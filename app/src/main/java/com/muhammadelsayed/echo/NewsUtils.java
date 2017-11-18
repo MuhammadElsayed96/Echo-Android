@@ -29,7 +29,7 @@ public class NewsUtils {
     }
 
     public static ArrayList<News> fetchNewsData(String url) {
-
+        Log.i(LOG_TAG, "TEST: fetchNewsData method has been triggered");
         String jsonResponse = "";
 
 
@@ -43,13 +43,14 @@ public class NewsUtils {
             Log.e(LOG_TAG, "Problem making the HTTP request.", e);
         }
 
-        ArrayList<News> news = extractJSONEarthquakes(jsonResponse);
+        ArrayList<News> news = extractJSONNews(jsonResponse);
         return news;
 
     }
 
 
     public static URL createUrl(String url) {
+        Log.i(LOG_TAG, "TEST: createUrl method has been triggered");
         URL mUrl;
         try {
             mUrl = new URL(url);
@@ -62,7 +63,7 @@ public class NewsUtils {
 
 
     public static String makeHTTPRequest(URL url) throws IOException {
-
+        Log.i(LOG_TAG, "TEST: makeHTTPRequest method has been triggered");
         String jsonResponse = "";
 
         if (url == null) {
@@ -98,6 +99,7 @@ public class NewsUtils {
     }
 
     public static String readFromStream(InputStream inputStream) throws IOException {
+        Log.i(LOG_TAG, "TEST: readFromStream method has been triggered");
         StringBuilder jsonOutput = new StringBuilder();
         if (inputStream != null) {
             InputStreamReader streamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
@@ -112,7 +114,8 @@ public class NewsUtils {
     }
 
 
-    public static ArrayList<News> extractJSONEarthquakes(String newsJson) {
+    public static ArrayList<News> extractJSONNews(String newsJson) {
+        Log.i(LOG_TAG, "TEST: extractJSONNews method has been triggered");
         if (TextUtils.isEmpty(newsJson)) {
             return null;
         }
@@ -123,7 +126,7 @@ public class NewsUtils {
             JSONObject root = new JSONObject(newsJson);
             JSONObject metaData = root.getJSONObject("response");
             JSONArray newsArray = metaData.getJSONArray("results");
-            for (int i = 0; i < 150; i++) {
+            for (int i = 0; i < newsArray.length(); i++) {
                 JSONObject currentNews = newsArray.getJSONObject(i);
                 String title = currentNews.getString("webTitle");
                 String date = currentNews.getString("webPublicationDate");
