@@ -37,6 +37,11 @@ public class NewsLoader extends AsyncTaskLoader<List<News>> {
         mUrl = url;
     }
 
+
+    public NewsLoader(Context context) {
+        super(context);
+    }
+
     @Override
     protected void onStartLoading() {
         Log.i(LOG_TAG, "TEST: onStartLoading method has been triggered");

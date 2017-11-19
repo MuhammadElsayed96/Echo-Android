@@ -174,7 +174,8 @@ public class NewsUtils {
                 String title = currentNews.getString("webTitle");
                 String date = currentNews.getString("webPublicationDate");
                 String url = currentNews.getString("webUrl");
-                news.add(new News(title, date, url));
+                String section = currentNews.getString("sectionName");
+                news.add(new News(title, date, url, section));
             }
         } catch (JSONException e) {
             e.printStackTrace();
