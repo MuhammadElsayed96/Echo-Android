@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
  Copyright [2017] [Muhammad Elsayed]
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,11 +22,29 @@
 
     <ListView
         android:id="@+id/news_list"
-        android:background="@color/colorPrimaryDark"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="@null"
-        android:dividerHeight="0dp"
+        android:background="@color/colorPrimaryDark"
+        android:divider="#03A9F4"
+        android:dividerHeight="1dp"
         android:orientation="vertical" />
+
+    <TextView
+        android:id="@+id/empty_state"
+        style="@android:style/TextAppearance.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/no_news"
+        android:textColor="#fff" />
+
+    <ProgressBar
+        android:id="@+id/loading_indicator"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminate="true"
+        android:visibility="visible" />
 
 </RelativeLayout>

@@ -46,6 +46,12 @@ public class NewsUtils {
     public static ArrayList<News> fetchNewsData(String url) {
         Log.i(LOG_TAG, "TEST: fetchNewsData method has been triggered");
 
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         String jsonResponse = "";
 
         //  create URL object

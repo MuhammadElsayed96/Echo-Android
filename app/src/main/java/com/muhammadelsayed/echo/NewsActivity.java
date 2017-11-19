@@ -28,6 +28,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +42,8 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
             "http://content.guardianapis.com/search?page-size=200&q=tech&api-key=c8133e91-2b02-42b7-9cc8-88ca8d73998a";
 
     private NewsAdapter newsAdapter;
+    private TextView emptyStateTextView;
+    private ProgressBar loadingIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,9 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
 
         newsAdapter = new NewsAdapter(this, new ArrayList<News>());
         newsListView.setAdapter(newsAdapter);
+        emptyStateTextView = (TextView) findViewById(R.id.empty_state);
+        newsListView.setEmptyView(emptyStateTextView);
+        emptyStateTextView.setText(R.string.empty_string);
 
         newsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -81,6 +88,9 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
             loaderManager.initLoader(NEWS_LOADER_ID, null, this);
         } else {
             Log.i(LOG_TAG, "No Internet connection.");
+            loadingIndicator = (ProgressBar) findViewById(R.id.loading_indicator);
+            loadingIndicator.setVisibility(View.GONE);
+            emptyStateTextView.setText(R.string.no_internet_connection);
         }
     }
 
@@ -96,6 +106,15 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoadFinished(Loader<List<News>> loader, List<News> data) {
         Log.i(LOG_TAG, "TEST: onLoadFinished method has been triggered");
+
+
+        // Hide loading indicator because the data has been loaded
+        loadingIndicator = findViewById(R.id.loading_indicator);
+        loadingIndicator.setVisibility(View.GONE);
+
+        // Set empty state text to display "No earthquakes found."
+        emptyStateTextView.setText(R.string.no_news);
+
 
         // Clear the adapter of previous news data
         newsAdapter.clear();
