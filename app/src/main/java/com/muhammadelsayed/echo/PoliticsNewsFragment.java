@@ -1,31 +1,19 @@
-/*
- *  Copyright [2017] [Muhammad Elsayed]
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.muhammadelsayed.echo;
 
-import android.app.LoaderManager;
+
 import android.content.Context;
 import android.content.Intent;
-import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -34,29 +22,36 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<News>> {
 
-    public static final String LOG_TAG = NewsActivity.class.getName();
-    private static final int NEWS_LOADER_ID = 1;
+public class PoliticsNewsFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<News>> {
+
+    public static final String LOG_TAG = TechNewsFragment.class.getName();
+    private static final int NEWS_LOADER_ID = 2;
     public static final String THE_GUARDIAN_REQUEST_URL =
-            "http://content.guardianapis.com/search?order-by=newest&page-size=200&q=tech&api-key=c8133e91-2b02-42b7-9cc8-88ca8d73998a";
-
+            "http://content.guardianapis.com/search?order-by=newest&page-size=200&q=politics&api-key=c8133e91-2b02-42b7-9cc8-88ca8d73998a";
+    private View rootView;
     private NewsAdapter newsAdapter;
     private TextView emptyStateTextView;
     private ProgressBar loadingIndicator;
 
+    public PoliticsNewsFragment() {
+        // Required empty public constructor
+    }
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        rootView = inflater.inflate(R.layout.news_list, container, false);
+
 
         Log.i(LOG_TAG, "TEST: onCreate method has been triggered");
 
-        ListView newsListView = findViewById(R.id.news_list);
+        ListView newsListView = rootView.findViewById(R.id.news_list);
 
-        newsAdapter = new NewsAdapter(this, new ArrayList<News>());
+        newsAdapter = new NewsAdapter(getContext(), new ArrayList<News>());
         newsListView.setAdapter(newsAdapter);
-        emptyStateTextView = (TextView) findViewById(R.id.empty_state);
+        emptyStateTextView = (TextView) rootView.findViewById(R.id.empty_state);
         newsListView.setEmptyView(emptyStateTextView);
         emptyStateTextView.setText(R.string.empty_string);
 
@@ -73,7 +68,7 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
 
         // Checking the network connectivity.
         ConnectivityManager cm =
-                (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+                (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         boolean isConnected = activeNetwork != null &&
@@ -88,19 +83,21 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
             loaderManager.initLoader(NEWS_LOADER_ID, null, this);
         } else {
             Log.i(LOG_TAG, "No Internet connection.");
-            loadingIndicator = (ProgressBar) findViewById(R.id.loading_indicator);
+            loadingIndicator = (ProgressBar) rootView.findViewById(R.id.loading_indicator);
             loadingIndicator.setVisibility(View.GONE);
             emptyStateTextView.setText(R.string.no_internet_connection);
         }
-    }
 
+
+        return rootView;
+    }
 
     @Override
     public Loader<List<News>> onCreateLoader(int id, Bundle args) {
         Log.i(LOG_TAG, "TEST: onCreateLoader method has been triggered");
 
         // Create a new loader for the given URL
-        return new NewsLoader(this, THE_GUARDIAN_REQUEST_URL);
+        return new NewsLoader(getContext(), THE_GUARDIAN_REQUEST_URL);
     }
 
     @Override
@@ -109,7 +106,7 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
 
 
         // Hide loading indicator because the data has been loaded
-        loadingIndicator = findViewById(R.id.loading_indicator);
+        loadingIndicator = rootView.findViewById(R.id.loading_indicator);
         loadingIndicator.setVisibility(View.GONE);
 
         // Set empty state text to display "No earthquakes found."
@@ -133,43 +130,4 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
         //Loader reset, so we can clear out our existing data.
         newsAdapter.clear();
     }
-
-
-    @Override
-    protected void onStart() {
-        Log.i(LOG_TAG, "TEST: onStart method has been triggered");
-        super.onStart();
-    }
-
-    @Override
-    protected void onResume() {
-        Log.i(LOG_TAG, "TEST: onResume method has been triggered");
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        Log.i(LOG_TAG, "TEST: onPause method has been triggered");
-        super.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        Log.i(LOG_TAG, "TEST: onStop method has been triggered");
-        super.onStop();
-    }
-
-
-    @Override
-    protected void onRestart() {
-        Log.i(LOG_TAG, "TEST: onRestart method has been triggered");
-        super.onRestart();
-    }
-
-    @Override
-    protected void onDestroy() {
-        Log.i(LOG_TAG, "TEST: onDestroy method has been triggered");
-        super.onDestroy();
-    }
-
 }

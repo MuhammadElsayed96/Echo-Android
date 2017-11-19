@@ -13,38 +13,29 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.muhammadelsayed.echo.NewsActivity">
+    android:orientation="vertical"
+    tools:context="com.muhammadelsayed.echo.MainActivity">
 
-
-    <ListView
-        android:id="@+id/news_list"
+    <android.support.design.widget.TabLayout
+        android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorPrimaryDark"
-        android:divider="#03A9F4"
-        android:dividerHeight="1dp"
-        android:orientation="vertical" />
-
-    <TextView
-        android:id="@+id/empty_state"
-        style="@android:style/TextAppearance.Medium"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/no_news"
-        android:textColor="#fff" />
+        android:background="#A8A19E"
+        app:tabIndicatorColor="#FFF"
+        app:tabMaxWidth="0dp"
+        app:tabSelectedTextColor="#FFF"
+        app:tabTextAppearance="@style/MineCustomTabText" />
 
-    <ProgressBar
-        android:id="@+id/loading_indicator"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:indeterminate="true"
-        android:visibility="visible" />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        style="@style/CategoryTab"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
-</RelativeLayout>
+
+</LinearLayout>
