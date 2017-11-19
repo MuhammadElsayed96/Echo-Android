@@ -39,7 +39,7 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
     public static final String LOG_TAG = NewsActivity.class.getName();
     private static final int NEWS_LOADER_ID = 1;
     public static final String THE_GUARDIAN_REQUEST_URL =
-            "http://content.guardianapis.com/search?page-size=200&q=tech&api-key=c8133e91-2b02-42b7-9cc8-88ca8d73998a";
+            "http://content.guardianapis.com/search?order-by=newest&page-size=200&q=tech&api-key=c8133e91-2b02-42b7-9cc8-88ca8d73998a";
 
     private NewsAdapter newsAdapter;
     private TextView emptyStateTextView;
