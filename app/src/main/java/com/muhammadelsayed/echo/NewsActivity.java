@@ -1,8 +1,26 @@
+/*
+ *  Copyright [2017] [Muhammad Elsayed]
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.muhammadelsayed.echo;
 
 import android.app.LoaderManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -46,21 +64,44 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         });
 
-        LoaderManager loaderManager = getLoaderManager();
-        loaderManager.initLoader(NEWS_LOADER_ID, null, this);
+        // Checking the network connectivity.
+        ConnectivityManager cm =
+                (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+        if (isConnected) {
+            // Get a reference to the LoaderManager, in order to interact with loaders.
+            LoaderManager loaderManager = getLoaderManager();
+
+            Log.i(LOG_TAG, "TEST: loaderManager.initLoader method has been triggered");
+
+            // Start the loader or create it to fetch the news data.
+            loaderManager.initLoader(NEWS_LOADER_ID, null, this);
+        } else {
+            Log.i(LOG_TAG, "No Internet connection.");
+        }
     }
 
 
     @Override
     public Loader<List<News>> onCreateLoader(int id, Bundle args) {
         Log.i(LOG_TAG, "TEST: onCreateLoader method has been triggered");
+
+        // Create a new loader for the given URL
         return new NewsLoader(this, THE_GUARDIAN_REQUEST_URL);
     }
 
     @Override
     public void onLoadFinished(Loader<List<News>> loader, List<News> data) {
         Log.i(LOG_TAG, "TEST: onLoadFinished method has been triggered");
+
+        // Clear the adapter of previous news data
         newsAdapter.clear();
+
+        // If there is a valid list of news, then add them to the adapter's
+        // data set. This will trigger the ListView to update.
         if (data != null || !data.isEmpty()) {
             newsAdapter.addAll(data);
         }
@@ -69,6 +110,8 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoaderReset(Loader<List<News>> loader) {
         Log.i(LOG_TAG, "TEST: onLoaderReset method has been triggered");
+
+        //Loader reset, so we can clear out our existing data.
         newsAdapter.clear();
     }
 
@@ -109,6 +152,5 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
         Log.i(LOG_TAG, "TEST: onDestroy method has been triggered");
         super.onDestroy();
     }
-
 
 }

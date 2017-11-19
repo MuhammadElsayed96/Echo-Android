@@ -1,3 +1,18 @@
+/*
+ *  Copyright [2017] [Muhammad Elsayed]
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.muhammadelsayed.echo;
 
 import android.text.TextUtils;
@@ -30,11 +45,11 @@ public class NewsUtils {
 
     public static ArrayList<News> fetchNewsData(String url) {
         Log.i(LOG_TAG, "TEST: fetchNewsData method has been triggered");
+
         String jsonResponse = "";
 
-
+        //  create URL object
         URL mUrl = createUrl(url);
-
 
         try {
             jsonResponse = makeHTTPRequest(mUrl);
@@ -48,7 +63,9 @@ public class NewsUtils {
 
     }
 
-
+    /**
+     * returns new URL object from the given String url .
+     */
     public static URL createUrl(String url) {
         Log.i(LOG_TAG, "TEST: createUrl method has been triggered");
         URL mUrl;
@@ -56,21 +73,27 @@ public class NewsUtils {
             mUrl = new URL(url);
         } catch (MalformedURLException e) {
             e.printStackTrace();
+            Log.e(LOG_TAG, "Error with creating the URL.", e);
             return null;
         }
         return mUrl;
     }
 
-
+    /**
+     * Make an Http request to the given url and returns a String as the response.
+     */
     public static String makeHTTPRequest(URL url) throws IOException {
         Log.i(LOG_TAG, "TEST: makeHTTPRequest method has been triggered");
         String jsonResponse = "";
 
+        // if the url is null, then return the Empty jsonResponse.
         if (url == null) {
             return jsonResponse;
         }
 
         HttpURLConnection urlConnection = null;
+        // InputStream: It is the stream of bytes of the information we want. ("raw data")
+        // InputStream: It represents a stream of bytes (small chuck of data)
         InputStream inputStream = null;
         try {
             urlConnection = (HttpURLConnection) url.openConnection();
@@ -79,6 +102,8 @@ public class NewsUtils {
             urlConnection.setConnectTimeout(15000);
             urlConnection.connect();
 
+            // If the request was successful (response code 200),
+            // then read the input stream and parse the response.
             if (urlConnection.getResponseCode() == 200) {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
@@ -87,6 +112,7 @@ public class NewsUtils {
             }
         } catch (IOException e) {
             e.printStackTrace();
+            Log.e(LOG_TAG, "Error retrieving the JSON results from the servers.", e);
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -98,11 +124,17 @@ public class NewsUtils {
         return jsonResponse;
     }
 
+    /**
+     * Converts the InputStream into a String that holds the
+     * whole JSON response from the server.
+     */
     public static String readFromStream(InputStream inputStream) throws IOException {
         Log.i(LOG_TAG, "TEST: readFromStream method has been triggered");
         StringBuilder jsonOutput = new StringBuilder();
         if (inputStream != null) {
             InputStreamReader streamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
+            // BufferedReader: it allows us to convert the raw data into human-readable text.
+            // BufferedReader: it helps us to read the text from the inputStreamReader.
             BufferedReader reader = new BufferedReader(streamReader);
             String line = reader.readLine();
             while (line != null) {
@@ -113,16 +145,21 @@ public class NewsUtils {
         return jsonOutput.toString();
     }
 
-
+    /**
+     * Return a list of {@link News} objects that has been built up from
+     * parsing a JSON response.
+     */
     public static ArrayList<News> extractJSONNews(String newsJson) {
         Log.i(LOG_TAG, "TEST: extractJSONNews method has been triggered");
         if (TextUtils.isEmpty(newsJson)) {
             return null;
         }
 
+        // Create an empty ArrayList to start adding news to it.
         ArrayList<News> news = new ArrayList<>();
 
         try {
+            // build up a list of News objects with the corresponding data.
             JSONObject root = new JSONObject(newsJson);
             JSONObject metaData = root.getJSONObject("response");
             JSONArray newsArray = metaData.getJSONArray("results");
@@ -137,6 +174,8 @@ public class NewsUtils {
             e.printStackTrace();
             Log.e(LOG_TAG, "Problem parsing the news JSON results", e);
         }
+
+        // Return the list of news.
         return news;
     }
 }
