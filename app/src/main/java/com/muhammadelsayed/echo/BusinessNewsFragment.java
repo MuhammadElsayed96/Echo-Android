@@ -23,18 +23,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class PoliticsNewsFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<News>> {
+public class BusinessNewsFragment extends Fragment implements LoaderManager.LoaderCallbacks<List<News>> {
 
-    public static final String LOG_TAG = PoliticsNewsFragment.class.getName();
-    private static final int NEWS_LOADER_ID = 3;
+    public static final String LOG_TAG = BusinessNewsFragment.class.getName();
+    private static final int NEWS_LOADER_ID = 4;
     public static final String THE_GUARDIAN_REQUEST_URL =
-            "http://content.guardianapis.com/search?order-by=newest&page-size=200&q=politics&api-key=c8133e91-2b02-42b7-9cc8-88ca8d73998a";
+            "http://content.guardianapis.com/search?order-by=newest&page-size=200&q=business&api-key=c8133e91-2b02-42b7-9cc8-88ca8d73998a";
     private View rootView;
     private NewsAdapter newsAdapter;
     private TextView emptyStateTextView;
     private ProgressBar loadingIndicator;
 
-    public PoliticsNewsFragment() {
+    public BusinessNewsFragment() {
         // Required empty public constructor
     }
 

@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 <resources>
-    <string name="app_name">Echo</string>
+    <string name="app_name">Echo News</string>
     <string name="no_news">No news found</string>
     <string name="no_internet_connection">No internet connection</string>
     <string name="empty_string"></string>

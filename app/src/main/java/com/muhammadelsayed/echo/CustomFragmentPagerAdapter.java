@@ -23,8 +23,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class CustomFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    private final int PAGE_COUNT = 2;
-    private String tabTitles[] = new String[]{"Tech", "Politics"};
+    private final int PAGE_COUNT = 11;
+    private String tabTitles[] = new String[]{"World", "National", "Politics", "Business", "Technology", "Environment", "LifeStyle", "Health", "Sport", "Science", "Travel"};
     private Context context;
 
 
@@ -37,9 +37,27 @@ public class CustomFragmentPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
-            return new TechNewsFragment();
-        } else {
+            return new WorldNewsFragment();
+        } else if (position == 1) {
+            return new NationalNewsFragment();
+        } else if (position == 2) {
             return new PoliticsNewsFragment();
+        } else if (position == 3) {
+            return new BusinessNewsFragment();
+        } else if (position == 4) {
+            return new TechNewsFragment();
+        } else if (position == 5) {
+            return new EnvironmentNewsFragment();
+        } else if (position == 6) {
+            return new LifeStyleNewsFragment();
+        } else if (position == 7) {
+            return new HealthNewsFragment();
+        } else if (position == 8) {
+            return new SportNewsFragment();
+        } else if (position == 9) {
+            return new ScienceNewsFragment();
+        } else {
+            return new TravelNewsFragment();
         }
     }
 
