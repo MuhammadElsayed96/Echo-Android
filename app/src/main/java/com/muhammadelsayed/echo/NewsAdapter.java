@@ -23,7 +23,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -66,7 +69,17 @@ public class NewsAdapter extends ArrayAdapter<News> {
         timeView.setText(time);
 
         TextView sectionView = newsListView.findViewById(R.id.section_name_text_view);
-        sectionView.setText(currentNews.getmSectionName());
+        sectionView.setText(currentNews.getSectionName());
+
+        TextView authorView = newsListView.findViewById(R.id.author_text_view);
+        if (currentNews.hasAuthor()) {
+            authorView.setText(currentNews.getAuthor());
+        } else {
+            authorView.setText("");
+        }
+
+        ImageView thumbnailView = newsListView.findViewById(R.id.thumbnail_image_view);
+        Picasso.with(getContext()).load(currentNews.getThumbnail()).into(thumbnailView);
 
         TextView titleView = newsListView.findViewById(R.id.title_text_view);
         titleView.setText(currentNews.getTitle());

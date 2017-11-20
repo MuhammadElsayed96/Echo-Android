@@ -175,7 +175,12 @@ public class NewsUtils {
                 String date = currentNews.getString("webPublicationDate");
                 String url = currentNews.getString("webUrl");
                 String section = currentNews.getString("sectionName");
-                news.add(new News(title, date, url, section));
+                JSONObject fields = currentNews.getJSONObject("fields");
+                String thumbnail = fields.getString("thumbnail");
+                JSONArray tagsArray = currentNews.getJSONArray("tags");
+                JSONObject tag = tagsArray.getJSONObject(0);
+                String author = tag.optString("webTitle");
+                news.add(new News(title, date, url, section, thumbnail, author));
             }
         } catch (JSONException e) {
             e.printStackTrace();

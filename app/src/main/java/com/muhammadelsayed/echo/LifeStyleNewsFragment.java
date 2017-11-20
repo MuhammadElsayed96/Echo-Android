@@ -30,7 +30,7 @@ public class LifeStyleNewsFragment extends Fragment implements LoaderManager.Loa
     public static final String LOG_TAG = LifeStyleNewsFragment.class.getName();
     private static final int NEWS_LOADER_ID = 7;
     public static final String THE_GUARDIAN_REQUEST_URL =
-            "http://content.guardianapis.com/search?order-by=newest&show-tags=contributor&show-fields=thumbnail&page-size=100&q=lifestyle&api-key=c8133e91-2b02-42b7-9cc8-88ca8d73998a";
+            "http://content.guardianapis.com/search?order-by=newest&show-tags=contributor&show-fields=thumbnail&page=1&page-size=100&q=lifestyle&api-key=c8133e91-2b02-42b7-9cc8-88ca8d73998a";
     private View rootView;
     private NewsAdapter newsAdapter;
     private TextView emptyStateTextView;
@@ -61,7 +61,7 @@ public class LifeStyleNewsFragment extends Fragment implements LoaderManager.Loa
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 News currentNews = newsAdapter.getItem(position);
-                String url = currentNews.getmUrl();
+                String url = currentNews.getUrl();
                 Uri uri = Uri.parse(url);
                 Intent websiteIntent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(websiteIntent);

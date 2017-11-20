@@ -25,12 +25,17 @@ public class News {
     private String mDate;
     private String mUrl;
     private String mSectionName;
+    private static final String NO_AUTHOR_PROVIDED = "null";
+    private String mAuthor = NO_AUTHOR_PROVIDED;
+    private String mThumbnail;
 
-    public News(String title, String date, String url, String sectionName) {
+    public News(String title, String date, String url, String sectionName, String thumbnail, String author) {
         mTitle = title;
         mDate = date;
         mUrl = url;
         mSectionName = sectionName;
+        mThumbnail = thumbnail;
+        mAuthor = author;
     }
 
     public String getDate() {
@@ -41,11 +46,25 @@ public class News {
         return mTitle;
     }
 
-    public String getmUrl() {
+    public String getUrl() {
         return mUrl;
     }
 
-    public String getmSectionName() {
+    public String getSectionName() {
         return mSectionName;
     }
+
+    public String getAuthor() {
+        return mAuthor;
+    }
+
+    public boolean hasAuthor() {
+        return mAuthor != NO_AUTHOR_PROVIDED;
+    }
+
+    public String getThumbnail() {
+        return mThumbnail;
+    }
+
+
 }
