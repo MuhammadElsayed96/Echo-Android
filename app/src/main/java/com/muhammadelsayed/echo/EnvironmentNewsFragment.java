@@ -30,7 +30,7 @@ public class EnvironmentNewsFragment extends Fragment implements LoaderManager.L
     public static final String LOG_TAG = EnvironmentNewsFragment.class.getName();
     private static final int NEWS_LOADER_ID = 6;
     public static final String THE_GUARDIAN_REQUEST_URL =
-            "http://content.guardianapis.com/search?order-by=newest&page-size=200&q=environment&api-key=c8133e91-2b02-42b7-9cc8-88ca8d73998a";
+            "http://content.guardianapis.com/search?section=environment&order-by=newest&show-tags=contributor&show-fields=thumbnail&page-size=100&q=Environment&api-key=c8133e91-2b02-42b7-9cc8-88ca8d73998a";
     private View rootView;
     private NewsAdapter newsAdapter;
     private TextView emptyStateTextView;

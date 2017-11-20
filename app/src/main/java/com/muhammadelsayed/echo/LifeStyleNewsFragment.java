@@ -30,7 +30,7 @@ public class LifeStyleNewsFragment extends Fragment implements LoaderManager.Loa
     public static final String LOG_TAG = LifeStyleNewsFragment.class.getName();
     private static final int NEWS_LOADER_ID = 7;
     public static final String THE_GUARDIAN_REQUEST_URL =
-            "http://content.guardianapis.com/search?order-by=newest&page-size=200&q=lifestyle&api-key=c8133e91-2b02-42b7-9cc8-88ca8d73998a";
+            "http://content.guardianapis.com/search?order-by=newest&show-tags=contributor&show-fields=thumbnail&page-size=100&q=lifestyle&api-key=c8133e91-2b02-42b7-9cc8-88ca8d73998a";
     private View rootView;
     private NewsAdapter newsAdapter;
     private TextView emptyStateTextView;
