@@ -1,6 +1,6 @@
 Earthquake Report Application.
 ===================================
-News feed app which gives a user list of regularly-updated news from the internet related to Technology topics.
+News feed app which gives a user list of regularly-updated news from the internet related to Many topics.
 
 Getting Started
 ---------------
