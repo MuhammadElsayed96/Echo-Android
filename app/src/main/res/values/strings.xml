@@ -18,4 +18,11 @@
     <string name="no_news">No news found</string>
     <string name="no_internet_connection">No internet connection</string>
     <string name="news_api_key">95c30721f33744b9bcd74c9d321563b6</string>
+
+    <!--BottomNavigationDrawer Strings-->
+    <string name="title_home">Home</string>
+    <string name="title_sources">Sources</string>
+    <string name="title_shortcuts">Shortcuts</string>
+    <string name="title_search">Search</string>
+    <string name="title_settings">Settings</string>
 </resources>

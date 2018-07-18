@@ -14,8 +14,13 @@
      limitations under the License.
 -->
 <resources>
-    <color name="colorPrimary">#000</color>
+    <color name="colorPrimary">#fff</color>
     <color name="colorPrimaryDark">#000</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#f52828</color>
 
+
+    <!--    ButtomNavigationDrawer Colors    -->
+    <color name="navigation_bar_item_bg">@color/colorPrimary</color>
+    <color name="navigation_bar_txt_color">#000</color>
+    <color name="gray">#858585</color>
 </resources>
