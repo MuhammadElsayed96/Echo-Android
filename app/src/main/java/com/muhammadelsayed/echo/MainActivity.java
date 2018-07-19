@@ -22,6 +22,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.muhammadelsayed.echo.model.ResultArticles;
 import com.muhammadelsayed.echo.network.NewsClient;
 import com.muhammadelsayed.echo.network.RetrofitClientInstance;
 
@@ -53,17 +54,17 @@ public class MainActivity extends AppCompatActivity {
         NewsClient service = RetrofitClientInstance.getRetrofitInstance()
                 .create(NewsClient.class);
 
-        Call<Void> call = service.getTopHeadLines(options);
+        Call<ResultArticles> call = service.getTopHeadLines(options);
 
-        call.enqueue(new Callback<Void>() {
+        call.enqueue(new Callback<ResultArticles>() {
             @Override
-            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+            public void onResponse(@NonNull Call<ResultArticles> call, @NonNull Response<ResultArticles> response) {
                 Log.d(TAG, "onResponse: SUCCEEDED");
-
+                Log.d(TAG, "onResponse: RESPONSE = " + response.body().getArticles()[3].getTitle());
             }
 
             @Override
-            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<ResultArticles> call, @NonNull Throwable t) {
                 Log.d(TAG, "onFailure: FAILED");
 
             }
