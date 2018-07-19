@@ -10,28 +10,28 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/navigation_earnings"
+        android:id="@+id/navigation_sources"
         android:enabled="true"
         android:icon="@drawable/ic_sources_black_24dp"
         android:title="@string/title_sources"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/navigation_rating"
+        android:id="@+id/navigation_shortcuts"
         android:enabled="true"
         android:icon="@drawable/ic_attach_file_black_24dp"
         android:title="@string/title_shortcuts"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/navigation_account"
+        android:id="@+id/navigation_search"
         android:enabled="true"
         android:icon="@drawable/ic_search_black_24dp"
         android:title="@string/title_search"
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/navigation_requests"
+        android:id="@+id/navigation_settings"
         android:enabled="true"
         android:icon="@drawable/ic_settings_black_24dp"
         android:title="@string/title_settings"
