@@ -16,16 +16,58 @@
 package com.muhammadelsayed.echo;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+
+import com.muhammadelsayed.echo.network.NewsClient;
+import com.muhammadelsayed.echo.network.RetrofitClientInstance;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.d(TAG, "onCreate: started !!");
 
+        testNetworkRequest();
+
+    }
+
+    private void testNetworkRequest() {
+        Log.d(TAG, "testNetworkRequest: testing network calls...");
+        Map<String, String> options = new HashMap<>();
+        options.put("country", "eg");
+        options.put("apiKey", getResources().getString(R.string.news_api_key));
+
+        NewsClient service = RetrofitClientInstance.getRetrofitInstance()
+                .create(NewsClient.class);
+
+        Call<Void> call = service.getTopHeadLines(options);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                Log.d(TAG, "onResponse: SUCCEEDED");
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                Log.d(TAG, "onFailure: FAILED");
+
+            }
+        });
     }
 
 }
