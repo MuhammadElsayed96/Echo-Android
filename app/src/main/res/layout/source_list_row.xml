@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:toggle="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/row_padding_vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/row_padding_vertical">
+
+
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/source_image_iv"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/trump" />
+
+    <TextView
+        android:id="@+id/source_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:textColor="@android:color/black"
+        toggle:layout_constraintBottom_toBottomOf="parent"
+        toggle:layout_constraintLeft_toRightOf="@id/source_image_iv"
+        toggle:layout_constraintTop_toTopOf="parent"
+        tools:text="ABC News" />
+
+    <com.zcw.togglebutton.ToggleButton
+        android:id="@+id/source_toggle"
+        android:layout_width="54dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        toggle:layout_constraintBottom_toBottomOf="parent"
+        toggle:layout_constraintRight_toLeftOf="@id/arrow_tv"
+        toggle:layout_constraintTop_toTopOf="parent"
+        toggle:tbBorderWidth="2dp"
+        toggle:tbOffBorderColor="#4bed90"
+        toggle:tbOffColor="#fff"
+        toggle:tbOnColor="#68e99f"
+        toggle:tbSpotColor="#fff" />
+
+    <TextView
+        android:id="@+id/arrow_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=">"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/darker_gray"
+        toggle:layout_constraintBottom_toBottomOf="parent"
+        toggle:layout_constraintRight_toRightOf="parent"
+        toggle:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

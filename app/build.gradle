@@ -41,5 +41,16 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.1'
     implementation 'com.google.firebase:firebase-database:16.0.1'
     implementation 'com.google.firebase:firebase-auth:16.0.2'
+
+    // RecyclerView
+    //noinspection GradleCompatible
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
+
+    // Circular ImageView
+    implementation 'com.mikhaellopez:circularimageview:3.0.2'
+
+    // zcweng/ToggleButton
+    implementation 'com.zcw:togglebutton-library:1.0.0'
+
 }
 apply plugin: 'com.google.gms.google-services'
