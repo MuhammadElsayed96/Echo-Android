@@ -17,6 +17,7 @@ package com.muhammadelsayed.echo;
 
 import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
+import android.graphics.Movie;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -27,15 +28,21 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.muhammadelsayed.echo.Adapters.SourcesAdapter;
 import com.muhammadelsayed.echo.Fragments.HomeFragment;
 import com.muhammadelsayed.echo.Fragments.SearchFragment;
 import com.muhammadelsayed.echo.Fragments.SettingsFragment;
 import com.muhammadelsayed.echo.Fragments.ShortcutsFragment;
 import com.muhammadelsayed.echo.Fragments.SourcesFragment;
 import com.muhammadelsayed.echo.model.ResultArticles;
+import com.muhammadelsayed.echo.model.Source;
 import com.muhammadelsayed.echo.network.NewsClient;
 import com.muhammadelsayed.echo.network.RetrofitClientInstance;
 
@@ -67,8 +74,10 @@ public class MainActivity extends AppCompatActivity {
     private static final int INT_FRAGMENT_SETTINGS_POS = 4;
     private ActionBar mActionBar;
     public BottomNavigationView mBottomNavigation;
-
     private List<Fragment> mFragmentsList = new ArrayList<>(INT_FRAGMENTS_COUNT);
+    private List<Source> mSourcesList = new ArrayList<>();
+    private RecyclerView mSourcesRecyclerView;
+    private SourcesAdapter mSourcesAdapter;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -110,8 +119,23 @@ public class MainActivity extends AppCompatActivity {
         // Set the 0th Fragment to be displayed by default.
         switchFragment(0, TAG_FRAGMENT_HOME);
 
+        mSourcesRecyclerView = findViewById(R.id.recycler_view);
+        mSourcesAdapter = new SourcesAdapter(mSourcesList);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        mSourcesRecyclerView.setHasFixedSize(true);
+        mSourcesRecyclerView.setLayoutManager(mLayoutManager);
+        mSourcesRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mSourcesRecyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        mSourcesRecyclerView.setAdapter(mSourcesAdapter);
+
+        prepareSourcesData();
+
     }
 
+
+    private void prepareSourcesData() {
+
+    }
 
     /**
      * Use this  method to create a new instance of
