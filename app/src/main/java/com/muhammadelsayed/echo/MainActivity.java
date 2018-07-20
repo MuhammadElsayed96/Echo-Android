@@ -75,9 +75,7 @@ public class MainActivity extends AppCompatActivity {
     private ActionBar mActionBar;
     public BottomNavigationView mBottomNavigation;
     private List<Fragment> mFragmentsList = new ArrayList<>(INT_FRAGMENTS_COUNT);
-    private List<Source> mSourcesList = new ArrayList<>();
-    private RecyclerView mSourcesRecyclerView;
-    private SourcesAdapter mSourcesAdapter;
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -118,23 +116,6 @@ public class MainActivity extends AppCompatActivity {
         buildFragmentsList();
         // Set the 0th Fragment to be displayed by default.
         switchFragment(0, TAG_FRAGMENT_HOME);
-
-        mSourcesRecyclerView = findViewById(R.id.recycler_view);
-        mSourcesAdapter = new SourcesAdapter(mSourcesList);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        mSourcesRecyclerView.setHasFixedSize(true);
-        mSourcesRecyclerView.setLayoutManager(mLayoutManager);
-        mSourcesRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mSourcesRecyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        mSourcesRecyclerView.setAdapter(mSourcesAdapter);
-
-        prepareSourcesData();
-
-    }
-
-
-    private void prepareSourcesData() {
-
     }
 
     /**
