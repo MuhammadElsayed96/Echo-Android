@@ -1,26 +1,40 @@
 package com.muhammadelsayed.echo.model;
 
+import java.net.URL;
+
 public class Source {
     private String id;
     private String name;
-    private String mSourceTitle;
+    private String description;
+    private URL url;
+    private String category;
+    private String language;
+    private String country;
     private int mImageResourceID;
     private boolean mToggleStatus;
-
-
-    public Source(String mSourceTitle, int mImageResourceID, boolean mToggleStatus) {
-        this.mSourceTitle = mSourceTitle;
-        this.mImageResourceID = mImageResourceID;
-        this.mToggleStatus = mToggleStatus;
-    }
 
 
     public Source() {
     }
 
-    public Source(String id, String name) {
+
+
+    public Source(String id, int mImageResourceID, boolean mToggleStatus) {
+        this.id = id;
+        this.mImageResourceID = mImageResourceID;
+        this.mToggleStatus = mToggleStatus;
+    }
+
+
+
+    public Source(String id, String name, String description, URL url, String category, String language, String country) {
         this.id = id;
         this.name = name;
+        this.description = description;
+        this.url = url;
+        this.category = category;
+        this.language = language;
+        this.country = country;
     }
 
     public String getId() {
@@ -39,13 +53,46 @@ public class Source {
         this.name = name;
     }
 
-    public String getSourceTitle() {
-        return mSourceTitle;
+    public String getDescription() {
+        return description;
     }
 
-    public void setSourceTitle(String mSourceTitle) {
-        this.mSourceTitle = mSourceTitle;
+    public void setDescription(String description) {
+        this.description = description;
     }
+
+    public URL getUrl() {
+        return url;
+    }
+
+    public void setUrl(URL url) {
+        this.url = url;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
 
     public int getImageResourceID() {
         return mImageResourceID;
@@ -68,7 +115,11 @@ public class Source {
         return "Source{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", mSourceTitle='" + mSourceTitle + '\'' +
+                ", description='" + description + '\'' +
+                ", url=" + url +
+                ", category='" + category + '\'' +
+                ", language='" + language + '\'' +
+                ", country='" + country + '\'' +
                 ", mImageResourceID=" + mImageResourceID +
                 ", mToggleStatus=" + mToggleStatus +
                 '}';

@@ -1,10 +1,13 @@
 package com.muhammadelsayed.echo.Adapters;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mikhaellopez.circularimageview.CircularImageView;
@@ -14,10 +17,12 @@ import com.zcw.togglebutton.ToggleButton;
 
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class SourcesAdapter extends RecyclerView.Adapter<SourcesAdapter.MyViewHolder> {
 
+    private Context mContext;
     private List<Source> sourcesList;
-
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -29,10 +34,25 @@ public class SourcesAdapter extends RecyclerView.Adapter<SourcesAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        final int index = position;
         Source source = sourcesList.get(position);
-        holder.SourceTitle.setText(source.getSourceTitle());
-        holder.sourceToggle.setToggleOn();
+        holder.SourceTitle.setText(source.getName());
         holder.sourceImage.setImageResource(source.getImageResourceID());
+
+        if (source.isToggleStatus()) {
+            holder.sourceToggle.setToggleOn();
+        } else {
+            holder.sourceToggle.setToggleOff();
+        }
+        holder.sourceToggle.setOnToggleChanged(new ToggleButton.OnToggleChanged() {
+            @Override
+            public void onToggle(boolean on) {
+//                SharedPreferences.Editor editor = mContext.getSharedPreferences("SOURCES_SETTINGS", MODE_PRIVATE).edit();
+//                editor.putBoolean(sourcesList.get(index).getId(), on);
+//                editor.apply();
+                sourcesList.get(index).setToggleStatus(on);
+            }
+        });
     }
 
     @Override
@@ -40,20 +60,21 @@ public class SourcesAdapter extends RecyclerView.Adapter<SourcesAdapter.MyViewHo
         return sourcesList.size();
     }
 
-    public SourcesAdapter(List<Source> moviesList) {
+    public SourcesAdapter(Context mContext, List<Source> moviesList) {
+        this.mContext = mContext;
         this.sourcesList = moviesList;
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView SourceTitle;
-        public ToggleButton sourceToggle;
-        public CircularImageView sourceImage;
+    class MyViewHolder extends RecyclerView.ViewHolder {
+        private TextView SourceTitle;
+        private ToggleButton sourceToggle;
+        private ImageView sourceImage;
 
-        public MyViewHolder(View view) {
+        private MyViewHolder(View view) {
             super(view);
-            SourceTitle = (TextView) view.findViewById(R.id.source_name_tv);
-            sourceToggle = (ToggleButton) view.findViewById(R.id.source_toggle);
-            sourceImage = (CircularImageView) view.findViewById(R.id.source_image_iv);
+            SourceTitle = view.findViewById(R.id.source_name_tv);
+            sourceToggle = view.findViewById(R.id.source_toggle);
+            sourceImage = view.findViewById(R.id.source_image_iv);
         }
     }
 }

@@ -12,7 +12,7 @@
     android:paddingTop="@dimen/row_padding_vertical">
 
 
-    <com.mikhaellopez.circularimageview.CircularImageView
+    <ImageView
         android:id="@+id/source_image_iv"
         android:layout_width="48dp"
         android:layout_height="48dp"
