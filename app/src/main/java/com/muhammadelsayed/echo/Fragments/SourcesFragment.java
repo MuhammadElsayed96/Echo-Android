@@ -24,13 +24,8 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class SourcesFragment extends Fragment {
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private View rootView;
 
-    private String mParam1;
-    private String mParam2;
+    private View rootView;
     private List<Source> mSourcesList = new ArrayList<>();
     private RecyclerView mSourcesRecyclerView;
     private SourcesAdapter mSourcesAdapter;
@@ -55,10 +50,6 @@ public class SourcesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -66,8 +57,6 @@ public class SourcesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_sources, container, false);
-
-
         mSourcesRecyclerView = rootView.findViewById(R.id.recycler_view);
         mSourcesAdapter = new SourcesAdapter(mSourcesList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
@@ -83,7 +72,6 @@ public class SourcesFragment extends Fragment {
     }
 
     private void prepareSourcesData() {
-
     }
 
 }
