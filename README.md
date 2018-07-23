@@ -1,4 +1,4 @@
-News feed Application.
+EchoNews Application
 ===================================
 News feed app which gives a user list of regularly-updated news from the internet related to Many topics.
 
