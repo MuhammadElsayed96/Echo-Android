@@ -13,32 +13,46 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.muhammadelsayed.echo.MainActivity">
 
-    <FrameLayout
-        android:id="@+id/frame_fragment_holder"
+
+
+    <!-- Middle Body Layout -->
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="?attr/actionBarSize" />
+        android:id="@+id/relativeMiddleBody"
+        android:layout_above="@+id/relativeBottomNav"
+        >
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/bottom_navigation_view"
-        style="@style/BottomNavigation"
-        android:layout_width="0dp"
+        <FrameLayout
+            android:id="@+id/frame_fragment_holder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </RelativeLayout>
+
+    <!-- Bottom Navigation Layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="0dp"
-        android:layout_marginStart="0dp"
-        app:itemIconTint="@drawable/bnv_tab_item_forground"
-        app:itemTextColor="@drawable/bnv_tab_item_forground"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/navigation_menu" />
+        android:id="@+id/relativeBottomNav"
+        android:layout_alignParentBottom="true"
+        >
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/bottom_navigation_view"
+            style="@style/BottomNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:itemIconTint="@drawable/bnv_tab_item_forground"
+            app:itemTextColor="@drawable/bnv_tab_item_forground"
+            app:menu="@menu/navigation_menu" />
+    </RelativeLayout>
 
-</android.support.constraint.ConstraintLayout>
+
+</RelativeLayout>

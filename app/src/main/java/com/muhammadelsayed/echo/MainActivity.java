@@ -16,47 +16,32 @@
 package com.muhammadelsayed.echo;
 
 import android.annotation.SuppressLint;
-import android.content.res.ColorStateList;
-import android.graphics.Movie;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
 
-import com.muhammadelsayed.echo.Adapters.SourcesAdapter;
+import com.muhammadelsayed.echo.Adapters.HomePagerAdapter;
 import com.muhammadelsayed.echo.Fragments.HomeFragment;
+import com.muhammadelsayed.echo.Fragments.HomeFragment1;
+import com.muhammadelsayed.echo.Fragments.HomeFragment2;
 import com.muhammadelsayed.echo.Fragments.SearchFragment;
 import com.muhammadelsayed.echo.Fragments.SettingsFragment;
 import com.muhammadelsayed.echo.Fragments.ShortcutsFragment;
 import com.muhammadelsayed.echo.Fragments.SourcesFragment;
-import com.muhammadelsayed.echo.model.ResultArticles;
-import com.muhammadelsayed.echo.model.Source;
-import com.muhammadelsayed.echo.network.NewsClient;
-import com.muhammadelsayed.echo.network.RetrofitClientInstance;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-import static android.provider.Contacts.PresenceColumns.OFFLINE;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -72,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
     private static final int INT_FRAGMENT_SHORTCUTS_POS = 2;
     private static final int INT_FRAGMENT_SEARCH_POS = 3;
     private static final int INT_FRAGMENT_SETTINGS_POS = 4;
-    private ActionBar mActionBar;
     public BottomNavigationView mBottomNavigation;
     private List<Fragment> mFragmentsList = new ArrayList<>(INT_FRAGMENTS_COUNT);
 
@@ -116,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
         buildFragmentsList();
         // Set the 0th Fragment to be displayed by default.
         switchFragment(0, TAG_FRAGMENT_HOME);
+
     }
 
     /**
@@ -138,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
         mFragmentsList.add(shortcutsFragment);
         mFragmentsList.add(searchFragment);
         mFragmentsList.add(settingsFragment);
+
     }
 
     /**
