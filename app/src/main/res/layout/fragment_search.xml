@@ -3,16 +3,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.SearchFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
+    <!-- Top Tabs Layout -->
+    <RelativeLayout
+        android:id="@+id/relativeTopTab"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Search Fragment"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        android:layout_centerInParent="true"
-        android:textColor="@color/colorPrimaryDark"/>
+        android:layout_alignParentTop="true">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.SearchView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:queryHint="Search Headlines"
+                app:iconifiedByDefault="false"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginEnd="15dp">
+            </android.support.v7.widget.SearchView>
+        </android.support.design.widget.AppBarLayout>
+
+    </RelativeLayout>
 
 </RelativeLayout>
