@@ -1,4 +1,4 @@
-package com.muhammadelsayed.echo.Fragments;
+package com.muhammadelsayed.echo.Fragments.Shortcut;
 
 
 import android.os.Bundle;
@@ -9,7 +9,12 @@ import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.R;
 
-public class SportHomeTab extends Fragment {
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link History#shortcutsFragment3Instance} factory method to
+ * create an instance of this fragment.
+ */
+public class History extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -20,8 +25,21 @@ public class SportHomeTab extends Fragment {
     private String mParam2;
 
 
-    public SportHomeTab() {
+    public History() {
         // Required empty public constructor
+    }
+
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @return A new instance of fragment HomeFragment.
+     */
+    public static History shortcutsFragment3Instance() {
+        History fragment = new History();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
@@ -37,7 +55,7 @@ public class SportHomeTab extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.sport_home_tab, container, false);
+        return inflater.inflate(R.layout.history_shortcuts_tab, container, false);
     }
 
 }

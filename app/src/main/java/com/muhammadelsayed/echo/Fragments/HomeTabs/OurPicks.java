@@ -1,4 +1,4 @@
-package com.muhammadelsayed.echo.Fragments;
+package com.muhammadelsayed.echo.Fragments.HomeTabs;
 
 
 import android.os.Bundle;
@@ -9,35 +9,20 @@ import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SearchFragment#searchFragmentInstance} factory method to
- * create an instance of this fragment.
- */
-public class SearchFragment extends Fragment {
+
+public class OurPicks extends Fragment {
+    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
 
-    public SearchFragment() {
+    public OurPicks() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment SearchFragment.
-     */
-    public static SearchFragment searchFragmentInstance() {
-        SearchFragment fragment = new SearchFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
@@ -53,7 +38,7 @@ public class SearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        return inflater.inflate(R.layout.ourpicks_home_tab, container, false);
     }
 
 }

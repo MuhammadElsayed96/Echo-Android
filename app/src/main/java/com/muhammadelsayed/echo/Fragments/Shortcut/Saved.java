@@ -1,4 +1,4 @@
-package com.muhammadelsayed.echo.Fragments;
+package com.muhammadelsayed.echo.Fragments.Shortcut;
 
 
 import android.os.Bundle;
@@ -11,10 +11,10 @@ import com.muhammadelsayed.echo.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ShortcutsFragment3#shortcutsFragment3Instance} factory method to
+ * Use the {@link Saved#shortcutsFragment2Instance} factory method to
  * create an instance of this fragment.
  */
-public class ShortcutsFragment3 extends Fragment {
+public class Saved extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -25,7 +25,7 @@ public class ShortcutsFragment3 extends Fragment {
     private String mParam2;
 
 
-    public ShortcutsFragment3() {
+    public Saved() {
         // Required empty public constructor
     }
 
@@ -35,8 +35,8 @@ public class ShortcutsFragment3 extends Fragment {
      *
      * @return A new instance of fragment HomeFragment.
      */
-    public static ShortcutsFragment3 shortcutsFragment3Instance() {
-        ShortcutsFragment3 fragment = new ShortcutsFragment3();
+    public static Saved shortcutsFragment2Instance() {
+        Saved fragment = new Saved();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -55,7 +55,7 @@ public class ShortcutsFragment3 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.history_shortcuts_tab, container, false);
+        return inflater.inflate(R.layout.saved_shortcuts_tab, container, false);
     }
 
 }

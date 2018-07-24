@@ -26,11 +26,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 
-import com.muhammadelsayed.echo.Fragments.HomeFragment;
-import com.muhammadelsayed.echo.Fragments.SearchFragment;
-import com.muhammadelsayed.echo.Fragments.SettingsFragment;
-import com.muhammadelsayed.echo.Fragments.ShortcutsFragment;
-import com.muhammadelsayed.echo.Fragments.SourcesFragment;
+import com.muhammadelsayed.echo.Fragments.App.HomeFragment;
+import com.muhammadelsayed.echo.Fragments.App.SearchFragment;
+import com.muhammadelsayed.echo.Fragments.App.SettingsFragment;
+import com.muhammadelsayed.echo.Fragments.App.ShortcutsFragment;
+import com.muhammadelsayed.echo.Fragments.App.SourcesFragment;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

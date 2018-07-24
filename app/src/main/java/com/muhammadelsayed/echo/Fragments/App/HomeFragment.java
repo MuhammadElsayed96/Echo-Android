@@ -1,4 +1,4 @@
-package com.muhammadelsayed.echo.Fragments;
+package com.muhammadelsayed.echo.Fragments.App;
 
 
 import android.os.Bundle;
@@ -12,6 +12,21 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.Adapters.HomePagerAdapter;
+import com.muhammadelsayed.echo.Fragments.HomeTabs.Business;
+import com.muhammadelsayed.echo.Fragments.HomeTabs.Entertainment;
+import com.muhammadelsayed.echo.Fragments.HomeTabs.Environment;
+import com.muhammadelsayed.echo.Fragments.HomeTabs.GoodNews;
+import com.muhammadelsayed.echo.Fragments.HomeTabs.Health;
+import com.muhammadelsayed.echo.Fragments.HomeTabs.LeadStories;
+import com.muhammadelsayed.echo.Fragments.HomeTabs.Lifestyle;
+import com.muhammadelsayed.echo.Fragments.HomeTabs.National;
+import com.muhammadelsayed.echo.Fragments.HomeTabs.OurPicks;
+import com.muhammadelsayed.echo.Fragments.HomeTabs.Politics;
+import com.muhammadelsayed.echo.Fragments.HomeTabs.Science;
+import com.muhammadelsayed.echo.Fragments.HomeTabs.Sport;
+import com.muhammadelsayed.echo.Fragments.HomeTabs.Technology;
+import com.muhammadelsayed.echo.Fragments.HomeTabs.Travel;
+import com.muhammadelsayed.echo.Fragments.HomeTabs.World;
 import com.muhammadelsayed.echo.R;
 
 /**
@@ -98,21 +113,21 @@ public class HomeFragment extends Fragment {
     private void setupViewPager(ViewPager viewPager) {
         Log.wtf(TAG, "setupViewPager: setting up viewPager...");
         HomePagerAdapter adapter = new HomePagerAdapter(getChildFragmentManager());
-        adapter.addFragment(new LeadStoriesHomeTab());
-        adapter.addFragment(new OurPicksHomeTab());
-        adapter.addFragment(new GoodNewsHomeTab());
-        adapter.addFragment(new BusinessHomeTab());
-        adapter.addFragment(new NationalHomeTab());
-        adapter.addFragment(new WorldHomeTab());
-        adapter.addFragment(new PoliticsHomeTab());
-        adapter.addFragment(new EntertainmentHomeTab());
-        adapter.addFragment(new LifestyleHomeTab());
-        adapter.addFragment(new HealthHomeTab());
-        adapter.addFragment(new SportHomeTab());
-        adapter.addFragment(new TechnologyHomeTab());
-        adapter.addFragment(new ScienceHomeTab());
-        adapter.addFragment(new EnvironmentHomeTab());
-        adapter.addFragment(new TravelHomeTab());
+        adapter.addFragment(new LeadStories());
+        adapter.addFragment(new OurPicks());
+        adapter.addFragment(new GoodNews());
+        adapter.addFragment(new Business());
+        adapter.addFragment(new National());
+        adapter.addFragment(new World());
+        adapter.addFragment(new Politics());
+        adapter.addFragment(new Entertainment());
+        adapter.addFragment(new Lifestyle());
+        adapter.addFragment(new Health());
+        adapter.addFragment(new Sport());
+        adapter.addFragment(new Technology());
+        adapter.addFragment(new Science());
+        adapter.addFragment(new Environment());
+        adapter.addFragment(new Travel());
         viewPager.setAdapter(adapter);
     }
 }

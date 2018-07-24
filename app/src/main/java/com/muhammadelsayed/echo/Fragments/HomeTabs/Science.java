@@ -1,4 +1,4 @@
-package com.muhammadelsayed.echo.Fragments;
+package com.muhammadelsayed.echo.Fragments.HomeTabs;
 
 
 import android.os.Bundle;
@@ -9,12 +9,8 @@ import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link WorldHomeTab#homeFragment6Instance} factory method to
- * create an instance of this fragment.
- */
-public class WorldHomeTab extends Fragment {
+
+public class Science extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -25,7 +21,7 @@ public class WorldHomeTab extends Fragment {
     private String mParam2;
 
 
-    public WorldHomeTab() {
+    public Science() {
         // Required empty public constructor
     }
 
@@ -42,7 +38,7 @@ public class WorldHomeTab extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.world_home_tab, container, false);
+        return inflater.inflate(R.layout.science_home_tab, container, false);
     }
 
 }

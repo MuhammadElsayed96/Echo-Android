@@ -1,4 +1,4 @@
-package com.muhammadelsayed.echo.Fragments;
+package com.muhammadelsayed.echo.Fragments.HomeTabs;
 
 
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import com.muhammadelsayed.echo.R;
 
 
-public class BusinessHomeTab extends Fragment {
+public class Business extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -21,7 +21,7 @@ public class BusinessHomeTab extends Fragment {
     private String mParam2;
 
 
-    public BusinessHomeTab() {
+    public Business() {
         // Required empty public constructor
     }
 

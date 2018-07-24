@@ -1,4 +1,4 @@
-package com.muhammadelsayed.echo.Fragments;
+package com.muhammadelsayed.echo.Fragments.HomeTabs;
 
 
 import android.os.Bundle;
@@ -9,7 +9,8 @@ import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.R;
 
-public class TechnologyHomeTab extends Fragment {
+
+public class Environment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -20,7 +21,7 @@ public class TechnologyHomeTab extends Fragment {
     private String mParam2;
 
 
-    public TechnologyHomeTab() {
+    public Environment() {
         // Required empty public constructor
     }
 
@@ -37,7 +38,7 @@ public class TechnologyHomeTab extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.technology_home_tab, container, false);
+        return inflater.inflate(R.layout.environment_home_tab, container, false);
     }
 
 }
