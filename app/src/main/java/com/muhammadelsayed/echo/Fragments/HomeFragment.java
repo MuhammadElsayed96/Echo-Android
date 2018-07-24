@@ -98,21 +98,21 @@ public class HomeFragment extends Fragment {
     private void setupViewPager(ViewPager viewPager) {
         Log.wtf(TAG, "setupViewPager: setting up viewPager...");
         HomePagerAdapter adapter = new HomePagerAdapter(getChildFragmentManager());
-        adapter.addFragment(new HomeFragment1());
-        adapter.addFragment(new HomeFragment2());
-        adapter.addFragment(new HomeFragment3());
-        adapter.addFragment(new HomeFragment4());
-        adapter.addFragment(new HomeFragment5());
-        adapter.addFragment(new HomeFragment6());
-        adapter.addFragment(new HomeFragment7());
-        adapter.addFragment(new HomeFragment8());
-        adapter.addFragment(new HomeFragment9());
-        adapter.addFragment(new HomeFragment10());
-        adapter.addFragment(new HomeFragment11());
-        adapter.addFragment(new HomeFragment12());
-        adapter.addFragment(new HomeFragment13());
-        adapter.addFragment(new HomeFragment14());
-        adapter.addFragment(new HomeFragment15());
+        adapter.addFragment(new LeadStoriesHomeTab());
+        adapter.addFragment(new OurPicksHomeTab());
+        adapter.addFragment(new GoodNewsHomeTab());
+        adapter.addFragment(new BusinessHomeTab());
+        adapter.addFragment(new NationalHomeTab());
+        adapter.addFragment(new WorldHomeTab());
+        adapter.addFragment(new PoliticsHomeTab());
+        adapter.addFragment(new EntertainmentHomeTab());
+        adapter.addFragment(new LifestyleHomeTab());
+        adapter.addFragment(new HealthHomeTab());
+        adapter.addFragment(new SportHomeTab());
+        adapter.addFragment(new TechnologyHomeTab());
+        adapter.addFragment(new ScienceHomeTab());
+        adapter.addFragment(new EnvironmentHomeTab());
+        adapter.addFragment(new TravelHomeTab());
         viewPager.setAdapter(adapter);
     }
 }

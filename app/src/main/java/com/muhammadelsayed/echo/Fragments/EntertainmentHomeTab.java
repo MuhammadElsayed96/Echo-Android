@@ -9,12 +9,7 @@ import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment8#homeFragment8Instance} factory method to
- * create an instance of this fragment.
- */
-public class HomeFragment8 extends Fragment {
+public class EntertainmentHomeTab extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -25,21 +20,8 @@ public class HomeFragment8 extends Fragment {
     private String mParam2;
 
 
-    public HomeFragment8() {
+    public EntertainmentHomeTab() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment HomeFragment.
-     */
-    public static HomeFragment8 homeFragment8Instance() {
-        HomeFragment8 fragment = new HomeFragment8();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override

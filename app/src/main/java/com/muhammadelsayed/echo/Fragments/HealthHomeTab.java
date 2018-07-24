@@ -9,12 +9,8 @@ import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment11#homeFragment11Instance} factory method to
- * create an instance of this fragment.
- */
-public class HomeFragment11 extends Fragment {
+
+public class HealthHomeTab extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -25,21 +21,8 @@ public class HomeFragment11 extends Fragment {
     private String mParam2;
 
 
-    public HomeFragment11() {
+    public HealthHomeTab() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment HomeFragment.
-     */
-    public static HomeFragment11 homeFragment11Instance() {
-        HomeFragment11 fragment = new HomeFragment11();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
@@ -55,7 +38,7 @@ public class HomeFragment11 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.sport_home_tab, container, false);
+        return inflater.inflate(R.layout.health_home_tab, container, false);
     }
 
 }
