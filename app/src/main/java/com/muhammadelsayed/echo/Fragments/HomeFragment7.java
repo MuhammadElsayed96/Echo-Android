@@ -11,10 +11,10 @@ import com.muhammadelsayed.echo.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment2#homeFragment2Instance} factory method to
+ * Use the {@link HomeFragment7#homeFragment7Instance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment2 extends Fragment {
+public class HomeFragment7 extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -25,7 +25,7 @@ public class HomeFragment2 extends Fragment {
     private String mParam2;
 
 
-    public HomeFragment2() {
+    public HomeFragment7() {
         // Required empty public constructor
     }
 
@@ -35,8 +35,8 @@ public class HomeFragment2 extends Fragment {
      *
      * @return A new instance of fragment HomeFragment.
      */
-    public static HomeFragment2 homeFragment2Instance() {
-        HomeFragment2 fragment = new HomeFragment2();
+    public static HomeFragment7 homeFragment7Instance() {
+        HomeFragment7 fragment = new HomeFragment7();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -55,7 +55,7 @@ public class HomeFragment2 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.ourpicks_home_tab, container, false);
+        return inflater.inflate(R.layout.politics_home_tab, container, false);
     }
 
 }

@@ -11,7 +11,7 @@ import com.muhammadelsayed.echo.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment1#homeFragmentInstance} factory method to
+ * Use the {@link HomeFragment1#homeFragment1Instance} factory method to
  * create an instance of this fragment.
  */
 public class HomeFragment1 extends Fragment {
@@ -35,7 +35,7 @@ public class HomeFragment1 extends Fragment {
      *
      * @return A new instance of fragment HomeFragment.
      */
-    public static HomeFragment1 homeFragmentInstance() {
+    public static HomeFragment1 homeFragment1Instance() {
         HomeFragment1 fragment = new HomeFragment1();
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -55,7 +55,7 @@ public class HomeFragment1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment1_tablayout, container, false);
+        return inflater.inflate(R.layout.leadstories_home_tab, container, false);
     }
 
 }
