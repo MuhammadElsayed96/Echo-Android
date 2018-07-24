@@ -13,19 +13,14 @@ public class Source {
     private int mImageResourceID;
     private boolean mToggleStatus;
 
-
     public Source() {
     }
-
-
 
     public Source(String id, int mImageResourceID, boolean mToggleStatus) {
         this.id = id;
         this.mImageResourceID = mImageResourceID;
         this.mToggleStatus = mToggleStatus;
     }
-
-
 
     public Source(String id, String name, String description, URL url, String category, String language, String country) {
         this.id = id;
@@ -92,7 +87,6 @@ public class Source {
     public void setCountry(String country) {
         this.country = country;
     }
-
 
     public int getImageResourceID() {
         return mImageResourceID;

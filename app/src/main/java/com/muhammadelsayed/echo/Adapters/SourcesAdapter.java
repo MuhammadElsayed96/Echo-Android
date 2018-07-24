@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.muhammadelsayed.echo.R;
 import com.muhammadelsayed.echo.model.Source;
+import com.squareup.picasso.Picasso;
 import com.zcw.togglebutton.ToggleButton;
 
 import java.util.List;
@@ -21,58 +22,51 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class SourcesAdapter extends RecyclerView.Adapter<SourcesAdapter.MyViewHolder> {
 
-    private List<Source> sourcesList;
-    @NonNull
-    @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater
-                .from(parent.getContext())
-                .inflate(R.layout.source_list_row, parent, false);
-        return new MyViewHolder(itemView);
+  private Context mContext;
+  private List<Source> sourcesList;
+
+  @NonNull
+  @Override
+  public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    View itemView =
+        LayoutInflater.from(parent.getContext()).inflate(R.layout.source_list_row, parent, false);
+    return new MyViewHolder(itemView);
+  }
+
+  @Override
+  public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    final int index = position;
+    Source source = sourcesList.get(position);
+    holder.SourceTitle.setText(source.getName());
+    //        holder.sourceImage.setImageResource(source.getImageResourceID());
+    Picasso.get().load(source.getImageResourceID()).into(holder.sourceImage);
+    if (source.isToggleStatus()) {
+      holder.sourceToggle.setChecked(true);
+    } else {
+      holder.sourceToggle.setChecked(false);
     }
+  }
 
-    @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        final int index = position;
-        Source source = sourcesList.get(position);
-        holder.SourceTitle.setText(source.getName());
-        holder.sourceImage.setImageResource(source.getImageResourceID());
+  @Override
+  public int getItemCount() {
+    return sourcesList.size();
+  }
 
-        if (source.isToggleStatus()) {
-            holder.sourceToggle.setToggleOn();
-        } else {
-            holder.sourceToggle.setToggleOff();
-        }
-        holder.sourceToggle.setOnToggleChanged(new ToggleButton.OnToggleChanged() {
-            @Override
-            public void onToggle(boolean on) {
-//                SharedPreferences.Editor editor = mContext.getSharedPreferences("SOURCES_SETTINGS", MODE_PRIVATE).edit();
-//                editor.putBoolean(sourcesList.get(index).getId(), on);
-//                editor.apply();
-                sourcesList.get(index).setToggleStatus(on);
-            }
-        });
+  public SourcesAdapter(Context mContext, List<Source> moviesList) {
+    this.mContext = mContext;
+    this.sourcesList = moviesList;
+  }
+
+  class MyViewHolder extends RecyclerView.ViewHolder {
+    private TextView SourceTitle;
+    private Switch sourceToggle;
+    private ImageView sourceImage;
+
+    private MyViewHolder(View view) {
+      super(view);
+      SourceTitle = view.findViewById(R.id.source_name_tv);
+      sourceToggle = view.findViewById(R.id.source_switch);
+      sourceImage = view.findViewById(R.id.source_image_iv);
     }
-
-    @Override
-    public int getItemCount() {
-        return sourcesList.size();
-    }
-
-    public SourcesAdapter(List<Source> moviesList) {
-        this.sourcesList = moviesList;
-    }
-
-    class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView SourceTitle;
-        private ToggleButton sourceToggle;
-        private ImageView sourceImage;
-
-        private MyViewHolder(View view) {
-            super(view);
-            SourceTitle = view.findViewById(R.id.source_name_tv);
-            sourceToggle = view.findViewById(R.id.source_toggle);
-            sourceImage = view.findViewById(R.id.source_image_iv);
-        }
-    }
+  }
 }

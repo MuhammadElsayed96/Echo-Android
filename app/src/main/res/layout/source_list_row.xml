@@ -31,20 +31,16 @@
         toggle:layout_constraintTop_toTopOf="parent"
         tools:text="ABC News" />
 
-    <com.zcw.togglebutton.ToggleButton
-        android:id="@+id/source_toggle"
-        android:layout_width="48dp"
-        android:layout_height="24dp"
+    <Switch
+        android:id="@+id/source_switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:shadowColor="#8c8c8c"
         toggle:layout_constraintBottom_toBottomOf="parent"
         toggle:layout_constraintRight_toLeftOf="@id/arrow_tv"
-        toggle:layout_constraintTop_toTopOf="parent"
-        toggle:tbBorderWidth="2dp"
-        toggle:tbOffBorderColor="#4bed90"
-        toggle:tbOffColor="#fff"
-        toggle:tbOnColor="#68e99f"
-        toggle:tbSpotColor="#fff" />
+        toggle:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/arrow_tv"
