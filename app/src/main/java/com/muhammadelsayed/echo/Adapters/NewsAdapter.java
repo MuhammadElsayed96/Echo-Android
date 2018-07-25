@@ -24,8 +24,9 @@ import java.util.NoSuchElementException;
 import me.grantland.widget.AutofitTextView;
 
 public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-  public static final int TYPE_FIRST_ITEM = 0;
-  public static final int TYPE_ITEM = 1;
+  private static final String TAG = NewsAdapter.class.getSimpleName();
+  private static final int TYPE_FIRST_ITEM = 0;
+  private static final int TYPE_ITEM = 1;
   private Context mContext;
   private List<Source> mNewsList;
 
@@ -37,6 +38,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
   @NonNull
   @Override
   public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    Log.wtf(TAG,"onCreateViewHolder(): has been instantiated");
     switch (viewType) {
       case TYPE_FIRST_ITEM:
         final View itemViewLarge =
@@ -55,6 +57,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
   @Override
   public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    Log.wtf(TAG,"onBindViewHolder(): has been instantiated");
     switch (holder.getItemViewType()) {
       case TYPE_FIRST_ITEM:
         LargeNewsAdapterViewHolder largeViewHolder = (LargeNewsAdapterViewHolder) holder;
@@ -64,6 +67,13 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         NewsAdapterViewHolder normalViewHolder = (NewsAdapterViewHolder) holder;
         break;
     }
+  }
+
+  @Override
+  public int getItemViewType(int position) {
+    Log.wtf(TAG,"getItemViewType(): has been instantiated");
+    if (position == 0) return TYPE_FIRST_ITEM;
+    return TYPE_ITEM;
   }
 
   @Override
@@ -108,6 +118,8 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
   }
 
   private void scaleImage(ImageView view) throws NoSuchElementException {
+    Log.wtf(TAG,"scaleImage(): has been instantiated");
+
     // Get bitmap from the the ImageView.
     Bitmap bitmap = null;
 

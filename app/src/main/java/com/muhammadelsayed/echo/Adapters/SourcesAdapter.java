@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,13 +23,15 @@ import java.util.List;
 import static android.content.Context.MODE_PRIVATE;
 
 public class SourcesAdapter extends RecyclerView.Adapter<SourcesAdapter.MyViewHolder> {
-
+  private static final String TAG = SourcesAdapter.class.getSimpleName();
   private Context mContext;
   private List<Source> sourcesList;
 
   @NonNull
   @Override
   public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    Log.wtf(TAG, "onCreateViewHolder(): has been instantiated");
+
     View itemView =
         LayoutInflater.from(parent.getContext()).inflate(R.layout.source_list_row, parent, false);
     return new MyViewHolder(itemView);
@@ -36,6 +39,8 @@ public class SourcesAdapter extends RecyclerView.Adapter<SourcesAdapter.MyViewHo
 
   @Override
   public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    Log.wtf(TAG, "onBindViewHolder(): has been instantiated");
+
     Source source = sourcesList.get(position);
     holder.SourceTitle.setText(source.getName());
     holder.sourceImage.setImageResource(source.getImageResourceID());
