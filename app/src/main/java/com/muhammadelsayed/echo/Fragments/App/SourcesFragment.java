@@ -83,7 +83,7 @@ public class SourcesFragment extends Fragment {
         if (mSourcesList.isEmpty()) {
             prepareSourcesData();
         } else {
-            mSourcesAdapter = new SourcesAdapter(getActivity(), mSourcesList);
+            mSourcesAdapter = new SourcesAdapter(mSourcesList);
             mSourcesRecyclerView.setAdapter(mSourcesAdapter);
         }
 
@@ -113,7 +113,7 @@ public class SourcesFragment extends Fragment {
                             mSourcesList.add(source);
                         }
                     }
-                    mSourcesAdapter = new SourcesAdapter(getActivity(), mSourcesList);
+                    mSourcesAdapter = new SourcesAdapter(mSourcesList);
                     mSourcesRecyclerView.setAdapter(mSourcesAdapter);
                 }
             }

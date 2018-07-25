@@ -21,7 +21,6 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class SourcesAdapter extends RecyclerView.Adapter<SourcesAdapter.MyViewHolder> {
 
-    private Context mContext;
     private List<Source> sourcesList;
     @NonNull
     @Override
@@ -60,8 +59,7 @@ public class SourcesAdapter extends RecyclerView.Adapter<SourcesAdapter.MyViewHo
         return sourcesList.size();
     }
 
-    public SourcesAdapter(Context mContext, List<Source> moviesList) {
-        this.mContext = mContext;
+    public SourcesAdapter(List<Source> moviesList) {
         this.sourcesList = moviesList;
     }
 
