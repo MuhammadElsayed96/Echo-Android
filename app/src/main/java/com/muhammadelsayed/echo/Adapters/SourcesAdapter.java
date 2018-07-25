@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.mikhaellopez.circularimageview.CircularImageView;
@@ -35,10 +36,8 @@ public class SourcesAdapter extends RecyclerView.Adapter<SourcesAdapter.MyViewHo
 
   @Override
   public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-    final int index = position;
     Source source = sourcesList.get(position);
     holder.SourceTitle.setText(source.getName());
-    //        holder.sourceImage.setImageResource(source.getImageResourceID());
     Picasso.get().load(source.getImageResourceID()).into(holder.sourceImage);
     if (source.isToggleStatus()) {
       holder.sourceToggle.setChecked(true);
