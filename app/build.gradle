@@ -55,5 +55,8 @@ dependencies {
     // Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+    // AutoFitTextView
+    implementation 'me.grantland:autofittextview:0.2.+'
+
 }
 apply plugin: 'com.google.gms.google-services'

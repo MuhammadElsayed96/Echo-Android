@@ -51,9 +51,9 @@ public class SourcesAdapter extends RecyclerView.Adapter<SourcesAdapter.MyViewHo
     return sourcesList.size();
   }
 
-  public SourcesAdapter(Context mContext, List<Source> moviesList) {
+  public SourcesAdapter(Context mContext, List<Source> sourcesList) {
     this.mContext = mContext;
-    this.sourcesList = moviesList;
+    this.sourcesList = sourcesList;
   }
 
   class MyViewHolder extends RecyclerView.ViewHolder {
