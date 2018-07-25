@@ -14,9 +14,9 @@
 
     <ImageView
         android:id="@+id/source_image_iv"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:src="@drawable/trump" />
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        tools:src="@drawable/trump" />
 
     <TextView
         android:id="@+id/source_name_tv"
