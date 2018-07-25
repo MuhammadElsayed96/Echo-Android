@@ -80,7 +80,12 @@ public class SourcesFragment extends Fragment {
         mSourcesRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mSourcesRecyclerView.addItemDecoration(new DividerItemDecoration(getActivity().getApplicationContext(), LinearLayoutManager.VERTICAL));
 
-        prepareSourcesData();
+        if (mSourcesList.isEmpty()) {
+            prepareSourcesData();
+        } else {
+            mSourcesAdapter = new SourcesAdapter(getActivity(), mSourcesList);
+            mSourcesRecyclerView.setAdapter(mSourcesAdapter);
+        }
 
         return rootView;
     }
@@ -101,12 +106,13 @@ public class SourcesFragment extends Fragment {
             public void onResponse(@NonNull Call<ResultSources> call, @NonNull Response<ResultSources> response) {
                 if (response.body() != null) {
                     ResultSources res = response.body();
-                    for (Source source : res.getSources())
+                    for (Source source : res.getSources()) {
                         if (sourcesMap.get(source.getId()) != null && !mSourcesList.contains(source)) {
 
                             source.setImageResourceID(sourcesMap.get(source.getId()));
                             mSourcesList.add(source);
                         }
+                    }
                     mSourcesAdapter = new SourcesAdapter(getActivity(), mSourcesList);
                     mSourcesRecyclerView.setAdapter(mSourcesAdapter);
                 }
