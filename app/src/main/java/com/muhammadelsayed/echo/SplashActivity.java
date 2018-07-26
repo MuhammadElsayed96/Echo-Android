@@ -37,8 +37,9 @@ public class SplashActivity extends AppCompatActivity {
     Log.wtf(TAG, "onCreate: has been instantiated");
 
     // LEAD STORIES
-    options.put("apiKey", getResources().getString(R.string.news_api_key));
+    options.put("apiKey", getResources().getString(R.string.news_api_key1));
     options.put("language", "en");
+      options.put("pageSize", 100);
     Utils.getTopHeadLines(
         options,
         new Utils.retrofitCallback() {
@@ -51,8 +52,9 @@ public class SplashActivity extends AppCompatActivity {
 
     // BUSINESS
     options.clear();
-    options.put("apiKey", getResources().getString(R.string.news_api_key));
-    //        options.put("language", "en");
+    options.put("apiKey", getResources().getString(R.string.news_api_key2));
+    options.put("language", "en");
+      options.put("pageSize", 100);
     options.put("category", "business");
 
     Utils.getTopHeadLines(
@@ -67,10 +69,10 @@ public class SplashActivity extends AppCompatActivity {
 
     // NATIONAL
     options.clear();
-    options.put("apiKey", getResources().getString(R.string.news_api_key));
+    options.put("apiKey", getResources().getString(R.string.news_api_key3));
     options.put("language", "en");
     options.put("q", "national");
-
+      options.put("pageSize", 100);
     Utils.getEverything(
         options,
         new Utils.retrofitCallback() {
@@ -83,10 +85,10 @@ public class SplashActivity extends AppCompatActivity {
 
     // WORLD
     options.clear();
-    options.put("apiKey", getResources().getString(R.string.news_api_key));
+    options.put("apiKey", getResources().getString(R.string.news_api_key4));
     options.put("language", "en");
     options.put("q", "world");
-
+      options.put("pageSize", 100);
     Utils.getEverything(
         options,
         new Utils.retrofitCallback() {
@@ -99,10 +101,10 @@ public class SplashActivity extends AppCompatActivity {
 
     // POLITICS
     options.clear();
-    options.put("apiKey", getResources().getString(R.string.news_api_key));
+    options.put("apiKey", getResources().getString(R.string.news_api_key5));
     options.put("language", "en");
     options.put("q", "politics");
-
+      options.put("pageSize", 100);
     Utils.getEverything(
         options,
         new Utils.retrofitCallback() {
@@ -115,10 +117,10 @@ public class SplashActivity extends AppCompatActivity {
 
     // ENTERTAINMENT
     options.clear();
-    options.put("apiKey", getResources().getString(R.string.news_api_key));
+    options.put("apiKey", getResources().getString(R.string.news_api_key6));
     options.put("language", "en");
     options.put("category", "entertainment");
-
+      options.put("pageSize", 100);
     Utils.getTopHeadLines(
         options,
         new Utils.retrofitCallback() {
@@ -131,10 +133,10 @@ public class SplashActivity extends AppCompatActivity {
 
     // LIFESTYLE
     options.clear();
-    options.put("apiKey", getResources().getString(R.string.news_api_key));
+    options.put("apiKey", getResources().getString(R.string.news_api_key7));
     options.put("language", "en");
     options.put("q", "lifestyle");
-
+      options.put("pageSize", 100);
     Utils.getTopHeadLines(
         options,
         new Utils.retrofitCallback() {
@@ -147,10 +149,10 @@ public class SplashActivity extends AppCompatActivity {
 
     // HEALTH
     options.clear();
-    options.put("apiKey", getResources().getString(R.string.news_api_key));
+    options.put("apiKey", getResources().getString(R.string.news_api_key8));
     options.put("language", "en");
     options.put("category", "health");
-
+      options.put("pageSize", 100);
     Utils.getTopHeadLines(
         options,
         new Utils.retrofitCallback() {
@@ -163,10 +165,10 @@ public class SplashActivity extends AppCompatActivity {
 
     // SPORT
     options.clear();
-    options.put("apiKey", getResources().getString(R.string.news_api_key));
+    options.put("apiKey", getResources().getString(R.string.news_api_key9));
     options.put("language", "en");
     options.put("category", "sports");
-
+      options.put("pageSize", 100);
     Utils.getTopHeadLines(
         options,
         new Utils.retrofitCallback() {
@@ -179,10 +181,10 @@ public class SplashActivity extends AppCompatActivity {
 
     // TECHNOLOGY
     options.clear();
-    options.put("apiKey", getResources().getString(R.string.news_api_key));
+    options.put("apiKey", getResources().getString(R.string.news_api_key10));
     options.put("language", "en");
     options.put("category", "technology");
-
+      options.put("pageSize", 100);
     Utils.getTopHeadLines(
         options,
         new Utils.retrofitCallback() {
@@ -195,10 +197,10 @@ public class SplashActivity extends AppCompatActivity {
 
     // SCIENCE
     options.clear();
-    options.put("apiKey", getResources().getString(R.string.news_api_key));
+    options.put("apiKey", getResources().getString(R.string.news_api_key11));
     options.put("language", "en");
     options.put("category", "science");
-
+      options.put("pageSize", 100);
     Utils.getTopHeadLines(
         options,
         new Utils.retrofitCallback() {
@@ -211,10 +213,10 @@ public class SplashActivity extends AppCompatActivity {
 
     // ENVIRONMENT
     options.clear();
-    options.put("apiKey", getResources().getString(R.string.news_api_key));
+    options.put("apiKey", getResources().getString(R.string.news_api_key12));
     options.put("language", "en");
     options.put("q", "environment");
-
+      options.put("pageSize", 100);
     Utils.getEverything(
         options,
         new Utils.retrofitCallback() {
@@ -227,10 +229,10 @@ public class SplashActivity extends AppCompatActivity {
 
     // TRAVEL
     options.clear();
-    options.put("apiKey", getResources().getString(R.string.news_api_key));
+    options.put("apiKey", getResources().getString(R.string.news_api_key13));
     options.put("language", "en");
     options.put("q", "travel");
-
+    options.put("pageSize", 100);
     Utils.getEverything(
         options,
         new Utils.retrofitCallback() {
@@ -240,6 +242,7 @@ public class SplashActivity extends AppCompatActivity {
             Log.wtf(TAG, "onSuccess: TRAVEL = " + travelList);
             Intent intent = new Intent(SplashActivity.this, MainActivity.class);
             startActivity(intent);
+            finish();
           }
         });
   }

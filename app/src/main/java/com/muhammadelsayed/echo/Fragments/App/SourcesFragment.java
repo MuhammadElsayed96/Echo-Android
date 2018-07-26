@@ -99,7 +99,7 @@ public class SourcesFragment extends Fragment {
     NewsClient service = RetrofitClientInstance.getRetrofitInstance().create(NewsClient.class);
 
     Map<String, String> options = new HashMap<>();
-    options.put("apiKey", getResources().getString(R.string.news_api_key));
+    options.put("apiKey", getResources().getString(R.string.news_api_key1));
 
     Call<ResultSources> call = service.getSources(options);
     call.enqueue(

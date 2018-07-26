@@ -3,9 +3,11 @@ package com.muhammadelsayed.echo.Adapters;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -66,6 +68,8 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
       case TYPE_FIRST_ITEM:
         LargeNewsAdapterViewHolder largeViewHolder = (LargeNewsAdapterViewHolder) holder;
         largeViewHolder.mCaptionTextL.setText(article.getDescription());
+        Typeface custom_font = ResourcesCompat.getFont(mContext, R.font.belgrano);
+        largeViewHolder.mTitleTextL.setTypeface(custom_font);
         largeViewHolder.mTitleTextL.setText(article.getTitle());
         if (article.getUrlToImage() != null)
           Picasso.get().load(article.getUrlToImage().toString()).into(largeViewHolder.mNewsImageL);
@@ -77,6 +81,8 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
       case TYPE_ITEM:
         NewsAdapterViewHolder normalViewHolder = (NewsAdapterViewHolder) holder;
         normalViewHolder.mCaptionText.setText(article.getDescription());
+        Typeface custom_font1 = ResourcesCompat.getFont(mContext, R.font.belgrano);
+        normalViewHolder.mTitleText.setTypeface(custom_font1);
         normalViewHolder.mTitleText.setText(article.getTitle());
         if (article.getUrlToImage() != null)
           Picasso.get().load(article.getUrlToImage().toString()).into(normalViewHolder.mNewsImage);
