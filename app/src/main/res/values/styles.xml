@@ -51,4 +51,9 @@
         <item name="paddingEnd">@dimen/activity_vertical_margin</item>
     </style>
 
+    <!-- Splash Screen theme. -->
+    <style name="SplashTheme" parent="@style/AppTheme">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+
 </resources>

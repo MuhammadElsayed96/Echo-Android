@@ -16,7 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.muhammadelsayed.echo.R;
-import com.muhammadelsayed.echo.model.Source;
+import com.muhammadelsayed.echo.model.Article;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -28,9 +29,9 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
   private static final int TYPE_FIRST_ITEM = 0;
   private static final int TYPE_ITEM = 1;
   private Context mContext;
-  private List<Source> mNewsList;
+  private List<Article> mNewsList;
 
-  public NewsAdapter(Context context, List<Source> newsList) {
+  public NewsAdapter(Context context, List<Article> newsList) {
     mContext = context;
     mNewsList = newsList;
   }
@@ -58,13 +59,35 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
   @Override
   public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
     Log.wtf(TAG,"onBindViewHolder(): has been instantiated");
+
+    Article article = mNewsList.get(position);
+
     switch (holder.getItemViewType()) {
+
       case TYPE_FIRST_ITEM:
         LargeNewsAdapterViewHolder largeViewHolder = (LargeNewsAdapterViewHolder) holder;
+
+        largeViewHolder.mCaptionTextL.setText(article.getDescription());
+        largeViewHolder.mTitleTextL.setText(article.getTitle());
+        Picasso.get().load(article.getUrlToImage().toString()).into(largeViewHolder.mNewsImageL);
+        scaleImage(largeViewHolder.mNewsImageL);
+        largeViewHolder.mSourceNameL.setText(article.getSource().getName());
+        Picasso.get().load(R.drawable.abc_news).into(largeViewHolder.mSourceImageL);
+        scaleImage(largeViewHolder.mSourceImageL);
+
         break;
 
       case TYPE_ITEM:
         NewsAdapterViewHolder normalViewHolder = (NewsAdapterViewHolder) holder;
+
+        normalViewHolder.mCaptionText.setText(article.getDescription());
+        normalViewHolder.mTitleText.setText(article.getTitle());
+        Picasso.get().load(article.getUrlToImage().toString()).into(normalViewHolder.mNewsImage);
+        scaleImage(normalViewHolder.mNewsImage);
+        normalViewHolder.mSourceName.setText(article.getSource().getName());
+        Picasso.get().load(R.drawable.abc_news).into(normalViewHolder.mSourceImage);
+        scaleImage(normalViewHolder.mSourceImage);
+
         break;
     }
   }

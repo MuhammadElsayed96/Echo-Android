@@ -36,7 +36,7 @@ public interface NewsClient {
      * @return an object containing an array of the top headline news
      */
     @GET("top-headlines")
-    Call<ResultArticles> getTopHeadLines(@QueryMap Map<String, String> options);
+    Call<ResultArticles> getTopHeadLines(@QueryMap Map<String, Object> options);
 
     /**
      * Retrieves all articles that matches the options
@@ -54,7 +54,7 @@ public interface NewsClient {
      * @return an object containing an array of all articles that matches the options
      */
     @GET("everything")
-    Call<ResultArticles> getArticles(@QueryMap Map<String, String> options);
+    Call<ResultArticles> getArticles(@QueryMap Map<String, Object> options);
 
 
     /**

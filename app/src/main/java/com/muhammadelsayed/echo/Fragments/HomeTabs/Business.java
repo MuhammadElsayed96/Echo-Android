@@ -17,11 +17,16 @@ import com.muhammadelsayed.echo.model.Article;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.muhammadelsayed.echo.SplashActivity.businessList;
+
 public class Business extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = Business.class.getSimpleName();
   private SwipeRefreshLayout mSwipeRefreshLayout;
   private NewsAdapter mNewsAdapter;
   private List<Article> mArticleList = new ArrayList<>();
+
+  private NewsAdapter mBusinessAdapter;
+  private RecyclerView mBusinessRecycler;
 
   public Business() {
     // Required empty public constructor
@@ -40,7 +45,7 @@ public class Business extends Fragment implements SwipeRefreshLayout.OnRefreshLi
     Log.wtf(TAG, "onCreateView() has been instantiated");
     // Inflate the layout for this fragment
     View rootView = inflater.inflate(R.layout.business_home_tab, container, false);
-    RecyclerView mBusinessRecycler = rootView.findViewById(R.id.business_recycler);
+    mBusinessRecycler = rootView.findViewById(R.id.business_recycler);
     mBusinessRecycler.setHasFixedSize(true);
     LinearLayoutManager mLinearLayoutManager =
         new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -78,5 +83,10 @@ public class Business extends Fragment implements SwipeRefreshLayout.OnRefreshLi
 
   private void loadBusinessData() {
     Log.wtf(TAG, "loadBusinessData() has been instantiated");
+
+    mBusinessAdapter = new NewsAdapter(getActivity(), businessList);
+    Log.d(TAG, "loadBusinessData: businessList = " + businessList);
+    mBusinessRecycler.setAdapter(mBusinessAdapter);
+
   }
 }
