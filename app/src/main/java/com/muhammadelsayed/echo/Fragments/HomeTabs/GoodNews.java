@@ -9,16 +9,12 @@ import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
-import com.muhammadelsayed.echo.model.Article;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class GoodNews extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = GoodNews.class.getSimpleName();
   private SwipeRefreshLayout mSwipeRefreshLayout;
   private NewsAdapter mNewsAdapter;
-  private List<Article> mArticleList = new ArrayList<>();
+//  private static List<Article> mGoodNewsArticleList = new ArrayList<>();
 
   public GoodNews() {
     // Required empty public constructor

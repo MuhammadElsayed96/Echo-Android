@@ -9,15 +9,11 @@ import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
-import com.muhammadelsayed.echo.model.Article;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class OurPicks extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = OurPicks.class.getSimpleName();
   private SwipeRefreshLayout mSwipeRefreshLayout;
-  private List<Article> mArticleList = new ArrayList<>();
+//  private List<Article> mArticleList = new ArrayList<>();
   private NewsAdapter mNewsAdapter;
 
   public OurPicks() {

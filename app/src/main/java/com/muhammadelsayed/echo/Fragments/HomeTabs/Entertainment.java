@@ -12,16 +12,15 @@ import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
-import com.muhammadelsayed.echo.model.Article;
 
-import java.util.ArrayList;
-import java.util.List;
+import static com.muhammadelsayed.echo.SplashActivity.entertainmentList;
 
 public class Entertainment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = Entertainment.class.getSimpleName();
   private SwipeRefreshLayout mSwipeRefreshLayout;
-  private NewsAdapter mNewsAdapter;
-  private List<Article> mArticleList = new ArrayList<>();
+  private NewsAdapter mEntertainmentNewsAdapter;
+  //  private static List<Article> mEntertainmentArticleList = new ArrayList<>();
+  private RecyclerView mEntertainmentRecycler;
 
   public Entertainment() {
     // Required empty public constructor
@@ -40,7 +39,7 @@ public class Entertainment extends Fragment implements SwipeRefreshLayout.OnRefr
 
     // Inflate the layout for this fragment
     View rootView = inflater.inflate(R.layout.entertainment_home_tab, container, false);
-    RecyclerView mEntertainmentRecycler = rootView.findViewById(R.id.entertainment_recycler);
+    mEntertainmentRecycler = rootView.findViewById(R.id.entertainment_recycler);
     mEntertainmentRecycler.setHasFixedSize(true);
     LinearLayoutManager mLinearLayoutManager =
         new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -53,30 +52,22 @@ public class Entertainment extends Fragment implements SwipeRefreshLayout.OnRefr
         android.R.color.holo_orange_dark,
         android.R.color.holo_blue_dark);
 
-    /*
-     Showing Swipe Refresh animation on activity create As animation won't start on onCreate, post
-     runnable is used
-    */
-    mSwipeRefreshLayout.post(
-        new Runnable() {
-          @Override
-          public void run() {
+    loadEntertainmentData();
 
-            mSwipeRefreshLayout.setRefreshing(true);
-
-            // Fetching data from server
-            loadEntertainmentData();
-          }
-        });
     return rootView;
   }
 
   @Override
   public void onRefresh() {
+    mSwipeRefreshLayout.setRefreshing(true);
     loadEntertainmentData();
+    mSwipeRefreshLayout.setRefreshing(false);
   }
 
   private void loadEntertainmentData() {
     Log.wtf(TAG, "loadEntertainmentData() has been instantiated");
+    mEntertainmentNewsAdapter = new NewsAdapter(getActivity(), entertainmentList);
+    Log.wtf(TAG, "loadEntertainmentData: entertainmentList = " + entertainmentList);
+    mEntertainmentRecycler.setAdapter(mEntertainmentNewsAdapter);
   }
 }

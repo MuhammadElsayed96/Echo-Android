@@ -10,16 +10,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
-import com.muhammadelsayed.echo.model.Article;
 
-import java.util.ArrayList;
-import java.util.List;
+import static com.muhammadelsayed.echo.SplashActivity.scienceList;
 
 public class Science extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = Science.class.getSimpleName();
   private SwipeRefreshLayout mSwipeRefreshLayout;
-  private List<Article> mArticleList = new ArrayList<>();
+  private RecyclerView mScienceRecycler;
+  private NewsAdapter mScienceNewsAdapter;
+  //  private List<Article> mArticleList = new ArrayList<>();
 
   public Science() {
     // Required empty public constructor
@@ -38,7 +39,7 @@ public class Science extends Fragment implements SwipeRefreshLayout.OnRefreshLis
 
     // Inflate the layout for this fragment
     View rootView = inflater.inflate(R.layout.science_home_tab, container, false);
-    RecyclerView mScienceRecycler = rootView.findViewById(R.id.science_recycler);
+    mScienceRecycler = rootView.findViewById(R.id.science_recycler);
     mScienceRecycler.setHasFixedSize(true);
     LinearLayoutManager mLinearLayoutManager =
         new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -51,21 +52,8 @@ public class Science extends Fragment implements SwipeRefreshLayout.OnRefreshLis
         android.R.color.holo_orange_dark,
         android.R.color.holo_blue_dark);
 
-    /*
-     Showing Swipe Refresh animation on activity create As animation won't start on onCreate, post
-     runnable is used
-    */
-    mSwipeRefreshLayout.post(
-        new Runnable() {
-          @Override
-          public void run() {
+    loadScienceData();
 
-            mSwipeRefreshLayout.setRefreshing(true);
-
-            // Fetching data from server
-            loadScienceData();
-          }
-        });
     return rootView;
   }
 
@@ -74,5 +62,10 @@ public class Science extends Fragment implements SwipeRefreshLayout.OnRefreshLis
     loadScienceData();
   }
 
-  private void loadScienceData() {}
+  private void loadScienceData() {
+    Log.wtf(TAG, "loadScienceData() has been instantiated");
+    mScienceNewsAdapter = new NewsAdapter(getActivity(), scienceList);
+    Log.wtf(TAG, "loadScienceData: scienceList = " + scienceList);
+    mScienceRecycler.setAdapter(mScienceNewsAdapter);
+  }
 }

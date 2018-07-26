@@ -12,17 +12,16 @@ import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
-import com.muhammadelsayed.echo.model.Article;
 
-import java.util.ArrayList;
-import java.util.List;
+import static com.muhammadelsayed.echo.SplashActivity.lifestyleList;
 
 public class Lifestyle extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
   private static final String TAG = Lifestyle.class.getSimpleName();
   private SwipeRefreshLayout mSwipeRefreshLayout;
-  private NewsAdapter mNewsAdapter;
-  private List<Article> mArticleList = new ArrayList<>();
+  private RecyclerView mLifestyleRecycler;
+  private NewsAdapter mLifestyleNewsAdapter;
+  //  private static List<Article> mLifestyleArticleList = new ArrayList<>();
 
   public Lifestyle() {
     // Required empty public constructor
@@ -42,7 +41,7 @@ public class Lifestyle extends Fragment implements SwipeRefreshLayout.OnRefreshL
 
     // Inflate the layout for this fragment
     View rootView = inflater.inflate(R.layout.lifestyle_home_tab, container, false);
-    RecyclerView mLifestyleRecycler = rootView.findViewById(R.id.lifestyle_recycler);
+    mLifestyleRecycler = rootView.findViewById(R.id.lifestyle_recycler);
     mLifestyleRecycler.setHasFixedSize(true);
     LinearLayoutManager mLinearLayoutManager =
         new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -55,21 +54,8 @@ public class Lifestyle extends Fragment implements SwipeRefreshLayout.OnRefreshL
         android.R.color.holo_orange_dark,
         android.R.color.holo_blue_dark);
 
-    /*
-     Showing Swipe Refresh animation on activity create As animation won't start on onCreate, post
-     runnable is used
-    */
-    mSwipeRefreshLayout.post(
-        new Runnable() {
-          @Override
-          public void run() {
+    loadLifestyleData();
 
-            mSwipeRefreshLayout.setRefreshing(true);
-
-            // Fetching data from server
-            loadLifestyleData();
-          }
-        });
     return rootView;
   }
 
@@ -78,5 +64,10 @@ public class Lifestyle extends Fragment implements SwipeRefreshLayout.OnRefreshL
     loadLifestyleData();
   }
 
-  private void loadLifestyleData() {}
+  private void loadLifestyleData() {
+    Log.wtf(TAG, "loadLifestyleData() has been instantiated");
+    mLifestyleNewsAdapter = new NewsAdapter(getActivity(), lifestyleList);
+    Log.wtf(TAG, "loadLifestyleData: lifestyleList = " + lifestyleList);
+    mLifestyleRecycler.setAdapter(mLifestyleNewsAdapter);
+  }
 }

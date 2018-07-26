@@ -12,16 +12,15 @@ import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
-import com.muhammadelsayed.echo.model.Article;
 
-import java.util.ArrayList;
-import java.util.List;
+import static com.muhammadelsayed.echo.SplashActivity.travelList;
 
 public class Travel extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = Travel.class.getSimpleName();
   private SwipeRefreshLayout mSwipeRefreshLayout;
-  private NewsAdapter mNewsAdapter;
-  private List<Article> mArticleList = new ArrayList<>();
+  private NewsAdapter mTravelNewsAdapter;
+  private RecyclerView mTravelRecycler;
+  //  private List<Article> mArticleList = new ArrayList<>();
 
   public Travel() {
     // Required empty public constructor
@@ -40,7 +39,7 @@ public class Travel extends Fragment implements SwipeRefreshLayout.OnRefreshList
 
     // Inflate the layout for this fragment
     View rootView = inflater.inflate(R.layout.travel_home_tab, container, false);
-    RecyclerView mTravelRecycler = rootView.findViewById(R.id.travel_recycler);
+    mTravelRecycler = rootView.findViewById(R.id.travel_recycler);
     mTravelRecycler.setHasFixedSize(true);
     LinearLayoutManager mLinearLayoutManager =
         new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -53,19 +52,8 @@ public class Travel extends Fragment implements SwipeRefreshLayout.OnRefreshList
         android.R.color.holo_orange_dark,
         android.R.color.holo_blue_dark);
 
-    /*
-     Showing Swipe Refresh animation on activity create As animation won't start on onCreate, post
-     runnable is used
-    */
-    mSwipeRefreshLayout.post(
-        new Runnable() {
-          @Override
-          public void run() {
-            mSwipeRefreshLayout.setRefreshing(true);
-            // Fetching data from server
-            loadTravelData();
-          }
-        });
+    loadTravelData();
+
     return rootView;
   }
 
@@ -74,5 +62,10 @@ public class Travel extends Fragment implements SwipeRefreshLayout.OnRefreshList
     loadTravelData();
   }
 
-  private void loadTravelData() {}
+  private void loadTravelData() {
+    Log.wtf(TAG, "loadTravelData() has been instantiated");
+    mTravelNewsAdapter = new NewsAdapter(getActivity(), travelList);
+    Log.wtf(TAG, "loadTravelData: travelList = " + travelList);
+    mTravelRecycler.setAdapter(mTravelNewsAdapter);
+  }
 }

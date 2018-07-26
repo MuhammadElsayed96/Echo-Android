@@ -10,16 +10,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
-import com.muhammadelsayed.echo.model.Article;
 
-import java.util.ArrayList;
-import java.util.List;
+import static com.muhammadelsayed.echo.SplashActivity.technologyList;
 
 public class Technology extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = Technology.class.getSimpleName();
   private SwipeRefreshLayout mSwipeRefreshLayout;
-  private List<Article> mArticleList = new ArrayList<>();
+  private RecyclerView mTechnologyRecycler;
+  private NewsAdapter mTechnologyNewsAdapter;
+  //  private List<Article> mArticleList = new ArrayList<>();
 
   public Technology() {
     // Required empty public constructor
@@ -38,7 +39,7 @@ public class Technology extends Fragment implements SwipeRefreshLayout.OnRefresh
 
     // Inflate the layout for this fragment
     View rootView = inflater.inflate(R.layout.technology_home_tab, container, false);
-    RecyclerView mTechnologyRecycler = rootView.findViewById(R.id.technology_recycler);
+    mTechnologyRecycler = rootView.findViewById(R.id.technology_recycler);
     mTechnologyRecycler.setHasFixedSize(true);
     LinearLayoutManager mLinearLayoutManager =
         new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -51,19 +52,8 @@ public class Technology extends Fragment implements SwipeRefreshLayout.OnRefresh
         android.R.color.holo_orange_dark,
         android.R.color.holo_blue_dark);
 
-    /*
-     Showing Swipe Refresh animation on activity create As animation won't start on onCreate, post
-     runnable is used
-    */
-    mSwipeRefreshLayout.post(
-        new Runnable() {
-          @Override
-          public void run() {
-            mSwipeRefreshLayout.setRefreshing(true);
-            // Fetching data from server
-            loadTechnologyData();
-          }
-        });
+    loadTechnologyData();
+
     return rootView;
   }
 
@@ -72,5 +62,10 @@ public class Technology extends Fragment implements SwipeRefreshLayout.OnRefresh
     loadTechnologyData();
   }
 
-  private void loadTechnologyData() {}
+  private void loadTechnologyData() {
+    Log.wtf(TAG, "loadTechnologyData() has been instantiated");
+    mTechnologyNewsAdapter = new NewsAdapter(getActivity(), technologyList);
+    Log.wtf(TAG, "loadTechnologyData: technologyList = " + technologyList);
+    mTechnologyRecycler.setAdapter(mTechnologyNewsAdapter);
+  }
 }

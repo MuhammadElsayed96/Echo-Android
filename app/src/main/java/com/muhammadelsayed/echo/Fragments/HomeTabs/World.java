@@ -12,17 +12,16 @@ import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
-import com.muhammadelsayed.echo.model.Article;
 
-import java.util.ArrayList;
-import java.util.List;
+import static com.muhammadelsayed.echo.SplashActivity.worldList;
 
 /** A simple {@link Fragment} subclass. create an instance of this fragment. */
 public class World extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = World.class.getSimpleName();
   private SwipeRefreshLayout mSwipeRefreshLayout;
-  private NewsAdapter mNewsAdapter;
-  private List<Article> mArticleList = new ArrayList<>();
+  private NewsAdapter mWorldNewsAdapter;
+  private RecyclerView mWorldRecycler;
+  //  private List<Article> mArticleList = new ArrayList<>();
 
   public World() {
     // Required empty public constructor
@@ -41,7 +40,7 @@ public class World extends Fragment implements SwipeRefreshLayout.OnRefreshListe
 
     // Inflate the layout for this fragment
     View rootView = inflater.inflate(R.layout.world_home_tab, container, false);
-    RecyclerView mWorldRecycler = rootView.findViewById(R.id.world_recycler);
+    mWorldRecycler = rootView.findViewById(R.id.world_recycler);
     mWorldRecycler.setHasFixedSize(true);
     LinearLayoutManager mLinearLayoutManager =
         new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -54,19 +53,8 @@ public class World extends Fragment implements SwipeRefreshLayout.OnRefreshListe
         android.R.color.holo_orange_dark,
         android.R.color.holo_blue_dark);
 
-    /*
-     Showing Swipe Refresh animation on activity create As animation won't start on onCreate, post
-     runnable is used
-    */
-    mSwipeRefreshLayout.post(
-        new Runnable() {
-          @Override
-          public void run() {
-            mSwipeRefreshLayout.setRefreshing(true);
-            // Fetching data from server
-            loadWorldData();
-          }
-        });
+    loadWorldData();
+
     return rootView;
   }
 
@@ -75,5 +63,10 @@ public class World extends Fragment implements SwipeRefreshLayout.OnRefreshListe
     loadWorldData();
   }
 
-  private void loadWorldData() {}
+  private void loadWorldData() {
+    Log.wtf(TAG, "loadWorldData() has been instantiated");
+    mWorldNewsAdapter = new NewsAdapter(getActivity(), worldList);
+    Log.wtf(TAG, "loadWorldData: worldList = " + worldList);
+    mWorldRecycler.setAdapter(mWorldNewsAdapter);
+  }
 }

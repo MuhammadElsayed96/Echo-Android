@@ -12,16 +12,15 @@ import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
-import com.muhammadelsayed.echo.model.Article;
 
-import java.util.ArrayList;
-import java.util.List;
+import static com.muhammadelsayed.echo.SplashActivity.politicsList;
 
 public class Politics extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = Politics.class.getSimpleName();
   private SwipeRefreshLayout mSwipeRefreshLayout;
-  private NewsAdapter mNewsAdapter;
-  private List<Article> mArticleList = new ArrayList<>();
+  private NewsAdapter mPoliticsNewsAdapter;
+  private RecyclerView mPoliticsRecycler;
+  //  private List<Article> mArticleList = new ArrayList<>();
 
   public Politics() {
     // Required empty public constructor
@@ -40,7 +39,7 @@ public class Politics extends Fragment implements SwipeRefreshLayout.OnRefreshLi
 
     // Inflate the layout for this fragment
     View rootView = inflater.inflate(R.layout.politics_home_tab, container, false);
-    RecyclerView mPoliticsRecycler = rootView.findViewById(R.id.politics_recycler);
+    mPoliticsRecycler = rootView.findViewById(R.id.politics_recycler);
     mPoliticsRecycler.setHasFixedSize(true);
     LinearLayoutManager mLinearLayoutManager =
         new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -53,21 +52,8 @@ public class Politics extends Fragment implements SwipeRefreshLayout.OnRefreshLi
         android.R.color.holo_orange_dark,
         android.R.color.holo_blue_dark);
 
-    /*
-     Showing Swipe Refresh animation on activity create As animation won't start on onCreate, post
-     runnable is used
-    */
-    mSwipeRefreshLayout.post(
-        new Runnable() {
-          @Override
-          public void run() {
+    loadPoliticsData();
 
-            mSwipeRefreshLayout.setRefreshing(true);
-
-            // Fetching data from server
-            loadPoliticsData();
-          }
-        });
     return rootView;
   }
 
@@ -76,5 +62,10 @@ public class Politics extends Fragment implements SwipeRefreshLayout.OnRefreshLi
     loadPoliticsData();
   }
 
-  private void loadPoliticsData() {}
+  private void loadPoliticsData() {
+    Log.wtf(TAG, "loadPoliticsData() has been instantiated");
+    mPoliticsNewsAdapter = new NewsAdapter(getActivity(), politicsList);
+    Log.wtf(TAG, "loadPoliticsData: politicsList = " + politicsList);
+    mPoliticsRecycler.setAdapter(mPoliticsNewsAdapter);
+  }
 }

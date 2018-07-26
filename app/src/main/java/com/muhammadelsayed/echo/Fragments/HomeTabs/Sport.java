@@ -10,16 +10,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
-import com.muhammadelsayed.echo.model.Article;
 
-import java.util.ArrayList;
-import java.util.List;
+import static com.muhammadelsayed.echo.SplashActivity.sportList;
 
 public class Sport extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = Sport.class.getSimpleName();
   private SwipeRefreshLayout mSwipeRefreshLayout;
-  private List<Article> mArticleList = new ArrayList<>();
+  private NewsAdapter mSportNewsAdapter;
+  private RecyclerView mSportRecycler;
+  //  private List<Article> mArticleList = new ArrayList<>();
 
   public Sport() {
     // Required empty public constructor
@@ -38,7 +39,7 @@ public class Sport extends Fragment implements SwipeRefreshLayout.OnRefreshListe
 
     // Inflate the layout for this fragment
     View rootView = inflater.inflate(R.layout.sport_home_tab, container, false);
-    RecyclerView mSportRecycler = rootView.findViewById(R.id.sport_recycler);
+    mSportRecycler = rootView.findViewById(R.id.sport_recycler);
     mSportRecycler.setHasFixedSize(true);
     LinearLayoutManager mLinearLayoutManager =
         new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -51,19 +52,8 @@ public class Sport extends Fragment implements SwipeRefreshLayout.OnRefreshListe
         android.R.color.holo_orange_dark,
         android.R.color.holo_blue_dark);
 
-    /*
-     Showing Swipe Refresh animation on activity create As animation won't start on onCreate, post
-     runnable is used
-    */
-    mSwipeRefreshLayout.post(
-        new Runnable() {
-          @Override
-          public void run() {
-            mSwipeRefreshLayout.setRefreshing(true);
-            // Fetching data from server
-            loadSportData();
-          }
-        });
+    loadSportData();
+
     return rootView;
   }
 
@@ -72,5 +62,10 @@ public class Sport extends Fragment implements SwipeRefreshLayout.OnRefreshListe
     loadSportData();
   }
 
-  private void loadSportData() {}
+  private void loadSportData() {
+    Log.wtf(TAG, "loadSportData() has been instantiated");
+    mSportNewsAdapter = new NewsAdapter(getActivity(), sportList);
+    Log.wtf(TAG, "loadSportData: sportList = " + sportList);
+    mSportRecycler.setAdapter(mSportNewsAdapter);
+  }
 }

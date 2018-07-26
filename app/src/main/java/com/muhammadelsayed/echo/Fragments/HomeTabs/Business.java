@@ -12,21 +12,15 @@ import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
-import com.muhammadelsayed.echo.model.Article;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.muhammadelsayed.echo.SplashActivity.businessList;
 
 public class Business extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = Business.class.getSimpleName();
   private SwipeRefreshLayout mSwipeRefreshLayout;
-  private NewsAdapter mNewsAdapter;
-  private List<Article> mArticleList = new ArrayList<>();
-
-  private NewsAdapter mBusinessAdapter;
+  private NewsAdapter mBusinessNewsAdapter;
   private RecyclerView mBusinessRecycler;
+  //  private static List<Article> mBusinessArticleList = new ArrayList<>();
 
   public Business() {
     // Required empty public constructor
@@ -53,40 +47,42 @@ public class Business extends Fragment implements SwipeRefreshLayout.OnRefreshLi
     mSwipeRefreshLayout = rootView.findViewById(R.id.business_swipe);
     mSwipeRefreshLayout.setOnRefreshListener(this);
     mSwipeRefreshLayout.setColorSchemeResources(
-        R.color.colorPrimary,
+        android.R.color.holo_red_light,
         android.R.color.holo_green_dark,
         android.R.color.holo_orange_dark,
         android.R.color.holo_blue_dark);
 
+    loadBusinessData();
     /*
      Showing Swipe Refresh animation on activity create As animation won't start on onCreate, post
      runnable is used
     */
-    mSwipeRefreshLayout.post(
-        new Runnable() {
-          @Override
-          public void run() {
-
-            mSwipeRefreshLayout.setRefreshing(true);
-
-            // Fetching data from server
-            loadBusinessData();
-          }
-        });
+    //    mSwipeRefreshLayout.post(
+    //        new Runnable() {
+    //          @Override
+    //          public void run() {
+    //
+    //            mSwipeRefreshLayout.setRefreshing(true);
+    //
+    //            // Fetching data from server
+    //            loadBusinessData();
+    //            mSwipeRefreshLayout.setRefreshing(false);
+    //          }
+    //        });
     return rootView;
   }
 
   @Override
   public void onRefresh() {
+    mSwipeRefreshLayout.setRefreshing(true);
     loadBusinessData();
+    mSwipeRefreshLayout.setRefreshing(false);
   }
 
   private void loadBusinessData() {
     Log.wtf(TAG, "loadBusinessData() has been instantiated");
-
-    mBusinessAdapter = new NewsAdapter(getActivity(), businessList);
-    Log.d(TAG, "loadBusinessData: businessList = " + businessList);
-    mBusinessRecycler.setAdapter(mBusinessAdapter);
-
+    mBusinessNewsAdapter = new NewsAdapter(getActivity(), businessList);
+    Log.wtf(TAG, "loadBusinessData: businessList = " + businessList);
+    mBusinessRecycler.setAdapter(mBusinessNewsAdapter);
   }
 }

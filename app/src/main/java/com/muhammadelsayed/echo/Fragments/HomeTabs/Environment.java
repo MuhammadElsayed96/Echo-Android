@@ -12,16 +12,15 @@ import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
-import com.muhammadelsayed.echo.model.Article;
 
-import java.util.ArrayList;
-import java.util.List;
+import static com.muhammadelsayed.echo.SplashActivity.environmentList;
 
 public class Environment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = Environment.class.getSimpleName();
   private SwipeRefreshLayout mSwipeRefreshLayout;
-  private NewsAdapter mNewsAdapter;
-  private List<Article> mArticleList = new ArrayList<>();
+  private NewsAdapter mEnvironmentNewsAdapter;
+  //  private static List<Article> mEnvironmentArticleList = new ArrayList<>();
+  private RecyclerView mEnvironmentRecycler;
 
   public Environment() {
     // Required empty public constructor
@@ -40,7 +39,7 @@ public class Environment extends Fragment implements SwipeRefreshLayout.OnRefres
 
     // Inflate the layout for this fragment
     View rootView = inflater.inflate(R.layout.environment_home_tab, container, false);
-    RecyclerView mEnvironmentRecycler = rootView.findViewById(R.id.environment_recycler);
+    mEnvironmentRecycler = rootView.findViewById(R.id.environment_recycler);
     mEnvironmentRecycler.setHasFixedSize(true);
     LinearLayoutManager mLinearLayoutManager =
         new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -53,21 +52,7 @@ public class Environment extends Fragment implements SwipeRefreshLayout.OnRefres
         android.R.color.holo_orange_dark,
         android.R.color.holo_blue_dark);
 
-    /*
-     Showing Swipe Refresh animation on activity create As animation won't start on onCreate, post
-     runnable is used
-    */
-    mSwipeRefreshLayout.post(
-        new Runnable() {
-          @Override
-          public void run() {
-
-            mSwipeRefreshLayout.setRefreshing(true);
-
-            // Fetching data from server
-            loadEnvironmentData();
-          }
-        });
+    loadEnvironmentData();
     return rootView;
   }
 
@@ -77,6 +62,9 @@ public class Environment extends Fragment implements SwipeRefreshLayout.OnRefres
   }
 
   private void loadEnvironmentData() {
-    Log.wtf(TAG, "onCreateView() has been instantiated");
+    Log.wtf(TAG, "loadEnvironmentData() has been instantiated");
+    mEnvironmentNewsAdapter = new NewsAdapter(getActivity(), environmentList);
+    Log.wtf(TAG, "loadEnvironmentData: environmentList = " + environmentList);
+    mEnvironmentRecycler.setAdapter(mEnvironmentNewsAdapter);
   }
 }

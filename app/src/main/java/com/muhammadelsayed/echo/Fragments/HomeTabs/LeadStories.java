@@ -12,16 +12,15 @@ import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
-import com.muhammadelsayed.echo.model.Article;
 
-import java.util.ArrayList;
-import java.util.List;
+import static com.muhammadelsayed.echo.SplashActivity.leadStoriesList;
 
 public class LeadStories extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = LeadStories.class.getSimpleName();
   private SwipeRefreshLayout mSwipeRefreshLayout;
-  private NewsAdapter mNewsAdapter;
-  private List<Article> mArticleList = new ArrayList<>();
+  private NewsAdapter mLeadStoriesNewsAdapter;
+  private RecyclerView mLeadStoriesRecycler;
+  //  private static List<Article> mLeadStoriesArticleList = new ArrayList<>();
 
   public LeadStories() {
     // Required empty public constructor
@@ -42,7 +41,7 @@ public class LeadStories extends Fragment implements SwipeRefreshLayout.OnRefres
 
     // Inflate the layout for this fragment
     View rootView = inflater.inflate(R.layout.leadstories_home_tab, container, false);
-    RecyclerView mLeadStoriesRecycler = rootView.findViewById(R.id.leadstories_recycler);
+    mLeadStoriesRecycler = rootView.findViewById(R.id.leadstories_recycler);
     mLeadStoriesRecycler.setHasFixedSize(true);
     LinearLayoutManager mLinearLayoutManager =
         new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -55,21 +54,8 @@ public class LeadStories extends Fragment implements SwipeRefreshLayout.OnRefres
         android.R.color.holo_orange_dark,
         android.R.color.holo_blue_dark);
 
-    /*
-     Showing Swipe Refresh animation on activity create As animation won't start on onCreate, post
-     runnable is used
-    */
-    mSwipeRefreshLayout.post(
-        new Runnable() {
-          @Override
-          public void run() {
+    loadLeadStoriesData();
 
-            mSwipeRefreshLayout.setRefreshing(true);
-
-            // Fetching data from server
-            loadLeadStoriesData();
-          }
-        });
     return rootView;
   }
 
@@ -78,5 +64,10 @@ public class LeadStories extends Fragment implements SwipeRefreshLayout.OnRefres
     loadLeadStoriesData();
   }
 
-  private void loadLeadStoriesData() {}
+  private void loadLeadStoriesData() {
+    Log.wtf(TAG, "loadLeadStoriesData() has been instantiated");
+    mLeadStoriesNewsAdapter = new NewsAdapter(getActivity(), leadStoriesList);
+    Log.wtf(TAG, "loadLeadStoriesData: leadStoriesList = " + leadStoriesList);
+    mLeadStoriesRecycler.setAdapter(mLeadStoriesNewsAdapter);
+  }
 }

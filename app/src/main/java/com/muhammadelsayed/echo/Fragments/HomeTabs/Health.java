@@ -12,16 +12,15 @@ import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
-import com.muhammadelsayed.echo.model.Article;
 
-import java.util.ArrayList;
-import java.util.List;
+import static com.muhammadelsayed.echo.SplashActivity.healthList;
 
 public class Health extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = Health.class.getSimpleName();
   private SwipeRefreshLayout mSwipeRefreshLayout;
-  private NewsAdapter mNewsAdapter;
-  private List<Article> mArticleList = new ArrayList<>();
+  private NewsAdapter mHealthNewsAdapter;
+  private RecyclerView mHealthRecycler;
+  //  private static List<Article> mHealthArticleList = new ArrayList<>();
 
   public Health() {
     // Required empty public constructor
@@ -40,7 +39,7 @@ public class Health extends Fragment implements SwipeRefreshLayout.OnRefreshList
 
     // Inflate the layout for this fragment
     View rootView = inflater.inflate(R.layout.health_home_tab, container, false);
-    RecyclerView mHealthRecycler = rootView.findViewById(R.id.health_recycler);
+    mHealthRecycler = rootView.findViewById(R.id.health_recycler);
     mHealthRecycler.setHasFixedSize(true);
     LinearLayoutManager mLinearLayoutManager =
         new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -53,21 +52,8 @@ public class Health extends Fragment implements SwipeRefreshLayout.OnRefreshList
         android.R.color.holo_orange_dark,
         android.R.color.holo_blue_dark);
 
-    /*
-     Showing Swipe Refresh animation on activity create As animation won't start on onCreate, post
-     runnable is used
-    */
-    mSwipeRefreshLayout.post(
-        new Runnable() {
-          @Override
-          public void run() {
+    loadHealthData();
 
-            mSwipeRefreshLayout.setRefreshing(true);
-
-            // Fetching data from server
-            loadHealthData();
-          }
-        });
     return rootView;
   }
 
@@ -76,5 +62,10 @@ public class Health extends Fragment implements SwipeRefreshLayout.OnRefreshList
     loadHealthData();
   }
 
-  private void loadHealthData() {}
+  private void loadHealthData() {
+    Log.wtf(TAG, "loadHealthData() has been instantiated");
+    mHealthNewsAdapter = new NewsAdapter(getActivity(), healthList);
+    Log.wtf(TAG, "loadHealthData: healthList = " + healthList);
+    mHealthRecycler.setAdapter(mHealthNewsAdapter);
+  }
 }

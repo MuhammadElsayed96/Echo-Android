@@ -12,16 +12,15 @@ import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
-import com.muhammadelsayed.echo.model.Article;
 
-import java.util.ArrayList;
-import java.util.List;
+import static com.muhammadelsayed.echo.SplashActivity.nationalList;
 
 public class National extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = National.class.getSimpleName();
   private SwipeRefreshLayout mSwipeRefreshLayout;
-  private NewsAdapter mNewsAdapter;
-  private List<Article> mArticleList = new ArrayList<>();
+  private NewsAdapter mNationalNewsAdapter;
+  private RecyclerView mNationalRecycler;
+  //  private static List<Article> mNationalArticleList = new ArrayList<>();
 
   public National() {
     // Required empty public constructor
@@ -40,7 +39,7 @@ public class National extends Fragment implements SwipeRefreshLayout.OnRefreshLi
 
     // Inflate the layout for this fragment
     View rootView = inflater.inflate(R.layout.national_home_tab, container, false);
-    RecyclerView mNationalRecycler = rootView.findViewById(R.id.national_recycler);
+    mNationalRecycler = rootView.findViewById(R.id.national_recycler);
     mNationalRecycler.setHasFixedSize(true);
     LinearLayoutManager mLinearLayoutManager =
         new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -53,21 +52,8 @@ public class National extends Fragment implements SwipeRefreshLayout.OnRefreshLi
         android.R.color.holo_orange_dark,
         android.R.color.holo_blue_dark);
 
-    /*
-     Showing Swipe Refresh animation on activity create As animation won't start on onCreate, post
-     runnable is used
-    */
-    mSwipeRefreshLayout.post(
-        new Runnable() {
-          @Override
-          public void run() {
+    loadNationalData();
 
-            mSwipeRefreshLayout.setRefreshing(true);
-
-            // Fetching data from server
-            loadNationalData();
-          }
-        });
     return rootView;
   }
 
@@ -76,5 +62,10 @@ public class National extends Fragment implements SwipeRefreshLayout.OnRefreshLi
     loadNationalData();
   }
 
-  private void loadNationalData() {}
+  private void loadNationalData() {
+    Log.wtf(TAG, "loadNationalData() has been instantiated");
+    mNationalNewsAdapter = new NewsAdapter(getActivity(), nationalList);
+    Log.wtf(TAG, "loadNationalData: nationalList = " + nationalList);
+    mNationalRecycler.setAdapter(mNationalNewsAdapter);
+  }
 }

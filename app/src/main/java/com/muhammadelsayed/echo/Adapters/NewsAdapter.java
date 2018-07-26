@@ -39,13 +39,13 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
   @NonNull
   @Override
   public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-    Log.wtf(TAG,"onCreateViewHolder(): has been instantiated");
+    Log.wtf(TAG, "onCreateViewHolder(): has been instantiated");
     switch (viewType) {
       case TYPE_FIRST_ITEM:
         final View itemViewLarge =
             LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.large_news_item, parent, false);
-        return new NewsAdapterViewHolder(itemViewLarge);
+        return new LargeNewsAdapterViewHolder(itemViewLarge);
       case TYPE_ITEM:
         final View itemViewNormal =
             LayoutInflater.from(parent.getContext())
@@ -58,43 +58,38 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
   @Override
   public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-    Log.wtf(TAG,"onBindViewHolder(): has been instantiated");
+    Log.wtf(TAG, "onBindViewHolder(): has been instantiated");
 
     Article article = mNewsList.get(position);
 
     switch (holder.getItemViewType()) {
-
       case TYPE_FIRST_ITEM:
         LargeNewsAdapterViewHolder largeViewHolder = (LargeNewsAdapterViewHolder) holder;
-
         largeViewHolder.mCaptionTextL.setText(article.getDescription());
         largeViewHolder.mTitleTextL.setText(article.getTitle());
-        Picasso.get().load(article.getUrlToImage().toString()).into(largeViewHolder.mNewsImageL);
-        scaleImage(largeViewHolder.mNewsImageL);
+        if (article.getUrlToImage() != null)
+          Picasso.get().load(article.getUrlToImage().toString()).into(largeViewHolder.mNewsImageL);
+        else largeViewHolder.mNewsImageL.setVisibility(View.GONE);
         largeViewHolder.mSourceNameL.setText(article.getSource().getName());
         Picasso.get().load(R.drawable.abc_news).into(largeViewHolder.mSourceImageL);
-        scaleImage(largeViewHolder.mSourceImageL);
-
         break;
 
       case TYPE_ITEM:
         NewsAdapterViewHolder normalViewHolder = (NewsAdapterViewHolder) holder;
-
         normalViewHolder.mCaptionText.setText(article.getDescription());
         normalViewHolder.mTitleText.setText(article.getTitle());
-        Picasso.get().load(article.getUrlToImage().toString()).into(normalViewHolder.mNewsImage);
-        scaleImage(normalViewHolder.mNewsImage);
+        if (article.getUrlToImage() != null)
+          Picasso.get().load(article.getUrlToImage().toString()).into(normalViewHolder.mNewsImage);
+        else normalViewHolder.mNewsImage.setVisibility(View.GONE);
         normalViewHolder.mSourceName.setText(article.getSource().getName());
         Picasso.get().load(R.drawable.abc_news).into(normalViewHolder.mSourceImage);
-        scaleImage(normalViewHolder.mSourceImage);
-
         break;
     }
   }
 
   @Override
   public int getItemViewType(int position) {
-    Log.wtf(TAG,"getItemViewType(): has been instantiated");
+    Log.wtf(TAG, "getItemViewType(): has been instantiated");
     if (position == 0) return TYPE_FIRST_ITEM;
     return TYPE_ITEM;
   }
@@ -104,7 +99,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     return mNewsList.size();
   }
 
-  class NewsAdapterViewHolder extends RecyclerView.ViewHolder {
+  private class NewsAdapterViewHolder extends RecyclerView.ViewHolder {
 
     private ImageView mNewsImage, mSourceImage, mBookmarkImage, mShareImage;
     private AutofitTextView mTitleText;
@@ -122,7 +117,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
   }
 
-  class LargeNewsAdapterViewHolder extends RecyclerView.ViewHolder {
+  private class LargeNewsAdapterViewHolder extends RecyclerView.ViewHolder {
 
     private ImageView mNewsImageL, mSourceImageL, mBookmarkImageL, mShareImageL;
     private AutofitTextView mTitleTextL;
@@ -141,7 +136,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
   }
 
   private void scaleImage(ImageView view) throws NoSuchElementException {
-    Log.wtf(TAG,"scaleImage(): has been instantiated");
+    Log.wtf(TAG, "scaleImage(): has been instantiated");
 
     // Get bitmap from the the ImageView.
     Bitmap bitmap = null;
