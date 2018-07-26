@@ -13,8 +13,6 @@ import android.view.ViewGroup;
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
 
-import static com.muhammadelsayed.echo.SplashActivity.nationalList;
-
 public class National extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = National.class.getSimpleName();
   private SwipeRefreshLayout mSwipeRefreshLayout;
@@ -63,9 +61,9 @@ public class National extends Fragment implements SwipeRefreshLayout.OnRefreshLi
   }
 
   private void loadNationalData() {
-    Log.wtf(TAG, "loadNationalData() has been instantiated");
-    mNationalNewsAdapter = new NewsAdapter(getActivity(), nationalList);
-    Log.wtf(TAG, "loadNationalData: nationalList = " + nationalList);
-    mNationalRecycler.setAdapter(mNationalNewsAdapter);
+    //    Log.wtf(TAG, "loadNationalData() has been instantiated");
+    //    mNationalNewsAdapter = new NewsAdapter(getActivity(), nationalList);
+    //    Log.wtf(TAG, "loadNationalData: nationalList = " + nationalList);
+    //    mNationalRecycler.setAdapter(mNationalNewsAdapter);
   }
 }

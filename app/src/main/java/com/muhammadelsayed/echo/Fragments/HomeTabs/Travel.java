@@ -13,8 +13,6 @@ import android.view.ViewGroup;
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
 
-import static com.muhammadelsayed.echo.SplashActivity.travelList;
-
 public class Travel extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = Travel.class.getSimpleName();
   private SwipeRefreshLayout mSwipeRefreshLayout;
@@ -63,9 +61,9 @@ public class Travel extends Fragment implements SwipeRefreshLayout.OnRefreshList
   }
 
   private void loadTravelData() {
-    Log.wtf(TAG, "loadTravelData() has been instantiated");
-    mTravelNewsAdapter = new NewsAdapter(getActivity(), travelList);
-    Log.wtf(TAG, "loadTravelData: travelList = " + travelList);
-    mTravelRecycler.setAdapter(mTravelNewsAdapter);
+    //    Log.wtf(TAG, "loadTravelData() has been instantiated");
+    //    mTravelNewsAdapter = new NewsAdapter(getActivity(), travelList);
+    //    Log.wtf(TAG, "loadTravelData: travelList = " + travelList);
+    //    mTravelRecycler.setAdapter(mTravelNewsAdapter);
   }
 }

@@ -13,8 +13,6 @@ import android.view.ViewGroup;
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
 
-import static com.muhammadelsayed.echo.SplashActivity.worldList;
-
 /** A simple {@link Fragment} subclass. create an instance of this fragment. */
 public class World extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = World.class.getSimpleName();
@@ -64,9 +62,9 @@ public class World extends Fragment implements SwipeRefreshLayout.OnRefreshListe
   }
 
   private void loadWorldData() {
-    Log.wtf(TAG, "loadWorldData() has been instantiated");
-    mWorldNewsAdapter = new NewsAdapter(getActivity(), worldList);
-    Log.wtf(TAG, "loadWorldData: worldList = " + worldList);
-    mWorldRecycler.setAdapter(mWorldNewsAdapter);
+    //    Log.wtf(TAG, "loadWorldData() has been instantiated");
+    //    mWorldNewsAdapter = new NewsAdapter(getActivity(), worldList);
+    //    Log.wtf(TAG, "loadWorldData: worldList = " + worldList);
+    //    mWorldRecycler.setAdapter(mWorldNewsAdapter);
   }
 }

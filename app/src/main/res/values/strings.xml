@@ -17,7 +17,7 @@
     <string name="app_name">Echo News</string>
     <string name="no_news">No news found</string>
     <string name="no_internet_connection">No internet connection</string>
-    <string name="news_api_key1">358d25e7dd804dd1b55af9bd6ec0c98f</string>
+    <string name="news_api_key1">b3997cff4cbc4771a175f6915af75ae1</string>
     <string name="news_api_key2">0d2c8bb61b8c4a64abca5fcb5e540fbf</string>
     <string name="news_api_key3">0554292760a34a92a7203592147d8dc8</string>
     <string name="news_api_key4">9409dda4f9d14d25a09c1f3481b66867</string>

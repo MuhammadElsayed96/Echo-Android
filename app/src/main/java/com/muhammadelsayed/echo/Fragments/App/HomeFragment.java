@@ -13,17 +13,11 @@ import android.view.ViewGroup;
 import com.muhammadelsayed.echo.Adapters.HomePagerAdapter;
 import com.muhammadelsayed.echo.Fragments.HomeTabs.Business;
 import com.muhammadelsayed.echo.Fragments.HomeTabs.Entertainment;
-import com.muhammadelsayed.echo.Fragments.HomeTabs.Environment;
 import com.muhammadelsayed.echo.Fragments.HomeTabs.Health;
 import com.muhammadelsayed.echo.Fragments.HomeTabs.LeadStories;
-import com.muhammadelsayed.echo.Fragments.HomeTabs.Lifestyle;
-import com.muhammadelsayed.echo.Fragments.HomeTabs.National;
-import com.muhammadelsayed.echo.Fragments.HomeTabs.Politics;
 import com.muhammadelsayed.echo.Fragments.HomeTabs.Science;
 import com.muhammadelsayed.echo.Fragments.HomeTabs.Sport;
 import com.muhammadelsayed.echo.Fragments.HomeTabs.Technology;
-import com.muhammadelsayed.echo.Fragments.HomeTabs.Travel;
-import com.muhammadelsayed.echo.Fragments.HomeTabs.World;
 import com.muhammadelsayed.echo.R;
 
 /**
@@ -72,17 +66,17 @@ public class HomeFragment extends Fragment {
     // adding home tabs' titles
     tabLayout.getTabAt(0).setText("LEAD STORIES");
     tabLayout.getTabAt(1).setText("BUSINESS");
-    tabLayout.getTabAt(2).setText("NATIONAL");
-    tabLayout.getTabAt(3).setText("WORLD");
-    tabLayout.getTabAt(4).setText("POLITICS");
-    tabLayout.getTabAt(5).setText("ENTERTAINMENT");
-    tabLayout.getTabAt(6).setText("LIFESTYLE");
-    tabLayout.getTabAt(7).setText("HEALTH");
-    tabLayout.getTabAt(8).setText("SPORT");
-    tabLayout.getTabAt(9).setText("TECHNOLOGY");
-    tabLayout.getTabAt(10).setText("SCIENCE");
-    tabLayout.getTabAt(11).setText("ENVIRONMENT");
-    tabLayout.getTabAt(12).setText("TRAVEL");
+    //    tabLayout.getTabAt(2).setText("NATIONAL");
+    //    tabLayout.getTabAt(3).setText("WORLD");
+    //    tabLayout.getTabAt(4).setText("POLITICS");
+    tabLayout.getTabAt(2).setText("ENTERTAINMENT");
+    //    tabLayout.getTabAt(6).setText("LIFESTYLE");
+    tabLayout.getTabAt(3).setText("HEALTH");
+    tabLayout.getTabAt(4).setText("SPORT");
+    tabLayout.getTabAt(5).setText("TECHNOLOGY");
+    tabLayout.getTabAt(6).setText("SCIENCE");
+    //    tabLayout.getTabAt(11).setText("ENVIRONMENT");
+    //    tabLayout.getTabAt(12).setText("TRAVEL");
 
     return rootView;
   }
@@ -97,17 +91,17 @@ public class HomeFragment extends Fragment {
     HomePagerAdapter adapter = new HomePagerAdapter(getChildFragmentManager());
     adapter.addFragment(new LeadStories());
     adapter.addFragment(new Business());
-    adapter.addFragment(new National());
-    adapter.addFragment(new World());
-    adapter.addFragment(new Politics());
+    //    adapter.addFragment(new National());
+    //    adapter.addFragment(new World());
+    //    adapter.addFragment(new Politics());
     adapter.addFragment(new Entertainment());
-    adapter.addFragment(new Lifestyle());
+    //    adapter.addFragment(new Lifestyle());
     adapter.addFragment(new Health());
     adapter.addFragment(new Sport());
     adapter.addFragment(new Technology());
     adapter.addFragment(new Science());
-    adapter.addFragment(new Environment());
-    adapter.addFragment(new Travel());
+    //    adapter.addFragment(new Environment());
+    //    adapter.addFragment(new Travel());
     viewPager.setAdapter(adapter);
   }
 }
