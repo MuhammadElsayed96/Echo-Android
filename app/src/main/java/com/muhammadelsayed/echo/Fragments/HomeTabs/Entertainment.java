@@ -12,14 +12,23 @@ import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
+import com.muhammadelsayed.echo.Utils;
+import com.muhammadelsayed.echo.model.Article;
+import com.muhammadelsayed.echo.model.Source;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static com.muhammadelsayed.echo.SplashActivity.entertainmentList;
+import static com.muhammadelsayed.echo.SplashActivity.mEntertainmentArticleList;
 
 public class Entertainment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = Entertainment.class.getSimpleName();
   private SwipeRefreshLayout mSwipeRefreshLayout;
   private NewsAdapter mEntertainmentNewsAdapter;
-  //  private static List<Article> mEntertainmentArticleList = new ArrayList<>();
   private RecyclerView mEntertainmentRecycler;
+  private String entertainmentSources;
 
   public Entertainment() {
     // Required empty public constructor
@@ -28,6 +37,7 @@ public class Entertainment extends Fragment implements SwipeRefreshLayout.OnRefr
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    entertainmentSources = "";
     if (getArguments() != null) {}
   }
 
@@ -43,6 +53,9 @@ public class Entertainment extends Fragment implements SwipeRefreshLayout.OnRefr
     LinearLayoutManager mLinearLayoutManager =
         new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
     mEntertainmentRecycler.setLayoutManager(mLinearLayoutManager);
+    mEntertainmentRecycler.setDrawingCacheEnabled(true);
+    mEntertainmentRecycler.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+    mEntertainmentRecycler.setItemViewCacheSize(20);
     mSwipeRefreshLayout = rootView.findViewById(R.id.entertainment_swipe);
     mSwipeRefreshLayout.setOnRefreshListener(this);
     mSwipeRefreshLayout.setColorSchemeResources(
@@ -59,14 +72,40 @@ public class Entertainment extends Fragment implements SwipeRefreshLayout.OnRefr
   @Override
   public void onRefresh() {
     mSwipeRefreshLayout.setRefreshing(true);
+    mEntertainmentArticleList.clear();
     loadEntertainmentData();
     mSwipeRefreshLayout.setRefreshing(false);
   }
 
   private void loadEntertainmentData() {
-//    Log.wtf(TAG, "loadEntertainmentData() has been instantiated");
-//    mEntertainmentNewsAdapter = new NewsAdapter(getActivity(), entertainmentList);
-//    Log.wtf(TAG, "loadEntertainmentData: entertainmentList = " + entertainmentList);
-//    mEntertainmentRecycler.setAdapter(mEntertainmentNewsAdapter);
+    Log.wtf(TAG, "loadEntertainmentData() has been instantiated");
+    if (mEntertainmentArticleList.isEmpty()) {
+      loadEntertainmentSources();
+      Map<String, Object> options = new HashMap<>();
+      options.put("apiKey", getResources().getString(R.string.news_api_key1));
+      options.put("sources", entertainmentSources);
+      Utils.getTopHeadLines(
+          options,
+          new Utils.retrofitCallbackArticle() {
+            @Override
+            public void onSuccessArticle(List<Article> articles) {
+              Log.wtf(TAG, "onSuccessArticle()::Entertainment");
+              mEntertainmentArticleList = articles;
+              mEntertainmentNewsAdapter = new NewsAdapter(getContext(), mEntertainmentArticleList);
+              mEntertainmentRecycler.setAdapter(mEntertainmentNewsAdapter);
+            }
+          });
+    } else {
+      mEntertainmentNewsAdapter = new NewsAdapter(getContext(), mEntertainmentArticleList);
+      mEntertainmentRecycler.setAdapter(mEntertainmentNewsAdapter);
+    }
+  }
+
+  private void loadEntertainmentSources() {
+    Log.wtf(TAG, "loadEntertainmentSources() has been instantiated");
+    for (Source source : entertainmentList) {
+      entertainmentSources = entertainmentSources.concat(source.getId() + ",");
+    }
+    entertainmentSources.replaceAll(",$", "");
   }
 }

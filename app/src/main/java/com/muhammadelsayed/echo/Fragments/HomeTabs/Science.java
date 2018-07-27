@@ -12,14 +12,23 @@ import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
+import com.muhammadelsayed.echo.Utils;
+import com.muhammadelsayed.echo.model.Article;
+import com.muhammadelsayed.echo.model.Source;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static com.muhammadelsayed.echo.SplashActivity.mScienceArticleList;
+import static com.muhammadelsayed.echo.SplashActivity.scienceList;
 
 public class Science extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = Science.class.getSimpleName();
   private SwipeRefreshLayout mSwipeRefreshLayout;
   private RecyclerView mScienceRecycler;
   private NewsAdapter mScienceNewsAdapter;
-  //  private List<Article> mArticleList = new ArrayList<>();
+  private String scienceSources;
 
   public Science() {
     // Required empty public constructor
@@ -28,6 +37,7 @@ public class Science extends Fragment implements SwipeRefreshLayout.OnRefreshLis
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    scienceSources = "";
     if (getArguments() != null) {}
   }
 
@@ -43,6 +53,9 @@ public class Science extends Fragment implements SwipeRefreshLayout.OnRefreshLis
     LinearLayoutManager mLinearLayoutManager =
         new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
     mScienceRecycler.setLayoutManager(mLinearLayoutManager);
+    mScienceRecycler.setDrawingCacheEnabled(true);
+    mScienceRecycler.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+    mScienceRecycler.setItemViewCacheSize(20);
     mSwipeRefreshLayout = rootView.findViewById(R.id.science_swipe);
     mSwipeRefreshLayout.setOnRefreshListener(this);
     mSwipeRefreshLayout.setColorSchemeResources(
@@ -58,13 +71,41 @@ public class Science extends Fragment implements SwipeRefreshLayout.OnRefreshLis
 
   @Override
   public void onRefresh() {
+    mSwipeRefreshLayout.setRefreshing(true);
+    mScienceArticleList.clear();
     loadScienceData();
+    mSwipeRefreshLayout.setRefreshing(false);
   }
 
   private void loadScienceData() {
-//    Log.wtf(TAG, "loadScienceData() has been instantiated");
-//    mScienceNewsAdapter = new NewsAdapter(getActivity(), scienceList);
-//    Log.wtf(TAG, "loadScienceData: scienceList = " + scienceList);
-//    mScienceRecycler.setAdapter(mScienceNewsAdapter);
+    Log.wtf(TAG, "loadScienceData() has been instantiated");
+    if (mScienceArticleList.isEmpty()) {
+      loadScienceSources();
+      Map<String, Object> options = new HashMap<>();
+      options.put("apiKey", getResources().getString(R.string.news_api_key1));
+      options.put("sources", scienceSources);
+      Utils.getTopHeadLines(
+          options,
+          new Utils.retrofitCallbackArticle() {
+            @Override
+            public void onSuccessArticle(List<Article> articles) {
+              Log.wtf(TAG, "onSuccessArticle()::Science");
+              mScienceArticleList = articles;
+              mScienceNewsAdapter = new NewsAdapter(getActivity(), mScienceArticleList);
+              mScienceRecycler.setAdapter(mScienceNewsAdapter);
+            }
+          });
+    } else {
+      mScienceNewsAdapter = new NewsAdapter(getActivity(), mScienceArticleList);
+      mScienceRecycler.setAdapter(mScienceNewsAdapter);
+    }
+  }
+
+  private void loadScienceSources() {
+    Log.wtf(TAG, "loadScienceSources() has been instantiated");
+    for (Source source : scienceList) {
+      scienceSources = scienceSources.concat(source.getId() + ",");
+    }
+    scienceSources.replaceAll(",$", "");
   }
 }

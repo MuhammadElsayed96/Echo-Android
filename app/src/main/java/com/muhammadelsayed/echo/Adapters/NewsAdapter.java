@@ -72,7 +72,11 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         largeViewHolder.mTitleTextL.setTypeface(custom_font);
         largeViewHolder.mTitleTextL.setText(article.getTitle());
         if (article.getUrlToImage() != null)
-          Picasso.get().load(article.getUrlToImage().toString()).into(largeViewHolder.mNewsImageL);
+          Picasso.get()
+              .load(article.getUrlToImage().toString())
+              .fit()
+              .centerCrop()
+              .into(largeViewHolder.mNewsImageL);
         else largeViewHolder.mNewsImageL.setVisibility(View.GONE);
         largeViewHolder.mSourceNameL.setText(article.getSource().getName());
         Picasso.get().load(R.drawable.abc_news).into(largeViewHolder.mSourceImageL);
@@ -85,7 +89,11 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         normalViewHolder.mTitleText.setTypeface(custom_font1);
         normalViewHolder.mTitleText.setText(article.getTitle());
         if (article.getUrlToImage() != null)
-          Picasso.get().load(article.getUrlToImage().toString()).into(normalViewHolder.mNewsImage);
+          Picasso.get()
+              .load(article.getUrlToImage().toString())
+              .fit()
+              .centerCrop()
+              .into(normalViewHolder.mNewsImage);
         else normalViewHolder.mNewsImage.setVisibility(View.GONE);
         normalViewHolder.mSourceName.setText(article.getSource().getName());
         Picasso.get().load(R.drawable.abc_news).into(normalViewHolder.mSourceImage);

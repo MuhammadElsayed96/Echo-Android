@@ -12,14 +12,23 @@ import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
+import com.muhammadelsayed.echo.Utils;
+import com.muhammadelsayed.echo.model.Article;
+import com.muhammadelsayed.echo.model.Source;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static com.muhammadelsayed.echo.SplashActivity.mTechnologyArticleList;
+import static com.muhammadelsayed.echo.SplashActivity.technologyList;
 
 public class Technology extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = Technology.class.getSimpleName();
   private SwipeRefreshLayout mSwipeRefreshLayout;
   private RecyclerView mTechnologyRecycler;
   private NewsAdapter mTechnologyNewsAdapter;
-  //  private List<Article> mArticleList = new ArrayList<>();
+  private String technologySources;
 
   public Technology() {
     // Required empty public constructor
@@ -28,6 +37,7 @@ public class Technology extends Fragment implements SwipeRefreshLayout.OnRefresh
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    technologySources = "";
     if (getArguments() != null) {}
   }
 
@@ -43,6 +53,9 @@ public class Technology extends Fragment implements SwipeRefreshLayout.OnRefresh
     LinearLayoutManager mLinearLayoutManager =
         new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
     mTechnologyRecycler.setLayoutManager(mLinearLayoutManager);
+    mTechnologyRecycler.setDrawingCacheEnabled(true);
+    mTechnologyRecycler.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+    mTechnologyRecycler.setItemViewCacheSize(20);
     mSwipeRefreshLayout = rootView.findViewById(R.id.technology_swipe);
     mSwipeRefreshLayout.setOnRefreshListener(this);
     mSwipeRefreshLayout.setColorSchemeResources(
@@ -58,13 +71,41 @@ public class Technology extends Fragment implements SwipeRefreshLayout.OnRefresh
 
   @Override
   public void onRefresh() {
+    mSwipeRefreshLayout.setRefreshing(true);
+    mTechnologyArticleList.clear();
     loadTechnologyData();
+    mSwipeRefreshLayout.setRefreshing(false);
   }
 
   private void loadTechnologyData() {
-//    Log.wtf(TAG, "loadTechnologyData() has been instantiated");
-//    mTechnologyNewsAdapter = new NewsAdapter(getActivity(), technologyList);
-//    Log.wtf(TAG, "loadTechnologyData: technologyList = " + technologyList);
-//    mTechnologyRecycler.setAdapter(mTechnologyNewsAdapter);
+    Log.wtf(TAG, "loadTechnologyData() has been instantiated");
+    if (mTechnologyArticleList.isEmpty()) {
+      loadTechnologySources();
+      Map<String, Object> options = new HashMap<>();
+      options.put("apiKey", getResources().getString(R.string.news_api_key1));
+      options.put("sources", technologySources);
+      Utils.getTopHeadLines(
+          options,
+          new Utils.retrofitCallbackArticle() {
+            @Override
+            public void onSuccessArticle(List<Article> articles) {
+              Log.wtf(TAG, "onSuccessArticle()::Technology");
+              mTechnologyArticleList = articles;
+              mTechnologyNewsAdapter = new NewsAdapter(getContext(), mTechnologyArticleList);
+              mTechnologyRecycler.setAdapter(mTechnologyNewsAdapter);
+            }
+          });
+    } else {
+      mTechnologyNewsAdapter = new NewsAdapter(getContext(), mTechnologyArticleList);
+      mTechnologyRecycler.setAdapter(mTechnologyNewsAdapter);
+    }
+  }
+
+  private void loadTechnologySources() {
+    Log.wtf(TAG, "loadTechnologySources() has been instantiated");
+    for (Source source : technologyList) {
+      technologySources = technologySources.concat(source.getId() + ",");
+    }
+    technologySources.replaceAll(",$", "");
   }
 }

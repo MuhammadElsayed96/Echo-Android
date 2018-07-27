@@ -12,14 +12,23 @@ import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
+import com.muhammadelsayed.echo.Utils;
+import com.muhammadelsayed.echo.model.Article;
+import com.muhammadelsayed.echo.model.Source;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static com.muhammadelsayed.echo.SplashActivity.mSportArticleList;
+import static com.muhammadelsayed.echo.SplashActivity.sportsList;
 
 public class Sport extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = Sport.class.getSimpleName();
   private SwipeRefreshLayout mSwipeRefreshLayout;
   private NewsAdapter mSportNewsAdapter;
   private RecyclerView mSportRecycler;
-  //  private List<Article> mArticleList = new ArrayList<>();
+  private String sportSources;
 
   public Sport() {
     // Required empty public constructor
@@ -28,6 +37,7 @@ public class Sport extends Fragment implements SwipeRefreshLayout.OnRefreshListe
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    sportSources = "";
     if (getArguments() != null) {}
   }
 
@@ -43,6 +53,9 @@ public class Sport extends Fragment implements SwipeRefreshLayout.OnRefreshListe
     LinearLayoutManager mLinearLayoutManager =
         new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
     mSportRecycler.setLayoutManager(mLinearLayoutManager);
+    mSportRecycler.setDrawingCacheEnabled(true);
+    mSportRecycler.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+    mSportRecycler.setItemViewCacheSize(20);
     mSwipeRefreshLayout = rootView.findViewById(R.id.sport_swipe);
     mSwipeRefreshLayout.setOnRefreshListener(this);
     mSwipeRefreshLayout.setColorSchemeResources(
@@ -51,20 +64,48 @@ public class Sport extends Fragment implements SwipeRefreshLayout.OnRefreshListe
         android.R.color.holo_orange_dark,
         android.R.color.holo_blue_dark);
 
-    loadSportData();
+    loadSportsData();
 
     return rootView;
   }
 
   @Override
   public void onRefresh() {
-    loadSportData();
+    mSwipeRefreshLayout.setRefreshing(true);
+    mSportArticleList.clear();
+    loadSportsData();
+    mSwipeRefreshLayout.setRefreshing(false);
   }
 
-  private void loadSportData() {
-//    Log.wtf(TAG, "loadSportData() has been instantiated");
-//    mSportNewsAdapter = new NewsAdapter(getActivity(), sportList);
-//    Log.wtf(TAG, "loadSportData: sportList = " + sportList);
-//    mSportRecycler.setAdapter(mSportNewsAdapter);
+  private void loadSportsData() {
+    Log.wtf(TAG, "loadSportData() has been instantiated");
+    if (mSportArticleList.isEmpty()) {
+      loadSportSources();
+      Map<String, Object> options = new HashMap<>();
+      options.put("apiKey", getResources().getString(R.string.news_api_key1));
+      options.put("sources", sportSources);
+      Utils.getTopHeadLines(
+          options,
+          new Utils.retrofitCallbackArticle() {
+            @Override
+            public void onSuccessArticle(List<Article> articles) {
+              Log.wtf(TAG, "onSuccessArticle()::Sport");
+              mSportArticleList = articles;
+              mSportNewsAdapter = new NewsAdapter(getContext(), mSportArticleList);
+              mSportRecycler.setAdapter(mSportNewsAdapter);
+            }
+          });
+    } else {
+      mSportNewsAdapter = new NewsAdapter(getContext(), mSportArticleList);
+      mSportRecycler.setAdapter(mSportNewsAdapter);
+    }
+  }
+
+  private void loadSportSources() {
+    Log.wtf(TAG, "loadSportSources() has been instantiated");
+    for (Source source : sportsList) {
+      sportSources = sportSources.concat(source.getId() + ",");
+    }
+    sportSources.replaceAll(",$", "");
   }
 }

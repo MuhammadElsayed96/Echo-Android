@@ -12,14 +12,23 @@ import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
+import com.muhammadelsayed.echo.Utils;
+import com.muhammadelsayed.echo.model.Article;
+import com.muhammadelsayed.echo.model.Source;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static com.muhammadelsayed.echo.SplashActivity.healthList;
+import static com.muhammadelsayed.echo.SplashActivity.mHealthArticleList;
 
 public class Health extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = Health.class.getSimpleName();
   private SwipeRefreshLayout mSwipeRefreshLayout;
   private NewsAdapter mHealthNewsAdapter;
   private RecyclerView mHealthRecycler;
-  //  private static List<Article> mHealthArticleList = new ArrayList<>();
+  private String healthSources;
 
   public Health() {
     // Required empty public constructor
@@ -28,6 +37,7 @@ public class Health extends Fragment implements SwipeRefreshLayout.OnRefreshList
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    healthSources = "";
     if (getArguments() != null) {}
   }
 
@@ -43,6 +53,9 @@ public class Health extends Fragment implements SwipeRefreshLayout.OnRefreshList
     LinearLayoutManager mLinearLayoutManager =
         new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
     mHealthRecycler.setLayoutManager(mLinearLayoutManager);
+    mHealthRecycler.setDrawingCacheEnabled(true);
+    mHealthRecycler.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+    mHealthRecycler.setItemViewCacheSize(20);
     mSwipeRefreshLayout = rootView.findViewById(R.id.health_swipe);
     mSwipeRefreshLayout.setOnRefreshListener(this);
     mSwipeRefreshLayout.setColorSchemeResources(
@@ -58,13 +71,41 @@ public class Health extends Fragment implements SwipeRefreshLayout.OnRefreshList
 
   @Override
   public void onRefresh() {
+    mSwipeRefreshLayout.setRefreshing(true);
+    mHealthArticleList.clear();
     loadHealthData();
+    mSwipeRefreshLayout.setRefreshing(false);
   }
 
   private void loadHealthData() {
-//    Log.wtf(TAG, "loadHealthData() has been instantiated");
-//    mHealthNewsAdapter = new NewsAdapter(getActivity(), healthList);
-//    Log.wtf(TAG, "loadHealthData: healthList = " + healthList);
-//    mHealthRecycler.setAdapter(mHealthNewsAdapter);
+    Log.wtf(TAG, "loadHealthData() has been instantiated");
+    if (mHealthArticleList.isEmpty()) {
+      loadHealthSources();
+      Map<String, Object> options = new HashMap<>();
+      options.put("apiKey", getResources().getString(R.string.news_api_key1));
+      options.put("sources", healthSources);
+      Utils.getTopHeadLines(
+          options,
+          new Utils.retrofitCallbackArticle() {
+            @Override
+            public void onSuccessArticle(List<Article> articles) {
+              Log.wtf(TAG, "onSuccessArticle()::Health");
+              mHealthArticleList = articles;
+              mHealthNewsAdapter = new NewsAdapter(getContext(), mHealthArticleList);
+              mHealthRecycler.setAdapter(mHealthNewsAdapter);
+            }
+          });
+    } else {
+      mHealthNewsAdapter = new NewsAdapter(getContext(), mHealthArticleList);
+      mHealthRecycler.setAdapter(mHealthNewsAdapter);
+    }
+  }
+
+  private void loadHealthSources() {
+    Log.wtf(TAG, "loadHealthSources() has been instantiated");
+    for (Source source : healthList) {
+      healthSources = healthSources.concat(source.getId() + ",");
+    }
+    healthSources.replaceAll(",$", "");
   }
 }
