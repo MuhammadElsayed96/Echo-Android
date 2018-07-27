@@ -13,11 +13,17 @@ import android.view.ViewGroup;
 import com.muhammadelsayed.echo.Adapters.HomePagerAdapter;
 import com.muhammadelsayed.echo.Fragments.HomeTabs.Business;
 import com.muhammadelsayed.echo.Fragments.HomeTabs.Entertainment;
+import com.muhammadelsayed.echo.Fragments.HomeTabs.Environment;
 import com.muhammadelsayed.echo.Fragments.HomeTabs.Health;
 import com.muhammadelsayed.echo.Fragments.HomeTabs.LeadStories;
+import com.muhammadelsayed.echo.Fragments.HomeTabs.Lifestyle;
+import com.muhammadelsayed.echo.Fragments.HomeTabs.National;
+import com.muhammadelsayed.echo.Fragments.HomeTabs.Politics;
 import com.muhammadelsayed.echo.Fragments.HomeTabs.Science;
 import com.muhammadelsayed.echo.Fragments.HomeTabs.Sport;
 import com.muhammadelsayed.echo.Fragments.HomeTabs.Technology;
+import com.muhammadelsayed.echo.Fragments.HomeTabs.Travel;
+import com.muhammadelsayed.echo.Fragments.HomeTabs.World;
 import com.muhammadelsayed.echo.R;
 
 /**
