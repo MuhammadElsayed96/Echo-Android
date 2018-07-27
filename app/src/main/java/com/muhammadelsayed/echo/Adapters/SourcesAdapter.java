@@ -1,7 +1,6 @@
 package com.muhammadelsayed.echo.Adapters;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,20 +11,20 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.mikhaellopez.circularimageview.CircularImageView;
 import com.muhammadelsayed.echo.R;
 import com.muhammadelsayed.echo.model.Source;
-import com.squareup.picasso.Picasso;
-import com.zcw.togglebutton.ToggleButton;
 
 import java.util.List;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class SourcesAdapter extends RecyclerView.Adapter<SourcesAdapter.MyViewHolder> {
   private static final String TAG = SourcesAdapter.class.getSimpleName();
   private Context mContext;
   private List<Source> sourcesList;
+
+  public SourcesAdapter(Context mContext, List<Source> sourcesList) {
+    this.mContext = mContext;
+    this.sourcesList = sourcesList;
+  }
 
   @NonNull
   @Override
@@ -44,6 +43,7 @@ public class SourcesAdapter extends RecyclerView.Adapter<SourcesAdapter.MyViewHo
     Source source = sourcesList.get(position);
     holder.SourceTitle.setText(source.getName());
     holder.sourceImage.setImageResource(source.getImageResourceID());
+    source.setToggleStatus(true);
     if (source.isToggleStatus()) {
       holder.sourceToggle.setChecked(true);
     } else {
@@ -54,11 +54,6 @@ public class SourcesAdapter extends RecyclerView.Adapter<SourcesAdapter.MyViewHo
   @Override
   public int getItemCount() {
     return sourcesList.size();
-  }
-
-  public SourcesAdapter(Context mContext, List<Source> sourcesList) {
-    this.mContext = mContext;
-    this.sourcesList = sourcesList;
   }
 
   class MyViewHolder extends RecyclerView.ViewHolder {

@@ -37,6 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:checked="true"
         android:shadowColor="#8c8c8c"
         toggle:layout_constraintBottom_toBottomOf="parent"
         toggle:layout_constraintRight_toLeftOf="@id/arrow_tv"

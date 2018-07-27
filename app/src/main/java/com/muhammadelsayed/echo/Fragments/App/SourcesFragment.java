@@ -1,7 +1,6 @@
 package com.muhammadelsayed.echo.Fragments.App;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -14,19 +13,11 @@ import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.Adapters.SourcesAdapter;
 import com.muhammadelsayed.echo.R;
-import com.muhammadelsayed.echo.model.ResultSources;
-import com.muhammadelsayed.echo.model.Source;
-import com.muhammadelsayed.echo.network.NewsClient;
-import com.muhammadelsayed.echo.network.RetrofitClientInstance;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import static com.muhammadelsayed.echo.SplashActivity.mSourcesList;
 
 /**
  * A simple {@link Fragment} subclass. Use the {@link SourcesFragment#sourcesFragmentInstance}
@@ -37,9 +28,7 @@ public class SourcesFragment extends Fragment {
   private static final String TAG = "SourcesFragment";
 
   private Map<String, Integer> sourcesMap = new HashMap<>();
-
   private View rootView;
-  private List<Source> mSourcesList = new ArrayList<>();
   private RecyclerView mSourcesRecyclerView;
   private SourcesAdapter mSourcesAdapter;
 
@@ -76,6 +65,9 @@ public class SourcesFragment extends Fragment {
         new LinearLayoutManager(getActivity().getApplicationContext());
     mSourcesRecyclerView.setHasFixedSize(true);
     mSourcesRecyclerView.setLayoutManager(mLayoutManager);
+    mSourcesRecyclerView.setDrawingCacheEnabled(true);
+    mSourcesRecyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_AUTO);
+    mSourcesRecyclerView.setItemViewCacheSize(75);
     mSourcesRecyclerView.setItemAnimator(new DefaultItemAnimator());
     mSourcesRecyclerView.addItemDecoration(
         new DividerItemDecoration(
@@ -94,37 +86,6 @@ public class SourcesFragment extends Fragment {
   private void prepareSourcesData() {
     Log.d(TAG, "prepareSourcesData: Loading sources data into RecyclerView...");
     instantiateSourcesMap();
-    mSourcesList.clear();
-    NewsClient service = RetrofitClientInstance.getRetrofitInstance().create(NewsClient.class);
-
-    Map<String, Object> options = new HashMap<>();
-    options.put("apiKey", getResources().getString(R.string.news_api_key1));
-
-    Call<ResultSources> call = service.getSources(options);
-    call.enqueue(
-        new Callback<ResultSources>() {
-          @Override
-          public void onResponse(
-              @NonNull Call<ResultSources> call, @NonNull Response<ResultSources> response) {
-            if (response.body() != null) {
-              ResultSources res = response.body();
-              for (Source source : res.getSources()) {
-                if (sourcesMap.get(source.getId()) != null && !mSourcesList.contains(source)) {
-                  source.setToggleStatus(true);
-                  source.setImageResourceID(sourcesMap.get(source.getId()));
-                  mSourcesList.add(source);
-                }
-              }
-              mSourcesAdapter = new SourcesAdapter(getActivity(), mSourcesList);
-              mSourcesRecyclerView.setAdapter(mSourcesAdapter);
-            }
-          }
-
-          @Override
-          public void onFailure(@NonNull Call<ResultSources> call, @NonNull Throwable t) {
-            Log.wtf(TAG, "onFailure: FAILED !!!");
-          }
-        });
   }
 
   private void instantiateSourcesMap() {

@@ -16,7 +16,7 @@ import java.util.Map;
 public class SplashActivity extends AppCompatActivity {
 
   private static final String TAG = "SplashActivity";
-
+  public static List<Source> mSourcesList = new ArrayList<>();
   public static List<Source> generalList = new ArrayList<>();
   public static List<Source> businessList = new ArrayList<>();
   public static List<Source> entertainmentList = new ArrayList<>();
@@ -62,6 +62,7 @@ public class SplashActivity extends AppCompatActivity {
           public void onSuccessSource(List<Source> source) {
             generalList = source;
             Log.wtf(TAG, "onSuccess: General = " + generalList);
+            mSourcesList.addAll(generalList);
             loadLeadStoriesSources();
             Map<String, Object> options = new HashMap<>();
             options.put("apiKey", getResources().getString(R.string.news_api_key2));
@@ -73,6 +74,9 @@ public class SplashActivity extends AppCompatActivity {
                   public void onSuccessArticle(List<Article> articles) {
                     Log.wtf(TAG, "onSuccessArticle()::LeadStories");
                     mLeadStoriesArticleList = articles;
+                      Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                      startActivity(intent);
+                      finish();
                   }
                 });
           }
@@ -90,6 +94,7 @@ public class SplashActivity extends AppCompatActivity {
           public void onSuccessSource(List<Source> sources) {
             businessList = sources;
             Log.wtf(TAG, "onSuccess: BUSINESS = " + businessList);
+            mSourcesList.addAll(businessList);
             loadBusinessSources();
             Map<String, Object> options = new HashMap<>();
             options.put("apiKey", getResources().getString(R.string.news_api_key4));
@@ -101,9 +106,6 @@ public class SplashActivity extends AppCompatActivity {
                   public void onSuccessArticle(List<Article> articles) {
                     Log.wtf(TAG, "onSuccessArticle()::Business");
                     mBusinessArticleList = articles;
-                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
                   }
                 });
           }
@@ -121,6 +123,7 @@ public class SplashActivity extends AppCompatActivity {
           public void onSuccessSource(List<Source> source) {
             technologyList = source;
             Log.wtf(TAG, "onSuccess: TECHNOLOGY = " + technologyList);
+            mSourcesList.addAll(technologyList);
             loadTechnologySources();
             Map<String, Object> options = new HashMap<>();
             options.put("apiKey", getResources().getString(R.string.news_api_key6));
@@ -149,6 +152,7 @@ public class SplashActivity extends AppCompatActivity {
           public void onSuccessSource(List<Source> source) {
             entertainmentList = source;
             Log.wtf(TAG, "onSuccess: ENTERTAINMENT = " + entertainmentList);
+            mSourcesList.addAll(entertainmentList);
             loadEntertainmentSources();
             Map<String, Object> options = new HashMap<>();
             options.put("apiKey", getResources().getString(R.string.news_api_key7));
@@ -177,6 +181,7 @@ public class SplashActivity extends AppCompatActivity {
           public void onSuccessSource(List<Source> source) {
             healthList = source;
             Log.wtf(TAG, "onSuccess: HEALTH = " + healthList);
+            mSourcesList.addAll(healthList);
             loadHealthSources();
             Map<String, Object> options = new HashMap<>();
             options.put("apiKey", getResources().getString(R.string.news_api_key9));
@@ -205,6 +210,7 @@ public class SplashActivity extends AppCompatActivity {
           public void onSuccessSource(List<Source> source) {
             sportsList = source;
             Log.wtf(TAG, "onSuccess: SPORTS = " + sportsList);
+            mSourcesList.addAll(sportsList);
             loadSportSources();
             Map<String, Object> options = new HashMap<>();
             options.put("apiKey", getResources().getString(R.string.news_api_key11));
@@ -233,6 +239,7 @@ public class SplashActivity extends AppCompatActivity {
           public void onSuccessSource(List<Source> sources) {
             scienceList = sources;
             Log.wtf(TAG, "onSuccess: science = " + scienceList);
+            mSourcesList.addAll(scienceList);
             loadScienceSources();
             Map<String, Object> options = new HashMap<>();
             options.put("apiKey", getResources().getString(R.string.news_api_key13));
