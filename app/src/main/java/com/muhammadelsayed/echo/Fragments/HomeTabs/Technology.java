@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
 
-import static com.muhammadelsayed.echo.SplashActivity.technologyList;
 
 public class Technology extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = Technology.class.getSimpleName();
@@ -63,9 +62,9 @@ public class Technology extends Fragment implements SwipeRefreshLayout.OnRefresh
   }
 
   private void loadTechnologyData() {
-    Log.wtf(TAG, "loadTechnologyData() has been instantiated");
-    mTechnologyNewsAdapter = new NewsAdapter(getActivity(), technologyList);
-    Log.wtf(TAG, "loadTechnologyData: technologyList = " + technologyList);
-    mTechnologyRecycler.setAdapter(mTechnologyNewsAdapter);
+//    Log.wtf(TAG, "loadTechnologyData() has been instantiated");
+//    mTechnologyNewsAdapter = new NewsAdapter(getActivity(), technologyList);
+//    Log.wtf(TAG, "loadTechnologyData: technologyList = " + technologyList);
+//    mTechnologyRecycler.setAdapter(mTechnologyNewsAdapter);
   }
 }

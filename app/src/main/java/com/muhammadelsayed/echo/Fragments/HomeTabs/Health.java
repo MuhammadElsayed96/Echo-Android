@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
 
-import static com.muhammadelsayed.echo.SplashActivity.healthList;
 
 public class Health extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = Health.class.getSimpleName();
@@ -63,9 +62,9 @@ public class Health extends Fragment implements SwipeRefreshLayout.OnRefreshList
   }
 
   private void loadHealthData() {
-    Log.wtf(TAG, "loadHealthData() has been instantiated");
-    mHealthNewsAdapter = new NewsAdapter(getActivity(), healthList);
-    Log.wtf(TAG, "loadHealthData: healthList = " + healthList);
-    mHealthRecycler.setAdapter(mHealthNewsAdapter);
+//    Log.wtf(TAG, "loadHealthData() has been instantiated");
+//    mHealthNewsAdapter = new NewsAdapter(getActivity(), healthList);
+//    Log.wtf(TAG, "loadHealthData: healthList = " + healthList);
+//    mHealthRecycler.setAdapter(mHealthNewsAdapter);
   }
 }

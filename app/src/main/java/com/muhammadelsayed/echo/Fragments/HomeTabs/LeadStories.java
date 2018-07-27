@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
 
-import static com.muhammadelsayed.echo.SplashActivity.leadStoriesList;
 
 public class LeadStories extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = LeadStories.class.getSimpleName();
@@ -65,9 +64,9 @@ public class LeadStories extends Fragment implements SwipeRefreshLayout.OnRefres
   }
 
   private void loadLeadStoriesData() {
-    Log.wtf(TAG, "loadLeadStoriesData() has been instantiated");
-    mLeadStoriesNewsAdapter = new NewsAdapter(getActivity(), leadStoriesList);
-    Log.wtf(TAG, "loadLeadStoriesData: leadStoriesList = " + leadStoriesList);
-    mLeadStoriesRecycler.setAdapter(mLeadStoriesNewsAdapter);
+//    Log.wtf(TAG, "loadLeadStoriesData() has been instantiated");
+//    mLeadStoriesNewsAdapter = new NewsAdapter(getActivity(), leadStoriesList);
+//    Log.wtf(TAG, "loadLeadStoriesData: leadStoriesList = " + leadStoriesList);
+//    mLeadStoriesRecycler.setAdapter(mLeadStoriesNewsAdapter);
   }
 }

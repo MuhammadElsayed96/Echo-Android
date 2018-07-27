@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
 
-import static com.muhammadelsayed.echo.SplashActivity.environmentList;
 
 public class Environment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = Environment.class.getSimpleName();
@@ -62,9 +61,9 @@ public class Environment extends Fragment implements SwipeRefreshLayout.OnRefres
   }
 
   private void loadEnvironmentData() {
-    Log.wtf(TAG, "loadEnvironmentData() has been instantiated");
-    mEnvironmentNewsAdapter = new NewsAdapter(getActivity(), environmentList);
-    Log.wtf(TAG, "loadEnvironmentData: environmentList = " + environmentList);
-    mEnvironmentRecycler.setAdapter(mEnvironmentNewsAdapter);
+//    Log.wtf(TAG, "loadEnvironmentData() has been instantiated");
+//    mEnvironmentNewsAdapter = new NewsAdapter(getActivity(), environmentList);
+//    Log.wtf(TAG, "loadEnvironmentData: environmentList = " + environmentList);
+//    mEnvironmentRecycler.setAdapter(mEnvironmentNewsAdapter);
   }
 }

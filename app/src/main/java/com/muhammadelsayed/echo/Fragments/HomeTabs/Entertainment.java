@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
 
-import static com.muhammadelsayed.echo.SplashActivity.entertainmentList;
 
 public class Entertainment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = Entertainment.class.getSimpleName();
@@ -65,9 +64,9 @@ public class Entertainment extends Fragment implements SwipeRefreshLayout.OnRefr
   }
 
   private void loadEntertainmentData() {
-    Log.wtf(TAG, "loadEntertainmentData() has been instantiated");
-    mEntertainmentNewsAdapter = new NewsAdapter(getActivity(), entertainmentList);
-    Log.wtf(TAG, "loadEntertainmentData: entertainmentList = " + entertainmentList);
-    mEntertainmentRecycler.setAdapter(mEntertainmentNewsAdapter);
+//    Log.wtf(TAG, "loadEntertainmentData() has been instantiated");
+//    mEntertainmentNewsAdapter = new NewsAdapter(getActivity(), entertainmentList);
+//    Log.wtf(TAG, "loadEntertainmentData: entertainmentList = " + entertainmentList);
+//    mEntertainmentRecycler.setAdapter(mEntertainmentNewsAdapter);
   }
 }

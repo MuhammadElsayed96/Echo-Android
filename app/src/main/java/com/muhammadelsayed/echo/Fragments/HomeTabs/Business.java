@@ -13,8 +13,6 @@ import android.view.ViewGroup;
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
 
-import static com.muhammadelsayed.echo.SplashActivity.businessList;
-
 public class Business extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = Business.class.getSimpleName();
   private SwipeRefreshLayout mSwipeRefreshLayout;
@@ -80,9 +78,9 @@ public class Business extends Fragment implements SwipeRefreshLayout.OnRefreshLi
   }
 
   private void loadBusinessData() {
-    Log.wtf(TAG, "loadBusinessData() has been instantiated");
-    mBusinessNewsAdapter = new NewsAdapter(getActivity(), businessList);
-    Log.wtf(TAG, "loadBusinessData: businessList = " + businessList);
-    mBusinessRecycler.setAdapter(mBusinessNewsAdapter);
+    //    Log.wtf(TAG, "loadBusinessData() has been instantiated");
+    //    mBusinessNewsAdapter = new NewsAdapter(getActivity(), businessList);
+    //    Log.wtf(TAG, "loadBusinessData: businessList = " + businessList);
+    //    mBusinessRecycler.setAdapter(mBusinessNewsAdapter);
   }
 }

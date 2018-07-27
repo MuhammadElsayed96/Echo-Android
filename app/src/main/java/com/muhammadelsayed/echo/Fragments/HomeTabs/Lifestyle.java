@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
 
-import static com.muhammadelsayed.echo.SplashActivity.lifestyleList;
 
 public class Lifestyle extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
@@ -65,9 +64,9 @@ public class Lifestyle extends Fragment implements SwipeRefreshLayout.OnRefreshL
   }
 
   private void loadLifestyleData() {
-    Log.wtf(TAG, "loadLifestyleData() has been instantiated");
-    mLifestyleNewsAdapter = new NewsAdapter(getActivity(), lifestyleList);
-    Log.wtf(TAG, "loadLifestyleData: lifestyleList = " + lifestyleList);
-    mLifestyleRecycler.setAdapter(mLifestyleNewsAdapter);
+//    Log.wtf(TAG, "loadLifestyleData() has been instantiated");
+//    mLifestyleNewsAdapter = new NewsAdapter(getActivity(), lifestyleList);
+//    Log.wtf(TAG, "loadLifestyleData: lifestyleList = " + lifestyleList);
+//    mLifestyleRecycler.setAdapter(mLifestyleNewsAdapter);
   }
 }

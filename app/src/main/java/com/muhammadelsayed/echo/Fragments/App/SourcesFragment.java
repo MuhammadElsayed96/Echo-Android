@@ -1,6 +1,5 @@
 package com.muhammadelsayed.echo.Fragments.App;
 
-
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -98,7 +97,7 @@ public class SourcesFragment extends Fragment {
     mSourcesList.clear();
     NewsClient service = RetrofitClientInstance.getRetrofitInstance().create(NewsClient.class);
 
-    Map<String, String> options = new HashMap<>();
+    Map<String, Object> options = new HashMap<>();
     options.put("apiKey", getResources().getString(R.string.news_api_key1));
 
     Call<ResultSources> call = service.getSources(options);

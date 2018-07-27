@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
 
-import static com.muhammadelsayed.echo.SplashActivity.politicsList;
 
 public class Politics extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = Politics.class.getSimpleName();
@@ -63,9 +62,9 @@ public class Politics extends Fragment implements SwipeRefreshLayout.OnRefreshLi
   }
 
   private void loadPoliticsData() {
-    Log.wtf(TAG, "loadPoliticsData() has been instantiated");
-    mPoliticsNewsAdapter = new NewsAdapter(getActivity(), politicsList);
-    Log.wtf(TAG, "loadPoliticsData: politicsList = " + politicsList);
-    mPoliticsRecycler.setAdapter(mPoliticsNewsAdapter);
+//    Log.wtf(TAG, "loadPoliticsData() has been instantiated");
+//    mPoliticsNewsAdapter = new NewsAdapter(getActivity(), politicsList);
+//    Log.wtf(TAG, "loadPoliticsData: politicsList = " + politicsList);
+//    mPoliticsRecycler.setAdapter(mPoliticsNewsAdapter);
   }
 }
