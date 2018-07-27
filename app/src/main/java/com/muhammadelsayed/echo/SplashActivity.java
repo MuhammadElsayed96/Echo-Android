@@ -33,6 +33,7 @@ public class SplashActivity extends AppCompatActivity {
     // LEAD STORIES
     options.put("apiKey", getResources().getString(R.string.news_api_key1));
     options.put("language", "en");
+    options.put("category", "general");
     Utils.getSources(
         options,
         new Utils.retrofitCallbackSource() {
@@ -56,6 +57,9 @@ public class SplashActivity extends AppCompatActivity {
           public void onSuccessSource(List<Source> sources) {
             businessList = sources;
             Log.wtf(TAG, "onSuccess: BUSINESS = " + businessList);
+            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
           }
         });
 
@@ -131,10 +135,6 @@ public class SplashActivity extends AppCompatActivity {
           public void onSuccessSource(List<Source> sources) {
             scienceList = sources;
             Log.wtf(TAG, "onSuccess: science = " + scienceList);
-
-            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
           }
         });
   }

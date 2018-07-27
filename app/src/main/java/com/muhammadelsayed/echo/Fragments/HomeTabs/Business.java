@@ -12,13 +12,23 @@ import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
+import com.muhammadelsayed.echo.Utils;
+import com.muhammadelsayed.echo.model.Article;
+import com.muhammadelsayed.echo.model.Source;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static com.muhammadelsayed.echo.SplashActivity.businessList;
 
 public class Business extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
   private static final String TAG = Business.class.getSimpleName();
   private SwipeRefreshLayout mSwipeRefreshLayout;
   private NewsAdapter mBusinessNewsAdapter;
   private RecyclerView mBusinessRecycler;
-  //  private static List<Article> mBusinessArticleList = new ArrayList<>();
+  private String businessSources;
+  //  private static List<Source> mBusinessSourcesList = new ArrayList<>();
 
   public Business() {
     // Required empty public constructor
@@ -28,6 +38,7 @@ public class Business extends Fragment implements SwipeRefreshLayout.OnRefreshLi
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Log.wtf(TAG, "onCreate() has been instantiated");
+    businessSources = "";
     if (getArguments() != null) {}
   }
 
@@ -78,9 +89,28 @@ public class Business extends Fragment implements SwipeRefreshLayout.OnRefreshLi
   }
 
   private void loadBusinessData() {
-    //    Log.wtf(TAG, "loadBusinessData() has been instantiated");
-    //    mBusinessNewsAdapter = new NewsAdapter(getActivity(), businessList);
-    //    Log.wtf(TAG, "loadBusinessData: businessList = " + businessList);
-    //    mBusinessRecycler.setAdapter(mBusinessNewsAdapter);
+    Log.wtf(TAG, "loadBusinessData() has been instantiated");
+    loadBusinessSources();
+    Map<String, Object> options = new HashMap<>();
+    options.put("apiKey", getResources().getString(R.string.news_api_key1));
+    options.put("sources", businessSources);
+    Utils.getTopHeadLines(
+        options,
+        new Utils.retrofitCallbackArticle() {
+          @Override
+          public void onSuccessArticle(List<Article> articles) {
+            Log.wtf(TAG, "onSuccessArticle()::Business");
+            mBusinessNewsAdapter = new NewsAdapter(getContext(), articles);
+            mBusinessRecycler.setAdapter(mBusinessNewsAdapter);
+          }
+        });
+  }
+
+  private void loadBusinessSources() {
+    Log.wtf(TAG, "loadBusinessSources() has been instantiated");
+    for (Source source : businessList) {
+      businessSources = businessSources.concat(source.getId() + ",");
+    }
+    businessSources.replaceAll(",$", "");
   }
 }
