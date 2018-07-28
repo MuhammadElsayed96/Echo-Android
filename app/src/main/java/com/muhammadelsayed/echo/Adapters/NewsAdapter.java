@@ -32,10 +32,12 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
   private static final int TYPE_ITEM = 1;
   private Context mContext;
   private List<Article> mNewsList;
+  private ItemClickListener mListener;
 
-  public NewsAdapter(Context context, List<Article> newsList) {
+  public NewsAdapter(Context context, List<Article> newsList, ItemClickListener listener) {
     mContext = context;
     mNewsList = newsList;
+    mListener = listener;
   }
 
   @NonNull
@@ -47,12 +49,34 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         final View itemViewLarge =
             LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.large_news_item, parent, false);
-        return new LargeNewsAdapterViewHolder(itemViewLarge);
+        final LargeNewsAdapterViewHolder mLargeViewHolder =
+            new LargeNewsAdapterViewHolder(itemViewLarge);
+
+        itemViewLarge.setOnClickListener(
+            new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                mListener.onItemClick(view, mLargeViewHolder.getPosition());
+              }
+            });
+        return mLargeViewHolder;
+
       case TYPE_ITEM:
         final View itemViewNormal =
             LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.normal_news_item, parent, false);
-        return new NewsAdapterViewHolder(itemViewNormal);
+
+        final NewsAdapterViewHolder mNormalViewHolder = new NewsAdapterViewHolder(itemViewNormal);
+
+        itemViewNormal.setOnClickListener(
+            new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                mListener.onItemClick(itemViewNormal, mNormalViewHolder.getPosition());
+              }
+            });
+        return mNormalViewHolder;
+
       default:
         return null;
     }
@@ -78,7 +102,10 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
               .into(largeViewHolder.mNewsImageL);
         else largeViewHolder.mNewsImageL.setVisibility(View.GONE);
         largeViewHolder.mSourceNameL.setText(article.getSource().getName());
-        Picasso.get().load(article.getSource().getImageResourceID()).fit().into(largeViewHolder.mSourceImageL);
+        Picasso.get()
+            .load(article.getSource().getImageResourceID())
+            .fit()
+            .into(largeViewHolder.mSourceImageL);
         break;
 
       case TYPE_ITEM:
@@ -94,7 +121,10 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
               .into(normalViewHolder.mNewsImage);
         else normalViewHolder.mNewsImage.setVisibility(View.GONE);
         normalViewHolder.mSourceName.setText(article.getSource().getName());
-        Picasso.get().load(article.getSource().getImageResourceID()).fit().into(normalViewHolder.mSourceImage);
+        Picasso.get()
+            .load(article.getSource().getImageResourceID())
+            .fit()
+            .into(normalViewHolder.mSourceImage);
         break;
     }
   }
@@ -215,5 +245,9 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
   private int dpToPx(int dp) {
     float density = mContext.getResources().getDisplayMetrics().density;
     return Math.round((float) dp * density);
+  }
+
+  public interface ItemClickListener {
+    void onItemClick(View v, int position);
   }
 }

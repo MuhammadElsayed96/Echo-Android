@@ -23,4 +23,9 @@
     <color name="navigation_bar_item_bg">@color/colorPrimary</color>
     <color name="navigation_bar_txt_color">#000</color>
     <color name="gray">#858585</color>
+
+    <!--   WebView colors -->
+    <color name="bluePrimaryDark">#048BFE</color>
+    <color name="bluePrimary">#2199FF</color>
+    <color name="bluePrimaryLight">#BADFFF</color>
 </resources>

@@ -44,8 +44,8 @@ public class SourcesAdapter extends RecyclerView.Adapter<SourcesAdapter.MyViewHo
     Source source = sourcesList.get(position);
     holder.SourceTitle.setText(source.getName());
     if (source.getImageResourceID() != 0)
-        Picasso.get().load(source.getImageResourceID()).fit().centerCrop().into(holder.sourceImage);
-//    holder.sourceImage.setImageResource(source.getImageResourceID());
+      Picasso.get().load(source.getImageResourceID()).fit().centerCrop().into(holder.sourceImage);
+    //    holder.sourceImage.setImageResource(source.getImageResourceID());
     source.setToggleStatus(true);
     if (source.isToggleStatus()) {
       holder.sourceToggle.setChecked(true);

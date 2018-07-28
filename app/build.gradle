@@ -62,5 +62,8 @@ dependencies {
     // AutoFitTextView
     implementation 'me.grantland:autofittextview:0.2.+'
 
+    // FinestWebView-Android
+    implementation 'com.thefinestartist:finestwebview:1.2.7'
+
 }
 apply plugin: 'com.google.gms.google-services'
