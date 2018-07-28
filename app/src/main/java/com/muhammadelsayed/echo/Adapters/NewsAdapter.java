@@ -75,11 +75,10 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
           Picasso.get()
               .load(article.getUrlToImage().toString())
               .fit()
-              .centerCrop()
               .into(largeViewHolder.mNewsImageL);
         else largeViewHolder.mNewsImageL.setVisibility(View.GONE);
         largeViewHolder.mSourceNameL.setText(article.getSource().getName());
-        Picasso.get().load(R.drawable.abc_news).into(largeViewHolder.mSourceImageL);
+        Picasso.get().load(article.getSource().getImageResourceID()).fit().into(largeViewHolder.mSourceImageL);
         break;
 
       case TYPE_ITEM:
@@ -92,11 +91,10 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
           Picasso.get()
               .load(article.getUrlToImage().toString())
               .fit()
-              .centerCrop()
               .into(normalViewHolder.mNewsImage);
         else normalViewHolder.mNewsImage.setVisibility(View.GONE);
         normalViewHolder.mSourceName.setText(article.getSource().getName());
-        Picasso.get().load(R.drawable.abc_news).into(normalViewHolder.mSourceImage);
+        Picasso.get().load(article.getSource().getImageResourceID()).fit().into(normalViewHolder.mSourceImage);
         break;
     }
   }

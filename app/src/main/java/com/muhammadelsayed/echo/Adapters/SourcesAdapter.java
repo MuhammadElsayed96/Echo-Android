@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.muhammadelsayed.echo.R;
 import com.muhammadelsayed.echo.model.Source;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -42,7 +43,9 @@ public class SourcesAdapter extends RecyclerView.Adapter<SourcesAdapter.MyViewHo
 
     Source source = sourcesList.get(position);
     holder.SourceTitle.setText(source.getName());
-    holder.sourceImage.setImageResource(source.getImageResourceID());
+    if (source.getImageResourceID() != 0)
+        Picasso.get().load(source.getImageResourceID()).fit().centerCrop().into(holder.sourceImage);
+//    holder.sourceImage.setImageResource(source.getImageResourceID());
     source.setToggleStatus(true);
     if (source.isToggleStatus()) {
       holder.sourceToggle.setChecked(true);

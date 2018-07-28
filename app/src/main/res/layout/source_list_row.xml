@@ -16,6 +16,12 @@
         android:id="@+id/source_image_iv"
         android:layout_width="24dp"
         android:layout_height="24dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        toggle:layout_constraintBottom_toBottomOf="parent"
+        toggle:layout_constraintLeft_toLeftOf="parent"
+        toggle:layout_constraintStart_toStartOf="parent"
+        toggle:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/trump" />
 
     <TextView
@@ -26,9 +32,9 @@
         android:layout_marginStart="16dp"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         android:textColor="@android:color/black"
-        toggle:layout_constraintBottom_toBottomOf="parent"
+        toggle:layout_constraintBottom_toBottomOf="@id/source_image_iv"
         toggle:layout_constraintLeft_toRightOf="@id/source_image_iv"
-        toggle:layout_constraintTop_toTopOf="parent"
+        toggle:layout_constraintTop_toTopOf="@id/source_image_iv"
         tools:text="ABC News" />
 
     <Switch
