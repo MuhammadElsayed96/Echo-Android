@@ -16,7 +16,8 @@ import java.util.Map;
 public class SplashActivity extends AppCompatActivity {
 
   private static final String TAG = "SplashActivity";
-  public static List<Source> mSourcesList = new ArrayList<>();
+
+    public static List<Source> mSourcesList = new ArrayList<>();
   public static List<Source> generalList = new ArrayList<>();
   public static List<Source> businessList = new ArrayList<>();
   public static List<Source> entertainmentList = new ArrayList<>();
@@ -56,13 +57,27 @@ public class SplashActivity extends AppCompatActivity {
     options.put("language", "en");
     options.put("category", "general");
     Utils.getSources(
+        getApplicationContext(),
         options,
         new Utils.retrofitCallbackSource() {
           @Override
-          public void onSuccessSource(List<Source> source) {
-            generalList = source;
+          public void onSuccessSource(List<Source> sources) {
+//            generalList = sources;
+//
+//              for(Iterator<Source> it = generalList.iterator(); it.hasNext();) {
+//                  Source source = it.next();
+//                  if(!source.isToggleStatus()) {
+//                      it.remove();
+//                  }
+//              }
+//
+              for (Source source : sources) {
+                  if (!source.isToggleStatus())
+                      continue;
+                  generalList.add(source);
+              }
             Log.wtf(TAG, "onSuccess: General = " + generalList);
-            mSourcesList.addAll(generalList);
+            mSourcesList.addAll(sources);
             loadLeadStoriesSources();
             Map<String, Object> options = new HashMap<>();
             options.put("apiKey", getResources().getString(R.string.news_api_key2));
@@ -85,13 +100,26 @@ public class SplashActivity extends AppCompatActivity {
     options.put("language", "en");
     options.put("category", "business");
     Utils.getSources(
-        options,
+            getApplicationContext(),
+            options,
         new Utils.retrofitCallbackSource() {
           @Override
           public void onSuccessSource(List<Source> sources) {
-            businessList = sources;
+//            businessList = sources;
+//
+//              for(Iterator<Source> it = businessList.iterator(); it.hasNext();) {
+//                  Source source = it.next();
+//                  if(!source.isToggleStatus()) {
+//                      it.remove();
+//                  }
+//              }
+              for (Source source : sources) {
+                  if (!source.isToggleStatus())
+                      continue;
+                  businessList.add(source);
+              }
             Log.wtf(TAG, "onSuccess: BUSINESS = " + businessList);
-            mSourcesList.addAll(businessList);
+            mSourcesList.addAll(sources);
             loadBusinessSources();
             Map<String, Object> options = new HashMap<>();
             options.put("apiKey", getResources().getString(R.string.news_api_key4));
@@ -117,13 +145,25 @@ public class SplashActivity extends AppCompatActivity {
     options.put("language", "en");
     options.put("category", "technology");
     Utils.getSources(
+        getApplicationContext(),
         options,
         new Utils.retrofitCallbackSource() {
           @Override
-          public void onSuccessSource(List<Source> source) {
-            technologyList = source;
+          public void onSuccessSource(List<Source> sources) {
+//            technologyList = sources;
+//              for(Iterator<Source> it = technologyList.iterator(); it.hasNext();) {
+//                  Source source = it.next();
+//                  if(!source.isToggleStatus()) {
+//                      it.remove();
+//                  }
+//              }
+              for (Source source : sources) {
+                  if (!source.isToggleStatus())
+                      continue;
+                  technologyList.add(source);
+              }
             Log.wtf(TAG, "onSuccess: TECHNOLOGY = " + technologyList);
-            mSourcesList.addAll(technologyList);
+            mSourcesList.addAll(sources);
             loadTechnologySources();
             Map<String, Object> options = new HashMap<>();
             options.put("apiKey", getResources().getString(R.string.news_api_key6));
@@ -146,13 +186,19 @@ public class SplashActivity extends AppCompatActivity {
     options.put("language", "en");
     options.put("category", "entertainment");
     Utils.getSources(
+        getApplicationContext(),
         options,
         new Utils.retrofitCallbackSource() {
           @Override
-          public void onSuccessSource(List<Source> source) {
-            entertainmentList = source;
+          public void onSuccessSource(List<Source> sources) {
+
+              for (Source source : sources) {
+                  if (!source.isToggleStatus())
+                      continue;
+                  entertainmentList.add(source);
+              }
             Log.wtf(TAG, "onSuccess: ENTERTAINMENT = " + entertainmentList);
-            mSourcesList.addAll(entertainmentList);
+            mSourcesList.addAll(sources);
             loadEntertainmentSources();
             Map<String, Object> options = new HashMap<>();
             options.put("apiKey", getResources().getString(R.string.news_api_key7));
@@ -175,13 +221,18 @@ public class SplashActivity extends AppCompatActivity {
     options.put("language", "en");
     options.put("category", "health");
     Utils.getSources(
+        getApplicationContext(),
         options,
         new Utils.retrofitCallbackSource() {
           @Override
-          public void onSuccessSource(List<Source> source) {
-            healthList = source;
+          public void onSuccessSource(List<Source> sources) {
+              for (Source source : sources) {
+                  if (!source.isToggleStatus())
+                      continue;
+                  healthList.add(source);
+              }
             Log.wtf(TAG, "onSuccess: HEALTH = " + healthList);
-            mSourcesList.addAll(healthList);
+            mSourcesList.addAll(sources);
             loadHealthSources();
             Map<String, Object> options = new HashMap<>();
             options.put("apiKey", getResources().getString(R.string.news_api_key9));
@@ -204,13 +255,18 @@ public class SplashActivity extends AppCompatActivity {
     options.put("language", "en");
     options.put("category", "sports");
     Utils.getSources(
+        getApplicationContext(),
         options,
         new Utils.retrofitCallbackSource() {
           @Override
-          public void onSuccessSource(List<Source> source) {
-            sportsList = source;
-            Log.wtf(TAG, "onSuccess: SPORTS = " + sportsList);
-            mSourcesList.addAll(sportsList);
+          public void onSuccessSource(List<Source> sources) {
+              for (Source source : sources) {
+                  if (!source.isToggleStatus())
+                      continue;
+                  sportsList.add(source);
+              }
+            Log.wtf(TAG, "onSuccsourcesess: SPORTS = " + sportsList);
+            mSourcesList.addAll(sources);
             loadSportSources();
             Map<String, Object> options = new HashMap<>();
             options.put("apiKey", getResources().getString(R.string.news_api_key11));
@@ -233,11 +289,16 @@ public class SplashActivity extends AppCompatActivity {
     options.put("language", "en");
     options.put("category", "science");
     Utils.getSources(
+        getApplicationContext(),
         options,
         new Utils.retrofitCallbackSource() {
           @Override
           public void onSuccessSource(List<Source> sources) {
-            scienceList = sources;
+              for (Source source : sources) {
+                  if (!source.isToggleStatus())
+                      continue;
+                  scienceList.add(source);
+              }
             Log.wtf(TAG, "onSuccess: science = " + scienceList);
             mSourcesList.addAll(scienceList);
             loadScienceSources();
@@ -312,4 +373,10 @@ public class SplashActivity extends AppCompatActivity {
     }
     entertainmentSources.replaceAll(",$", "");
   }
+
+  private void createSharedPreferences() {}
+
+
+
+
 }

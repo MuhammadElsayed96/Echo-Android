@@ -1,12 +1,14 @@
 package com.muhammadelsayed.echo.Adapters;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -21,10 +23,15 @@ public class SourcesAdapter extends RecyclerView.Adapter<SourcesAdapter.MyViewHo
   private static final String TAG = SourcesAdapter.class.getSimpleName();
   private Context mContext;
   private List<Source> sourcesList;
+  SharedPreferences sharedPref;
 
   public SourcesAdapter(Context mContext, List<Source> sourcesList) {
     this.mContext = mContext;
     this.sourcesList = sourcesList;
+
+    sharedPref = mContext.getSharedPreferences("SOURCES_SETTINGS", Context.MODE_PRIVATE);
+    Log.d(TAG, "onBindViewHolder: SOURCES LIST = " + sourcesList);
+    Log.d(TAG, "onBindViewHolder: SHARED PREF = " + sharedPref);
   }
 
   @NonNull
@@ -44,16 +51,32 @@ public class SourcesAdapter extends RecyclerView.Adapter<SourcesAdapter.MyViewHo
     Source source = sourcesList.get(position);
     holder.SourceTitle.setText(source.getName());
     if (source.getImageResourceID() != 0)
-      Picasso.get().load(source.getImageResourceID()).fit().centerCrop().into(holder.sourceImage);
+        Picasso.get().load(source.getImageResourceID()).fit().centerCrop().into(holder.sourceImage);
     //    holder.sourceImage.setImageResource(source.getImageResourceID());
-    source.setToggleStatus(true);
-    if (source.isToggleStatus()) {
-      holder.sourceToggle.setChecked(true);
-    } else {
-      holder.sourceToggle.setChecked(false);
-    }
-  }
 
+
+    sourcesList.get(position).setToggleStatus(sharedPref.getBoolean(sourcesList.get(position).getId(), true));
+
+    holder.sourceToggle.setChecked(sourcesList.get(position).isToggleStatus());
+
+    final int index = position;
+    holder.sourceToggle.setOnCheckedChangeListener(
+        new CompoundButton.OnCheckedChangeListener() {
+          @Override
+          public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+            sourcesList.get(index).setToggleStatus(b);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putBoolean(
+                sourcesList.get(index).getId(), sourcesList.get(index).isToggleStatus());
+            editor.apply();
+            Log.d(TAG, "onCheckedChanged: " + sourcesList.get(index).getName() + " STATUS = " + b);
+          }
+        });
+  }
+  @Override
+  public int getItemViewType(int position) {
+    return position;
+  }
   @Override
   public int getItemCount() {
     return sourcesList.size();

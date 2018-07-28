@@ -1,5 +1,7 @@
 package com.muhammadelsayed.echo;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.muhammadelsayed.echo.model.Article;
@@ -83,7 +85,7 @@ public class Utils {
   }
 
   public static void getSources(
-      Map<String, Object> options, final retrofitCallbackSource callback) {
+          final Context mContext, Map<String, Object> options, final retrofitCallbackSource callback) {
     NewsClient service = RetrofitClientInstance.getRetrofitInstance().create(NewsClient.class);
 
     Call<ResultSources> call = service.getSources(options);
@@ -96,12 +98,24 @@ public class Utils {
               List<Source> sources =
                   new LinkedList<Source>(Arrays.asList(response.body().getSources()));
 
-              instantiateSourcesMap();
-              for (Source source : sources) {
+              SharedPreferences sharedPref = mContext.getSharedPreferences("SOURCES_SETTINGS", Context.MODE_PRIVATE);
 
+              for (Source source : sources) {
+                if (sharedPref.contains(source.getId()))
+                    source.setToggleStatus(sharedPref.getBoolean(source.getId(), true));
+                else {
+                    source.setToggleStatus(true);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putBoolean(source.getId(), source.isToggleStatus());
+                    editor.apply();
+                }
+
+                instantiateSourcesMap();
                 if (sourcesMap.get(source.getId()) != null)
-                  source.setImageResourceID(sourcesMap.get(source.getId()));
+                    source.setImageResourceID(sourcesMap.get(source.getId()));
+
               }
+
               callback.onSuccessSource(sources);
             }
           }
