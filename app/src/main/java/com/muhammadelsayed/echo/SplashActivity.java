@@ -74,9 +74,6 @@ public class SplashActivity extends AppCompatActivity {
                   public void onSuccessArticle(List<Article> articles) {
                     Log.wtf(TAG, "onSuccessArticle()::LeadStories");
                     mLeadStoriesArticleList = articles;
-                      Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                      startActivity(intent);
-                      finish();
                   }
                 });
           }
@@ -106,6 +103,9 @@ public class SplashActivity extends AppCompatActivity {
                   public void onSuccessArticle(List<Article> articles) {
                     Log.wtf(TAG, "onSuccessArticle()::Business");
                     mBusinessArticleList = articles;
+                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
                   }
                 });
           }
