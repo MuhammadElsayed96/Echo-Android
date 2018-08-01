@@ -1,6 +1,8 @@
 package com.muhammadelsayed.echo.Fragments.HomeTabs;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,29 +35,10 @@ public class Lifestyle extends Fragment implements SwipeRefreshLayout.OnRefreshL
     if (getArguments() != null) {}
   }
 
+  @Nullable
   @Override
-  public View onCreateView(
-      LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    Log.wtf(TAG, "onCreateView() has been instantiated");
-
-    // Inflate the layout for this fragment
-    View rootView = inflater.inflate(R.layout.lifestyle_home_tab, container, false);
-    mLifestyleRecycler = rootView.findViewById(R.id.lifestyle_recycler);
-    mLifestyleRecycler.setHasFixedSize(true);
-    LinearLayoutManager mLinearLayoutManager =
-        new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-    mLifestyleRecycler.setLayoutManager(mLinearLayoutManager);
-    mSwipeRefreshLayout = rootView.findViewById(R.id.lifestyle_swipe);
-    mSwipeRefreshLayout.setOnRefreshListener(this);
-    mSwipeRefreshLayout.setColorSchemeResources(
-        R.color.colorPrimary,
-        android.R.color.holo_green_dark,
-        android.R.color.holo_orange_dark,
-        android.R.color.holo_blue_dark);
-
-    loadLifestyleData();
-
-    return rootView;
+  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    return super.onCreateView(inflater, container, savedInstanceState);
   }
 
   @Override
@@ -64,9 +47,5 @@ public class Lifestyle extends Fragment implements SwipeRefreshLayout.OnRefreshL
   }
 
   private void loadLifestyleData() {
-//    Log.wtf(TAG, "loadLifestyleData() has been instantiated");
-//    mLifestyleNewsAdapter = new NewsAdapter(getActivity(), lifestyleList);
-//    Log.wtf(TAG, "loadLifestyleData: lifestyleList = " + lifestyleList);
-//    mLifestyleRecycler.setAdapter(mLifestyleNewsAdapter);
   }
 }

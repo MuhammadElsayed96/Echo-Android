@@ -1,6 +1,8 @@
 package com.muhammadelsayed.echo.Fragments.HomeTabs;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,29 +33,10 @@ public class Politics extends Fragment implements SwipeRefreshLayout.OnRefreshLi
     if (getArguments() != null) {}
   }
 
+  @Nullable
   @Override
-  public View onCreateView(
-      LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    Log.wtf(TAG, "onCreateView() has been instantiated");
-
-    // Inflate the layout for this fragment
-    View rootView = inflater.inflate(R.layout.politics_home_tab, container, false);
-    mPoliticsRecycler = rootView.findViewById(R.id.politics_recycler);
-    mPoliticsRecycler.setHasFixedSize(true);
-    LinearLayoutManager mLinearLayoutManager =
-        new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-    mPoliticsRecycler.setLayoutManager(mLinearLayoutManager);
-    mSwipeRefreshLayout = rootView.findViewById(R.id.politics_swipe);
-    mSwipeRefreshLayout.setOnRefreshListener(this);
-    mSwipeRefreshLayout.setColorSchemeResources(
-        R.color.colorPrimary,
-        android.R.color.holo_green_dark,
-        android.R.color.holo_orange_dark,
-        android.R.color.holo_blue_dark);
-
-    loadPoliticsData();
-
-    return rootView;
+  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    return super.onCreateView(inflater, container, savedInstanceState);
   }
 
   @Override
@@ -63,8 +46,5 @@ public class Politics extends Fragment implements SwipeRefreshLayout.OnRefreshLi
 
   private void loadPoliticsData() {
 //    Log.wtf(TAG, "loadPoliticsData() has been instantiated");
-//    mPoliticsNewsAdapter = new NewsAdapter(getActivity(), politicsList);
-//    Log.wtf(TAG, "loadPoliticsData: politicsList = " + politicsList);
-//    mPoliticsRecycler.setAdapter(mPoliticsNewsAdapter);
   }
 }

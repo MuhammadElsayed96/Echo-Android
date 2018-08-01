@@ -30,7 +30,6 @@ import com.muhammadelsayed.echo.Fragments.App.HomeFragment;
 import com.muhammadelsayed.echo.Fragments.App.SearchFragment;
 import com.muhammadelsayed.echo.Fragments.App.SettingsFragment;
 import com.muhammadelsayed.echo.Fragments.App.ShortcutsFragment;
-import com.muhammadelsayed.echo.Fragments.App.SourcesFragment;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -40,16 +39,14 @@ public class MainActivity extends AppCompatActivity {
 
   private static final String TAG = "MainActivity";
   private static final String TAG_FRAGMENT_HOME = "tag_frag_home";
-  private static final String TAG_FRAGMENT_SOURCES = "tag_frag_sources";
   private static final String TAG_FRAGMENT_SHORTCUTS = "tag_frag_shortcuts";
   private static final String TAG_FRAGMENT_SEARCH = "tag_frag_search";
   private static final String TAG_FRAGMENT_SETTINGS = "tag_frag_settings";
-  private static final int INT_FRAGMENTS_COUNT = 5;
+  private static final int INT_FRAGMENTS_COUNT = 4;
   private static final int INT_FRAGMENT_HOME_POS = 0;
-  private static final int INT_FRAGMENT_SOURCES_POS = 1;
-  private static final int INT_FRAGMENT_SHORTCUTS_POS = 2;
-  private static final int INT_FRAGMENT_SEARCH_POS = 3;
-  private static final int INT_FRAGMENT_SETTINGS_POS = 4;
+  private static final int INT_FRAGMENT_SHORTCUTS_POS = 1;
+  private static final int INT_FRAGMENT_SEARCH_POS = 2;
+  private static final int INT_FRAGMENT_SETTINGS_POS = 3;
   public BottomNavigationView mBottomNavigation;
   private List<Fragment> mFragmentsList = new ArrayList<>(INT_FRAGMENTS_COUNT);
 
@@ -60,9 +57,6 @@ public class MainActivity extends AppCompatActivity {
           switch (item.getItemId()) {
             case R.id.navigation_home:
               switchFragment(INT_FRAGMENT_HOME_POS, TAG_FRAGMENT_HOME);
-              return true;
-            case R.id.navigation_sources:
-              switchFragment(INT_FRAGMENT_SOURCES_POS, TAG_FRAGMENT_SOURCES);
               return true;
             case R.id.navigation_shortcuts:
               switchFragment(INT_FRAGMENT_SHORTCUTS_POS, TAG_FRAGMENT_SHORTCUTS);
@@ -103,13 +97,11 @@ public class MainActivity extends AppCompatActivity {
     Log.wtf(TAG, "buildFragmentsList() has been instantiated");
 
     HomeFragment homeFragment = HomeFragment.homeFragmentInstance();
-    SourcesFragment sourcesFragment = SourcesFragment.sourcesFragmentInstance();
     ShortcutsFragment shortcutsFragment = ShortcutsFragment.shortcutsFragmentInstance();
     SearchFragment searchFragment = SearchFragment.searchFragmentInstance();
     SettingsFragment settingsFragment = SettingsFragment.settingsFragmentInstance();
 
     mFragmentsList.add(homeFragment);
-    mFragmentsList.add(sourcesFragment);
     mFragmentsList.add(shortcutsFragment);
     mFragmentsList.add(searchFragment);
     mFragmentsList.add(settingsFragment);

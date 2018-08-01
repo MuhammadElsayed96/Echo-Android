@@ -1,6 +1,8 @@
 package com.muhammadelsayed.echo.Fragments.HomeTabs;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,39 +32,14 @@ public class Environment extends Fragment implements SwipeRefreshLayout.OnRefres
     if (getArguments() != null) {}
   }
 
+  @Nullable
   @Override
-  public View onCreateView(
-      LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    Log.wtf(TAG, "onCreateView() has been instantiated");
-
-    // Inflate the layout for this fragment
-    View rootView = inflater.inflate(R.layout.environment_home_tab, container, false);
-    mEnvironmentRecycler = rootView.findViewById(R.id.environment_recycler);
-    mEnvironmentRecycler.setHasFixedSize(true);
-    LinearLayoutManager mLinearLayoutManager =
-        new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-    mEnvironmentRecycler.setLayoutManager(mLinearLayoutManager);
-    mSwipeRefreshLayout = rootView.findViewById(R.id.environment_swipe);
-    mSwipeRefreshLayout.setOnRefreshListener(this);
-    mSwipeRefreshLayout.setColorSchemeResources(
-        R.color.colorPrimary,
-        android.R.color.holo_green_dark,
-        android.R.color.holo_orange_dark,
-        android.R.color.holo_blue_dark);
-
-    loadEnvironmentData();
-    return rootView;
+  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    return super.onCreateView(inflater, container, savedInstanceState);
   }
 
   @Override
   public void onRefresh() {
-    loadEnvironmentData();
-  }
 
-  private void loadEnvironmentData() {
-    //    Log.wtf(TAG, "loadEnvironmentData() has been instantiated");
-    //    mEnvironmentNewsAdapter = new NewsAdapter(getActivity(), environmentList);
-    //    Log.wtf(TAG, "loadEnvironmentData: environmentList = " + environmentList);
-    //    mEnvironmentRecycler.setAdapter(mEnvironmentNewsAdapter);
   }
 }

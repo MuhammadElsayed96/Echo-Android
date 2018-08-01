@@ -1,6 +1,8 @@
 package com.muhammadelsayed.echo.Fragments.HomeTabs;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,29 +33,10 @@ public class Travel extends Fragment implements SwipeRefreshLayout.OnRefreshList
     if (getArguments() != null) {}
   }
 
+  @Nullable
   @Override
-  public View onCreateView(
-      LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    Log.wtf(TAG, "onCreateView() has been instantiated");
-
-    // Inflate the layout for this fragment
-    View rootView = inflater.inflate(R.layout.travel_home_tab, container, false);
-    mTravelRecycler = rootView.findViewById(R.id.travel_recycler);
-    mTravelRecycler.setHasFixedSize(true);
-    LinearLayoutManager mLinearLayoutManager =
-        new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-    mTravelRecycler.setLayoutManager(mLinearLayoutManager);
-    mSwipeRefreshLayout = rootView.findViewById(R.id.travel_swipe);
-    mSwipeRefreshLayout.setOnRefreshListener(this);
-    mSwipeRefreshLayout.setColorSchemeResources(
-        R.color.colorPrimary,
-        android.R.color.holo_green_dark,
-        android.R.color.holo_orange_dark,
-        android.R.color.holo_blue_dark);
-
-    loadTravelData();
-
-    return rootView;
+  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    return super.onCreateView(inflater, container, savedInstanceState);
   }
 
   @Override
@@ -63,8 +46,5 @@ public class Travel extends Fragment implements SwipeRefreshLayout.OnRefreshList
 
   private void loadTravelData() {
 //    Log.wtf(TAG, "loadTravelData() has been instantiated");
-//    mTravelNewsAdapter = new NewsAdapter(getActivity(), travelList);
-//    Log.wtf(TAG, "loadTravelData: travelList = " + travelList);
-//    mTravelRecycler.setAdapter(mTravelNewsAdapter);
   }
 }

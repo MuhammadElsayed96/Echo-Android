@@ -90,41 +90,31 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     switch (holder.getItemViewType()) {
       case TYPE_FIRST_ITEM:
-        LargeNewsAdapterViewHolder largeViewHolder = (LargeNewsAdapterViewHolder) holder;
-        largeViewHolder.mCaptionTextL.setText(article.getDescription());
-        Typeface custom_font = ResourcesCompat.getFont(mContext, R.font.belgrano);
-        largeViewHolder.mTitleTextL.setTypeface(custom_font);
-        largeViewHolder.mTitleTextL.setText(article.getTitle());
-        if (article.getUrlToImage() != null)
-          Picasso.get()
-              .load(article.getUrlToImage().toString())
-              .fit()
-              .into(largeViewHolder.mNewsImageL);
-        else largeViewHolder.mNewsImageL.setVisibility(View.GONE);
-        largeViewHolder.mSourceNameL.setText(article.getSource().getName());
-        Picasso.get()
-            .load(article.getSource().getImageResourceID())
-            .fit()
-            .into(largeViewHolder.mSourceImageL);
+//        LargeNewsAdapterViewHolder largeViewHolder = (LargeNewsAdapterViewHolder) holder;
+//        largeViewHolder.mCaptionTextL.setText(article.getDescription());
+//        Typeface custom_font = ResourcesCompat.getFont(mContext, R.font.belgrano);
+//        largeViewHolder.mTitleTextL.setTypeface(custom_font);
+//        largeViewHolder.mTitleTextL.setText(article.getTitle());
+//        if (article.getUrlToImage() != null)
+//          Picasso.get()
+//              .load(article.getUrlToImage().toString())
+//              .fit()
+//              .into(largeViewHolder.mNewsImageL);
+//        else largeViewHolder.mNewsImageL.setVisibility(View.GONE);
         break;
 
       case TYPE_ITEM:
-        NewsAdapterViewHolder normalViewHolder = (NewsAdapterViewHolder) holder;
-        normalViewHolder.mCaptionText.setText(article.getDescription());
-        Typeface custom_font1 = ResourcesCompat.getFont(mContext, R.font.belgrano);
-        normalViewHolder.mTitleText.setTypeface(custom_font1);
-        normalViewHolder.mTitleText.setText(article.getTitle());
-        if (article.getUrlToImage() != null)
-          Picasso.get()
-              .load(article.getUrlToImage().toString())
-              .fit()
-              .into(normalViewHolder.mNewsImage);
-        else normalViewHolder.mNewsImage.setVisibility(View.GONE);
-        normalViewHolder.mSourceName.setText(article.getSource().getName());
-        Picasso.get()
-            .load(article.getSource().getImageResourceID())
-            .fit()
-            .into(normalViewHolder.mSourceImage);
+//        NewsAdapterViewHolder normalViewHolder = (NewsAdapterViewHolder) holder;
+//        normalViewHolder.mCaptionText.setText(article.getDescription());
+//        Typeface custom_font1 = ResourcesCompat.getFont(mContext, R.font.belgrano);
+//        normalViewHolder.mTitleText.setTypeface(custom_font1);
+//        normalViewHolder.mTitleText.setText(article.getTitle());
+//        if (article.getUrlToImage() != null)
+//          Picasso.get()
+//              .load(article.getUrlToImage().toString())
+//              .fit()
+//              .into(normalViewHolder.mNewsImage);
+//        else normalViewHolder.mNewsImage.setVisibility(View.GONE);
         break;
     }
   }
@@ -175,76 +165,6 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
       mCaptionTextL = view.findViewById(R.id.large_caption_text);
       mSourceNameL = view.findViewById(R.id.large_news_source_name);
     }
-  }
-
-  private void scaleImage(ImageView view) throws NoSuchElementException {
-    Log.wtf(TAG, "scaleImage(): has been instantiated");
-
-    // Get bitmap from the the ImageView.
-    Bitmap bitmap = null;
-
-    try {
-      Drawable drawing = view.getDrawable();
-      bitmap = ((BitmapDrawable) drawing).getBitmap();
-    } catch (NullPointerException e) {
-      throw new NoSuchElementException("No drawable on given view");
-    } catch (ClassCastException e) {
-      // Check bitmap is Ion drawable
-      //      bitmap = Ion.with(view).getBitmap();
-    }
-
-    // Get current dimensions AND the desired bounding box
-    int width = 0;
-
-    try {
-      width = bitmap.getWidth();
-    } catch (NullPointerException e) {
-      throw new NoSuchElementException("Can't find bitmap on given view/drawable");
-    }
-
-    int height = bitmap.getHeight();
-    int bounding = dpToPx(250);
-    Log.i("Test", "original width = " + Integer.toString(width));
-    Log.i("Test", "original height = " + Integer.toString(height));
-    Log.i("Test", "bounding = " + Integer.toString(bounding));
-
-    // Determine how much to scale: the dimension requiring less scaling is
-    // closer to the its side. This way the image always stays inside your
-    // bounding box AND either x/y axis touches it.
-    float xScale = ((float) bounding) / width;
-    float yScale = ((float) bounding) / height;
-    float scale = (xScale <= yScale) ? xScale : yScale;
-    Log.i("Test", "xScale = " + Float.toString(xScale));
-    Log.i("Test", "yScale = " + Float.toString(yScale));
-    Log.i("Test", "scale = " + Float.toString(scale));
-
-    // Create a matrix for the scaling and add the scaling data
-    Matrix matrix = new Matrix();
-    matrix.postScale(scale, scale);
-
-    // Create a new bitmap and convert it to a format understood by the ImageView
-    Bitmap scaledBitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
-    width = scaledBitmap.getWidth(); // re-use
-    height = scaledBitmap.getHeight(); // re-use
-    BitmapDrawable result = new BitmapDrawable(scaledBitmap);
-    Log.i("Test", "scaled width = " + Integer.toString(width));
-    Log.i("Test", "scaled height = " + Integer.toString(height));
-
-    // Apply the scaled bitmap
-    view.setImageDrawable(result);
-
-    // Now change ImageView's dimensions to match the scaled image
-    LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
-    params.width = width;
-    params.height = height;
-    view.setLayoutParams(params);
-
-    Log.i("Test", "done");
-  }
-
-  private int dpToPx(int dp) {
-    float density = mContext.getResources().getDisplayMetrics().density;
-    return Math.round((float) dp * density);
   }
 
   public interface ItemClickListener {
