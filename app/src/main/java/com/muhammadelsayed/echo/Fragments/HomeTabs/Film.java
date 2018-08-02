@@ -36,7 +36,7 @@ public class Film extends Fragment implements SwipeRefreshLayout.OnRefreshListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.wtf(TAG, "onCreateView() has been instantiated");
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_film, container, false);
         return rootView;
     }
 
