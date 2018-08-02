@@ -25,6 +25,7 @@
     <string name="title_search">Search</string>
     <string name="title_settings">Settings</string>
     <string name="arrow"><![CDATA[>]]></string>
+    <string name="dummy">Dummy</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
