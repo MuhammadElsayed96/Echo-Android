@@ -81,7 +81,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         switch (holder.getItemViewType()) {
             case TYPE_FIRST_ITEM:
-//        LargeNewsAdapterViewHolder largeViewHolder = (LargeNewsAdapterViewHolder) holder;
+//       LargeNewsAdapterViewHolder largeViewHolder = (LargeNewsAdapterViewHolder) holder;
 //        largeViewHolder.mCaptionTextL.setText(article.getDescription());
 //        Typeface custom_font = ResourcesCompat.getFont(mContext, R.font.belgrano);
 //        largeViewHolder.mTitleTextL.setTypeface(custom_font);
