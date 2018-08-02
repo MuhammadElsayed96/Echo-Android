@@ -10,30 +10,31 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
-import com.muhammadelsayed.echo.R;
 
 public class OurPicks extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
-  private static final String TAG = OurPicks.class.getSimpleName();
-  private SwipeRefreshLayout mSwipeRefreshLayout;
-//  private List<Article> mArticleList = new ArrayList<>();
-  private NewsAdapter mNewsAdapter;
+    private static final String TAG = OurPicks.class.getSimpleName();
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+    //  private List<Article> mArticleList = new ArrayList<>();
+    private NewsAdapter mNewsAdapter;
 
-  public OurPicks() {
-    // Required empty public constructor
-  }
+    public OurPicks() {
+        // Required empty public constructor
+    }
 
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    if (getArguments() != null) {}
-  }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+        }
+    }
 
-  @Nullable
-  @Override
-  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-    return super.onCreateView(inflater, container, savedInstanceState);
-  }
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
 
-  @Override
-  public void onRefresh() {}
+    @Override
+    public void onRefresh() {
+    }
 }

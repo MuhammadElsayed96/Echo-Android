@@ -13,30 +13,31 @@ import android.view.ViewGroup;
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 
 public class Health extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
-  private static final String TAG = Health.class.getSimpleName();
-  private SwipeRefreshLayout mSwipeRefreshLayout;
-  private NewsAdapter mHealthNewsAdapter;
-  private RecyclerView mHealthRecycler;
-  private String healthSources;
+    private static final String TAG = Health.class.getSimpleName();
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+    private NewsAdapter mHealthNewsAdapter;
+    private RecyclerView mHealthRecycler;
+    private String healthSources;
 
-  public Health() {
-    // Required empty public constructor
-  }
+    public Health() {
+        // Required empty public constructor
+    }
 
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    healthSources = "";
-    if (getArguments() != null) {}
-  }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        healthSources = "";
+        if (getArguments() != null) {
+        }
+    }
 
-  @Nullable
-  @Override
-  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-    return super.onCreateView(inflater, container, savedInstanceState);
-  }
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
 
-  @Override
-  public void onRefresh() {
-  }
+    @Override
+    public void onRefresh() {
+    }
 }

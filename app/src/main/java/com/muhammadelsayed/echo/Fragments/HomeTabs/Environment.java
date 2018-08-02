@@ -5,41 +5,39 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
-import com.muhammadelsayed.echo.R;
 
 public class Environment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
-  private static final String TAG = Environment.class.getSimpleName();
-  private SwipeRefreshLayout mSwipeRefreshLayout;
-  private NewsAdapter mEnvironmentNewsAdapter;
-  //  private static List<Article> mEnvironmentArticleList = new ArrayList<>();
-  private RecyclerView mEnvironmentRecycler;
+    private static final String TAG = Environment.class.getSimpleName();
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+    private NewsAdapter mEnvironmentNewsAdapter;
+    //  private static List<Article> mEnvironmentArticleList = new ArrayList<>();
+    private RecyclerView mEnvironmentRecycler;
 
-  public Environment() {
-    // Required empty public constructor
-  }
+    public Environment() {
+        // Required empty public constructor
+    }
 
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    if (getArguments() != null) {}
-  }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+        }
+    }
 
-  @Nullable
-  @Override
-  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-    return super.onCreateView(inflater, container, savedInstanceState);
-  }
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
 
-  @Override
-  public void onRefresh() {
+    @Override
+    public void onRefresh() {
 
-  }
+    }
 }

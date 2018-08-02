@@ -25,70 +25,71 @@ import com.muhammadelsayed.echo.R;
  * method to create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
-  private static final String TAG = "HomeFragment";
-  private ViewPager mViewPager;
+    private static final String TAG = "HomeFragment";
+    private ViewPager mViewPager;
 
-  public HomeFragment() {
-    // Required empty public constructor
-  }
+    public HomeFragment() {
+        // Required empty public constructor
+    }
 
-  /**
-   * Use this factory method to create a new instance of this fragment using the provided
-   * parameters.
-   *
-   * @return A new instance of fragment HomeFragment.
-   */
-  public static HomeFragment homeFragmentInstance() {
-    HomeFragment fragment = new HomeFragment();
-    Bundle args = new Bundle();
-    fragment.setArguments(args);
-    return fragment;
-  }
+    /**
+     * Use this factory method to create a new instance of this fragment using the provided
+     * parameters.
+     *
+     * @return A new instance of fragment HomeFragment.
+     */
+    public static HomeFragment homeFragmentInstance() {
+        HomeFragment fragment = new HomeFragment();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    if (getArguments() != null) {}
-  }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+        }
+    }
 
-  @Override
-  public View onCreateView(
-      @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    // Inflate the layout for this fragment
-    View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+    @Override
+    public View onCreateView(
+            @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
-    mViewPager = rootView.findViewById(R.id.container);
-    setupViewPager(mViewPager);
+        mViewPager = rootView.findViewById(R.id.container);
+        setupViewPager(mViewPager);
 
-    TabLayout tabLayout = rootView.findViewById(R.id.tabs);
-    tabLayout.setupWithViewPager(mViewPager);
+        TabLayout tabLayout = rootView.findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(mViewPager);
 
-    // adding home tabs' titles
-    tabLayout.getTabAt(0).setText("LEAD STORIES");
-    tabLayout.getTabAt(1).setText("BUSINESS");
-    tabLayout.getTabAt(2).setText("ENTERTAINMENT");
-    tabLayout.getTabAt(3).setText("HEALTH");
-    tabLayout.getTabAt(4).setText("SPORTS");
-    tabLayout.getTabAt(5).setText("TECHNOLOGY");
-    tabLayout.getTabAt(6).setText("SCIENCE");
-    return rootView;
-  }
+        // adding home tabs' titles
+        tabLayout.getTabAt(0).setText("LEAD STORIES");
+        tabLayout.getTabAt(1).setText("BUSINESS");
+        tabLayout.getTabAt(2).setText("ENTERTAINMENT");
+        tabLayout.getTabAt(3).setText("HEALTH");
+        tabLayout.getTabAt(4).setText("SPORTS");
+        tabLayout.getTabAt(5).setText("TECHNOLOGY");
+        tabLayout.getTabAt(6).setText("SCIENCE");
+        return rootView;
+    }
 
-  /**
-   * Adds fragments to the viewPager
-   *
-   * @param viewPager the view that holds the fragments
-   */
-  private void setupViewPager(ViewPager viewPager) {
-    Log.wtf(TAG, "setupViewPager: setting up viewPager...");
-    HomePagerAdapter adapter = new HomePagerAdapter(getChildFragmentManager());
-    adapter.addFragment(new LeadStories());
-    adapter.addFragment(new Business());
-    adapter.addFragment(new Entertainment());
-    adapter.addFragment(new Health());
-    adapter.addFragment(new Sport());
-    adapter.addFragment(new Technology());
-    adapter.addFragment(new Science());
-    viewPager.setAdapter(adapter);
-  }
+    /**
+     * Adds fragments to the viewPager
+     *
+     * @param viewPager the view that holds the fragments
+     */
+    private void setupViewPager(ViewPager viewPager) {
+        Log.wtf(TAG, "setupViewPager: setting up viewPager...");
+        HomePagerAdapter adapter = new HomePagerAdapter(getChildFragmentManager());
+        adapter.addFragment(new LeadStories());
+        adapter.addFragment(new Business());
+        adapter.addFragment(new Entertainment());
+        adapter.addFragment(new Health());
+        adapter.addFragment(new Sport());
+        adapter.addFragment(new Technology());
+        adapter.addFragment(new Science());
+        viewPager.setAdapter(adapter);
+    }
 }

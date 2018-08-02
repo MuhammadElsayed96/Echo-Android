@@ -14,50 +14,51 @@ import android.view.ViewGroup;
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 
 public class Business extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
-  private static final String TAG = Business.class.getSimpleName();
-  private SwipeRefreshLayout mSwipeRefreshLayout;
-  private NewsAdapter mBusinessNewsAdapter;
-  private RecyclerView mBusinessRecycler;
-  private String businessSources;
+    private static final String TAG = Business.class.getSimpleName();
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+    private NewsAdapter mBusinessNewsAdapter;
+    private RecyclerView mBusinessRecycler;
+    private String businessSources;
 
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    Log.wtf(TAG, "onCreate() has been instantiated");
-    businessSources = "";
-    if (getArguments() != null) {}
-  }
+    public Business() {
+        // Required empty public constructor
+    }
 
-  @Nullable
-  @Override
-  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-    return super.onCreateView(inflater, container, savedInstanceState);
-  }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.wtf(TAG, "onCreate() has been instantiated");
+        businessSources = "";
+        if (getArguments() != null) {
+        }
+    }
 
-  public Business() {
-    // Required empty public constructor
-  }
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
 
-  @Override
-  public void onRefresh() {
-    Log.wtf(TAG, "onRefresh() has been instantiated");
-  }
+    @Override
+    public void onRefresh() {
+        Log.wtf(TAG, "onRefresh() has been instantiated");
+    }
 
-  @Override
-  public void onPause() {
-    super.onPause();
-    Log.wtf(TAG, "onPause() has been instantiated");
-  }
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.wtf(TAG, "onPause() has been instantiated");
+    }
 
-  @Override
-  public void onStart() {
-    super.onStart();
-    Log.wtf(TAG, "onStart() has been instantiated");
-  }
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.wtf(TAG, "onStart() has been instantiated");
+    }
 
-  @Override
-  public void onStop() {
-    super.onStop();
-    Log.wtf(TAG, "onStop() has been instantiated");
-  }
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.wtf(TAG, "onStop() has been instantiated");
+    }
 }

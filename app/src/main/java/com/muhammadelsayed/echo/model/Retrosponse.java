@@ -1,7 +1,7 @@
 package com.muhammadelsayed.echo.model;
 
 public class Retrosponse {
-   private ResposneModel response;
+    private ResposneModel response;
 
     public ResposneModel getResponse() {
         return response;
