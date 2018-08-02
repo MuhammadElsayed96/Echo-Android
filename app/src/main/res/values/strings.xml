@@ -17,19 +17,6 @@
     <string name="app_name">Echo News</string>
     <string name="no_news">No news found</string>
     <string name="no_internet_connection">No internet connection</string>
-    <string name="news_api_key1">7460345eb83e4473a94ee2f4eb02d540</string>
-    <string name="news_api_key2">99524d5bf54b44fa8e5c86d99851ba53</string>
-    <string name="news_api_key3">24a2ce3df4404bbcbbb41418fc7d0c50</string>
-    <string name="news_api_key4">a1ec714829df4bcb8ab956e627a111eb</string>
-    <string name="news_api_key5">f3f0f0e2548b4436a80ec46fa4489a03</string>
-    <string name="news_api_key6">4d65415c94eb4da7858978f0cfba8d28</string>
-    <string name="news_api_key7">e9e82083c6204599b23fa047f0506df8</string>
-    <string name="news_api_key8">541f025b0fb9490ca2ca2d1b51973440</string>
-    <string name="news_api_key9">ed414c12806c4057a60d2b5506333126</string>
-    <string name="news_api_key10">5807662717a94ac8930aa3a75a78f2db</string>
-    <string name="news_api_key11">f1a94b2cc88d4d5d88c6c54a57bd633e</string>
-    <string name="news_api_key12">a2acf77a8997459997762d5164ff8633</string>
-    <string name="news_api_key13">ce6310a389b145129e5a64c503e659f5</string>
 
     <!--BottomNavigationDrawer Strings-->
     <string name="title_home">Home</string>

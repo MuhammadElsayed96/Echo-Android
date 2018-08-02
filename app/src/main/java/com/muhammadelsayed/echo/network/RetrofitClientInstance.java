@@ -19,7 +19,7 @@ public class RetrofitClientInstance {
   private static final String TAG = "RetrofitClientInstance";
 
   private static Retrofit retrofit;
-  private static final String BASE_URL = "https://newsapi.org/v2/";
+  private static final String BASE_URL = "http://content.guardianapis.com/";
 
   public static Retrofit getRetrofitInstance() {
     Log.wtf(TAG, "getRetrofitInstance: getting retrofit instance...");
