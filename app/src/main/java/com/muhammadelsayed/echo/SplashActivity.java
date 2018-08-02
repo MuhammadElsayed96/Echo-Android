@@ -27,9 +27,6 @@ public class SplashActivity extends AppCompatActivity {
 
         testNetworkCalls();
 
-
-
-
     }
 
     private void testNetworkCalls() {
@@ -40,16 +37,17 @@ public class SplashActivity extends AppCompatActivity {
         options.put("order-by", "newest");
         options.put("show-tags", "contributor");
         options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
-        options.put("page", "1");
-        options.put("page-size", "20");
+        options.put("page", 1);
+        options.put("page-size", 20);
         options.put("q", "business");
         options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
         Call<Retrosponse> call = service.search(options);
 
+        Log.d(TAG, "testNetworkCalls: " + call.request().url());
         call.enqueue(new Callback<Retrosponse>() {
             @Override
             public void onResponse(Call<Retrosponse> call, Response<Retrosponse> response) {
-                Log.d(TAG, "onResponse: RESPONSE = " + response.body());
+                Log.e(TAG, "onResponse: RESPONSE = " + response.body());
 
                 Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(intent);
@@ -58,7 +56,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Retrosponse> call, Throwable t) {
-                Log.d(TAG, "onFailure: FAILED !!");
+                Log.e(TAG, "onFailure: FAILED !!");
             }
         });
 
