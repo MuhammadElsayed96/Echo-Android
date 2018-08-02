@@ -128,14 +128,14 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private class NewsAdapterViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView mNewsImage, mSourceImage, mBookmarkImage, mShareImage;
-        private AutofitTextView mTitleText;
+        private ImageView mNewsImage, mBookmarkImage, mShareImage;
+        private AutofitTextView mTitleText, mTime;
         private TextView mCaptionText, mSourceName;
 
         private NewsAdapterViewHolder(View view) {
             super(view);
             mNewsImage = view.findViewById(R.id.news_image);
-            mSourceImage = view.findViewById(R.id.news_source_image);
+            mTime = view.findViewById(R.id.time);
             mBookmarkImage = view.findViewById(R.id.bookmark_news);
             mShareImage = view.findViewById(R.id.share_news);
             mTitleText = view.findViewById(R.id.title_text);
@@ -146,14 +146,14 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private class LargeNewsAdapterViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView mNewsImageL, mSourceImageL, mBookmarkImageL, mShareImageL;
+        private ImageView mNewsImageL, mBookmarkImageL, mShareImageL;
         private AutofitTextView mTitleTextL;
-        private TextView mCaptionTextL, mSourceNameL;
+        private TextView mCaptionTextL, mSourceNameL, mTimeL;
 
         private LargeNewsAdapterViewHolder(View view) {
             super(view);
             mNewsImageL = view.findViewById(R.id.large_news_image);
-            mSourceImageL = view.findViewById(R.id.large_news_source_image);
+            mTimeL = view.findViewById(R.id.large_time);
             mBookmarkImageL = view.findViewById(R.id.large_bookmark_news);
             mShareImageL = view.findViewById(R.id.large_share_news);
             mTitleTextL = view.findViewById(R.id.large_title_text);
