@@ -11,7 +11,7 @@ public class ResposneModel {
     private int currentPage;
     private int pages;
     private String orderBy;
-    private Result[] results;
+    private Article[] results;
 
     public String getStatus() {
         return status;
@@ -77,12 +77,12 @@ public class ResposneModel {
         this.orderBy = orderBy;
     }
 
-    public Result[] getResults() {
+    public Article[] getArticles() {
         return results;
     }
 
-    public void setResults(Result[] results) {
-        this.results = results;
+    public void setArticles(Article[] articles) {
+        this.results = articles;
     }
 
     @Override
@@ -96,7 +96,7 @@ public class ResposneModel {
                 ", currentPage=" + currentPage +
                 ", pages=" + pages +
                 ", orderBy='" + orderBy + '\'' +
-                ", results=" + Arrays.toString(results) +
+                ", articles=" + Arrays.toString(results) +
                 '}';
     }
 }
