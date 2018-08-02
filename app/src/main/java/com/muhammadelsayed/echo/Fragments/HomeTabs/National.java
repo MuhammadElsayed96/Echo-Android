@@ -15,10 +15,10 @@ import com.muhammadelsayed.echo.R;
 
 public class National extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
+    private static final String TAG = National.class.getSimpleName();
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private NewsAdapter mNewsAdapter;
     private RecyclerView mRecycler;
-    private static final String TAG = National.class.getSimpleName();
 
     public National() {
         // Required empty public constructor

@@ -14,10 +14,10 @@ import com.muhammadelsayed.echo.R;
 
 public class InternationalHeadlines extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
+    private static final String TAG = InternationalHeadlines.class.getSimpleName();
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private NewsAdapter mNewsAdapter;
     private RecyclerView mRecycler;
-    private static final String TAG = InternationalHeadlines.class.getSimpleName();
 
     public InternationalHeadlines() {
         // Required empty public constructor

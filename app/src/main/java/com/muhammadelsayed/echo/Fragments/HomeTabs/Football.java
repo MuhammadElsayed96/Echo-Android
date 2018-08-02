@@ -8,17 +8,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
 
-public class Football extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public class Football extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
+    private static final String TAG = Football.class.getSimpleName();
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private NewsAdapter mNewsAdapter;
     private RecyclerView mRecycler;
-    private static final String TAG = Football.class.getSimpleName();
 
     public Football() {
         // Required empty public constructor

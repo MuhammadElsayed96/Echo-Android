@@ -14,15 +14,12 @@ import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.R;
 
-/**
- * A simple {@link Fragment} subclass. Use the {@link HomeFragment#homeFragmentInstance} factory
- * method to create an instance of this fragment.
- */
 public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private static final String TAG = "HomeFragment";
-    private RecyclerView mGeneralRecycler;
-    private TabLayout tabLayout;
-    private SwipeRefreshLayout mSwipeRefreshLayout;
+
+    public HomeFragment() {
+        // Required empty public constructor
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,8 +36,8 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         Log.wtf(TAG, "onCreateView() has been instantiated");
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-        tabLayout = rootView.findViewById(R.id.tabs);
-        mSwipeRefreshLayout = rootView.findViewById(R.id.general_swipe);
+        TabLayout tabLayout = rootView.findViewById(R.id.tabs);
+        SwipeRefreshLayout mSwipeRefreshLayout = rootView.findViewById(R.id.general_swipe);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeResources(
                 android.R.color.holo_red_light,
@@ -48,7 +45,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 android.R.color.holo_orange_dark,
                 android.R.color.holo_blue_dark);
 
-        mGeneralRecycler = rootView.findViewById(R.id.general_recycler);
+        RecyclerView mGeneralRecycler = rootView.findViewById(R.id.general_recycler);
         LinearLayoutManager mLinearLayoutManager =
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mGeneralRecycler.setLayoutManager(mLinearLayoutManager);
@@ -61,23 +58,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 android.R.color.holo_orange_dark,
                 android.R.color.holo_blue_dark);
         return rootView;
-    }
-
-    public HomeFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of this fragment using the provided
-     * parameters.
-     *
-     * @return A new instance of fragment HomeFragment.
-     */
-    public static HomeFragment homeFragmentInstance() {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override

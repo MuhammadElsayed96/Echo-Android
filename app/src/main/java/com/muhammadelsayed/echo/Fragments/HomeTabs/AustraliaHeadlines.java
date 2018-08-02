@@ -13,7 +13,7 @@ import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
 
 
-public class AustraliaHeadlines extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public class AustraliaHeadlines extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private static final String TAG = AustraliaHeadlines.class.getSimpleName();
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private NewsAdapter mNewsAdapter;

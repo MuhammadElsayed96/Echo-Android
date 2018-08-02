@@ -12,12 +12,12 @@ import android.view.ViewGroup;
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
 
-public class Law extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public class Law extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
+    private static final String TAG = Law.class.getSimpleName();
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private NewsAdapter mNewsAdapter;
     private RecyclerView mRecycler;
-    private static final String TAG = Law.class.getSimpleName();
 
     public Law() {
         // Required empty public constructor

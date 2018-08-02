@@ -15,9 +15,6 @@ import java.util.Map;
 public class SplashActivity extends AppCompatActivity {
 
     private static final String TAG = "SplashActivity";
-
-    Map<String, Object> options = new HashMap<>();
-
     public static List<Article> mBusinessArticleList = new ArrayList<>();
     public static List<Article> mEnvironmentArticleList = new ArrayList<>();
     public static List<Article> mTechnologyArticleList = new ArrayList<>();
@@ -44,6 +41,7 @@ public class SplashActivity extends AppCompatActivity {
     public static List<Article> mTravelArticleList = new ArrayList<>();
     public static List<Article> mTvAndRadioArticleList = new ArrayList<>();
     public static List<Article> mWeatherArticleList = new ArrayList<>();
+    Map<String, Object> options = new HashMap<>();
     boolean bool, f1 = false, f2 = false, f3 = false, f4 = false, f5 = false, f6 = false, f7 = false, f8 = false,
             f9 = false, f10 = false, f11 = false, f12 = false, f13 = false, f14 = false, f15 = false, f16 = false,
             f17 = false, f18 = false, f19 = false, f20 = false, f21 = false, f22 = false, f23 = false, f24 = false,

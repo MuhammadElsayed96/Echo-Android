@@ -1,8 +1,6 @@
 package com.muhammadelsayed.echo.Fragments.HomeTabs;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
@@ -15,12 +13,12 @@ import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
 
 
-public class Politics extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public class Politics extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
+    private static final String TAG = Politics.class.getSimpleName();
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private NewsAdapter mNewsAdapter;
     private RecyclerView mRecycler;
-    private static final String TAG = Politics.class.getSimpleName();
 
     public Politics() {
         // Required empty public constructor

@@ -14,10 +14,10 @@ import com.muhammadelsayed.echo.R;
 
 public class Sport extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
+    private static final String TAG = Sport.class.getSimpleName();
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private NewsAdapter mNewsAdapter;
     private RecyclerView mRecycler;
-    private static final String TAG = Sport.class.getSimpleName();
 
     public Sport() {
         // Required empty public constructor

@@ -18,10 +18,10 @@ import com.muhammadelsayed.echo.Adapters.NewsAdapter;
  */
 public class World extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
+    private static final String TAG = World.class.getSimpleName();
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private NewsAdapter mNewsAdapter;
     private RecyclerView mRecycler;
-    private static final String TAG = World.class.getSimpleName();
 
     public World() {
         // Required empty public constructor

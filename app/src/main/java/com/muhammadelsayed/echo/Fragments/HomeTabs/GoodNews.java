@@ -14,11 +14,10 @@ import com.muhammadelsayed.echo.R;
 
 public class GoodNews extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
+    private static final String TAG = GoodNews.class.getSimpleName();
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private NewsAdapter mNewsAdapter;
     private RecyclerView mRecycler;
-
-    private static final String TAG = GoodNews.class.getSimpleName();
 
     public GoodNews() {
         // Required empty public constructor
