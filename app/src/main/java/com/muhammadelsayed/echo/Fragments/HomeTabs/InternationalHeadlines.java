@@ -1,8 +1,6 @@
 package com.muhammadelsayed.echo.Fragments.HomeTabs;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
@@ -14,13 +12,14 @@ import android.view.ViewGroup;
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
 
-public class Entertainment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
-    private static final String TAG = Entertainment.class.getSimpleName();
-    private SwipeRefreshLayout mSwipeRefreshLayout;
-    private NewsAdapter mEntertainmentNewsAdapter;
-    private RecyclerView mEntertainmentRecycler;
+public class InternationalHeadlines extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    public Entertainment() {
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+    private NewsAdapter mNewsAdapter;
+    private RecyclerView mRecycler;
+    private static final String TAG = InternationalHeadlines.class.getSimpleName();
+
+    public InternationalHeadlines() {
         // Required empty public constructor
     }
 
@@ -28,14 +27,12 @@ public class Entertainment extends Fragment implements SwipeRefreshLayout.OnRefr
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.wtf(TAG, "onCreate() has been instantiated");
-
         if (getArguments() != null) {
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.wtf(TAG, "onCreateView() has been instantiated");
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         return rootView;
@@ -43,5 +40,6 @@ public class Entertainment extends Fragment implements SwipeRefreshLayout.OnRefr
 
     @Override
     public void onRefresh() {
+
     }
 }

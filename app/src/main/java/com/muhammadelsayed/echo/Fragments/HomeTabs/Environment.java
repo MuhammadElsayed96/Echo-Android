@@ -6,17 +6,18 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
+import com.muhammadelsayed.echo.R;
 
 public class Environment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private static final String TAG = Environment.class.getSimpleName();
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private NewsAdapter mEnvironmentNewsAdapter;
-    //  private static List<Article> mEnvironmentArticleList = new ArrayList<>();
     private RecyclerView mEnvironmentRecycler;
 
     public Environment() {
@@ -26,14 +27,18 @@ public class Environment extends Fragment implements SwipeRefreshLayout.OnRefres
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.wtf(TAG, "onCreate() has been instantiated");
+
         if (getArguments() != null) {
         }
     }
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        Log.wtf(TAG, "onCreateView() has been instantiated");
+        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        return rootView;
     }
 
     @Override

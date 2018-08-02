@@ -10,13 +10,6 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/navigation_sources"
-        android:enabled="true"
-        android:icon="@drawable/ic_sources_black_24dp"
-        android:title="@string/title_sources"
-        app:showAsAction="ifRoom" />
-
-    <item
         android:id="@+id/navigation_shortcuts"
         android:enabled="true"
         android:icon="@drawable/ic_attach_file_black_24dp"

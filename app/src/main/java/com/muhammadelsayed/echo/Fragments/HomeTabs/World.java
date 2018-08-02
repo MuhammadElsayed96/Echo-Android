@@ -17,11 +17,11 @@ import com.muhammadelsayed.echo.Adapters.NewsAdapter;
  * A simple {@link Fragment} subclass. create an instance of this fragment.
  */
 public class World extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
-    private static final String TAG = World.class.getSimpleName();
+
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    private NewsAdapter mWorldNewsAdapter;
-    private RecyclerView mWorldRecycler;
-    //  private List<Article> mArticleList = new ArrayList<>();
+    private NewsAdapter mNewsAdapter;
+    private RecyclerView mRecycler;
+    private static final String TAG = World.class.getSimpleName();
 
     public World() {
         // Required empty public constructor

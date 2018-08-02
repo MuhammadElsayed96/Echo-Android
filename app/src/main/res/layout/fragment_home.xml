@@ -27,11 +27,16 @@
         android:layout_height="match_parent"
         android:layout_below="@id/relativeTopTab">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/general_recycler"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/general_swipe"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
 
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/general_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </android.support.v4.widget.SwipeRefreshLayout>
     </RelativeLayout>
 
 

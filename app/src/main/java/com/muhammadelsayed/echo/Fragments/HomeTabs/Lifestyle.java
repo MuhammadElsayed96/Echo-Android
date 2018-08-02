@@ -12,15 +12,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
+import com.muhammadelsayed.echo.R;
 
 
-public class Lifestyle extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class Lifestyle extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+    private NewsAdapter mNewsAdapter;
+    private RecyclerView mRecycler;
 
     private static final String TAG = Lifestyle.class.getSimpleName();
-    private SwipeRefreshLayout mSwipeRefreshLayout;
-    private RecyclerView mLifestyleRecycler;
-    private NewsAdapter mLifestyleNewsAdapter;
-    //  private static List<Article> mLifestyleArticleList = new ArrayList<>();
 
     public Lifestyle() {
         // Required empty public constructor
@@ -34,10 +35,11 @@ public class Lifestyle extends Fragment implements SwipeRefreshLayout.OnRefreshL
         }
     }
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.wtf(TAG, "onCreateView() has been instantiated");
+        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        return rootView;
     }
 
     @Override

@@ -1,8 +1,6 @@
 package com.muhammadelsayed.echo.Fragments.HomeTabs;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
@@ -14,15 +12,16 @@ import android.view.ViewGroup;
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
 
-public class Entertainment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
-    private static final String TAG = Entertainment.class.getSimpleName();
+public class Culture extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+    private static final String TAG = Culture.class.getSimpleName();
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    private NewsAdapter mEntertainmentNewsAdapter;
-    private RecyclerView mEntertainmentRecycler;
+    private NewsAdapter mNewsAdapter;
+    private RecyclerView mRecycler;
 
-    public Entertainment() {
+    public Culture() {
         // Required empty public constructor
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,5 +42,6 @@ public class Entertainment extends Fragment implements SwipeRefreshLayout.OnRefr
 
     @Override
     public void onRefresh() {
+
     }
 }

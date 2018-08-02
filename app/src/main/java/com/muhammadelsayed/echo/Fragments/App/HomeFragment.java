@@ -4,29 +4,64 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.muhammadelsayed.echo.Adapters.HomePagerAdapter;
-import com.muhammadelsayed.echo.Fragments.HomeTabs.Business;
-import com.muhammadelsayed.echo.Fragments.HomeTabs.Entertainment;
-import com.muhammadelsayed.echo.Fragments.HomeTabs.Health;
-import com.muhammadelsayed.echo.Fragments.HomeTabs.LeadStories;
-import com.muhammadelsayed.echo.Fragments.HomeTabs.Science;
-import com.muhammadelsayed.echo.Fragments.HomeTabs.Sport;
-import com.muhammadelsayed.echo.Fragments.HomeTabs.Technology;
 import com.muhammadelsayed.echo.R;
 
 /**
  * A simple {@link Fragment} subclass. Use the {@link HomeFragment#homeFragmentInstance} factory
  * method to create an instance of this fragment.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private static final String TAG = "HomeFragment";
-    private ViewPager mViewPager;
+    private RecyclerView mGeneralRecycler;
+    private TabLayout tabLayout;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.wtf(TAG, "onCreate() has been instantiated");
+        if (getArguments() != null) {
+        }
+
+    }
+
+    @Override
+    public View onCreateView(
+            @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.wtf(TAG, "onCreateView() has been instantiated");
+        // Inflate the layout for this fragment
+        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        tabLayout = rootView.findViewById(R.id.tabs);
+        mSwipeRefreshLayout = rootView.findViewById(R.id.general_swipe);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+        mSwipeRefreshLayout.setColorSchemeResources(
+                android.R.color.holo_red_light,
+                android.R.color.holo_green_dark,
+                android.R.color.holo_orange_dark,
+                android.R.color.holo_blue_dark);
+
+        mGeneralRecycler = rootView.findViewById(R.id.general_recycler);
+        LinearLayoutManager mLinearLayoutManager =
+                new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        mGeneralRecycler.setLayoutManager(mLinearLayoutManager);
+        mGeneralRecycler.setDrawingCacheEnabled(true);
+        mGeneralRecycler.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+        mGeneralRecycler.setItemViewCacheSize(100);
+        mSwipeRefreshLayout.setColorSchemeResources(
+                android.R.color.holo_red_light,
+                android.R.color.holo_green_dark,
+                android.R.color.holo_orange_dark,
+                android.R.color.holo_blue_dark);
+        return rootView;
+    }
 
     public HomeFragment() {
         // Required empty public constructor
@@ -46,50 +81,7 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
-    }
-
-    @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-
-        mViewPager = rootView.findViewById(R.id.container);
-        setupViewPager(mViewPager);
-
-        TabLayout tabLayout = rootView.findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
-
-        // adding home tabs' titles
-        tabLayout.getTabAt(0).setText("LEAD STORIES");
-        tabLayout.getTabAt(1).setText("BUSINESS");
-        tabLayout.getTabAt(2).setText("ENTERTAINMENT");
-        tabLayout.getTabAt(3).setText("HEALTH");
-        tabLayout.getTabAt(4).setText("SPORTS");
-        tabLayout.getTabAt(5).setText("TECHNOLOGY");
-        tabLayout.getTabAt(6).setText("SCIENCE");
-        return rootView;
-    }
-
-    /**
-     * Adds fragments to the viewPager
-     *
-     * @param viewPager the view that holds the fragments
-     */
-    private void setupViewPager(ViewPager viewPager) {
-        Log.wtf(TAG, "setupViewPager: setting up viewPager...");
-        HomePagerAdapter adapter = new HomePagerAdapter(getChildFragmentManager());
-        adapter.addFragment(new LeadStories());
-        adapter.addFragment(new Business());
-        adapter.addFragment(new Entertainment());
-        adapter.addFragment(new Health());
-        adapter.addFragment(new Sport());
-        adapter.addFragment(new Technology());
-        adapter.addFragment(new Science());
-        viewPager.setAdapter(adapter);
+    public void onRefresh() {
+        Log.wtf(TAG, "onRefresh() has been instantiated");
     }
 }

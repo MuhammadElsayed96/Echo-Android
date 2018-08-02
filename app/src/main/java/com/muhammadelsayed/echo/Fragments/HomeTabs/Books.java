@@ -1,8 +1,6 @@
 package com.muhammadelsayed.echo.Fragments.HomeTabs;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
@@ -14,13 +12,13 @@ import android.view.ViewGroup;
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
 
-public class Entertainment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
-    private static final String TAG = Entertainment.class.getSimpleName();
+public class Books extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+    private static final String TAG = Books.class.getSimpleName();
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    private NewsAdapter mEntertainmentNewsAdapter;
-    private RecyclerView mEntertainmentRecycler;
+    private NewsAdapter mNewsAdapter;
+    private RecyclerView mRecycler;
 
-    public Entertainment() {
+    public Books() {
         // Required empty public constructor
     }
 
@@ -34,8 +32,7 @@ public class Entertainment extends Fragment implements SwipeRefreshLayout.OnRefr
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.wtf(TAG, "onCreateView() has been instantiated");
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         return rootView;
@@ -43,5 +40,6 @@ public class Entertainment extends Fragment implements SwipeRefreshLayout.OnRefr
 
     @Override
     public void onRefresh() {
+
     }
 }

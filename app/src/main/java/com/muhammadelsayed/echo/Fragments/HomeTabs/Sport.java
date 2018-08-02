@@ -1,23 +1,23 @@
 package com.muhammadelsayed.echo.Fragments.HomeTabs;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
+import com.muhammadelsayed.echo.R;
 
 public class Sport extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
-    private static final String TAG = Sport.class.getSimpleName();
+
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    private NewsAdapter mSportNewsAdapter;
-    private RecyclerView mSportRecycler;
-    private String sportSources;
+    private NewsAdapter mNewsAdapter;
+    private RecyclerView mRecycler;
+    private static final String TAG = Sport.class.getSimpleName();
 
     public Sport() {
         // Required empty public constructor
@@ -26,15 +26,16 @@ public class Sport extends Fragment implements SwipeRefreshLayout.OnRefreshListe
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sportSources = "";
+        Log.wtf(TAG, "onCreate() has been instantiated");
         if (getArguments() != null) {
         }
     }
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.wtf(TAG, "onCreateView() has been instantiated");
+        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        return rootView;
     }
 
     @Override

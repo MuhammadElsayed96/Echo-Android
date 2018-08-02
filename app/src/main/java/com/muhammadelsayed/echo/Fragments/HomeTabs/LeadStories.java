@@ -12,13 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
+import com.muhammadelsayed.echo.R;
 
 public class LeadStories extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private static final String TAG = LeadStories.class.getSimpleName();
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private NewsAdapter mLeadStoriesNewsAdapter;
     private RecyclerView mLeadStoriesRecycler;
-    private String leadStoriesSources;
 
     public LeadStories() {
         // Required empty public constructor
@@ -26,17 +26,17 @@ public class LeadStories extends Fragment implements SwipeRefreshLayout.OnRefres
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Log.wtf(TAG, "onCreate() has been instantiated");
         super.onCreate(savedInstanceState);
-        leadStoriesSources = "";
+        Log.wtf(TAG, "onCreate() has been instantiated");
         if (getArguments() != null) {
         }
     }
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.wtf(TAG, "onCreateView() has been instantiated");
+        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        return rootView;
     }
 
     @Override
