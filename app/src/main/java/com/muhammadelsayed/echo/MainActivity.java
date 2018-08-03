@@ -15,94 +15,30 @@
  */
 package com.muhammadelsayed.echo;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.internal.BottomNavigationItemView;
-import android.support.design.internal.BottomNavigationMenuView;
-import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 
-import com.muhammadelsayed.echo.Fragments.App.HomeFragment;
-import com.muhammadelsayed.echo.Fragments.App.SearchFragment;
-import com.muhammadelsayed.echo.Fragments.App.SettingsFragment;
-import com.muhammadelsayed.echo.Fragments.App.ShortcutsFragment;
-
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
+import com.muhammadelsayed.echo.Fragments.HomeTabs.Business;
+import com.muhammadelsayed.echo.Fragments.HomeTabs.Film;
+import com.muhammadelsayed.echo.Fragments.HomeTabs.Technology;
+import com.muhammadelsayed.echo.Fragments.HomeTabs.World;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    private static final String TAG_FRAGMENT_HOME = "tag_frag_home";
-    private static final String TAG_FRAGMENT_SHORTCUTS = "tag_frag_shortcuts";
-    private static final String TAG_FRAGMENT_SEARCH = "tag_frag_search";
-    private static final String TAG_FRAGMENT_SETTINGS = "tag_frag_settings";
-    private static final int INT_FRAGMENTS_COUNT = 4;
-    private static final int INT_FRAGMENT_HOME_POS = 0;
-    private static final int INT_FRAGMENT_SHORTCUTS_POS = 1;
-    private static final int INT_FRAGMENT_SEARCH_POS = 2;
-    private static final int INT_FRAGMENT_SETTINGS_POS = 3;
-    public BottomNavigationView mBottomNavigation;
-    private List<Fragment> mFragmentsList = new ArrayList<>(INT_FRAGMENTS_COUNT);
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    switch (item.getItemId()) {
-                        case R.id.navigation_home:
-                            switchFragment(INT_FRAGMENT_HOME_POS, TAG_FRAGMENT_HOME);
-                            return true;
-                        case R.id.navigation_shortcuts:
-                            switchFragment(INT_FRAGMENT_SHORTCUTS_POS, TAG_FRAGMENT_SHORTCUTS);
-                            return true;
-                        case R.id.navigation_search:
-                            switchFragment(INT_FRAGMENT_SEARCH_POS, TAG_FRAGMENT_SEARCH);
-                            return true;
-                        case R.id.navigation_settings:
-                            switchFragment(INT_FRAGMENT_SETTINGS_POS, TAG_FRAGMENT_SETTINGS);
-                            return true;
-                    }
-                    return false;
-                }
-            };
-
-    /**
-     * This method will force the BottomNavigationView to show both the icon and the label of each
-     * element in the BottomNavigationView, not only the highlighted element
-     * <p>
-     * <p>I got this method from STACKOVERFLOW.com and here's the link see <a
-     * href="https://stackoverflow.com/questions/41352934/force-showing-icon-and-title-in-bottomnavigationview-support-android/41374515"</a>
-     *
-     * @param view is the BottomNavigationView object on which the force showing will be applied
-     */
-    @SuppressLint("RestrictedApi")
-    public static void disableShiftMode(BottomNavigationView view) {
-        Log.wtf(TAG, "disableShiftMode() has been instantiated");
-
-        BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);
-        try {
-            Field shiftingMode = menuView.getClass().getDeclaredField("mShiftingMode");
-            shiftingMode.setAccessible(true);
-            shiftingMode.setBoolean(menuView, false);
-            shiftingMode.setAccessible(false);
-            for (int i = 0; i < menuView.getChildCount(); i++) {
-                BottomNavigationItemView item = (BottomNavigationItemView) menuView.getChildAt(i);
-                item.setShiftingMode(false);
-                // set once again checked value, so view will be updated
-                item.setChecked(item.getItemData().isChecked());
-            }
-        } catch (NoSuchFieldException e) {
-            // Timber.e(e, "Unable to get shift mode field");
-        } catch (IllegalAccessException e) {
-            // Timber.e(e, "Unable to change value of shift mode");
-        }
-    }
+    private DrawerLayout mDrawerLayout;
+    private Toolbar toolbar;
+    private NavigationView navDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,47 +46,73 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate: started !!");
 
-        mBottomNavigation = findViewById(R.id.bottom_navigation_view);
-        mBottomNavigation.getMenu().getItem(0).setChecked(true);
-        mBottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        disableShiftMode(mBottomNavigation);
-        buildFragmentsList();
-        // Set the 0th Fragment to be displayed by default.
-        switchFragment(0, TAG_FRAGMENT_HOME);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+        navDrawer = findViewById(R.id.nav_view);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
+        mDrawerLayout.setDrawerListener(toggle);
+        toggle.syncState();
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, new World()).commit();
+        navDrawer.setCheckedItem(R.id.nav_world);
+
+        setupDrawerContent(navDrawer);
     }
 
-    /**
-     * Use this method to create a new instance of any of the fragments using the fragments' factory
-     * methods.
-     * <p>
-     * <p>Then, the method puts the created fragments in the "mFragmentsList"
-     */
-    private void buildFragmentsList() {
-        Log.wtf(TAG, "buildFragmentsList() has been instantiated");
-
-        HomeFragment homeFragment = HomeFragment.homeFragmentInstance();
-        ShortcutsFragment shortcutsFragment = ShortcutsFragment.shortcutsFragmentInstance();
-        SearchFragment searchFragment = SearchFragment.searchFragmentInstance();
-        SettingsFragment settingsFragment = SettingsFragment.settingsFragmentInstance();
-
-        mFragmentsList.add(homeFragment);
-        mFragmentsList.add(shortcutsFragment);
-        mFragmentsList.add(searchFragment);
-        mFragmentsList.add(settingsFragment);
+    private void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        selectDrawerItem(menuItem);
+                        return true;
+                    }
+                });
     }
 
-    /**
-     * This generic method is used to handle switching between fragments.
-     *
-     * @param pos The position of fragment at the "mFragmentList".
-     * @param tag The tag name for the fragment.
-     */
-    private void switchFragment(int pos, String tag) {
-        Log.wtf(TAG, "switchFragment() has been instantiated");
+    public void selectDrawerItem(MenuItem menuItem) {
+        Fragment fragment;
+        switch(menuItem.getItemId()) {
+            case R.id.nav_world:
+                fragment = new World();
+                break;
+            case R.id.nav_film:
+                fragment = new Film();
+                break;
+            case R.id.nav_business:
+                fragment = new Business();
+                break;
+            case R.id.nav_technology:
+                fragment = new Technology();
+                break;
+            default:
+                fragment = new World();
+        }
 
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.frame_fragment_holder, mFragmentsList.get(pos), tag)
-                .commit();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+
+        menuItem.setChecked(true);
+
+        setTitle(menuItem.getTitle());
+        mDrawerLayout.closeDrawers();
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        // The action bar home/up action should open or close the drawer.
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 }
