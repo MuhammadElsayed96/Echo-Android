@@ -6,7 +6,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,6 @@ import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
 import com.muhammadelsayed.echo.Utils;
 import com.muhammadelsayed.echo.model.Article;
-import com.thefinestartist.finestwebview.FinestWebView;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,10 +28,6 @@ public class Travel extends Fragment implements SwipeRefreshLayout.OnRefreshList
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private NewsAdapter mTravelNewsAdapter;
     private RecyclerView mTravelRecycler;
-
-    public Travel() {
-        // Required empty public constructor
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,6 +61,10 @@ public class Travel extends Fragment implements SwipeRefreshLayout.OnRefreshList
         return rootView;
     }
 
+    public Travel() {
+        // Required empty public constructor
+    }
+
 
     private void loadTravelData() {
         Log.wtf(TAG, "loadTravelData() has been instantiated");
@@ -84,36 +82,7 @@ public class Travel extends Fragment implements SwipeRefreshLayout.OnRefreshList
                 public void onSuccess(List<Article> articles) {
                     Log.wtf(TAG, "onSuccess: Travel = " + articles);
                     mTravelArticleList = articles;
-                    mTravelNewsAdapter = new NewsAdapter(getContext(), mTravelArticleList, new NewsAdapter.ItemClickListener() {
-                        @Override
-                        public void onItemClick(View v, int position) {
-                            Article currentArticle = mTravelArticleList.get(position);
-                            String articleUrl = currentArticle.getWebUrl();
-                            new FinestWebView.Builder(getContext())
-                                    .theme(R.style.FinestWebViewTheme)
-                                    .titleDefault(getString(R.string.the_guardian))
-                                    .showUrl(false)
-                                    .statusBarColorRes(R.color.bluePrimaryDark)
-                                    .toolbarColorRes(R.color.bluePrimary)
-                                    .titleColorRes(R.color.finestWhite)
-                                    .urlColorRes(R.color.bluePrimaryLight)
-                                    .iconDefaultColorRes(R.color.finestWhite)
-                                    .progressBarColorRes(R.color.finestWhite)
-                                    .stringResCopiedToClipboard(R.string.copied_to_clipboard)
-                                    .stringResCopiedToClipboard(R.string.copied_to_clipboard)
-                                    .stringResCopiedToClipboard(R.string.copied_to_clipboard)
-                                    .showSwipeRefreshLayout(true)
-                                    .swipeRefreshColorRes(R.color.bluePrimaryDark)
-                                    .menuSelector(R.drawable.selector_light_theme)
-                                    .menuTextGravity(Gravity.CENTER)
-                                    .menuTextPaddingRightRes(R.dimen.defaultMenuTextPaddingLeft)
-                                    .dividerHeight(0)
-                                    .gradientDivider(false)
-                                    .setCustomAnimations(
-                                            R.anim.slide_up, R.anim.hold, R.anim.hold, R.anim.slide_down)
-                                    .show(articleUrl);
-                        }
-                    });
+                    mTravelNewsAdapter = new NewsAdapter(getContext(), mTravelArticleList);
                     mTravelRecycler.setAdapter(mTravelNewsAdapter);
                 }
 
@@ -123,40 +92,7 @@ public class Travel extends Fragment implements SwipeRefreshLayout.OnRefreshList
                 }
             });
         } else {
-            mTravelNewsAdapter =
-                    new NewsAdapter(
-                            getContext(),
-                            mTravelArticleList,
-                            new NewsAdapter.ItemClickListener() {
-                                @Override
-                                public void onItemClick(View v, int position) {
-                                    Article currentArticle = mTravelArticleList.get(position);
-                                    String articleUrl = currentArticle.getWebUrl();
-                                    new FinestWebView.Builder(getContext())
-                                            .theme(R.style.FinestWebViewTheme)
-                                            .titleDefault(getString(R.string.the_guardian))
-                                            .showUrl(false)
-                                            .statusBarColorRes(R.color.bluePrimaryDark)
-                                            .toolbarColorRes(R.color.bluePrimary)
-                                            .titleColorRes(R.color.finestWhite)
-                                            .urlColorRes(R.color.bluePrimaryLight)
-                                            .iconDefaultColorRes(R.color.finestWhite)
-                                            .progressBarColorRes(R.color.finestWhite)
-                                            .stringResCopiedToClipboard(R.string.copied_to_clipboard)
-                                            .stringResCopiedToClipboard(R.string.copied_to_clipboard)
-                                            .stringResCopiedToClipboard(R.string.copied_to_clipboard)
-                                            .showSwipeRefreshLayout(true)
-                                            .swipeRefreshColorRes(R.color.bluePrimaryDark)
-                                            .menuSelector(R.drawable.selector_light_theme)
-                                            .menuTextGravity(Gravity.CENTER)
-                                            .menuTextPaddingRightRes(R.dimen.defaultMenuTextPaddingLeft)
-                                            .dividerHeight(0)
-                                            .gradientDivider(false)
-                                            .setCustomAnimations(
-                                                    R.anim.slide_up, R.anim.hold, R.anim.hold, R.anim.slide_down)
-                                            .show(articleUrl);
-                                }
-                            });
+            mTravelNewsAdapter = new NewsAdapter(getContext(), mTravelArticleList);
         }
         mTravelRecycler.setAdapter(mTravelNewsAdapter);
     }

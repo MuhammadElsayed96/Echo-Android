@@ -15,7 +15,7 @@
         <android.support.constraint.ConstraintLayout
             android:id="@+id/headline_view"
             android:layout_width="match_parent"
-            android:layout_height="96dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:weightSum="1"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -75,8 +75,7 @@
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
+
             android:layout_marginTop="16dp"
             android:ellipsize="end"
             android:fontFamily="sans-serif"
@@ -97,11 +96,9 @@
 
 
             <TextView
-                android:id="@+id/news_source_name"
+                android:id="@+id/author_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
                 android:ellipsize="end"
                 android:fontFamily="sans-serif"
                 android:text="The Straits Times"
@@ -114,8 +111,8 @@
 
             <ImageView
                 android:id="@+id/bookmark_news"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:src="@drawable/ic_bookmark_border_black_24dp"
@@ -125,8 +122,8 @@
 
             <ImageView
                 android:id="@+id/share_news"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="8dp"
