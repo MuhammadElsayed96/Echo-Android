@@ -41,11 +41,12 @@ public class SplashActivity extends AppCompatActivity {
     public static List<Article> mTravelArticleList = new ArrayList<>();
     public static List<Article> mTvAndRadioArticleList = new ArrayList<>();
     public static List<Article> mWeatherArticleList = new ArrayList<>();
+    public static List<Article> mWorldArticleList = new ArrayList<>();
     Map<String, Object> options = new HashMap<>();
     boolean bool, f1 = false, f2 = false, f3 = false, f4 = false, f5 = false, f6 = false, f7 = false, f8 = false,
             f9 = false, f10 = false, f11 = false, f12 = false, f13 = false, f14 = false, f15 = false, f16 = false,
             f17 = false, f18 = false, f19 = false, f20 = false, f21 = false, f22 = false, f23 = false, f24 = false,
-            f25 = false, f26 = false;
+            f25 = false, f26 = false, f28 = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,17 +73,16 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure(): BUSINESS FAILED !!");
+                Log.wtf(TAG, "onFailure(): BUSINESS -> " + t.getMessage());
             }
         });
 
         // CULTURE
         options.put("section", "culture");
-
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
-                Log.wtf(TAG, "onSuccess: CULTURE = " + articles);
+                Log.wtf(TAG, "onSuccess: CULTURE FAILED -> " + articles);
                 mCultureArticleList = articles;
                 f2 = true;
                 moveToMain();
@@ -90,13 +90,13 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure(): CULTURE FAILED !!");
+                Log.wtf(TAG, "onFailure(): CULTURE FAILED -> " + t.getMessage());
             }
         });
 
+
         // ART & DESIGN
         options.put("section", "artanddesign");
-
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -108,14 +108,12 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure: ART & DESIGN FAILED !!");
+                Log.wtf(TAG, "onFailure: ART & DESIGN FAILED -> " + t.getMessage());
             }
         });
 
-
         // ENVIRONMENT
         options.put("section", "environment");
-
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -127,13 +125,12 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure(): ENVIRONMENT FAILED !!");
+                Log.wtf(TAG, "onFailure(): ENVIRONMENT FAILED -> " + t.getMessage());
             }
         });
 
         // BOOKS
-        options.put("section", "environment");
-
+        options.put("section", "books");
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -145,13 +142,12 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure(): BOOKS FAILED !!");
+                Log.wtf(TAG, "onFailure(): BOOKS FAILED -> " + t.getMessage());
             }
         });
 
         // AUSTRALIA NEWS
         options.put("section", "australia-news");
-
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -163,13 +159,12 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure(): AUSTRALIA NEWS FAILED !!");
+                Log.wtf(TAG, "onFailure(): AUSTRALIA NEWS FAILED -> " + t.getMessage());
             }
         });
 
         // UK NEWS
         options.put("section", "uk-news");
-
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -181,13 +176,12 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure(): UK NEWS FAILED !!");
+                Log.wtf(TAG, "onFailure(): UK NEWS FAILED -> " + t.getMessage());
             }
         });
 
         // US NEWS
         options.put("section", "us-news");
-
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -199,13 +193,12 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure(): US NEWS FAILED !!");
+                Log.wtf(TAG, "onFailure(): US NEWS FAILED -> " + t.getMessage());
             }
         });
 
         // NEWS
         options.put("section", "news");
-
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -217,13 +210,12 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure(): NEWS FAILED !!");
+                Log.wtf(TAG, "onFailure(): NEWS FAILED -> " + t.getMessage());
             }
         });
 
         // EDUCATION
         options.put("section", "education");
-
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -235,13 +227,12 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure(): EDUCATION FAILED !!");
+                Log.wtf(TAG, "onFailure(): EDUCATION FAILED -> " + t.getMessage());
             }
         });
 
         // FASHION
         options.put("section", "fashion");
-
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -253,13 +244,12 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure(): FASHION FAILED !!");
+                Log.wtf(TAG, "onFailure(): FASHION FAILED -> " + t.getMessage());
             }
         });
 
         // FILM
         options.put("section", "film");
-
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -271,13 +261,12 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure(): FILM FAILED !!");
+                Log.wtf(TAG, "onFailure(): FILM FAILED -> " + t.getMessage());
             }
         });
 
         // FOOTBALL
         options.put("section", "football");
-
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -289,13 +278,12 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure(): FOOTBALL FAILED !!");
+                Log.wtf(TAG, "onFailure(): FOOTBALL FAILED -> " + t.getMessage());
             }
         });
 
         // LAW
         options.put("section", "law");
-
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -307,13 +295,12 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure(): LAW FAILED !!");
+                Log.wtf(TAG, "onFailure(): LAW FAILED -> " + t.getMessage());
             }
         });
 
         // LIFESTYLE
         options.put("section", "lifeandstyle");
-
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -325,13 +312,12 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure(): LIFESTYLE FAILED !!");
+                Log.wtf(TAG, "onFailure(): LIFESTYLE FAILED -> " + t.getMessage());
             }
         });
 
         // MEDIA
         options.put("section", "media");
-
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -343,13 +329,12 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure(): MEDIA FAILED !!");
+                Log.wtf(TAG, "onFailure(): MEDIA FAILED -> " + t.getMessage());
             }
         });
 
         // MONEY
         options.put("section", "money");
-
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -361,13 +346,12 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure(): MONEY FAILED !!");
+                Log.wtf(TAG, "onFailure(): MONEY FAILED -> " + t.getMessage());
             }
         });
 
         // MUSIC
         options.put("section", "music");
-
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -379,13 +363,12 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure(): MUSIC FAILED !!");
+                Log.wtf(TAG, "onFailure(): MUSIC FAILED -> " + t.getMessage());
             }
         });
 
         // POLITICS
         options.put("section", "politics");
-
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -397,13 +380,12 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure(): POLITICS FAILED !!");
+                Log.wtf(TAG, "onFailure(): POLITICS FAILED -> " + t.getMessage());
             }
         });
 
         // SCIENCE
         options.put("section", "science");
-
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -415,13 +397,12 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure(): SCIENCE FAILED !!");
+                Log.wtf(TAG, "onFailure(): SCIENCE FAILED -> " + t.getMessage());
             }
         });
 
         // SOCIETY
         options.put("section", "society");
-
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -433,13 +414,12 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure(): SOCIETY FAILED !!");
+                Log.wtf(TAG, "onFailure(): SOCIETY FAILED -> " + t.getMessage());
             }
         });
 
         // SPORT
         options.put("section", "sport");
-
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -451,13 +431,12 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure(): SPORT FAILED !!");
+                Log.wtf(TAG, "onFailure(): SPORT FAILED -> " + t.getMessage());
             }
         });
 
         // TECHNOLOGY
         options.put("section", "technology");
-
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -469,13 +448,12 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure(): TECHNOLOGY FAILED !!");
+                Log.wtf(TAG, "onFailure(): TECHNOLOGY FAILED -> " + t.getMessage());
             }
         });
 
         // TRAVEL
         options.put("section", "travel");
-
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -487,13 +465,12 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure(): TRAVEL FAILED !!");
+                Log.wtf(TAG, "onFailure(): TRAVEL FAILED -> " + t.getMessage());
             }
         });
 
         // TV & RADIO
         options.put("section", "tv-and-radio");
-
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -505,13 +482,12 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure(): TV & RADIO FAILED !!");
+                Log.wtf(TAG, "onFailure(): TV & RADIO FAILED -> " + t.getMessage());
             }
         });
 
         // WEATHER
         options.put("section", "weather");
-
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -523,16 +499,35 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure(): WEATHER FAILED !!");
+                Log.wtf(TAG, "onFailure(): WEATHER FAILED-> " + t.getMessage());
             }
         });
+
+        // WORLD
+        options.put("section", "world");
+        Utils.getNews(options, new Utils.retrofitCallback() {
+            @Override
+            public void onSuccess(List<Article> articles) {
+                Log.wtf(TAG, "onSuccess: WORLD = " + articles);
+                mWorldArticleList = articles;
+                f28 = true;
+                moveToMain();
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Log.wtf(TAG, "onFailure(): WORLD FAILED -> " + t.getMessage());
+            }
+        });
+
     }
+
 
     private void moveToMain() {
         Log.wtf(TAG, "moveToMain() has been instantiated");
         bool = f1 && f2 && f3 && f4 && f5 && f6 && f7 && f8 && f9 && f10
                 && f11 && f12 && f13 && f14 && f15 && f16 && f17 && f18 && f19 && f20
-                && f21 && f22 && f23 && f24 && f25 && f26;
+                && f21 && f22 && f23 && f24 && f25 && f26 && f28;
         if (bool) {
             Intent intent = new Intent(SplashActivity.this, MainActivity.class);
             startActivity(intent);
