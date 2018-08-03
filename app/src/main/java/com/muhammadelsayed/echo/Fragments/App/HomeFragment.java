@@ -47,12 +47,14 @@ import com.muhammadelsayed.echo.R;
 
 public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private static final String TAG = "HomeFragment";
-
     private DrawerLayout mDrawerLayout;
-    private NavigationView navDrawer;
 
     public HomeFragment() {
         // Required empty public constructor
+    }
+
+    public static HomeFragment homeFragmentInstance() {
+        return new HomeFragment();
     }
 
     @Override
@@ -61,25 +63,19 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         Log.wtf(TAG, "onCreate() has been instantiated");
         if (getArguments() != null) {
         }
-
-    }
-
-    public static HomeFragment homeFragmentInstance(){
-        return new HomeFragment();
     }
 
     @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.wtf(TAG, "onCreateView() has been instantiated");
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         Toolbar toolbar = rootView.findViewById(R.id.toolbar);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
         mDrawerLayout = rootView.findViewById(R.id.drawer_layout);
-        navDrawer = rootView.findViewById(R.id.nav_view);
+        NavigationView navDrawer = rootView.findViewById(R.id.nav_view);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(getActivity(), mDrawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         mDrawerLayout.setDrawerListener(toggle);
@@ -87,7 +83,8 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
         FragmentManager fragmentManager = getChildFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, new AustraliaHeadlines()).commit();
-        navDrawer.setCheckedItem(R.id.nav_au_news);
+        navDrawer.setCheckedItem(R.id.nav_news);
+        getActivity().setTitle(getResources().getString(R.string.international_headlines));
 
         setupDrawerContent(navDrawer);
 
@@ -107,8 +104,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
     public void selectDrawerItem(MenuItem menuItem) {
         Fragment fragment;
-        switch(menuItem.getItemId()) {
-
+        switch (menuItem.getItemId()) {
             case R.id.nav_au_news:
                 fragment = new AustraliaHeadlines();
                 break;

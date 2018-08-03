@@ -72,7 +72,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure: BUSINESS FAILED !!");
+                Log.wtf(TAG, "onFailure(): BUSINESS FAILED !!");
             }
         });
 
@@ -90,7 +90,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure: CULTURE FAILED !!");
+                Log.wtf(TAG, "onFailure(): CULTURE FAILED !!");
             }
         });
 
@@ -127,7 +127,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure: ENVIRONMENT FAILED !!");
+                Log.wtf(TAG, "onFailure(): ENVIRONMENT FAILED !!");
             }
         });
 
@@ -145,7 +145,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure: BOOKS FAILED !!");
+                Log.wtf(TAG, "onFailure(): BOOKS FAILED !!");
             }
         });
 
@@ -163,7 +163,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure: AUSTRALIA NEWS FAILED !!");
+                Log.wtf(TAG, "onFailure(): AUSTRALIA NEWS FAILED !!");
             }
         });
 
@@ -181,7 +181,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure: UK NEWS FAILED !!");
+                Log.wtf(TAG, "onFailure(): UK NEWS FAILED !!");
             }
         });
 
@@ -199,7 +199,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure: US NEWS FAILED !!");
+                Log.wtf(TAG, "onFailure(): US NEWS FAILED !!");
             }
         });
 
@@ -217,7 +217,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure: NEWS FAILED !!");
+                Log.wtf(TAG, "onFailure(): NEWS FAILED !!");
             }
         });
 
@@ -235,7 +235,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure: EDUCATION FAILED !!");
+                Log.wtf(TAG, "onFailure(): EDUCATION FAILED !!");
             }
         });
 
@@ -253,7 +253,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure: FASHION FAILED !!");
+                Log.wtf(TAG, "onFailure(): FASHION FAILED !!");
             }
         });
 
@@ -271,7 +271,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure: FILM FAILED !!");
+                Log.wtf(TAG, "onFailure(): FILM FAILED !!");
             }
         });
 
@@ -289,7 +289,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure: FOOTBALL FAILED !!");
+                Log.wtf(TAG, "onFailure(): FOOTBALL FAILED !!");
             }
         });
 
@@ -307,7 +307,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure: LAW FAILED !!");
+                Log.wtf(TAG, "onFailure(): LAW FAILED !!");
             }
         });
 
@@ -325,7 +325,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure: LIFESTYLE FAILED !!");
+                Log.wtf(TAG, "onFailure(): LIFESTYLE FAILED !!");
             }
         });
 
@@ -343,7 +343,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure: MEDIA FAILED !!");
+                Log.wtf(TAG, "onFailure(): MEDIA FAILED !!");
             }
         });
 
@@ -361,7 +361,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure: MONEY FAILED !!");
+                Log.wtf(TAG, "onFailure(): MONEY FAILED !!");
             }
         });
 
@@ -379,7 +379,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure: MUSIC FAILED !!");
+                Log.wtf(TAG, "onFailure(): MUSIC FAILED !!");
             }
         });
 
@@ -397,7 +397,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure: POLITICS FAILED !!");
+                Log.wtf(TAG, "onFailure(): POLITICS FAILED !!");
             }
         });
 
@@ -415,7 +415,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure: SCIENCE FAILED !!");
+                Log.wtf(TAG, "onFailure(): SCIENCE FAILED !!");
             }
         });
 
@@ -433,7 +433,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure: SOCIETY FAILED !!");
+                Log.wtf(TAG, "onFailure(): SOCIETY FAILED !!");
             }
         });
 
@@ -451,7 +451,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure: SPORT FAILED !!");
+                Log.wtf(TAG, "onFailure(): SPORT FAILED !!");
             }
         });
 
@@ -469,7 +469,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure: TECHNOLOGY FAILED !!");
+                Log.wtf(TAG, "onFailure(): TECHNOLOGY FAILED !!");
             }
         });
 
@@ -487,7 +487,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure: TRAVEL FAILED !!");
+                Log.wtf(TAG, "onFailure(): TRAVEL FAILED !!");
             }
         });
 
@@ -505,7 +505,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure: TV & RADIO FAILED !!");
+                Log.wtf(TAG, "onFailure(): TV & RADIO FAILED !!");
             }
         });
 
@@ -523,7 +523,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Throwable t) {
-                Log.wtf(TAG, "onFailure: WEATHER FAILED !!");
+                Log.wtf(TAG, "onFailure(): WEATHER FAILED !!");
             }
         });
     }

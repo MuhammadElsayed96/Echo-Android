@@ -14,12 +14,11 @@
      limitations under the License.
 -->
 <resources>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@android:color/white</item>
+        <item name="colorPrimaryDark">@android:color/black</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
@@ -39,14 +38,13 @@
         <item name="android:textColor">#A8A19E</item>
     </style>
 
-
     <style name="MineCustomTabText" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">16sp</item>
         <item name="android:textAllCaps">true</item>
     </style>
 
     <style name="BottomNavigation">
-        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:background">@android:color/white</item>
         <item name="itemBackground">@color/navigation_bar_item_bg</item>
         <item name="itemIconTint">@color/navigation_bar_txt_color</item>
         <item name="itemTextColor">@color/navigation_bar_txt_color</item>
@@ -61,7 +59,6 @@
 
     <style name="NavigationDrawerStyle">
         <item name="android:textSize">16sp</item><!-- text size in menu-->
-
         <item name="android:listPreferredItemHeightSmall">40dp</item><!-- item size in menu-->
         <item name="listPreferredItemHeightSmall">40dp</item><!-- item size in menu-->
     </style>

@@ -22,6 +22,10 @@ public class ShortcutsFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public static ShortcutsFragment shortcutsFragmentInstance() {
+        return new ShortcutsFragment();
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Log.wtf(TAG, "onCreate() has been instantiated");
@@ -30,13 +34,8 @@ public class ShortcutsFragment extends Fragment {
         }
     }
 
-    public static ShortcutsFragment shortcutsFragmentInstance(){
-        return new ShortcutsFragment();
-    }
-
     @Override
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.wtf(TAG, "onCreateView() has been instantiated");
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_shortcuts, container, false);

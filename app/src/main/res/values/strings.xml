@@ -25,12 +25,34 @@
     <string name="title_search">Search</string>
     <string name="title_settings">Settings</string>
     <string name="arrow"><![CDATA[>]]></string>
-    <string name="dummy">Dummy</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
-
-
+    <string name="australia_headlines">Australia Headlines</string>
+    <string name="uk_headlines">UK Headlines</string>
+    <string name="us_headlines">US Headlines</string>
+    <string name="international_headlines">International Headlines</string>
+    <string name="art_amp_design"><![CDATA[Art & Design]]></string>
+    <string name="books">Books</string>
+    <string name="culture">Culture</string>
+    <string name="business">Business</string>
+    <string name="football">Football</string>
+    <string name="film">Film</string>
+    <string name="fashion">Fashion</string>
+    <string name="environment">Environment</string>
+    <string name="education">Education</string>
+    <string name="law">Law</string>
+    <string name="lifestyle">Lifestyle</string>
+    <string name="media">Media</string>
+    <string name="money">Money</string>
+    <string name="music">Music</string>
+    <string name="politics">Politics</string>
+    <string name="science">Science</string>
+    <string name="society">Society</string>
+    <string name="sport">Sport</string>
+    <string name="technology">Technology</string>
+    <string name="travel">Travel</string>
+    <string name="tv_amp_radio"><![CDATA[TV & Radio]]></string>
+    <string name="weather">Weather</string>
+    <string name="the_guardian_echo">The Guardian Echo</string>
 </resources>

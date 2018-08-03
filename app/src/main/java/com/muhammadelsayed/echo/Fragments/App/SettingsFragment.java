@@ -12,6 +12,14 @@ import com.muhammadelsayed.echo.R;
 public class SettingsFragment extends Fragment {
     private static final String TAG = "SettingsFragment";
 
+    public SettingsFragment() {
+        // Required empty public constructor
+    }
+
+    public static SettingsFragment settingsFragmentInstance() {
+        return new SettingsFragment();
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,20 +30,11 @@ public class SettingsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.wtf(TAG, "onCreateView() has been instantiated");
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_settings, container, false);
-    }
-
-    public SettingsFragment() {
-        // Required empty public constructor
-    }
-
-    public static SettingsFragment settingsFragmentInstance(){
-        return new SettingsFragment();
     }
 
 

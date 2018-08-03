@@ -14,13 +14,17 @@
      limitations under the License.
 -->
 <resources>
-    <color name="colorPrimary">#fff</color>
-    <color name="colorPrimaryDark">#000</color>
-    <color name="colorAccent">#f52828</color>
-
+    <color name="colorPrimary">#607d8b</color>
+    <color name="colorPrimaryDark">#455a64</color>
+    <color name="colorPrimaryLight">#cfd8dc</color>
+    <color name="colorText">#FFFFFF</color>
+    <color name="colorPrimaryText">#212121</color>
+    <color name="colorSecondaryText">#757575</color>
+    <color name="colorAccent">#ff5252</color>
+    <color name="colorDivider">#BDBDBD</color>
 
     <!--    ButtomNavigationDrawer Colors    -->
-    <color name="navigation_bar_item_bg">@color/colorPrimary</color>
+    <color name="navigation_bar_item_bg">@android:color/white</color>
     <color name="navigation_bar_txt_color">#000</color>
     <color name="gray">#858585</color>
 
@@ -28,5 +32,4 @@
     <color name="bluePrimaryDark">#048BFE</color>
     <color name="bluePrimary">#2199FF</color>
     <color name="bluePrimaryLight">#BADFFF</color>
-
 </resources>

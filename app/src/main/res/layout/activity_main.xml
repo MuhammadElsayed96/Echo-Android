@@ -20,16 +20,13 @@
     android:layout_height="match_parent"
     tools:context="com.muhammadelsayed.echo.MainActivity">
 
-
-
     <!-- Middle Body Layout -->
     <RelativeLayout
+        android:id="@+id/relativeMiddleBody"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/relativeMiddleBody"
-        android:layout_alignParentTop="true"
         android:layout_above="@+id/relativeBottomNav"
-        >
+        android:layout_alignParentTop="true">
 
         <FrameLayout
             android:id="@+id/frame_fragment_holder"
@@ -40,11 +37,11 @@
 
     <!-- Bottom Navigation Layout -->
     <RelativeLayout
+        android:id="@+id/relativeBottomNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/relativeBottomNav"
-        android:layout_alignParentBottom="true"
-        >
+        android:layout_alignParentBottom="true">
+
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/bottom_navigation_view"
             style="@style/BottomNavigation"

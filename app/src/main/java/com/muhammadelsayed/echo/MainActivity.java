@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d(TAG, "onCreate: started !!");
+        Log.d(TAG, "onCreate(): has been instantiated");
 
         mBottomNavigation = findViewById(R.id.bottom_navigation_view);
         mBottomNavigation.getMenu().getItem(0).setChecked(true);
