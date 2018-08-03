@@ -34,7 +34,7 @@ public class Law extends Fragment implements SwipeRefreshLayout.OnRefreshListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.wtf(TAG, "onCreateView() has been instantiated");
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_law, container, false);
         return rootView;
     }
 

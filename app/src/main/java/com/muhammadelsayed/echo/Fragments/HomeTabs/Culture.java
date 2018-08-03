@@ -36,7 +36,7 @@ public class Culture extends Fragment implements SwipeRefreshLayout.OnRefreshLis
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.wtf(TAG, "onCreateView() has been instantiated");
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_culture, container, false);
         return rootView;
     }
 

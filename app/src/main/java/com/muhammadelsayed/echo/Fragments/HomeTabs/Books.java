@@ -34,7 +34,7 @@ public class Books extends Fragment implements SwipeRefreshLayout.OnRefreshListe
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.wtf(TAG, "onCreateView() has been instantiated");
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_books, container, false);
         return rootView;
     }
 

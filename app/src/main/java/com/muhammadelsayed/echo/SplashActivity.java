@@ -78,12 +78,7 @@ public class SplashActivity extends AppCompatActivity {
 
         // CULTURE
         options.put("section", "culture");
-        options.put("order-by", "newest");
-        options.put("show-tags", "contributor");
-        options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
-        options.put("page", 1);
-        options.put("page-size", 20);
-        options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -100,14 +95,8 @@ public class SplashActivity extends AppCompatActivity {
         });
 
         // ART & DESIGN
-        options.clear();
         options.put("section", "artanddesign");
-        options.put("order-by", "newest");
-        options.put("show-tags", "contributor");
-        options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
-        options.put("page", 1);
-        options.put("page-size", 20);
-        options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -125,14 +114,8 @@ public class SplashActivity extends AppCompatActivity {
 
 
         // ENVIRONMENT
-        options.clear();
         options.put("section", "environment");
-        options.put("order-by", "newest");
-        options.put("show-tags", "contributor");
-        options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
-        options.put("page", 1);
-        options.put("page-size", 20);
-        options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -149,14 +132,8 @@ public class SplashActivity extends AppCompatActivity {
         });
 
         // BOOKS
-        options.clear();
         options.put("section", "environment");
-        options.put("order-by", "newest");
-        options.put("show-tags", "contributor");
-        options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
-        options.put("page", 1);
-        options.put("page-size", 20);
-        options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -173,14 +150,8 @@ public class SplashActivity extends AppCompatActivity {
         });
 
         // AUSTRALIA NEWS
-        options.clear();
         options.put("section", "australia-news");
-        options.put("order-by", "newest");
-        options.put("show-tags", "contributor");
-        options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
-        options.put("page", 1);
-        options.put("page-size", 20);
-        options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -197,14 +168,8 @@ public class SplashActivity extends AppCompatActivity {
         });
 
         // UK NEWS
-        options.clear();
         options.put("section", "uk-news");
-        options.put("order-by", "newest");
-        options.put("show-tags", "contributor");
-        options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
-        options.put("page", 1);
-        options.put("page-size", 20);
-        options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -221,14 +186,8 @@ public class SplashActivity extends AppCompatActivity {
         });
 
         // US NEWS
-        options.clear();
         options.put("section", "us-news");
-        options.put("order-by", "newest");
-        options.put("show-tags", "contributor");
-        options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
-        options.put("page", 1);
-        options.put("page-size", 20);
-        options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -245,14 +204,8 @@ public class SplashActivity extends AppCompatActivity {
         });
 
         // NEWS
-        options.clear();
         options.put("section", "news");
-        options.put("order-by", "newest");
-        options.put("show-tags", "contributor");
-        options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
-        options.put("page", 1);
-        options.put("page-size", 20);
-        options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -269,14 +222,8 @@ public class SplashActivity extends AppCompatActivity {
         });
 
         // EDUCATION
-        options.clear();
         options.put("section", "education");
-        options.put("order-by", "newest");
-        options.put("show-tags", "contributor");
-        options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
-        options.put("page", 1);
-        options.put("page-size", 20);
-        options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -293,14 +240,8 @@ public class SplashActivity extends AppCompatActivity {
         });
 
         // FASHION
-        options.clear();
         options.put("section", "fashion");
-        options.put("order-by", "newest");
-        options.put("show-tags", "contributor");
-        options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
-        options.put("page", 1);
-        options.put("page-size", 20);
-        options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -317,14 +258,8 @@ public class SplashActivity extends AppCompatActivity {
         });
 
         // FILM
-        options.clear();
         options.put("section", "film");
-        options.put("order-by", "newest");
-        options.put("show-tags", "contributor");
-        options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
-        options.put("page", 1);
-        options.put("page-size", 20);
-        options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -341,14 +276,8 @@ public class SplashActivity extends AppCompatActivity {
         });
 
         // FOOTBALL
-        options.clear();
         options.put("section", "football");
-        options.put("order-by", "newest");
-        options.put("show-tags", "contributor");
-        options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
-        options.put("page", 1);
-        options.put("page-size", 20);
-        options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -365,14 +294,8 @@ public class SplashActivity extends AppCompatActivity {
         });
 
         // LAW
-        options.clear();
         options.put("section", "law");
-        options.put("order-by", "newest");
-        options.put("show-tags", "contributor");
-        options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
-        options.put("page", 1);
-        options.put("page-size", 20);
-        options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -389,14 +312,8 @@ public class SplashActivity extends AppCompatActivity {
         });
 
         // LIFESTYLE
-        options.clear();
         options.put("section", "lifeandstyle");
-        options.put("order-by", "newest");
-        options.put("show-tags", "contributor");
-        options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
-        options.put("page", 1);
-        options.put("page-size", 20);
-        options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -413,14 +330,8 @@ public class SplashActivity extends AppCompatActivity {
         });
 
         // MEDIA
-        options.clear();
         options.put("section", "media");
-        options.put("order-by", "newest");
-        options.put("show-tags", "contributor");
-        options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
-        options.put("page", 1);
-        options.put("page-size", 20);
-        options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -437,14 +348,8 @@ public class SplashActivity extends AppCompatActivity {
         });
 
         // MONEY
-        options.clear();
         options.put("section", "money");
-        options.put("order-by", "newest");
-        options.put("show-tags", "contributor");
-        options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
-        options.put("page", 1);
-        options.put("page-size", 20);
-        options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -461,14 +366,8 @@ public class SplashActivity extends AppCompatActivity {
         });
 
         // MUSIC
-        options.clear();
         options.put("section", "music");
-        options.put("order-by", "newest");
-        options.put("show-tags", "contributor");
-        options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
-        options.put("page", 1);
-        options.put("page-size", 20);
-        options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -485,14 +384,8 @@ public class SplashActivity extends AppCompatActivity {
         });
 
         // POLITICS
-        options.clear();
         options.put("section", "politics");
-        options.put("order-by", "newest");
-        options.put("show-tags", "contributor");
-        options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
-        options.put("page", 1);
-        options.put("page-size", 20);
-        options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -509,14 +402,8 @@ public class SplashActivity extends AppCompatActivity {
         });
 
         // SCIENCE
-        options.clear();
         options.put("section", "science");
-        options.put("order-by", "newest");
-        options.put("show-tags", "contributor");
-        options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
-        options.put("page", 1);
-        options.put("page-size", 20);
-        options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -533,14 +420,8 @@ public class SplashActivity extends AppCompatActivity {
         });
 
         // SOCIETY
-        options.clear();
         options.put("section", "society");
-        options.put("order-by", "newest");
-        options.put("show-tags", "contributor");
-        options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
-        options.put("page", 1);
-        options.put("page-size", 20);
-        options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -557,14 +438,8 @@ public class SplashActivity extends AppCompatActivity {
         });
 
         // SPORT
-        options.clear();
         options.put("section", "sport");
-        options.put("order-by", "newest");
-        options.put("show-tags", "contributor");
-        options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
-        options.put("page", 1);
-        options.put("page-size", 20);
-        options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -581,14 +456,8 @@ public class SplashActivity extends AppCompatActivity {
         });
 
         // TECHNOLOGY
-        options.clear();
         options.put("section", "technology");
-        options.put("order-by", "newest");
-        options.put("show-tags", "contributor");
-        options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
-        options.put("page", 1);
-        options.put("page-size", 20);
-        options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -605,14 +474,8 @@ public class SplashActivity extends AppCompatActivity {
         });
 
         // TRAVEL
-        options.clear();
         options.put("section", "travel");
-        options.put("order-by", "newest");
-        options.put("show-tags", "contributor");
-        options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
-        options.put("page", 1);
-        options.put("page-size", 20);
-        options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -629,14 +492,8 @@ public class SplashActivity extends AppCompatActivity {
         });
 
         // TV & RADIO
-        options.clear();
         options.put("section", "tv-and-radio");
-        options.put("order-by", "newest");
-        options.put("show-tags", "contributor");
-        options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
-        options.put("page", 1);
-        options.put("page-size", 20);
-        options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
@@ -653,14 +510,8 @@ public class SplashActivity extends AppCompatActivity {
         });
 
         // WEATHER
-        options.clear();
         options.put("section", "weather");
-        options.put("order-by", "newest");
-        options.put("show-tags", "contributor");
-        options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
-        options.put("page", 1);
-        options.put("page-size", 20);
-        options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {

@@ -36,7 +36,7 @@ public class ArtAndDesign extends Fragment implements SwipeRefreshLayout.OnRefre
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.wtf(TAG, "onCreate() has been instantiated");
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_art_design, container, false);
         return rootView;
     }
 

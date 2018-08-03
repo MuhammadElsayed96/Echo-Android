@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/group1">
+
+        <item
+            android:id="@+id/nav_au_news"
+            android:title="Australia Headlines" />
+
+        <item
+            android:id="@+id/nav_uk_news"
+            android:title="UK Headlines" />
+
+        <item
+            android:id="@+id/nav_us_news"
+            android:title="US Headlines" />
+
+        <item
+            android:id="@+id/nav_news"
+            android:title="International" />
+
+        <item
+            android:id="@+id/nav_art_design"
+            android:title="Art &amp; Design" />
+
+        <item
+            android:id="@+id/nav_books"
+            android:title="Books" />
+
+        <item
+            android:id="@+id/nav_business"
+            android:title="Business"
+            />
+
+        <item
+            android:id="@+id/nav_culture"
+            android:title="Culture" />
+
+        <item
+            android:id="@+id/nav_education"
+            android:title="Education" />
+
+        <item
+            android:id="@+id/nav_environment"
+            android:title="Environment" />
+
+        <item
+            android:id="@+id/nav_fashion"
+            android:title="Fashion" />
+
+        <item
+            android:id="@+id/nav_film"
+            android:title="Film"
+            />
+
+        <item
+            android:id="@+id/nav_football"
+            android:title="Football" />
+
+        <item
+            android:id="@+id/nav_law"
+            android:title="Law" />
+
+        <item
+            android:id="@+id/nav_lifestyle"
+            android:title="Lifestyle" />
+
+        <item
+            android:id="@+id/nav_media"
+            android:title="Media" />
+
+        <item
+            android:id="@+id/nav_money"
+            android:title="Money" />
+
+        <item
+            android:id="@+id/nav_music"
+            android:title="Music" />
+
+        <item
+            android:id="@+id/nav_politics"
+            android:title="Politics" />
+
+        <item
+            android:id="@+id/nav_science"
+            android:title="Science" />
+
+        <item
+            android:id="@+id/nav_society"
+            android:title="Society" />
+
+        <item
+            android:id="@+id/nav_sport"
+            android:title="Sport" />
+
+        <item
+            android:id="@+id/nav_technology"
+            android:title="Technology" />
+
+        <item
+            android:id="@+id/nav_travel"
+            android:title="Travel" />
+
+        <item
+            android:id="@+id/nav_tv_radio"
+            android:title="TV &amp; Radio" />
+
+        <item
+            android:id="@+id/nav_weather"
+            android:title="Weather" />
+
+    </group>
+
+</menu>

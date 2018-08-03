@@ -35,7 +35,7 @@ public class Travel extends Fragment implements SwipeRefreshLayout.OnRefreshList
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.wtf(TAG, "onCreateView() has been instantiated");
-        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_travel, container, false);
         return rootView;
     }
 
