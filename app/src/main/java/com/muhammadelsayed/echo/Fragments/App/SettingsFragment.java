@@ -12,10 +12,6 @@ import com.muhammadelsayed.echo.R;
 public class SettingsFragment extends Fragment {
     private static final String TAG = "SettingsFragment";
 
-    public SettingsFragment() {
-        // Required empty public constructor
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,4 +29,14 @@ public class SettingsFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_settings, container, false);
     }
+
+    public SettingsFragment() {
+        // Required empty public constructor
+    }
+
+    public static SettingsFragment settingsFragmentInstance(){
+        return new SettingsFragment();
+    }
+
+
 }

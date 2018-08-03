@@ -23,6 +23,9 @@ public class SearchFragment extends Fragment {
         if (getArguments() != null) {
         }
     }
+    public static SearchFragment searchFragmentInstance(){
+        return new SearchFragment();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

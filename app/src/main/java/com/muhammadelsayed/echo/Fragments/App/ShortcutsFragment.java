@@ -30,6 +30,10 @@ public class ShortcutsFragment extends Fragment {
         }
     }
 
+    public static ShortcutsFragment shortcutsFragmentInstance(){
+        return new ShortcutsFragment();
+    }
+
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

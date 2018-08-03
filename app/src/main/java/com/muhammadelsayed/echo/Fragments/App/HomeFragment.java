@@ -30,6 +30,10 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
     }
 
+    public static HomeFragment homeFragmentInstance(){
+        return new HomeFragment();
+    }
+
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
