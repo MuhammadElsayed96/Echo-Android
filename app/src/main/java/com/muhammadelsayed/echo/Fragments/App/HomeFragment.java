@@ -48,10 +48,8 @@ import com.muhammadelsayed.echo.R;
 public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private static final String TAG = "HomeFragment";
     private DrawerLayout mDrawerLayout;
-
-    public HomeFragment() {
-        // Required empty public constructor
-    }
+    FragmentManager fragmentManager;
+    Fragment fragment;
 
     public static HomeFragment homeFragmentInstance() {
         return new HomeFragment();
@@ -61,14 +59,11 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.wtf(TAG, "onCreate() has been instantiated");
-        if (getArguments() != null) {
-        }
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.wtf(TAG, "onCreateView() has been instantiated");
-        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         Toolbar toolbar = rootView.findViewById(R.id.toolbar);
@@ -81,13 +76,15 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         mDrawerLayout.setDrawerListener(toggle);
         toggle.syncState();
 
-        FragmentManager fragmentManager = getChildFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, new AustraliaHeadlines()).commit();
-        navDrawer.setCheckedItem(R.id.nav_news);
-        getActivity().setTitle(getResources().getString(R.string.international_headlines));
+        fragmentManager = getChildFragmentManager();
+        if (fragment == null) {
+            fragment = new InternationalHeadlines();
+            getActivity().setTitle(getResources().getString(R.string.international_headlines));
+            navDrawer.setCheckedItem(R.id.nav_news);
+        }
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
         setupDrawerContent(navDrawer);
-
         return rootView;
     }
 
@@ -103,7 +100,10 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     }
 
     public void selectDrawerItem(MenuItem menuItem) {
-        Fragment fragment;
+        menuItem.setChecked(true);
+        getActivity().setTitle(menuItem.getTitle());
+        mDrawerLayout.closeDrawers();
+
         switch (menuItem.getItemId()) {
             case R.id.nav_au_news:
                 fragment = new AustraliaHeadlines();
@@ -184,28 +184,18 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 fragment = new Weather();
                 break;
             default:
-                fragment = new AustraliaHeadlines();
+                fragment = new InternationalHeadlines();
         }
-
-        FragmentManager fragmentManager = getChildFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-
-        menuItem.setChecked(true);
-
-        getActivity().setTitle(menuItem.getTitle());
-        mDrawerLayout.closeDrawers();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        // The action bar home/up action should open or close the drawer.
         switch (item.getItemId()) {
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
