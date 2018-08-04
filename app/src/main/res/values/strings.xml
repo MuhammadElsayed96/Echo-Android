@@ -56,4 +56,6 @@
     <string name="weather">Weather</string>
     <string name="the_guardian_echo">The Guardian Echo</string>
     <string name="the_guardian">The Guardian</string>
+    <string name="no_results">No Results!</string>
+    <string name="search_headlines">Search Headlines</string>
 </resources>

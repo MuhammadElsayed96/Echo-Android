@@ -6,7 +6,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.App.SearchFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <!-- Top Tabs Layout -->
     <RelativeLayout
         android:id="@+id/relativeTopTab"
@@ -17,18 +16,54 @@
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <!--<EditText-->
+            <!--android:id="@+id/search_view"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="10dp"-->
+            <!--android:layout_marginEnd="15dp"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:layout_marginRight="15dp"-->
+            <!--android:layout_marginStart="15dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:drawableLeft="@drawable/ic_search_black_24dp"-->
+            <!--android:drawableStart="@drawable/ic_search_black_24dp"-->
+            <!--android:hint="@string/search_headlines"-->
+            <!--android:imeOptions="actionSearch"-->
+            <!--android:inputType="text" />-->
             <android.support.v7.widget.SearchView
+                android:id="@+id/search_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:queryHint="Search Headlines"
-                app:iconifiedByDefault="false"
-                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
+                android:layout_marginEnd="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_marginEnd="15dp">
-            </android.support.v7.widget.SearchView>
+                android:layout_marginTop="10dp"
+                app:iconifiedByDefault="false"
+                app:queryHint="Search Headlines" />
         </android.support.design.widget.AppBarLayout>
 
     </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/search_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/relativeTopTab"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/white"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/no_results"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="@string/no_results"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="24sp"
+        android:visibility="gone" />
 
 </RelativeLayout>
