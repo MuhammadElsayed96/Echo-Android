@@ -30,6 +30,7 @@ import com.muhammadelsayed.echo.Fragments.App.HomeFragment;
 import com.muhammadelsayed.echo.Fragments.App.SearchFragment;
 import com.muhammadelsayed.echo.Fragments.App.SettingsFragment;
 import com.muhammadelsayed.echo.Fragments.App.ShortcutsFragment;
+import com.thefinestartist.Base;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -112,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate(): has been instantiated");
-
+        Base.initialize(this);
         mBottomNavigation = findViewById(R.id.bottom_navigation_view);
         mBottomNavigation.getMenu().getItem(0).setChecked(true);
         mBottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);

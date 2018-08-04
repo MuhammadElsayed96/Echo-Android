@@ -1,6 +1,7 @@
 package com.muhammadelsayed.echo.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -31,7 +32,9 @@ import java.util.Locale;
 
 import me.grantland.widget.AutofitTextView;
 
+import static android.content.Intent.createChooser;
 import static com.thefinestartist.utils.content.ContextUtil.getString;
+import static com.thefinestartist.utils.content.ContextUtil.startActivity;
 
 public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final String TAG = NewsAdapter.class.getSimpleName();
@@ -138,6 +141,16 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }
         });
         normalViewHolder.mTitleText.setText(article.getWebTitle());
+        normalViewHolder.mShareImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sharingIntent.setType("text/plain");
+                String shareBody = "Share URL to...";
+                sharingIntent.putExtra(Intent.EXTRA_TEXT, article.getWebUrl());
+                startActivity(createChooser(sharingIntent, shareBody));
+            }
+        });
         if (article.getFields().getThumbnail() != null)
             Picasso.get()
                     .load(article.getFields().getThumbnail())
