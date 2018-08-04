@@ -41,7 +41,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public long saveArticle (Article article) {
+    public long saveArticle(Article article) {
         Log.wtf(TAG, "saveArticle() has been instantiated");
 
         SQLiteDatabase db = this.getWritableDatabase();
@@ -69,7 +69,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return id;
     }
 
-    public long addArticleToHistory (Article article) {
+    public long addArticleToHistory(Article article) {
         Log.wtf(TAG, "saveArticle() has been instantiated");
         if (isArticleAlreadyHistory(article.getId()))
             return -1;
@@ -105,21 +105,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(countQuery, null);
 
         int count = cursor.getCount();
-        if (count > 0)
-            return true;
-        return false;
+        return count > 0;
     }
 
-    public boolean isArticleAlreadyHistory(String id) {
+    private boolean isArticleAlreadyHistory(String id) {
         Log.wtf(TAG, "articleExists() has been instantiated");
         String countQuery = "SELECT * FROM " + ArticleModel.HISTORY_TABLE_NAME + " WHERE " + ArticleModel.COLUMN_ARTICLE_ID + " == '" + id + "'";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
 
         int count = cursor.getCount();
-        if (count > 0)
-            return true;
-        return false;
+        return count > 0;
     }
 
     public ArticleModel getSavedArticle(String id) {
@@ -127,7 +123,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(ArticleModel.SAVED_TABLE_NAME,
-                new String[] {ArticleModel.COLUMN_ID,
+                new String[]{ArticleModel.COLUMN_ID,
                         ArticleModel.COLUMN_ARTICLE_ID,
                         ArticleModel.COLUMN_TYPE,
                         ArticleModel.COLUMN_SECTION_ID,
@@ -138,7 +134,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         ArticleModel.COLUMN_THUMBNAIL,
                         ArticleModel.COLUMN_AUTHOR},
                 ArticleModel.COLUMN_ARTICLE_ID + "=?",
-                new String[] {String.valueOf(id)},
+                new String[]{String.valueOf(id)},
                 null,
                 null,
                 null);
@@ -156,7 +152,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 cursor.getString(cursor.getColumnIndex(ArticleModel.COLUMN_WEB_URL)),
                 cursor.getString(cursor.getColumnIndex(ArticleModel.COLUMN_THUMBNAIL)),
                 cursor.getString(cursor.getColumnIndex(ArticleModel.COLUMN_AUTHOR))
-                        );
+        );
         cursor.close();
         return article;
     }
@@ -279,7 +275,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(ArticleModel.SAVED_TABLE_NAME,
                 ArticleModel.COLUMN_ARTICLE_ID + " = ?",
-                new String[] {String.valueOf(article.getId())});
+                new String[]{String.valueOf(article.getId())});
 
         db.close();
     }
@@ -291,7 +287,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(ArticleModel.HISTORY_TABLE_NAME,
                 ArticleModel.COLUMN_ARTICLE_ID + " = ?",
-                new String[] {String.valueOf(article.getId())});
+                new String[]{String.valueOf(article.getId())});
 
         db.close();
     }

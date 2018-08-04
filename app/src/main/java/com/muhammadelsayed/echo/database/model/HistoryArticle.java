@@ -1,30 +1,18 @@
 package com.muhammadelsayed.echo.database.model;
 
 public class HistoryArticle {
-    public static final String TABLE_NAME = "saved";
+    private static final String TABLE_NAME = "saved";
 
-    public static final String COLUMN_ID = "id";
-    public static final String COLUMN_ARTICLE_ID = "article_id";
-    public static final String COLUMN_TYPE = "type";
-    public static final String COLUMN_SECTION_ID = "section_id";
-    public static final String COLUMN_SECTION_NAME = "section_name";
-    public static final String COLUMN_DATE = "date";
-    public static final String COLUMN_TITLE = "title";
-    public static final String COLUMN_WEB_URL = "url";
-    public static final String COLUMN_THUMBNAIL = "thumbnail";
-    public static final String COLUMN_AUTHOR = "author";
-
-    private String id;
-    private String articleId;
-    private String type;
-    private String sectionId;
-    private String sectionName;
-    private String date;
-    private String title;
-    private String webUrl;
-    private String thumbnail;
-    private String author;
-
+    private static final String COLUMN_ID = "id";
+    private static final String COLUMN_ARTICLE_ID = "article_id";
+    private static final String COLUMN_TYPE = "type";
+    private static final String COLUMN_SECTION_ID = "section_id";
+    private static final String COLUMN_SECTION_NAME = "section_name";
+    private static final String COLUMN_DATE = "date";
+    private static final String COLUMN_TITLE = "title";
+    private static final String COLUMN_WEB_URL = "url";
+    private static final String COLUMN_THUMBNAIL = "thumbnail";
+    private static final String COLUMN_AUTHOR = "author";
     // Create table SQL query
     public static final String CREATE_TABLE =
             "CREATE TABLE " + TABLE_NAME + "("
@@ -39,9 +27,18 @@ public class HistoryArticle {
                     + COLUMN_AUTHOR + " TEXT,"
                     + COLUMN_DATE + " DATETIME DEFAULT CURRENT_TIMESTAMP"
                     + ")";
-
     public static final String DROP_TABLE =
             "DROP TABLE IF EXISTS " + TABLE_NAME;
+    private String id;
+    private String articleId;
+    private String type;
+    private String sectionId;
+    private String sectionName;
+    private String date;
+    private String title;
+    private String webUrl;
+    private String thumbnail;
+    private String author;
 
     public HistoryArticle() {
     }

@@ -59,5 +59,11 @@
     <string name="no_results">No Results!</string>
     <string name="no_saved_articles">No Saved Articles!</string>
     <string name="search_headlines">Search Headlines</string>
+    <string name="my_account">My Account</string>
     <string name="no_history_articles">No History Articles!</string>
+    <string name="filter_news">Filter News</string>
+    <string name="default_edition">Default Edition</string>
+    <string name="read_article_in">Read Article In</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="topics">TOPICS</string>
 </resources>

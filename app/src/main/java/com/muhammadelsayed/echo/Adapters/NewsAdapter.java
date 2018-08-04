@@ -51,6 +51,14 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         mNewsList = newsList;
     }
 
+    private static String formatTime(String tripTime) throws ParseException {
+        DateFormat formatter
+                = new SimpleDateFormat("MM/dd/yy 'at' h:mm a");
+        DateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH);
+        Date date = originalFormat.parse(tripTime);
+        return formatter.format(date);
+    }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -76,13 +84,19 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         final View itemViewNormal =
                 LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.normal_news_item, parent, false);
-        final NewsAdapterViewHolder mNormalViewHolder = new NewsAdapterViewHolder(itemViewNormal);
-        return mNormalViewHolder;
+        return new NewsAdapterViewHolder(itemViewNormal);
 //
 //            default:
 //                return null;
 //        }
     }
+
+//    @Override
+//    public int getItemViewType(int position) {
+//        Log.wtf(TAG, "getItemViewType(): has been instantiated");
+//        if (position == 0) return TYPE_FIRST_ITEM;
+//        return TYPE_ITEM;
+//    }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
@@ -118,25 +132,25 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         normalViewHolder.mBookmarkImage.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            //Change Image Resource
-            if (article.isBookmarked()) {
-                article.setBookmarked(UN_BOOKMARED);
+            @Override
+            public void onClick(View view) {
+                //Change Image Resource
+                if (article.isBookmarked()) {
+                    article.setBookmarked(UN_BOOKMARED);
 
-                db.deleteSavedArticle(article);
+                    db.deleteSavedArticle(article);
 
-                normalViewHolder.mBookmarkImage.setImageResource(R.drawable.ic_bookmark_border_black_24dp);
-                Toast.makeText(mContext, "Removed", Toast.LENGTH_SHORT).show();
+                    normalViewHolder.mBookmarkImage.setImageResource(R.drawable.ic_bookmark_border_black_24dp);
+                    Toast.makeText(mContext, "Removed", Toast.LENGTH_SHORT).show();
 
-            } else {
-                long id = db.saveArticle(article);
+                } else {
+                    long id = db.saveArticle(article);
 
-                Log.wtf(TAG, "onClick: SAVED = " + id);
+                    Log.wtf(TAG, "onClick: SAVED = " + id);
 
-                normalViewHolder.mBookmarkImage.setImageResource(R.drawable.ic_bookmark_black_24dp);
-                Toast.makeText(mContext, "Bookmarked", Toast.LENGTH_SHORT).show();
-            }
+                    normalViewHolder.mBookmarkImage.setImageResource(R.drawable.ic_bookmark_black_24dp);
+                    Toast.makeText(mContext, "Bookmarked", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
@@ -205,14 +219,6 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 //        }
     }
 
-//    @Override
-//    public int getItemViewType(int position) {
-//        Log.wtf(TAG, "getItemViewType(): has been instantiated");
-//        if (position == 0) return TYPE_FIRST_ITEM;
-//        return TYPE_ITEM;
-//    }
-
-
     @Override
     public int getItemCount() {
         return mNewsList.size();
@@ -256,13 +262,5 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             mTitleTextL = view.findViewById(R.id.large_title_text);
             mSourceNameL = view.findViewById(R.id.large_news_source_name);
         }
-    }
-
-    private static String formatTime(String tripTime) throws ParseException {
-        DateFormat formatter
-                = new SimpleDateFormat("MM/dd/yy 'at' h:mm a");
-        DateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH);
-        Date date = originalFormat.parse(tripTime);
-        return formatter.format(date);
     }
 }

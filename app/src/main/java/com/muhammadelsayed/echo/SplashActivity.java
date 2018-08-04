@@ -50,6 +50,7 @@ public class SplashActivity extends AppCompatActivity {
             f25 = false, f26 = false, f28 = false;
 
     private static List<Article> filterArticles(List<Article> articles) {
+        Log.wtf(TAG, "filterArticles() has been instantiated");
         List<Article> filtered = new ArrayList<>();
         for (Article article : articles) {
             if (!TextUtils.isEmpty(article.getFields().getThumbnail()))
@@ -57,7 +58,6 @@ public class SplashActivity extends AppCompatActivity {
         }
         return filtered;
     }
-
 
     private void moveToMain() {
         Log.wtf(TAG, "moveToMain() has been instantiated");
