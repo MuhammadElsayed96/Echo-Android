@@ -35,6 +35,8 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
@@ -49,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int INT_FRAGMENT_SETTINGS_POS = 3;
     public BottomNavigationView mBottomNavigation;
     private List<Fragment> mFragmentsList = new ArrayList<>(INT_FRAGMENTS_COUNT);
+    private SweetAlertDialog exit;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -152,5 +155,29 @@ public class MainActivity extends AppCompatActivity {
                 .beginTransaction()
                 .replace(R.id.frame_fragment_holder, mFragmentsList.get(pos), tag)
                 .commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Log.wtf(TAG, "onBackPressed() has been instantiated");
+        if (exit != null)
+            exit = null;
+        exit = new SweetAlertDialog(MainActivity.this, SweetAlertDialog.WARNING_TYPE);
+        exit.setCancelable(false);
+        exit.setTitleText("Exit app")
+                .setContentText("Are you sure you want close the app?")
+                .setConfirmText("YES")
+                .setCancelText("CANCEL")
+                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        sweetAlertDialog.dismissWithAnimation();
+                    }
+                }).setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+            @Override
+            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                finish();
+            }
+        }).show();
     }
 }

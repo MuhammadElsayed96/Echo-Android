@@ -65,5 +65,7 @@ dependencies {
     // FinestWebView-Android
     implementation 'com.thefinestartist:finestwebview:1.2.7'
 
+    // Sweet Alert Dialog
+    implementation 'com.github.f0ris.sweetalert:library:1.5.1'
 }
 apply plugin: 'com.google.gms.google-services'

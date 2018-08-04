@@ -203,4 +203,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     public void onRefresh() {
         Log.wtf(TAG, "onRefresh() has been instantiated");
     }
+
+
 }
