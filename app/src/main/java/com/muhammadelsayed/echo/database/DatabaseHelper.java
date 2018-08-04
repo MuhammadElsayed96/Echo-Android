@@ -7,9 +7,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.muhammadelsayed.echo.database.model.ArticleModel;
 import com.muhammadelsayed.echo.model.Article;
+import com.muhammadelsayed.echo.model.Fields;
+import com.muhammadelsayed.echo.model.Tag;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -24,44 +28,79 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         Log.wtf(TAG, "onCreate() has been instantiated");
-        sqLiteDatabase.execSQL(SavedArticle.CREATE_TABLE);
+        sqLiteDatabase.execSQL(ArticleModel.CREATE_SAVED_TABLE);
+        sqLiteDatabase.execSQL(ArticleModel.CREATE_HISTORY_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         Log.wtf(TAG, "onUpgrade() has been instantiated");
 
-        sqLiteDatabase.execSQL(SavedArticle.DROP_TABLE);
+        sqLiteDatabase.execSQL(ArticleModel.DROP_SAVED_TABLE);
+        sqLiteDatabase.execSQL(ArticleModel.DROP_HISTORY_TABLE);
         onCreate(sqLiteDatabase);
     }
 
     public long saveArticle (Article article) {
         Log.wtf(TAG, "saveArticle() has been instantiated");
-        if (articleExists(article.getId()))
-            return -1;
+
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(SavedArticle.COLUMN_ARTICLE_ID, article.getId());
-        values.put(SavedArticle.COLUMN_TYPE, article.getType());
-        values.put(SavedArticle.COLUMN_SECTION_ID, article.getSectionId());
-        values.put(SavedArticle.COLUMN_SECTION_NAME, article.getSectionName());
-        values.put(SavedArticle.COLUMN_DATE, article.getWebPublicationDate());
-        values.put(SavedArticle.COLUMN_TITLE, article.getWebTitle());
-        values.put(SavedArticle.COLUMN_WEB_URL, article.getWebUrl());
-        values.put(SavedArticle.COLUMN_THUMBNAIL, article.getFields().getThumbnail());
-        values.put(SavedArticle.COLUMN_AUTHOR, article.getTags()[0].getWebTitle());
+        values.put(ArticleModel.COLUMN_ARTICLE_ID, article.getId());
+        values.put(ArticleModel.COLUMN_TYPE, article.getType());
+        values.put(ArticleModel.COLUMN_SECTION_ID, article.getSectionId());
+        values.put(ArticleModel.COLUMN_SECTION_NAME, article.getSectionName());
+        values.put(ArticleModel.COLUMN_DATE, article.getWebPublicationDate());
+        values.put(ArticleModel.COLUMN_TITLE, article.getWebTitle());
+        values.put(ArticleModel.COLUMN_WEB_URL, article.getWebUrl());
+        values.put(ArticleModel.COLUMN_THUMBNAIL, article.getFields().getThumbnail());
+        if (article.getTags().length <= 0) {
+            Tag tag = new Tag();
+            tag.setWebTitle("Anonymous");
+            article.setTags(new Tag[]{tag});
+        }
+        values.put(ArticleModel.COLUMN_AUTHOR, article.getTags()[0].getWebTitle());
 
-        long id = db.insert(SavedArticle.TABLE_NAME, null, values);
+        long id = db.insert(ArticleModel.SAVED_TABLE_NAME, null, values);
 
         db.close();
 
         return id;
     }
 
-    public boolean articleExists(String id) {
+    public long addArticleToHistory (Article article) {
+        Log.wtf(TAG, "saveArticle() has been instantiated");
+        if (isArticleAlreadyHistory(article.getId()))
+            return -1;
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(ArticleModel.COLUMN_ARTICLE_ID, article.getId());
+        values.put(ArticleModel.COLUMN_TYPE, article.getType());
+        values.put(ArticleModel.COLUMN_SECTION_ID, article.getSectionId());
+        values.put(ArticleModel.COLUMN_SECTION_NAME, article.getSectionName());
+        values.put(ArticleModel.COLUMN_DATE, article.getWebPublicationDate());
+        values.put(ArticleModel.COLUMN_TITLE, article.getWebTitle());
+        values.put(ArticleModel.COLUMN_WEB_URL, article.getWebUrl());
+        values.put(ArticleModel.COLUMN_THUMBNAIL, article.getFields().getThumbnail());
+        if (article.getTags().length <= 0) {
+            Tag tag = new Tag();
+            tag.setWebTitle("Anonymous");
+            article.setTags(new Tag[]{tag});
+        }
+        values.put(ArticleModel.COLUMN_AUTHOR, article.getTags()[0].getWebTitle());
+
+        long id = db.insert(ArticleModel.HISTORY_TABLE_NAME, null, values);
+
+        db.close();
+
+        return id;
+    }
+
+    public boolean isArticleAlreadySaved(String id) {
         Log.wtf(TAG, "articleExists() has been instantiated");
-        String countQuery = "SELECT * FROM " + SavedArticle.TABLE_NAME + " WHERE " + SavedArticle.COLUMN_ARTICLE_ID + " == '" + id + "'";
+        String countQuery = "SELECT * FROM " + ArticleModel.SAVED_TABLE_NAME + " WHERE " + ArticleModel.COLUMN_ARTICLE_ID + " == '" + id + "'";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
 
@@ -69,25 +108,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (count > 0)
             return true;
         return false;
-
     }
 
-    public SavedArticle getArticle(String id) {
+    public boolean isArticleAlreadyHistory(String id) {
+        Log.wtf(TAG, "articleExists() has been instantiated");
+        String countQuery = "SELECT * FROM " + ArticleModel.HISTORY_TABLE_NAME + " WHERE " + ArticleModel.COLUMN_ARTICLE_ID + " == '" + id + "'";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+
+        int count = cursor.getCount();
+        if (count > 0)
+            return true;
+        return false;
+    }
+
+    public ArticleModel getSavedArticle(String id) {
         Log.wtf(TAG, "getArticle() has been instantiated");
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(SavedArticle.TABLE_NAME,
-                new String[] {SavedArticle.COLUMN_ID,
-                        SavedArticle.COLUMN_ARTICLE_ID,
-                        SavedArticle.COLUMN_TYPE,
-                        SavedArticle.COLUMN_SECTION_ID,
-                        SavedArticle.COLUMN_SECTION_NAME,
-                        SavedArticle.COLUMN_DATE,
-                        SavedArticle.COLUMN_TITLE,
-                        SavedArticle.COLUMN_WEB_URL,
-                        SavedArticle.COLUMN_THUMBNAIL,
-                        SavedArticle.COLUMN_AUTHOR},
-                SavedArticle.COLUMN_ARTICLE_ID + "=?",
+        Cursor cursor = db.query(ArticleModel.SAVED_TABLE_NAME,
+                new String[] {ArticleModel.COLUMN_ID,
+                        ArticleModel.COLUMN_ARTICLE_ID,
+                        ArticleModel.COLUMN_TYPE,
+                        ArticleModel.COLUMN_SECTION_ID,
+                        ArticleModel.COLUMN_SECTION_NAME,
+                        ArticleModel.COLUMN_DATE,
+                        ArticleModel.COLUMN_TITLE,
+                        ArticleModel.COLUMN_WEB_URL,
+                        ArticleModel.COLUMN_THUMBNAIL,
+                        ArticleModel.COLUMN_AUTHOR},
+                ArticleModel.COLUMN_ARTICLE_ID + "=?",
                 new String[] {String.valueOf(id)},
                 null,
                 null,
@@ -96,27 +146,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor != null)
             cursor.moveToFirst();
 
-        SavedArticle article = new SavedArticle(
-                cursor.getString(cursor.getColumnIndex(SavedArticle.COLUMN_ARTICLE_ID)),
-                cursor.getString(cursor.getColumnIndex(SavedArticle.COLUMN_TYPE)),
-                cursor.getString(cursor.getColumnIndex(SavedArticle.COLUMN_SECTION_ID)),
-                cursor.getString(cursor.getColumnIndex(SavedArticle.COLUMN_SECTION_NAME)),
-                cursor.getString(cursor.getColumnIndex(SavedArticle.COLUMN_DATE)),
-                cursor.getString(cursor.getColumnIndex(SavedArticle.COLUMN_TITLE)),
-                cursor.getString(cursor.getColumnIndex(SavedArticle.COLUMN_WEB_URL)),
-                cursor.getString(cursor.getColumnIndex(SavedArticle.COLUMN_THUMBNAIL)),
-                cursor.getString(cursor.getColumnIndex(SavedArticle.COLUMN_AUTHOR))
+        ArticleModel article = new ArticleModel(
+                cursor.getString(cursor.getColumnIndex(ArticleModel.COLUMN_ARTICLE_ID)),
+                cursor.getString(cursor.getColumnIndex(ArticleModel.COLUMN_TYPE)),
+                cursor.getString(cursor.getColumnIndex(ArticleModel.COLUMN_SECTION_ID)),
+                cursor.getString(cursor.getColumnIndex(ArticleModel.COLUMN_SECTION_NAME)),
+                cursor.getString(cursor.getColumnIndex(ArticleModel.COLUMN_DATE)),
+                cursor.getString(cursor.getColumnIndex(ArticleModel.COLUMN_TITLE)),
+                cursor.getString(cursor.getColumnIndex(ArticleModel.COLUMN_WEB_URL)),
+                cursor.getString(cursor.getColumnIndex(ArticleModel.COLUMN_THUMBNAIL)),
+                cursor.getString(cursor.getColumnIndex(ArticleModel.COLUMN_AUTHOR))
                         );
         cursor.close();
         return article;
     }
 
-    public List<SavedArticle> getAllArticles() {
-        Log.wtf(TAG, "getAllArticles() has been instantiated");
+    public List<Article> getAllSavedArticles() {
+        Log.wtf(TAG, "getAllSavedArticles() has been instantiated");
 
-        List<SavedArticle> articles = new ArrayList<>();
+        List<Article> articles = new ArrayList<>();
 
-        String selectQuery = "SELECT * FROM " + SavedArticle.TABLE_NAME;
+        String selectQuery = "SELECT * FROM " + ArticleModel.SAVED_TABLE_NAME;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -124,17 +174,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
 
-                SavedArticle article = new SavedArticle(
-                        cursor.getString(cursor.getColumnIndex(SavedArticle.COLUMN_ARTICLE_ID)),
-                        cursor.getString(cursor.getColumnIndex(SavedArticle.COLUMN_TYPE)),
-                        cursor.getString(cursor.getColumnIndex(SavedArticle.COLUMN_SECTION_ID)),
-                        cursor.getString(cursor.getColumnIndex(SavedArticle.COLUMN_SECTION_NAME)),
-                        cursor.getString(cursor.getColumnIndex(SavedArticle.COLUMN_DATE)),
-                        cursor.getString(cursor.getColumnIndex(SavedArticle.COLUMN_TITLE)),
-                        cursor.getString(cursor.getColumnIndex(SavedArticle.COLUMN_WEB_URL)),
-                        cursor.getString(cursor.getColumnIndex(SavedArticle.COLUMN_THUMBNAIL)),
-                        cursor.getString(cursor.getColumnIndex(SavedArticle.COLUMN_AUTHOR))
-                );
+                Article article = new Article();
+                article.setId(cursor.getString(cursor.getColumnIndex(ArticleModel.COLUMN_ARTICLE_ID)));
+                article.setType(cursor.getString(cursor.getColumnIndex(ArticleModel.COLUMN_TYPE)));
+                article.setSectionId(cursor.getString(cursor.getColumnIndex(ArticleModel.COLUMN_SECTION_ID)));
+                article.setSectionName(cursor.getString(cursor.getColumnIndex(ArticleModel.COLUMN_SECTION_NAME)));
+                article.setWebPublicationDate(cursor.getString(cursor.getColumnIndex(ArticleModel.COLUMN_DATE)));
+                article.setWebTitle(cursor.getString(cursor.getColumnIndex(ArticleModel.COLUMN_TITLE)));
+                article.setWebUrl(cursor.getString(cursor.getColumnIndex(ArticleModel.COLUMN_WEB_URL)));
+
+                Fields field = new Fields();
+                field.setThumbnail(cursor.getString(cursor.getColumnIndex(ArticleModel.COLUMN_THUMBNAIL)));
+                article.setFields(field);
+
+                Tag tag = new Tag();
+                tag.setWebTitle(cursor.getString(cursor.getColumnIndex(ArticleModel.COLUMN_AUTHOR)));
+                article.setTags(new Tag[]{tag});
 
                 articles.add(article);
 
@@ -143,13 +198,71 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.close();
 
+        Collections.reverse(articles);
+
+        return articles;
+    }
+
+    public List<Article> getAllHistoryArticles() {
+        Log.wtf(TAG, "getAllSavedArticles() has been instantiated");
+
+        List<Article> articles = new ArrayList<>();
+
+        String selectQuery = "SELECT * FROM " + ArticleModel.HISTORY_TABLE_NAME;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+
+                Article article = new Article();
+                article.setId(cursor.getString(cursor.getColumnIndex(ArticleModel.COLUMN_ARTICLE_ID)));
+                article.setType(cursor.getString(cursor.getColumnIndex(ArticleModel.COLUMN_TYPE)));
+                article.setSectionId(cursor.getString(cursor.getColumnIndex(ArticleModel.COLUMN_SECTION_ID)));
+                article.setSectionName(cursor.getString(cursor.getColumnIndex(ArticleModel.COLUMN_SECTION_NAME)));
+                article.setWebPublicationDate(cursor.getString(cursor.getColumnIndex(ArticleModel.COLUMN_DATE)));
+                article.setWebTitle(cursor.getString(cursor.getColumnIndex(ArticleModel.COLUMN_TITLE)));
+                article.setWebUrl(cursor.getString(cursor.getColumnIndex(ArticleModel.COLUMN_WEB_URL)));
+
+                Fields field = new Fields();
+                field.setThumbnail(cursor.getString(cursor.getColumnIndex(ArticleModel.COLUMN_THUMBNAIL)));
+                article.setFields(field);
+
+                Tag tag = new Tag();
+                tag.setWebTitle(cursor.getString(cursor.getColumnIndex(ArticleModel.COLUMN_AUTHOR)));
+                article.setTags(new Tag[]{tag});
+
+                articles.add(article);
+
+            } while (cursor.moveToNext());
+        }
+
+        db.close();
+
+        Collections.reverse(articles);
+
         return articles;
     }
 
     public int getSavedArticlesCount() {
         Log.wtf(TAG, "getSavedArticlesCount() has been instantiated");
 
-        String countQuery = "SELECT * FROM " + SavedArticle.TABLE_NAME;
+        String countQuery = "SELECT * FROM " + ArticleModel.SAVED_TABLE_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+
+        int count = cursor.getCount();
+
+        cursor.close();
+
+        return count;
+    }
+
+    public int getHistoryArticlesCount() {
+        Log.wtf(TAG, "getSavedArticlesCount() has been instantiated");
+
+        String countQuery = "SELECT * FROM " + ArticleModel.HISTORY_TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
 
@@ -164,8 +277,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.wtf(TAG, "deleteSavedArticle() has been instantiated");
 
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(SavedArticle.TABLE_NAME,
-                SavedArticle.COLUMN_ARTICLE_ID + " = ?",
+        db.delete(ArticleModel.SAVED_TABLE_NAME,
+                ArticleModel.COLUMN_ARTICLE_ID + " = ?",
+                new String[] {String.valueOf(article.getId())});
+
+        db.close();
+    }
+
+
+    public void deleteHistoryArticle(Article article) {
+        Log.wtf(TAG, "deleteSavedArticle() has been instantiated");
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(ArticleModel.HISTORY_TABLE_NAME,
+                ArticleModel.COLUMN_ARTICLE_ID + " = ?",
                 new String[] {String.valueOf(article.getId())});
 
         db.close();

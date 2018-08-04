@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.muhammadelsayed.echo.R;
 import com.muhammadelsayed.echo.database.DatabaseHelper;
 import com.muhammadelsayed.echo.model.Article;
+import com.muhammadelsayed.echo.model.Tag;
 import com.squareup.picasso.Picasso;
 import com.thefinestartist.finestwebview.FinestWebView;
 
@@ -105,28 +106,35 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         final DatabaseHelper db = new DatabaseHelper(mContext);
 
+        if (db.isArticleAlreadySaved(article.getId())) {
+            article.setBookmarked(BOOKMARKED);
+            normalViewHolder.mBookmarkImage.setImageResource(R.drawable.ic_bookmark_black_24dp);
+        } else {
+            article.setBookmarked(UN_BOOKMARED);
+            normalViewHolder.mBookmarkImage.setImageResource(R.drawable.ic_bookmark_border_black_24dp);
+        }
+
         normalViewHolder.mBookmarkImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Change Image Resource
-                if (article.isBookmarked()) {
-                    article.setBookmarked(UN_BOOKMARED);
+        @Override
+        public void onClick(View view) {
+            //Change Image Resource
+            if (article.isBookmarked()) {
+                article.setBookmarked(UN_BOOKMARED);
 
-                    db.deleteSavedArticle(article);
+                db.deleteSavedArticle(article);
 
-                    normalViewHolder.mBookmarkImage.setImageResource(R.drawable.ic_bookmark_border_black_24dp);
-                    Toast.makeText(mContext, "Removed", Toast.LENGTH_SHORT).show();
+                normalViewHolder.mBookmarkImage.setImageResource(R.drawable.ic_bookmark_border_black_24dp);
+                Toast.makeText(mContext, "Removed", Toast.LENGTH_SHORT).show();
 
-                } else {
-                    article.setBookmarked(BOOKMARKED);
-                    long id = db.saveArticle(article);
+            } else {
+                long id = db.saveArticle(article);
 
-                    Log.wtf(TAG, "onClick: SAVED = " + id);
+                Log.wtf(TAG, "onClick: SAVED = " + id);
 
-                    normalViewHolder.mBookmarkImage.setImageResource(R.drawable.ic_bookmark_black_24dp);
-                    Toast.makeText(mContext, "Bookmarked", Toast.LENGTH_SHORT).show();
-                }
-//
+                normalViewHolder.mBookmarkImage.setImageResource(R.drawable.ic_bookmark_black_24dp);
+                Toast.makeText(mContext, "Bookmarked", Toast.LENGTH_SHORT).show();
+            }
+
             }
         });
         normalViewHolder.mTitleText.setText(article.getWebTitle());
@@ -137,10 +145,12 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     .into(normalViewHolder.mNewsImage);
         else
             normalViewHolder.mNewsImage.setVisibility(View.GONE);
-        if (article.getTags().length > 0)
-            normalViewHolder.mAuthorName.setText(article.getTags()[0].getWebTitle());
-        else
-            normalViewHolder.mAuthorName.setText("Anonymous");
+        if (article.getTags().length <= 0) {
+            Tag tag = new Tag();
+            tag.setWebTitle("Anonymous");
+            article.setTags(new Tag[]{tag});
+        }
+        normalViewHolder.mAuthorName.setText(article.getTags()[0].getWebTitle());
         try {
             normalViewHolder.mTime.setText(formatTime(article.getWebPublicationDate()));
         } catch (ParseException e) {
@@ -173,6 +183,9 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         .setCustomAnimations(
                                 R.anim.slide_up, R.anim.hold, R.anim.hold, R.anim.slide_down)
                         .show(articleUrl);
+
+                long id = db.addArticleToHistory(article);
+                Log.d(TAG, "onClick: HISTORY = " + id);
             }
         });
 //                break;

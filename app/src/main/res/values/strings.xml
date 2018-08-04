@@ -57,5 +57,7 @@
     <string name="the_guardian_echo">The Guardian Echo</string>
     <string name="the_guardian">The Guardian</string>
     <string name="no_results">No Results!</string>
+    <string name="no_saved_articles">No Saved Articles!</string>
     <string name="search_headlines">Search Headlines</string>
+    <string name="no_history_articles">No History Articles!</string>
 </resources>

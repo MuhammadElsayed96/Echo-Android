@@ -58,7 +58,6 @@ public class SearchFragment extends Fragment {
         mSearchRecycler.setDrawingCacheEnabled(true);
         mSearchRecycler.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
         mSearchRecycler.setItemViewCacheSize(100);
-        mSearchView = rootView.findViewById(R.id.search_view);
         mNoResults = rootView.findViewById(R.id.no_results);
         mSearchView = rootView.findViewById(R.id.search_view);
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

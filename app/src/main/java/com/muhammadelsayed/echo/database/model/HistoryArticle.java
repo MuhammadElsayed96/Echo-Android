@@ -1,6 +1,6 @@
-package com.muhammadelsayed.echo.database;
+package com.muhammadelsayed.echo.database.model;
 
-public class SavedArticle {
+public class HistoryArticle {
     public static final String TABLE_NAME = "saved";
 
     public static final String COLUMN_ID = "id";
@@ -43,10 +43,10 @@ public class SavedArticle {
     public static final String DROP_TABLE =
             "DROP TABLE IF EXISTS " + TABLE_NAME;
 
-    public SavedArticle() {
+    public HistoryArticle() {
     }
 
-    public SavedArticle(String articleId, String type, String sectionId, String sectionName, String date, String title, String webUrl, String thumbnail, String author) {
+    public HistoryArticle(String articleId, String type, String sectionId, String sectionName, String date, String title, String webUrl, String thumbnail, String author) {
         this.articleId = articleId;
         this.type = type;
         this.sectionId = sectionId;
@@ -136,7 +136,7 @@ public class SavedArticle {
 
     @Override
     public String toString() {
-        return "SavedArticle{" +
+        return "ArticleModel{" +
                 "id='" + id + '\'' +
                 ", articleId='" + articleId + '\'' +
                 ", type='" + type + '\'' +
