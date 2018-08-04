@@ -124,4 +124,5 @@ public class ArtAndDesign extends Fragment implements SwipeRefreshLayout.OnRefre
         super.onStop();
         Log.wtf(TAG, "onStop() has been instantiated");
     }
+
 }

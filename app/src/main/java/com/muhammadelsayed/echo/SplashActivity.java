@@ -3,6 +3,7 @@ package com.muhammadelsayed.echo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.muhammadelsayed.echo.model.Article;
@@ -48,6 +49,28 @@ public class SplashActivity extends AppCompatActivity {
             f17 = false, f18 = false, f19 = false, f20 = false, f21 = false, f22 = false, f23 = false, f24 = false,
             f25 = false, f26 = false, f28 = false;
 
+    private static List<Article> filterArticles(List<Article> articles) {
+        List<Article> filtered = new ArrayList<>();
+        for (Article article : articles) {
+            if (!TextUtils.isEmpty(article.getFields().getThumbnail()))
+                filtered.add(article);
+        }
+        return filtered;
+    }
+
+
+    private void moveToMain() {
+        Log.wtf(TAG, "moveToMain() has been instantiated");
+        bool = f1 && f2 && f3 && f4 && f5 && f6 && f7 && f8 && f9 && f10
+                && f11 && f12 && f13 && f14 && f15 && f16 && f17 && f18 && f19 && f20
+                && f21 && f22 && f23 && f24 && f25 && f26 && f28;
+        if (bool) {
+            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +89,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Article> articles) {
                 Log.wtf(TAG, "onSuccess: BUSINESS = " + articles);
-                mBusinessArticleList = articles;
+                mBusinessArticleList = filterArticles(articles);
                 f1 = true;
                 moveToMain();
             }
@@ -83,7 +106,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Article> articles) {
                 Log.wtf(TAG, "onSuccess: CULTURE FAILED -> " + articles);
-                mCultureArticleList = articles;
+                mCultureArticleList = filterArticles(articles);
                 f2 = true;
                 moveToMain();
             }
@@ -101,7 +124,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Article> articles) {
                 Log.wtf(TAG, "onSuccess: ART & DESIGN = " + articles);
-                mArtAndDesignArticleList = articles;
+                mArtAndDesignArticleList = filterArticles(articles);
                 f3 = true;
                 moveToMain();
             }
@@ -118,7 +141,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Article> articles) {
                 Log.wtf(TAG, "onSuccess: ENVIRONMENT = " + articles);
-                mEnvironmentArticleList = articles;
+                mEnvironmentArticleList = filterArticles(articles);
                 f4 = true;
                 moveToMain();
             }
@@ -135,7 +158,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Article> articles) {
                 Log.wtf(TAG, "onSuccess: BOOKS = " + articles);
-                mBooksArticleList = articles;
+                mBooksArticleList = filterArticles(articles);
                 f5 = true;
                 moveToMain();
             }
@@ -152,7 +175,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Article> articles) {
                 Log.wtf(TAG, "onSuccess: AUSTRALIA NEWS = " + articles);
-                mAustraliaNewsArticleList = articles;
+                mAustraliaNewsArticleList = filterArticles(articles);
                 f6 = true;
                 moveToMain();
             }
@@ -169,7 +192,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Article> articles) {
                 Log.wtf(TAG, "onSuccess: UK NEWS = " + articles);
-                mUkNewsArticleList = articles;
+                mUkNewsArticleList = filterArticles(articles);
                 f7 = true;
                 moveToMain();
             }
@@ -186,7 +209,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Article> articles) {
                 Log.wtf(TAG, "onSuccess: US NEWS = " + articles);
-                mUsNewsArticleList = articles;
+                mUsNewsArticleList = filterArticles(articles);
                 f8 = true;
                 moveToMain();
             }
@@ -203,7 +226,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Article> articles) {
                 Log.wtf(TAG, "onSuccess: NEWS = " + articles);
-                mInternationalArticleList = articles;
+                mInternationalArticleList = filterArticles(articles);
                 f9 = true;
                 moveToMain();
             }
@@ -220,7 +243,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Article> articles) {
                 Log.wtf(TAG, "onSuccess: EDUCATION = " + articles);
-                mEducationArticleList = articles;
+                mEducationArticleList = filterArticles(articles);
                 f10 = true;
                 moveToMain();
             }
@@ -237,7 +260,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Article> articles) {
                 Log.wtf(TAG, "onSuccess: FASHION = " + articles);
-                mFashionArticleList = articles;
+                mFashionArticleList = filterArticles(articles);
                 f11 = true;
                 moveToMain();
             }
@@ -254,7 +277,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Article> articles) {
                 Log.wtf(TAG, "onSuccess: FILM = " + articles);
-                mFilmArticleList = articles;
+                mFilmArticleList = filterArticles(articles);
                 f12 = true;
                 moveToMain();
             }
@@ -271,7 +294,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Article> articles) {
                 Log.wtf(TAG, "onSuccess: FOOTBALL = " + articles);
-                mFootballArticleList = articles;
+                mFootballArticleList = filterArticles(articles);
                 f13 = true;
                 moveToMain();
             }
@@ -288,7 +311,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Article> articles) {
                 Log.wtf(TAG, "onSuccess: LAW = " + articles);
-                mLawArticleList = articles;
+                mLawArticleList = filterArticles(articles);
                 f14 = true;
                 moveToMain();
             }
@@ -305,7 +328,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Article> articles) {
                 Log.wtf(TAG, "onSuccess: LIFESTYLE = " + articles);
-                mLifestyleArticleList = articles;
+                mLifestyleArticleList = filterArticles(articles);
                 f15 = true;
                 moveToMain();
             }
@@ -322,7 +345,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Article> articles) {
                 Log.wtf(TAG, "onSuccess: MEDIA = " + articles);
-                mMediaArticleList = articles;
+                mMediaArticleList = filterArticles(articles);
                 f16 = true;
                 moveToMain();
             }
@@ -339,7 +362,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Article> articles) {
                 Log.wtf(TAG, "onSuccess: MONEY = " + articles);
-                mMoneyArticleList = articles;
+                mMoneyArticleList = filterArticles(articles);
                 f17 = true;
                 moveToMain();
             }
@@ -356,7 +379,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Article> articles) {
                 Log.wtf(TAG, "onSuccess: MUSIC = " + articles);
-                mMusicArticleList = articles;
+                mMusicArticleList = filterArticles(articles);
                 f18 = true;
                 moveToMain();
             }
@@ -373,7 +396,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Article> articles) {
                 Log.wtf(TAG, "onSuccess: POLITICS = " + articles);
-                mPoliticsArticleList = articles;
+                mPoliticsArticleList = filterArticles(articles);
                 f19 = true;
                 moveToMain();
             }
@@ -390,7 +413,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Article> articles) {
                 Log.wtf(TAG, "onSuccess: SCIENCE = " + articles);
-                mScienceArticleList = articles;
+                mScienceArticleList = filterArticles(articles);
                 f20 = true;
                 moveToMain();
             }
@@ -407,7 +430,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Article> articles) {
                 Log.wtf(TAG, "onSuccess: SOCIETY = " + articles);
-                mSocietyArticleList = articles;
+                mSocietyArticleList = filterArticles(articles);
                 f21 = true;
                 moveToMain();
             }
@@ -424,7 +447,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Article> articles) {
                 Log.wtf(TAG, "onSuccess: SPORT = " + articles);
-                mSportArticleList = articles;
+                mSportArticleList = filterArticles(articles);
                 f22 = true;
                 moveToMain();
             }
@@ -441,7 +464,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Article> articles) {
                 Log.wtf(TAG, "onSuccess: TECHNOLOGY = " + articles);
-                mTechnologyArticleList = articles;
+                mTechnologyArticleList = filterArticles(articles);
                 f23 = true;
                 moveToMain();
             }
@@ -458,7 +481,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Article> articles) {
                 Log.wtf(TAG, "onSuccess: TRAVEL = " + articles);
-                mTravelArticleList = articles;
+                mTravelArticleList = filterArticles(articles);
                 f24 = true;
                 moveToMain();
             }
@@ -475,7 +498,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Article> articles) {
                 Log.wtf(TAG, "onSuccess: TV & RADIO = " + articles);
-                mTvAndRadioArticleList = articles;
+                mTvAndRadioArticleList = filterArticles(articles);
                 f25 = true;
                 moveToMain();
             }
@@ -492,7 +515,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Article> articles) {
                 Log.wtf(TAG, "onSuccess: WEATHER = " + articles);
-                mWeatherArticleList = articles;
+                mWeatherArticleList = filterArticles(articles);
                 f26 = true;
                 moveToMain();
             }
@@ -509,7 +532,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Article> articles) {
                 Log.wtf(TAG, "onSuccess: WORLD = " + articles);
-                mWorldArticleList = articles;
+                mWorldArticleList = filterArticles(articles);
                 f28 = true;
                 moveToMain();
             }
@@ -520,18 +543,5 @@ public class SplashActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-
-    private void moveToMain() {
-        Log.wtf(TAG, "moveToMain() has been instantiated");
-        bool = f1 && f2 && f3 && f4 && f5 && f6 && f7 && f8 && f9 && f10
-                && f11 && f12 && f13 && f14 && f15 && f16 && f17 && f18 && f19 && f20
-                && f21 && f22 && f23 && f24 && f25 && f26 && f28;
-        if (bool) {
-            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
-        }
     }
 }

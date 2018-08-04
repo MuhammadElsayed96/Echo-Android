@@ -65,36 +65,23 @@ public class SearchFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                //Log.e("onQueryTextChange", "called");
-
+                //Log.wtf("onQueryTextChange", "called");
                 return false;
             }
 
             @Override
             public boolean onQueryTextSubmit(String query) {
                 loadSearchData(mSearchView.getQuery().toString());
-
-                // Do your task here
-
                 return false;
             }
-
         });
-//        mSearchView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            @Override
-//            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-//                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-//                    loadSearchData(mSearchView.getText().toString());
-//                    return true;
-//                }
-//                return false;
-//            }
-//        });
+
         return rootView;
     }
 
     private void loadSearchData(String query) {
         Log.wtf(TAG, "loadSearchData() has been instantiated");
+        showData();
         mSearchView.clearFocus();
         if (!TextUtils.isEmpty(query)) {
             if (mSearchNewsAdapter != null)
@@ -111,9 +98,13 @@ public class SearchFragment extends Fragment {
                 @Override
                 public void onSuccess(List<Article> Article) {
                     Log.wtf(TAG, "onSuccess: SEARCH ARTICLES = " + Article);
-                    mSearchArticleList = Article;
-                    mSearchNewsAdapter = new NewsAdapter(getContext(), mSearchArticleList);
-                    mSearchRecycler.setAdapter(mSearchNewsAdapter);
+                    if (Article.size() > 0) {
+                        mSearchArticleList = Article;
+                        mSearchNewsAdapter = new NewsAdapter(getContext(), mSearchArticleList);
+                        mSearchRecycler.setAdapter(mSearchNewsAdapter);
+                    } else {
+                        showEmptyResults();
+                    }
                 }
 
                 @Override
@@ -122,8 +113,7 @@ public class SearchFragment extends Fragment {
                 }
             });
         } else {
-            mSearchRecycler.setVisibility(View.GONE);
-            mNoResults.setVisibility(View.VISIBLE);
+            showEmptyResults();
         }
         mSearchRecycler.setAdapter(mSearchNewsAdapter);
     }
@@ -147,4 +137,17 @@ public class SearchFragment extends Fragment {
         super.onStop();
         Log.wtf(TAG, "onStop() has been instantiated");
     }
+
+    private void showEmptyResults() {
+        Log.wtf(TAG, "showEmptyResults() has been instantiated");
+        mSearchRecycler.setVisibility(View.GONE);
+        mNoResults.setVisibility(View.VISIBLE);
+    }
+
+    private void showData() {
+        Log.wtf(TAG, "showData() has been instantiated");
+        mSearchRecycler.setVisibility(View.VISIBLE);
+        mNoResults.setVisibility(View.GONE);
+    }
+
 }

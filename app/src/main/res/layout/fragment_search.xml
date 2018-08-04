@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.App.SearchFragment">
 
     <!-- Top Tabs Layout -->
@@ -17,21 +17,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!--<EditText-->
-            <!--android:id="@+id/search_view"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginBottom="10dp"-->
-            <!--android:layout_marginEnd="15dp"-->
-            <!--android:layout_marginLeft="15dp"-->
-            <!--android:layout_marginRight="15dp"-->
-            <!--android:layout_marginStart="15dp"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:drawableLeft="@drawable/ic_search_black_24dp"-->
-            <!--android:drawableStart="@drawable/ic_search_black_24dp"-->
-            <!--android:hint="@string/search_headlines"-->
-            <!--android:imeOptions="actionSearch"-->
-            <!--android:inputType="text" />-->
             <android.support.v7.widget.SearchView
                 android:id="@+id/search_view"
                 android:layout_width="match_parent"
@@ -51,7 +36,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/relativeTopTab"
-        android:layout_marginTop="8dp"
         android:background="@android:color/white"
         android:visibility="visible" />
 
