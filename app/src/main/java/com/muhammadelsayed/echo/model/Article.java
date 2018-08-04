@@ -17,6 +17,7 @@ public class Article {
     private boolean isHosted;
     private String pillarId;
     private String pillarName;
+    private boolean bookmarked;
 
     public String getId() {
         return id;
@@ -122,6 +123,14 @@ public class Article {
         this.pillarName = pillarName;
     }
 
+    public boolean isBookmarked() {
+        return bookmarked;
+    }
+
+    public void setBookmarked(boolean bookmarked) {
+        this.bookmarked = bookmarked;
+    }
+
     @Override
     public String toString() {
         return "Article{" +
@@ -138,6 +147,7 @@ public class Article {
                 ", isHosted=" + isHosted +
                 ", pillarId='" + pillarId + '\'' +
                 ", pillarName='" + pillarName + '\'' +
+                ", bookmarked=" + bookmarked +
                 '}';
     }
 }

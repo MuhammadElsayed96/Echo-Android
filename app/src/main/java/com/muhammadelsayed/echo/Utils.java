@@ -30,13 +30,10 @@ public class Utils {
             public void onResponse(Call<Retrosponse> call, Response<Retrosponse> response) {
                 if (response.body() != null) {
                     if (response.body().getResponse().getStatus().equals("ok")) {
-
                         Log.d(TAG, "onResponse: " + response.body());
                         List<Article> articles =
                                 new ArrayList<>(Arrays.asList(response.body().getResponse().getArticles()));
                         callback.onSuccess(articles);
-
-
                     }
                 }
             }

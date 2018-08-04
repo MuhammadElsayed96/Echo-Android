@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.muhammadelsayed.echo.R;
+import com.muhammadelsayed.echo.database.DatabaseHelper;
 import com.muhammadelsayed.echo.model.Article;
 import com.squareup.picasso.Picasso;
 import com.thefinestartist.finestwebview.FinestWebView;
@@ -101,20 +102,31 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         final NewsAdapterViewHolder normalViewHolder = (NewsAdapterViewHolder) holder;
         Typeface custom_font1 = ResourcesCompat.getFont(mContext, R.font.belgrano);
         normalViewHolder.mTitleText.setTypeface(custom_font1);
+
+        final DatabaseHelper db = new DatabaseHelper(mContext);
+
         normalViewHolder.mBookmarkImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Change Image Resource
-                if (mBookmark) {
-                    mBookmark = UN_BOOKMARED;
+                if (article.isBookmarked()) {
+                    article.setBookmarked(UN_BOOKMARED);
+
+                    db.deleteSavedArticle(article);
+
                     normalViewHolder.mBookmarkImage.setImageResource(R.drawable.ic_bookmark_border_black_24dp);
                     Toast.makeText(mContext, "Removed", Toast.LENGTH_SHORT).show();
+
                 } else {
-                    mBookmark = BOOKMARKED;
+                    article.setBookmarked(BOOKMARKED);
+                    long id = db.saveArticle(article);
+
+                    Log.wtf(TAG, "onClick: SAVED = " + id);
+
                     normalViewHolder.mBookmarkImage.setImageResource(R.drawable.ic_bookmark_black_24dp);
                     Toast.makeText(mContext, "Bookmarked", Toast.LENGTH_SHORT).show();
                 }
-
+//
             }
         });
         normalViewHolder.mTitleText.setText(article.getWebTitle());
@@ -125,7 +137,10 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     .into(normalViewHolder.mNewsImage);
         else
             normalViewHolder.mNewsImage.setVisibility(View.GONE);
-        normalViewHolder.mAuthorName.setText(article.getTags()[0].getWebTitle());
+        if (article.getTags().length > 0)
+            normalViewHolder.mAuthorName.setText(article.getTags()[0].getWebTitle());
+        else
+            normalViewHolder.mAuthorName.setText("Anonymous");
         try {
             normalViewHolder.mTime.setText(formatTime(article.getWebPublicationDate()));
         } catch (ParseException e) {
@@ -170,6 +185,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 //        if (position == 0) return TYPE_FIRST_ITEM;
 //        return TYPE_ITEM;
 //    }
+
 
     @Override
     public int getItemCount() {
