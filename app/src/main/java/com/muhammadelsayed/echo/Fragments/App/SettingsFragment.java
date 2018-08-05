@@ -1,6 +1,9 @@
 package com.muhammadelsayed.echo.Fragments.App;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,9 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.muhammadelsayed.echo.R;
+import com.muhammadelsayed.echo.SettingsFragment.AccountActivity;
+import com.muhammadelsayed.echo.SettingsFragment.ContactUsActivity;
+import com.muhammadelsayed.echo.SettingsFragment.DefaultEditionActivity;
+import com.muhammadelsayed.echo.SettingsFragment.FilterNewsActivity;
+import com.muhammadelsayed.echo.SettingsFragment.ReadArticleActivity;
 
 public class SettingsFragment extends Fragment {
     private static final String TAG = "SettingsFragment";
+    private View rootView;
 
     public SettingsFragment() {
         // Required empty public constructor
@@ -21,21 +30,57 @@ public class SettingsFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.wtf(TAG, "onCreate() has been instantiated");
-
-        if (getArguments() != null) {
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.wtf(TAG, "onCreateView() has been instantiated");
-
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+        Log.wtf(TAG, "onCreateView() has been instantiated");
+        rootView = inflater.inflate(R.layout.fragment_settings, container, false);
+        initiateViews();
+
+        return rootView;
     }
 
+    private void initiateViews() {
+        Log.wtf(TAG, "initiateViews() has been instantiated");
+        ConstraintLayout mAccount = rootView.findViewById(R.id.my_account_layout);
+        ConstraintLayout mNewsFilter = rootView.findViewById(R.id.news_filter_layout);
+        ConstraintLayout mEdition = rootView.findViewById(R.id.default_edition_layout);
+        ConstraintLayout mArticle = rootView.findViewById(R.id.read_article_layout);
+        ConstraintLayout mContact = rootView.findViewById(R.id.contact_layout);
 
+        mAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), AccountActivity.class));
+            }
+        });
+
+
+        mNewsFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), FilterNewsActivity.class));
+            }
+        });
+
+        mEdition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), DefaultEditionActivity.class));
+            }
+        });
+
+        mArticle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), ReadArticleActivity.class));
+            }
+        });
+
+        mContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), ContactUsActivity.class));
+            }
+        });
+    }
 }

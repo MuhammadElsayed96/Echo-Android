@@ -1,6 +1,7 @@
 package com.muhammadelsayed.echo.Fragments.HomeTabs;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -29,16 +30,12 @@ public class Travel extends Fragment implements SwipeRefreshLayout.OnRefreshList
     private NewsAdapter mTravelNewsAdapter;
     private RecyclerView mTravelRecycler;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.wtf(TAG, "onCreate() has been instantiated");
-        if (getArguments() != null) {
-        }
+    public Travel() {
+        // Required empty public constructor
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.wtf(TAG, "onCreateView() has been instantiated");
         View rootView = inflater.inflate(R.layout.fragment_travel, container, false);
         mTravelRecycler = rootView.findViewById(R.id.travel_recycler);
@@ -60,11 +57,6 @@ public class Travel extends Fragment implements SwipeRefreshLayout.OnRefreshList
         loadTravelData();
         return rootView;
     }
-
-    public Travel() {
-        // Required empty public constructor
-    }
-
 
     private void loadTravelData() {
         Log.wtf(TAG, "loadTravelData() has been instantiated");

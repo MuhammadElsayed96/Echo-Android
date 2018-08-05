@@ -14,18 +14,6 @@ public class ArticleModel {
     public static final String COLUMN_WEB_URL = "url";
     public static final String COLUMN_THUMBNAIL = "thumbnail";
     public static final String COLUMN_AUTHOR = "author";
-
-    private String id;
-    private String articleId;
-    private String type;
-    private String sectionId;
-    private String sectionName;
-    private String date;
-    private String title;
-    private String webUrl;
-    private String thumbnail;
-    private String author;
-
     // Create table SQL query
     public static final String CREATE_SAVED_TABLE =
             "CREATE TABLE " + SAVED_TABLE_NAME + "("
@@ -40,7 +28,6 @@ public class ArticleModel {
                     + COLUMN_AUTHOR + " TEXT,"
                     + COLUMN_DATE + " DATETIME DEFAULT CURRENT_TIMESTAMP"
                     + ")";
-
     public static final String CREATE_HISTORY_TABLE =
             "CREATE TABLE " + HISTORY_TABLE_NAME + "("
                     + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -54,12 +41,20 @@ public class ArticleModel {
                     + COLUMN_AUTHOR + " TEXT,"
                     + COLUMN_DATE + " DATETIME DEFAULT CURRENT_TIMESTAMP"
                     + ")";
-
     public static final String DROP_SAVED_TABLE =
             "DROP TABLE IF EXISTS " + SAVED_TABLE_NAME;
-
     public static final String DROP_HISTORY_TABLE =
             "DROP TABLE IF EXISTS " + HISTORY_TABLE_NAME;
+    private String id;
+    private String articleId;
+    private String type;
+    private String sectionId;
+    private String sectionName;
+    private String date;
+    private String title;
+    private String webUrl;
+    private String thumbnail;
+    private String author;
 
     public ArticleModel() {
     }
