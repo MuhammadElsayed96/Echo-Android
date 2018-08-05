@@ -1,8 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="24dp"
     tools:context=".SettingsFragment.DefaultEditionActivity">
 
+    <RadioGroup
+        android:id="@+id/editions_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/radio_australia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/australia_headlines"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/radio_uk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/uk_headlines"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/radio_us"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/us_headlines"
+            android:textSize="20sp" />
+
+        <RadioButton
+            android:id="@+id/radio_international"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/international_headlines"
+            android:textSize="20sp" />
+    </RadioGroup>
 </android.support.constraint.ConstraintLayout>
