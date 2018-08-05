@@ -9,7 +9,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
+import com.muhammadelsayed.echo.Adapters.EndlessRecyclerOnScrollListener;
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
 import com.muhammadelsayed.echo.Utils;
@@ -20,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.muhammadelsayed.echo.SplashActivity.mUkNewsArticleList;
+import static com.muhammadelsayed.echo.SplashActivity.mUsNewsArticleList;
 
 public class UsHeadlines extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
@@ -27,28 +30,30 @@ public class UsHeadlines extends Fragment implements SwipeRefreshLayout.OnRefres
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private NewsAdapter mUsHeadlinesNewsAdapter;
     private RecyclerView mUsHeadlinesRecycler;
+    private ProgressBar mProgressBar;
 
-    public UsHeadlines() {
-        // Required empty public constructor
-    }
+    private final int PAGE_START = 1;
+    private int currentPage = PAGE_START;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.wtf(TAG, "onCreate() has been instantiated");
-        if (getArguments() != null) {
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.wtf(TAG, "onCreateView() has been instantiated");
         View rootView = inflater.inflate(R.layout.fragment_us_headlines, container, false);
-        mUsHeadlinesRecycler = rootView.findViewById(R.id.us_recycler);
+        mProgressBar = rootView.findViewById(R.id.progressBar);
+        mUsHeadlinesRecycler = rootView.findViewById(R.id.recycler);
         LinearLayoutManager mLinearLayoutManager =
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mUsHeadlinesRecycler.setLayoutManager(mLinearLayoutManager);
-        mSwipeRefreshLayout = rootView.findViewById(R.id.us_swipe);
+        mSwipeRefreshLayout = rootView.findViewById(R.id.swipe);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mUsHeadlinesRecycler.setDrawingCacheEnabled(true);
         mUsHeadlinesRecycler.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
@@ -61,9 +66,44 @@ public class UsHeadlines extends Fragment implements SwipeRefreshLayout.OnRefres
                 android.R.color.holo_blue_dark);
 
         loadUsHeadlinesData();
+        mUsHeadlinesRecycler.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
+            @Override
+            public void onLoadMore() {
+                currentPage++;
+                addDataToList(currentPage);
+            }
+        });
+
         return rootView;
     }
 
+    private void addDataToList(int page) {
+        mProgressBar.setVisibility(View.VISIBLE);
+        Map<String, Object> options = new HashMap<>();
+        options.put("section", "us-news");
+        options.put("order-by", "newest");
+        options.put("show-tags", "contributor");
+        options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
+        options.put("page", page);
+        options.put("page-size", 20);
+        options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+        Utils.getNews(options, new Utils.retrofitCallback() {
+            @Override
+            public void onSuccess(List<Article> articles) {
+                Log.wtf(TAG, "onSuccess: US NEWS = " + articles);
+                mUsNewsArticleList.addAll(articles);
+                mUsHeadlinesNewsAdapter.notifyDataSetChanged();
+                mProgressBar.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Log.wtf(TAG, "onFailure(): US NEWS FAILED !!");
+                mProgressBar.setVisibility(View.GONE);
+            }
+        });
+    }
 
     private void loadUsHeadlinesData() {
         Log.wtf(TAG, "loadUsHeadlinesData() has been instantiated");
@@ -101,8 +141,31 @@ public class UsHeadlines extends Fragment implements SwipeRefreshLayout.OnRefres
         Log.wtf(TAG, "onRefresh() has been instantiated");
         mSwipeRefreshLayout.setRefreshing(true);
         mUkNewsArticleList.clear();
+        EndlessRecyclerOnScrollListener.mPreviousTotal = 0;
+        currentPage = PAGE_START;
         Log.wtf(TAG, "onRefresh()::mUkNewsArticleList = " + mUkNewsArticleList.toString());
         loadUsHeadlinesData();
         mSwipeRefreshLayout.setRefreshing(false);
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        EndlessRecyclerOnScrollListener.mPreviousTotal = 0;
+        Log.wtf(TAG, "onPause() has been instantiated");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.wtf(TAG, "onStart() has been instantiated");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EndlessRecyclerOnScrollListener.mPreviousTotal = 0;
+        Log.wtf(TAG, "onStop() has been instantiated");
+    }
+
 }

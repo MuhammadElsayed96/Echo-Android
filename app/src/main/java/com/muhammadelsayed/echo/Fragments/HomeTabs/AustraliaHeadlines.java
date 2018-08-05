@@ -34,18 +34,11 @@ public class AustraliaHeadlines extends Fragment implements SwipeRefreshLayout.O
     private final int PAGE_START = 1;
     private int currentPage = PAGE_START;
 
-
-    public AustraliaHeadlines() {
-        // Required empty public constructor
-    }
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.wtf(TAG, "onCreate() has been instantiated");
-        if (getArguments() != null) {
-        }
+
     }
 
     @Override
@@ -154,4 +147,26 @@ public class AustraliaHeadlines extends Fragment implements SwipeRefreshLayout.O
         loadAustraliaHeadlinesData();
         mSwipeRefreshLayout.setRefreshing(false);
     }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        EndlessRecyclerOnScrollListener.mPreviousTotal = 0;
+        Log.wtf(TAG, "onPause() has been instantiated");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.wtf(TAG, "onStart() has been instantiated");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EndlessRecyclerOnScrollListener.mPreviousTotal = 0;
+        Log.wtf(TAG, "onStop() has been instantiated");
+    }
+
 }

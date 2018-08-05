@@ -9,7 +9,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
+import com.muhammadelsayed.echo.Adapters.EndlessRecyclerOnScrollListener;
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
 import com.muhammadelsayed.echo.Utils;
@@ -26,18 +28,16 @@ public class Business extends Fragment implements SwipeRefreshLayout.OnRefreshLi
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private NewsAdapter mBusinessNewsAdapter;
     private RecyclerView mBusinessRecycler;
+    private ProgressBar mProgressBar;
 
-    public Business() {
-        // Required empty public constructor
-    }
+    private final int PAGE_START = 1;
+    private int currentPage = PAGE_START;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.wtf(TAG, "onCreate() has been instantiated");
 
-        if (getArguments() != null) {
-        }
     }
 
     @Override
@@ -46,12 +46,13 @@ public class Business extends Fragment implements SwipeRefreshLayout.OnRefreshLi
         Log.wtf(TAG, "onCreateView() has been instantiated");
         View rootView = inflater.inflate(R.layout.fragment_business, container, false);
 
+        mProgressBar = rootView.findViewById(R.id.progressBar);
 
-        mBusinessRecycler = rootView.findViewById(R.id.business_recycler);
+        mBusinessRecycler = rootView.findViewById(R.id.recycler);
         LinearLayoutManager mLinearLayoutManager =
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mBusinessRecycler.setLayoutManager(mLinearLayoutManager);
-        mSwipeRefreshLayout = rootView.findViewById(R.id.business_swipe);
+        mSwipeRefreshLayout = rootView.findViewById(R.id.swipe);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mBusinessRecycler.setDrawingCacheEnabled(true);
         mBusinessRecycler.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
@@ -63,7 +64,42 @@ public class Business extends Fragment implements SwipeRefreshLayout.OnRefreshLi
                 android.R.color.holo_orange_dark,
                 android.R.color.holo_blue_dark);
         loadBusinessData();
+        mBusinessRecycler.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
+            @Override
+            public void onLoadMore() {
+                currentPage++;
+                addDataToList(currentPage);
+            }
+        });
         return rootView;
+    }
+
+    private void addDataToList(int page) {
+        mProgressBar.setVisibility(View.VISIBLE);
+        Map<String, Object> options = new HashMap<>();
+        options.put("section", "business");
+        options.put("order-by", "newest");
+        options.put("show-tags", "contributor");
+        options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
+        options.put("page", page);
+        options.put("page-size", 20);
+        options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+        Utils.getNews(options, new Utils.retrofitCallback() {
+            @Override
+            public void onSuccess(List<Article> articles) {
+                Log.wtf(TAG, "onSuccess: BUSINESS = " + articles);
+                mBusinessArticleList.addAll(articles);
+                mBusinessNewsAdapter.notifyDataSetChanged();
+                mProgressBar.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Log.wtf(TAG, "onFailure(): BUSINESS FAILED !!");
+                mProgressBar.setVisibility(View.GONE);
+            }
+        });
     }
 
     private void loadBusinessData() {
@@ -103,6 +139,8 @@ public class Business extends Fragment implements SwipeRefreshLayout.OnRefreshLi
         Log.wtf(TAG, "onRefresh() has been instantiated");
         mSwipeRefreshLayout.setRefreshing(true);
         mBusinessArticleList.clear();
+        EndlessRecyclerOnScrollListener.mPreviousTotal = 0;
+        currentPage = PAGE_START;
         Log.wtf(TAG, "onRefresh()::mBusinessArticleList = " + mBusinessArticleList.toString());
         loadBusinessData();
         mSwipeRefreshLayout.setRefreshing(false);
@@ -111,6 +149,7 @@ public class Business extends Fragment implements SwipeRefreshLayout.OnRefreshLi
     @Override
     public void onPause() {
         super.onPause();
+        EndlessRecyclerOnScrollListener.mPreviousTotal = 0;
         Log.wtf(TAG, "onPause() has been instantiated");
     }
 
@@ -123,6 +162,8 @@ public class Business extends Fragment implements SwipeRefreshLayout.OnRefreshLi
     @Override
     public void onStop() {
         super.onStop();
+        EndlessRecyclerOnScrollListener.mPreviousTotal = 0;
         Log.wtf(TAG, "onStop() has been instantiated");
     }
+
 }
