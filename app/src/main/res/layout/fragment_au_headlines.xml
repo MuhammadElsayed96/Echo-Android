@@ -8,12 +8,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/australia_recycler"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        </android.support.v7.widget.RecyclerView>
-    </android.support.v4.widget.SwipeRefreshLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/australia_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/progressBar">
 
+            </android.support.v7.widget.RecyclerView>
+
+            <ProgressBar
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/progressBar"
+                android:visibility="gone"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                />
+
+        </RelativeLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </RelativeLayout>

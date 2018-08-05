@@ -1,19 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/international_swipe"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/international_recycler"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        </android.support.v7.widget.RecyclerView>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/international_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/progressBar">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <ProgressBar
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/progressBar"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                />
+
+        </RelativeLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
 
-</RelativeLayout>
+</layout>

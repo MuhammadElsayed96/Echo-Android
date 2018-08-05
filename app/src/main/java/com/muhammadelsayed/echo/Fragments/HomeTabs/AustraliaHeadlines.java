@@ -9,7 +9,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
+import com.muhammadelsayed.echo.Adapters.EndlessRecyclerOnScrollListener;
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
 import com.muhammadelsayed.echo.Utils;
@@ -27,6 +29,11 @@ public class AustraliaHeadlines extends Fragment implements SwipeRefreshLayout.O
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private NewsAdapter mAustraliaHeadlinesNewsAdapter;
     private RecyclerView mAustraliaHeadlinesRecycler;
+    private ProgressBar mProgressBar;
+
+    private final int PAGE_START = 1;
+    private int currentPage = PAGE_START;
+
 
     public AustraliaHeadlines() {
         // Required empty public constructor
@@ -46,6 +53,7 @@ public class AustraliaHeadlines extends Fragment implements SwipeRefreshLayout.O
         Log.wtf(TAG, "onCreateView() has been instantiated");
         View rootView = inflater.inflate(R.layout.fragment_au_headlines, container, false);
 
+        mProgressBar = rootView.findViewById(R.id.progressBar);
         mAustraliaHeadlinesRecycler = rootView.findViewById(R.id.australia_recycler);
         LinearLayoutManager mLinearLayoutManager =
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -63,7 +71,44 @@ public class AustraliaHeadlines extends Fragment implements SwipeRefreshLayout.O
                 android.R.color.holo_blue_dark);
 
         loadAustraliaHeadlinesData();
+
+        mAustraliaHeadlinesRecycler.addOnScrollListener(new EndlessRecyclerOnScrollListener() {
+            @Override
+            public void onLoadMore() {
+                currentPage++;
+                addDataToList(currentPage);
+            }
+        });
         return rootView;
+    }
+
+
+    private void addDataToList(int page) {
+        mProgressBar.setVisibility(View.VISIBLE);
+        Map<String, Object> options = new HashMap<>();
+        options.put("section", "australia-news");
+        options.put("order-by", "newest");
+        options.put("show-tags", "contributor");
+        options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
+        options.put("page", page);
+        options.put("page-size", 20);
+        options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+        Utils.getNews(options, new Utils.retrofitCallback() {
+            @Override
+            public void onSuccess(List<Article> articles) {
+                Log.wtf(TAG, "onSuccess: AustraliaHeadlines = " + articles);
+                mAustraliaNewsArticleList.addAll(articles);
+                mAustraliaHeadlinesNewsAdapter.notifyDataSetChanged();
+                mProgressBar.setVisibility(View.GONE);
+
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Log.wtf(TAG, "onFailure(): AustraliaHeadlines FAILED !!");
+                mProgressBar.setVisibility(View.GONE);
+            }
+        });
     }
 
     private void loadAustraliaHeadlinesData() {
@@ -103,6 +148,8 @@ public class AustraliaHeadlines extends Fragment implements SwipeRefreshLayout.O
         Log.wtf(TAG, "onRefresh() has been instantiated");
         mSwipeRefreshLayout.setRefreshing(true);
         mAustraliaNewsArticleList.clear();
+        EndlessRecyclerOnScrollListener.mPreviousTotal = 0;
+        currentPage = PAGE_START;
         Log.wtf(TAG, "onRefresh()::mAustraliaNewsArticleList = " + mAustraliaNewsArticleList.toString());
         loadAustraliaHeadlinesData();
         mSwipeRefreshLayout.setRefreshing(false);

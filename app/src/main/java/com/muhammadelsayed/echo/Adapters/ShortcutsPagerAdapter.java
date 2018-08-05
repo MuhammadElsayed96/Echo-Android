@@ -7,11 +7,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomePagerAdapter extends FragmentPagerAdapter {
+public class ShortcutsPagerAdapter extends FragmentPagerAdapter {
 
     private final List<Fragment> mFragmentList = new ArrayList<>();
 
-    public HomePagerAdapter(FragmentManager fm) {
+    public ShortcutsPagerAdapter(FragmentManager fm) {
         super(fm);
     }
 

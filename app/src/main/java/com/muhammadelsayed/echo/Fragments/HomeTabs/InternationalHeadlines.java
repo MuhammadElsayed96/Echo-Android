@@ -1,5 +1,6 @@
 package com.muhammadelsayed.echo.Fragments.HomeTabs;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
 import com.muhammadelsayed.echo.R;
 import com.muhammadelsayed.echo.Utils;
+import com.muhammadelsayed.echo.databinding.FragmentInternationalHeadlinesBinding;
 import com.muhammadelsayed.echo.model.Article;
 
 import java.util.HashMap;
@@ -27,6 +29,9 @@ public class InternationalHeadlines extends Fragment implements SwipeRefreshLayo
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private NewsAdapter mInternationalNewsAdapter;
     private RecyclerView mInternationalRecycler;
+
+    private int mLoadedItems = 0;
+    private FragmentInternationalHeadlinesBinding mFragmentInternationalHeadlinesBinding;
 
     public InternationalHeadlines() {
         // Required empty public constructor
@@ -43,7 +48,12 @@ public class InternationalHeadlines extends Fragment implements SwipeRefreshLayo
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.wtf(TAG, "onCreateView() has been instantiated");
-        View rootView = inflater.inflate(R.layout.fragment_international_headlines, container, false);
+
+        mFragmentInternationalHeadlinesBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_international_headlines, container, false);
+
+        View rootView = mFragmentInternationalHeadlinesBinding.getRoot();
+
+
         mInternationalRecycler = rootView.findViewById(R.id.international_recycler);
         LinearLayoutManager mLinearLayoutManager =
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -61,6 +71,8 @@ public class InternationalHeadlines extends Fragment implements SwipeRefreshLayo
                 android.R.color.holo_blue_dark);
 
         loadInternationalData();
+
+
         return rootView;
     }
 

@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.muhammadelsayed.echo.Adapters.HomePagerAdapter;
+import com.muhammadelsayed.echo.Adapters.ShortcutsPagerAdapter;
 import com.muhammadelsayed.echo.Fragments.Shortcut.History;
 import com.muhammadelsayed.echo.Fragments.Shortcut.Saved;
 import com.muhammadelsayed.echo.Fragments.Shortcut.Topics;
@@ -61,7 +61,7 @@ public class ShortcutsFragment extends Fragment {
      */
     private void setupViewPager(ViewPager viewPager) {
         Log.wtf(TAG, "setupViewPager() has been instantiated");
-        HomePagerAdapter adapter = new HomePagerAdapter(getChildFragmentManager());
+        ShortcutsPagerAdapter adapter = new ShortcutsPagerAdapter(getChildFragmentManager());
         adapter.addFragment(new Topics());
         adapter.addFragment(new Saved());
         adapter.addFragment(new History());
