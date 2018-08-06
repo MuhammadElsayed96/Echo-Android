@@ -233,6 +233,19 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return mNewsList.size();
     }
 
+    private void openWebPage(String url) {
+        Log.wtf(TAG, "openWebPage() has been instantiated");
+        try {
+            Uri webPage = Uri.parse(url);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(webPage);
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(mContext, "No application can handle this request. Please install a web browser or check your URL.", Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
+    }
+
     public interface ItemClickListener {
         void onItemClick(View v, int position);
     }
@@ -270,19 +283,6 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             mShareImageL = view.findViewById(R.id.large_share_news);
             mTitleTextL = view.findViewById(R.id.large_title_text);
             mSourceNameL = view.findViewById(R.id.large_news_source_name);
-        }
-    }
-
-    private void openWebPage(String url) {
-        Log.wtf(TAG, "openWebPage() has been instantiated");
-        try {
-            Uri webPage = Uri.parse(url);
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(webPage);
-            startActivity(intent);
-        } catch (ActivityNotFoundException e) {
-            Toast.makeText(mContext, "No application can handle this request. Please install a web browser or check your URL.", Toast.LENGTH_LONG).show();
-            e.printStackTrace();
         }
     }
 }

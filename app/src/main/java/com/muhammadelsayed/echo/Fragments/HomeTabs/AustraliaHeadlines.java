@@ -21,25 +21,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 import static com.muhammadelsayed.echo.SplashActivity.mAustraliaNewsArticleList;
+import static com.muhammadelsayed.echo.Utils.isNetworkAvailable;
 
 
 public class AustraliaHeadlines extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private static final String TAG = AustraliaHeadlines.class.getSimpleName();
+    private final int PAGE_START = 1;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private NewsAdapter mAustraliaHeadlinesNewsAdapter;
     private RecyclerView mAustraliaHeadlinesRecycler;
     private ProgressBar mProgressBar;
-
-    private final int PAGE_START = 1;
+    private SweetAlertDialog noInternet;
     private int currentPage = PAGE_START;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.wtf(TAG, "onCreate() has been instantiated");
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -75,7 +72,6 @@ public class AustraliaHeadlines extends Fragment implements SwipeRefreshLayout.O
         return rootView;
     }
 
-
     private void addDataToList(int page) {
         mProgressBar.setVisibility(View.VISIBLE);
         Map<String, Object> options = new HashMap<>();
@@ -93,7 +89,6 @@ public class AustraliaHeadlines extends Fragment implements SwipeRefreshLayout.O
                 mAustraliaNewsArticleList.addAll(articles);
                 mAustraliaHeadlinesNewsAdapter.notifyDataSetChanged();
                 mProgressBar.setVisibility(View.GONE);
-
             }
 
             @Override
@@ -107,28 +102,31 @@ public class AustraliaHeadlines extends Fragment implements SwipeRefreshLayout.O
     private void loadAustraliaHeadlinesData() {
         Log.wtf(TAG, "loadAustraliaHeadlinesData() has been instantiated");
         if (mAustraliaNewsArticleList.isEmpty()) {
-            Map<String, Object> options = new HashMap<>();
-            options.put("section", "australia-news");
-            options.put("order-by", "newest");
-            options.put("show-tags", "contributor");
-            options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
-            options.put("page", 1);
-            options.put("page-size", 20);
-            options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
-            Utils.getNews(options, new Utils.retrofitCallback() {
-                @Override
-                public void onSuccess(List<Article> articles) {
-                    Log.wtf(TAG, "onSuccess: AustraliaHeadlines = " + articles);
-                    mAustraliaNewsArticleList = articles;
-                    mAustraliaHeadlinesNewsAdapter = new NewsAdapter(getContext(), mAustraliaNewsArticleList);
-                    mAustraliaHeadlinesRecycler.setAdapter(mAustraliaHeadlinesNewsAdapter);
-                }
+            if (isNetworkAvailable()) {
+                Map<String, Object> options = new HashMap<>();
+                options.put("section", "australia-news");
+                options.put("order-by", "newest");
+                options.put("show-tags", "contributor");
+                options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
+                options.put("page", 1);
+                options.put("page-size", 20);
+                options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+                Utils.getNews(options, new Utils.retrofitCallback() {
+                    @Override
+                    public void onSuccess(List<Article> articles) {
+                        Log.wtf(TAG, "onSuccess: AustraliaHeadlines = " + articles);
+                        mAustraliaNewsArticleList = articles;
+                        mAustraliaHeadlinesNewsAdapter = new NewsAdapter(getContext(), mAustraliaNewsArticleList);
+                        mAustraliaHeadlinesRecycler.setAdapter(mAustraliaHeadlinesNewsAdapter);
+                    }
 
-                @Override
-                public void onFailure(Throwable t) {
-                    Log.wtf(TAG, "onFailure(): AustraliaHeadlines FAILED !!");
-                }
-            });
+                    @Override
+                    public void onFailure(Throwable t) {
+                        Log.wtf(TAG, "onFailure(): AustraliaHeadlines FAILED !!");
+                    }
+                });
+            } else
+                noInternetConnection();
         } else {
             mAustraliaHeadlinesNewsAdapter = new NewsAdapter(getContext(), mAustraliaNewsArticleList);
         }
@@ -139,15 +137,19 @@ public class AustraliaHeadlines extends Fragment implements SwipeRefreshLayout.O
     @Override
     public void onRefresh() {
         Log.wtf(TAG, "onRefresh() has been instantiated");
-        mSwipeRefreshLayout.setRefreshing(true);
-        mAustraliaNewsArticleList.clear();
-        EndlessRecyclerOnScrollListener.mPreviousTotal = 0;
-        currentPage = PAGE_START;
-        Log.wtf(TAG, "onRefresh()::mAustraliaNewsArticleList = " + mAustraliaNewsArticleList.toString());
-        loadAustraliaHeadlinesData();
-        mSwipeRefreshLayout.setRefreshing(false);
+        if (isNetworkAvailable()) {
+            mSwipeRefreshLayout.setRefreshing(true);
+            mAustraliaNewsArticleList.clear();
+            EndlessRecyclerOnScrollListener.mPreviousTotal = 0;
+            currentPage = PAGE_START;
+            Log.wtf(TAG, "onRefresh()::mAustraliaNewsArticleList = " + mAustraliaNewsArticleList.toString());
+            loadAustraliaHeadlinesData();
+            mSwipeRefreshLayout.setRefreshing(false);
+        } else {
+            mSwipeRefreshLayout.setRefreshing(false);
+            noInternetConnection();
+        }
     }
-
 
     @Override
     public void onPause() {
@@ -157,16 +159,26 @@ public class AustraliaHeadlines extends Fragment implements SwipeRefreshLayout.O
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        Log.wtf(TAG, "onStart() has been instantiated");
-    }
-
-    @Override
     public void onStop() {
         super.onStop();
         EndlessRecyclerOnScrollListener.mPreviousTotal = 0;
         Log.wtf(TAG, "onStop() has been instantiated");
     }
 
+    private void noInternetConnection() {
+        Log.wtf(TAG, "tryToConnectOrExit(): has been instantiated");
+        if (noInternet != null)
+            noInternet = null;
+        noInternet = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE);
+        noInternet.setCancelable(false);
+        noInternet.setTitleText("No Internet Connection")
+                .setContentText("Connect to WI-FI or Cellular")
+                .setConfirmText("OK")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        sweetAlertDialog.dismissWithAnimation();
+                    }
+                }).show();
+    }
 }

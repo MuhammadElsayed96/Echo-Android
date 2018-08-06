@@ -1,5 +1,8 @@
 package com.muhammadelsayed.echo;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 
 import com.muhammadelsayed.echo.model.Article;
@@ -15,6 +18,8 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.thefinestartist.utils.content.ContextUtil.getSystemService;
 
 public class Utils {
     private static final String TAG = "Utils";
@@ -74,10 +79,17 @@ public class Utils {
         });
     }
 
+    public static boolean isNetworkAvailable() {
+        Log.wtf(TAG, "isNetworkAvailable(): has been instantiated");
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
     public interface retrofitCallback {
         void onSuccess(List<Article> articles);
 
         void onFailure(Throwable t);
     }
-
 }

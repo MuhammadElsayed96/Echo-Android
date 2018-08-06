@@ -78,12 +78,49 @@
         </android.support.constraint.ConstraintLayout>
 
         <View
-            android:id="@+id/edition_divider"
+            android:id="@+id/reorder_divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/colorDivider"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/news_filter_layout" />
+        <!--News Filter-->
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/reorder_news_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginStart="24dp"
+            android:paddingBottom="24dp"
+            android:paddingTop="24dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/reorder_divider">
+
+            <ImageView
+                android:id="@+id/reorder_image"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_unfold_more_black_24dp" />
+
+            <TextView
+                android:id="@+id/reorder_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginStart="24dp"
+                android:text="@string/reorder_sections"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                app:layout_constraintLeft_toRightOf="@id/reorder_image" />
+        </android.support.constraint.ConstraintLayout>
+
+        <View
+            android:id="@+id/edition_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorDivider"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/reorder_news_layout" />
         <!--Default Edition-->
         <android.support.constraint.ConstraintLayout
             android:id="@+id/default_edition_layout"

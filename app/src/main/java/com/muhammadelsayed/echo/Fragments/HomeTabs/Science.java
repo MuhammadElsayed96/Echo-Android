@@ -21,27 +21,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 import static com.muhammadelsayed.echo.SplashActivity.mScienceArticleList;
+import static com.muhammadelsayed.echo.Utils.isNetworkAvailable;
 
 public class Science extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private static final String TAG = Science.class.getSimpleName();
+    private final int PAGE_START = 1;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private NewsAdapter mScienceNewsAdapter;
     private RecyclerView mScienceRecycler;
     private ProgressBar mProgressBar;
-
-    private final int PAGE_START = 1;
+    private SweetAlertDialog noInternet;
     private int currentPage = PAGE_START;
-
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.wtf(TAG, "onCreate() has been instantiated");
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -106,28 +100,31 @@ public class Science extends Fragment implements SwipeRefreshLayout.OnRefreshLis
     private void loadScienceData() {
         Log.wtf(TAG, "loadScienceData() has been instantiated");
         if (mScienceArticleList.isEmpty()) {
-            Map<String, Object> options = new HashMap<>();
-            options.put("section", "science");
-            options.put("order-by", "newest");
-            options.put("show-tags", "contributor");
-            options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
-            options.put("page", 1);
-            options.put("page-size", 20);
-            options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
-            Utils.getNews(options, new Utils.retrofitCallback() {
-                @Override
-                public void onSuccess(List<Article> articles) {
-                    Log.wtf(TAG, "onSuccess: Science = " + articles);
-                    mScienceArticleList = articles;
-                    mScienceNewsAdapter = new NewsAdapter(getContext(), mScienceArticleList);
-                    mScienceRecycler.setAdapter(mScienceNewsAdapter);
-                }
+            if (isNetworkAvailable()) {
+                Map<String, Object> options = new HashMap<>();
+                options.put("section", "science");
+                options.put("order-by", "newest");
+                options.put("show-tags", "contributor");
+                options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
+                options.put("page", 1);
+                options.put("page-size", 20);
+                options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+                Utils.getNews(options, new Utils.retrofitCallback() {
+                    @Override
+                    public void onSuccess(List<Article> articles) {
+                        Log.wtf(TAG, "onSuccess: Science = " + articles);
+                        mScienceArticleList = articles;
+                        mScienceNewsAdapter = new NewsAdapter(getContext(), mScienceArticleList);
+                        mScienceRecycler.setAdapter(mScienceNewsAdapter);
+                    }
 
-                @Override
-                public void onFailure(Throwable t) {
-                    Log.wtf(TAG, "onFailure(): Science FAILED !!");
-                }
-            });
+                    @Override
+                    public void onFailure(Throwable t) {
+                        Log.wtf(TAG, "onFailure(): Science FAILED !!");
+                    }
+                });
+            } else
+                noInternetConnection();
         } else {
             mScienceNewsAdapter = new NewsAdapter(getContext(), mScienceArticleList);
         }
@@ -137,13 +134,18 @@ public class Science extends Fragment implements SwipeRefreshLayout.OnRefreshLis
     @Override
     public void onRefresh() {
         Log.wtf(TAG, "onRefresh() has been instantiated");
-        mSwipeRefreshLayout.setRefreshing(true);
-        mScienceArticleList.clear();
-        EndlessRecyclerOnScrollListener.mPreviousTotal = 0;
-        currentPage = PAGE_START;
-        Log.wtf(TAG, "onRefresh()::mScienceArticleList = " + mScienceArticleList.toString());
-        loadScienceData();
-        mSwipeRefreshLayout.setRefreshing(false);
+        if (isNetworkAvailable()) {
+            mSwipeRefreshLayout.setRefreshing(true);
+            mScienceArticleList.clear();
+            EndlessRecyclerOnScrollListener.mPreviousTotal = 0;
+            currentPage = PAGE_START;
+            Log.wtf(TAG, "onRefresh()::mScienceArticleList = " + mScienceArticleList.toString());
+            loadScienceData();
+            mSwipeRefreshLayout.setRefreshing(false);
+        } else {
+            mSwipeRefreshLayout.setRefreshing(false);
+            noInternetConnection();
+        }
     }
 
     @Override
@@ -154,16 +156,27 @@ public class Science extends Fragment implements SwipeRefreshLayout.OnRefreshLis
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        Log.wtf(TAG, "onStart() has been instantiated");
-    }
-
-    @Override
     public void onStop() {
         super.onStop();
         EndlessRecyclerOnScrollListener.mPreviousTotal = 0;
         Log.wtf(TAG, "onStop() has been instantiated");
+    }
+
+    private void noInternetConnection() {
+        Log.wtf(TAG, "tryToConnectOrExit(): has been instantiated");
+        if (noInternet != null)
+            noInternet = null;
+        noInternet = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE);
+        noInternet.setCancelable(false);
+        noInternet.setTitleText("No Internet Connection")
+                .setContentText("Connect to WI-FI or Cellular")
+                .setConfirmText("OK")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        sweetAlertDialog.dismissWithAnimation();
+                    }
+                }).show();
     }
 
 }

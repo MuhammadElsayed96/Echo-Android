@@ -2,7 +2,8 @@ package com.muhammadelsayed.echo.database.model;
 
 public class HistoryArticle {
     private static final String TABLE_NAME = "saved";
-
+    public static final String DROP_TABLE =
+            "DROP TABLE IF EXISTS " + TABLE_NAME;
     private static final String COLUMN_ID = "id";
     private static final String COLUMN_ARTICLE_ID = "article_id";
     private static final String COLUMN_TYPE = "type";
@@ -27,8 +28,6 @@ public class HistoryArticle {
                     + COLUMN_AUTHOR + " TEXT,"
                     + COLUMN_DATE + " DATETIME DEFAULT CURRENT_TIMESTAMP"
                     + ")";
-    public static final String DROP_TABLE =
-            "DROP TABLE IF EXISTS " + TABLE_NAME;
     private String id;
     private String articleId;
     private String type;

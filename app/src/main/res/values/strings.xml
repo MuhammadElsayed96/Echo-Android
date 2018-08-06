@@ -73,4 +73,5 @@
     <string name="tell_us_what_s_on_your_mind">Tell us what\'s on your mind</string>
     <string name="send">send</string>
     <string name="settings_preferences">com.muhammadelsayed.echo.settings_preferences</string>
+    <string name="reorder_sections">Reorder Sections</string>
 </resources>

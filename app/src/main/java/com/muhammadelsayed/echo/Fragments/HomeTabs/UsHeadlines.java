@@ -21,28 +21,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 import static com.muhammadelsayed.echo.SplashActivity.mUkNewsArticleList;
 import static com.muhammadelsayed.echo.SplashActivity.mUsNewsArticleList;
+import static com.muhammadelsayed.echo.Utils.isNetworkAvailable;
 
 public class UsHeadlines extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     private static final String TAG = UsHeadlines.class.getSimpleName();
+    private final int PAGE_START = 1;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private NewsAdapter mUsHeadlinesNewsAdapter;
     private RecyclerView mUsHeadlinesRecycler;
     private ProgressBar mProgressBar;
-
-    private final int PAGE_START = 1;
+    private SweetAlertDialog noInternet;
     private int currentPage = PAGE_START;
-
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.wtf(TAG, "onCreate() has been instantiated");
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -108,28 +102,31 @@ public class UsHeadlines extends Fragment implements SwipeRefreshLayout.OnRefres
     private void loadUsHeadlinesData() {
         Log.wtf(TAG, "loadUsHeadlinesData() has been instantiated");
         if (mUkNewsArticleList.isEmpty()) {
-            Map<String, Object> options = new HashMap<>();
-            options.put("section", "us-news");
-            options.put("order-by", "newest");
-            options.put("show-tags", "contributor");
-            options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
-            options.put("page", 1);
-            options.put("page-size", 20);
-            options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
-            Utils.getNews(options, new Utils.retrofitCallback() {
-                @Override
-                public void onSuccess(List<Article> articles) {
-                    Log.wtf(TAG, "onSuccess: US NEWS = " + articles);
-                    mUkNewsArticleList = articles;
-                    mUsHeadlinesNewsAdapter = new NewsAdapter(getContext(), mUkNewsArticleList);
-                    mUsHeadlinesRecycler.setAdapter(mUsHeadlinesNewsAdapter);
-                }
+            if (isNetworkAvailable()) {
+                Map<String, Object> options = new HashMap<>();
+                options.put("section", "us-news");
+                options.put("order-by", "newest");
+                options.put("show-tags", "contributor");
+                options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
+                options.put("page", 1);
+                options.put("page-size", 20);
+                options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+                Utils.getNews(options, new Utils.retrofitCallback() {
+                    @Override
+                    public void onSuccess(List<Article> articles) {
+                        Log.wtf(TAG, "onSuccess: US NEWS = " + articles);
+                        mUkNewsArticleList = articles;
+                        mUsHeadlinesNewsAdapter = new NewsAdapter(getContext(), mUkNewsArticleList);
+                        mUsHeadlinesRecycler.setAdapter(mUsHeadlinesNewsAdapter);
+                    }
 
-                @Override
-                public void onFailure(Throwable t) {
-                    Log.wtf(TAG, "onFailure(): US NEWS FAILED !!");
-                }
-            });
+                    @Override
+                    public void onFailure(Throwable t) {
+                        Log.wtf(TAG, "onFailure(): US NEWS FAILED !!");
+                    }
+                });
+            } else
+                noInternetConnection();
         } else {
             mUsHeadlinesNewsAdapter = new NewsAdapter(getContext(), mUkNewsArticleList);
         }
@@ -139,13 +136,18 @@ public class UsHeadlines extends Fragment implements SwipeRefreshLayout.OnRefres
     @Override
     public void onRefresh() {
         Log.wtf(TAG, "onRefresh() has been instantiated");
-        mSwipeRefreshLayout.setRefreshing(true);
-        mUkNewsArticleList.clear();
-        EndlessRecyclerOnScrollListener.mPreviousTotal = 0;
-        currentPage = PAGE_START;
-        Log.wtf(TAG, "onRefresh()::mUkNewsArticleList = " + mUkNewsArticleList.toString());
-        loadUsHeadlinesData();
-        mSwipeRefreshLayout.setRefreshing(false);
+        if (isNetworkAvailable()) {
+            mSwipeRefreshLayout.setRefreshing(true);
+            mUkNewsArticleList.clear();
+            EndlessRecyclerOnScrollListener.mPreviousTotal = 0;
+            currentPage = PAGE_START;
+            Log.wtf(TAG, "onRefresh()::mUkNewsArticleList = " + mUkNewsArticleList.toString());
+            loadUsHeadlinesData();
+            mSwipeRefreshLayout.setRefreshing(false);
+        } else {
+            mSwipeRefreshLayout.setRefreshing(false);
+            noInternetConnection();
+        }
     }
 
     @Override
@@ -156,16 +158,27 @@ public class UsHeadlines extends Fragment implements SwipeRefreshLayout.OnRefres
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        Log.wtf(TAG, "onStart() has been instantiated");
-    }
-
-    @Override
     public void onStop() {
         super.onStop();
         EndlessRecyclerOnScrollListener.mPreviousTotal = 0;
         Log.wtf(TAG, "onStop() has been instantiated");
+    }
+
+    private void noInternetConnection() {
+        Log.wtf(TAG, "tryToConnectOrExit(): has been instantiated");
+        if (noInternet != null)
+            noInternet = null;
+        noInternet = new SweetAlertDialog(getActivity(), SweetAlertDialog.WARNING_TYPE);
+        noInternet.setCancelable(false);
+        noInternet.setTitleText("No Internet Connection")
+                .setContentText("Connect to WI-FI or Cellular")
+                .setConfirmText("OK")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        sweetAlertDialog.dismissWithAnimation();
+                    }
+                }).show();
     }
 
 }

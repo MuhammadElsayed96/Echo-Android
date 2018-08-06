@@ -49,18 +49,12 @@ import com.muhammadelsayed.echo.R;
 
 public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private static final String TAG = "HomeFragment";
-    private DrawerLayout mDrawerLayout;
     FragmentManager fragmentManager;
     Fragment fragment;
+    private DrawerLayout mDrawerLayout;
 
     public static HomeFragment homeFragmentInstance() {
         return new HomeFragment();
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.wtf(TAG, "onCreate() has been instantiated");
     }
 
     @Override

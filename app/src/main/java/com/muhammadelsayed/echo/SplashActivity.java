@@ -7,11 +7,16 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.muhammadelsayed.echo.model.Article;
+import com.thefinestartist.Base;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
+import static com.muhammadelsayed.echo.Utils.isNetworkAvailable;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -48,6 +53,7 @@ public class SplashActivity extends AppCompatActivity {
             f9 = false, f10 = false, f11 = false, f12 = false, f13 = false, f14 = false, f15 = false, f16 = false,
             f17 = false, f18 = false, f19 = false, f20 = false, f21 = false, f22 = false, f23 = false, f24 = false,
             f25 = false, f26 = false, f28 = false;
+    private SweetAlertDialog exitOrRetry;
 
     private static List<Article> filterArticles(List<Article> articles) {
         Log.wtf(TAG, "filterArticles() has been instantiated");
@@ -59,24 +65,21 @@ public class SplashActivity extends AppCompatActivity {
         return filtered;
     }
 
-    private void moveToMain() {
-        Log.wtf(TAG, "moveToMain() has been instantiated");
-        bool = f1 && f2 && f3 && f4 && f5 && f6 && f7 && f8 && f9 && f10
-                && f11 && f12 && f13 && f14 && f15 && f16 && f17 && f18 && f19 && f20
-                && f21 && f22 && f23 && f24 && f25 && f26 && f28;
-        if (bool) {
-            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.wtf(TAG, "onCreate: has been instantiated");
-        bool = false;
+        Log.wtf(TAG, "onCreate(): has been instantiated");
+        Base.initialize(this);
+        if (isNetworkAvailable())
+            getData();
+        else
+            tryToConnectOrExit();
+    }
 
+    private void getData() {
+        Log.wtf(TAG, "getData(): has been instantiated");
+
+        bool = false;
         // BUSINESS
         options.put("section", "business");
         options.put("order-by", "newest");
@@ -116,7 +119,6 @@ public class SplashActivity extends AppCompatActivity {
                 Log.wtf(TAG, "onFailure(): CULTURE FAILED -> " + t.getMessage());
             }
         });
-
 
         // ART & DESIGN
         options.put("section", "artanddesign");
@@ -542,6 +544,41 @@ public class SplashActivity extends AppCompatActivity {
                 Log.wtf(TAG, "onFailure(): WORLD FAILED -> " + t.getMessage());
             }
         });
+    }
 
+    private void moveToMain() {
+        Log.wtf(TAG, "moveToMain() has been instantiated");
+        bool = f1 && f2 && f3 && f4 && f5 && f6 && f7 && f8 && f9 && f10
+                && f11 && f12 && f13 && f14 && f15 && f16 && f17 && f18 && f19 && f20
+                && f21 && f22 && f23 && f24 && f25 && f26 && f28;
+        if (bool) {
+            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    private void tryToConnectOrExit() {
+        Log.wtf(TAG, "tryToConnectOrExit(): has been instantiated");
+        if (exitOrRetry != null)
+            exitOrRetry = null;
+        exitOrRetry = new SweetAlertDialog(SplashActivity.this, SweetAlertDialog.WARNING_TYPE);
+        exitOrRetry.setCancelable(false);
+        exitOrRetry.setTitleText("No Internet Connection")
+                .setContentText("Connect to WI-FI or Cellular")
+                .setConfirmText("RETRY")
+                .setCancelText("EXIT")
+                .setCancelClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        sweetAlertDialog.dismissWithAnimation();
+                        finish();
+                    }
+                }).setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+            @Override
+            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                getData();
+            }
+        }).show();
     }
 }
