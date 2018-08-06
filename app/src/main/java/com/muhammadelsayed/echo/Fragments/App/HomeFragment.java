@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,9 +50,10 @@ import com.muhammadelsayed.echo.R;
 
 public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private static final String TAG = "HomeFragment";
+    private DrawerLayout mDrawerLayout;
+    private NavigationView navDrawer;
     FragmentManager fragmentManager;
     Fragment fragment;
-    private DrawerLayout mDrawerLayout;
 
     public static HomeFragment homeFragmentInstance() {
         return new HomeFragment();
@@ -66,7 +68,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
 
         mDrawerLayout = rootView.findViewById(R.id.drawer_layout);
-        NavigationView navDrawer = rootView.findViewById(R.id.nav_view);
+        navDrawer = rootView.findViewById(R.id.nav_view);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(getActivity(), mDrawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
         mDrawerLayout.setDrawerListener(toggle);
@@ -99,9 +101,70 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 replace(R.id.content_frame, fragment).
 
                 commit();
-
+        setupDrawerItems();
         setupDrawerContent(navDrawer);
         return rootView;
+    }
+
+    private void setupDrawerItems() {
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.settings_preferences), Context.MODE_PRIVATE);
+        boolean au = sharedPreferences.getBoolean("au_enabled", true);
+        boolean uk = sharedPreferences.getBoolean("uk_enabled", true);
+        boolean us = sharedPreferences.getBoolean("us_enabled", true);
+        boolean international = sharedPreferences.getBoolean("international_enabled", true);
+
+        boolean artdesign = sharedPreferences.getBoolean("artdesign_enabled", true);
+        boolean books = sharedPreferences.getBoolean("books_enabled", true);
+        boolean business = sharedPreferences.getBoolean("business_enabled", true);
+        boolean culture = sharedPreferences.getBoolean("culture_enabled", true);
+        boolean education = sharedPreferences.getBoolean("education_enabled", true);
+        boolean environment = sharedPreferences.getBoolean("environment_enabled", true);
+        boolean fashion = sharedPreferences.getBoolean("fashion_enabled", true);
+        boolean film = sharedPreferences.getBoolean("film_enabled", true);
+        boolean football = sharedPreferences.getBoolean("football_enabled", true);
+        boolean law = sharedPreferences.getBoolean("law_enabled", true);
+        boolean lifestyle = sharedPreferences.getBoolean("lifestyle_enabled", true);
+        boolean media = sharedPreferences.getBoolean("media_enabled", true);
+        boolean money = sharedPreferences.getBoolean("money_enabled", true);
+        boolean music = sharedPreferences.getBoolean("music_enabled", true);
+        boolean politics = sharedPreferences.getBoolean("politics_enabled", true);
+        boolean science = sharedPreferences.getBoolean("science_enabled", true);
+        boolean society = sharedPreferences.getBoolean("society_enabled", true);
+        boolean sport = sharedPreferences.getBoolean("sport_enabled", true);
+        boolean technology = sharedPreferences.getBoolean("technology_enabled", true);
+        boolean travel = sharedPreferences.getBoolean("travel_enabled", true);
+        boolean tvradio = sharedPreferences.getBoolean("tvradio_enabled", true);
+        boolean weather = sharedPreferences.getBoolean("weather_enabled", true);
+        Menu navMenu = navDrawer.getMenu();
+
+        navMenu.findItem(R.id.nav_au_news).setVisible(au);
+        navMenu.findItem(R.id.nav_uk_news).setVisible(uk);
+        navMenu.findItem(R.id.nav_us_news).setVisible(us);
+        navMenu.findItem(R.id.nav_news).setVisible(international);
+
+        navMenu.findItem(R.id.nav_art_design).setVisible(artdesign);
+        navMenu.findItem(R.id.nav_books).setVisible(books);
+        navMenu.findItem(R.id.nav_business).setVisible(business);
+        navMenu.findItem(R.id.nav_culture).setVisible(culture);
+        navMenu.findItem(R.id.nav_education).setVisible(education);
+        navMenu.findItem(R.id.nav_environment).setVisible(environment);
+        navMenu.findItem(R.id.nav_fashion).setVisible(fashion);
+        navMenu.findItem(R.id.nav_film).setVisible(film);
+        navMenu.findItem(R.id.nav_football).setVisible(football);
+        navMenu.findItem(R.id.nav_law).setVisible(law);
+        navMenu.findItem(R.id.nav_lifestyle).setVisible(lifestyle);
+        navMenu.findItem(R.id.nav_media).setVisible(media);
+        navMenu.findItem(R.id.nav_money).setVisible(money);
+        navMenu.findItem(R.id.nav_music).setVisible(music);
+        navMenu.findItem(R.id.nav_politics).setVisible(politics);
+        navMenu.findItem(R.id.nav_science).setVisible(science);
+        navMenu.findItem(R.id.nav_society).setVisible(society);
+        navMenu.findItem(R.id.nav_sport).setVisible(sport);
+        navMenu.findItem(R.id.nav_technology).setVisible(technology);
+        navMenu.findItem(R.id.nav_travel).setVisible(travel);
+        navMenu.findItem(R.id.nav_tv_radio).setVisible(tvradio);
+        navMenu.findItem(R.id.nav_weather).setVisible(weather);
+
     }
 
     private void setupDrawerContent(NavigationView navigationView) {

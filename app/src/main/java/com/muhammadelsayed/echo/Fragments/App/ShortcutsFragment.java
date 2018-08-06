@@ -30,8 +30,7 @@ public class ShortcutsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         Log.wtf(TAG, "onCreate() has been instantiated");
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
+
     }
 
     @Override
