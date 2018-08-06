@@ -1,8 +1,11 @@
 package com.muhammadelsayed.echo.Adapters;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.res.ResourcesCompat;
@@ -33,6 +36,7 @@ import java.util.Locale;
 import me.grantland.widget.AutofitTextView;
 
 import static android.content.Intent.createChooser;
+import static com.thefinestartist.utils.content.ContextUtil.getSharedPreferences;
 import static com.thefinestartist.utils.content.ContextUtil.getString;
 import static com.thefinestartist.utils.content.ContextUtil.startActivity;
 
@@ -187,30 +191,35 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             @Override
             public void onClick(View view) {
                 String articleUrl = article.getWebUrl();
-                new FinestWebView.Builder(mContext)
-                        .theme(R.style.FinestWebViewTheme)
-                        .titleDefault(getString(R.string.the_guardian))
-                        .showUrl(false)
-                        .statusBarColorRes(R.color.bluePrimaryDark)
-                        .toolbarColorRes(R.color.bluePrimary)
-                        .titleColorRes(R.color.finestWhite)
-                        .urlColorRes(R.color.bluePrimaryLight)
-                        .iconDefaultColorRes(R.color.finestWhite)
-                        .progressBarColorRes(R.color.finestWhite)
-                        .stringResCopiedToClipboard(R.string.copied_to_clipboard)
-                        .stringResCopiedToClipboard(R.string.copied_to_clipboard)
-                        .stringResCopiedToClipboard(R.string.copied_to_clipboard)
-                        .showSwipeRefreshLayout(true)
-                        .swipeRefreshColorRes(R.color.bluePrimaryDark)
-                        .menuSelector(R.drawable.selector_light_theme)
-                        .menuTextGravity(Gravity.CENTER)
-                        .menuTextPaddingRightRes(R.dimen.defaultMenuTextPaddingLeft)
-                        .dividerHeight(0)
-                        .gradientDivider(false)
-                        .setCustomAnimations(
-                                R.anim.slide_up, R.anim.hold, R.anim.hold, R.anim.slide_down)
-                        .show(articleUrl);
-
+                SharedPreferences preferences = getSharedPreferences(getString(R.string.settings_preferences), Context.MODE_PRIVATE);
+                boolean inAppBrowser = preferences.getBoolean("in_app_browser", true);
+                if (inAppBrowser) {
+                    new FinestWebView.Builder(mContext)
+                            .theme(R.style.FinestWebViewTheme)
+                            .titleDefault(getString(R.string.the_guardian))
+                            .showUrl(false)
+                            .statusBarColorRes(R.color.bluePrimaryDark)
+                            .toolbarColorRes(R.color.bluePrimary)
+                            .titleColorRes(R.color.finestWhite)
+                            .urlColorRes(R.color.bluePrimaryLight)
+                            .iconDefaultColorRes(R.color.finestWhite)
+                            .progressBarColorRes(R.color.finestWhite)
+                            .stringResCopiedToClipboard(R.string.copied_to_clipboard)
+                            .stringResCopiedToClipboard(R.string.copied_to_clipboard)
+                            .stringResCopiedToClipboard(R.string.copied_to_clipboard)
+                            .showSwipeRefreshLayout(true)
+                            .swipeRefreshColorRes(R.color.bluePrimaryDark)
+                            .menuSelector(R.drawable.selector_light_theme)
+                            .menuTextGravity(Gravity.CENTER)
+                            .menuTextPaddingRightRes(R.dimen.defaultMenuTextPaddingLeft)
+                            .dividerHeight(0)
+                            .gradientDivider(false)
+                            .setCustomAnimations(
+                                    R.anim.slide_up, R.anim.hold, R.anim.hold, R.anim.slide_down)
+                            .show(articleUrl);
+                } else {
+                    openWebPage(articleUrl);
+                }
                 long id = db.addArticleToHistory(article);
                 Log.d(TAG, "onClick: HISTORY = " + id);
             }
@@ -261,6 +270,19 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             mShareImageL = view.findViewById(R.id.large_share_news);
             mTitleTextL = view.findViewById(R.id.large_title_text);
             mSourceNameL = view.findViewById(R.id.large_news_source_name);
+        }
+    }
+
+    private void openWebPage(String url) {
+        Log.wtf(TAG, "openWebPage() has been instantiated");
+        try {
+            Uri webPage = Uri.parse(url);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(webPage);
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(mContext, "No application can handle this request. Please install a web browser or check your URL.", Toast.LENGTH_LONG).show();
+            e.printStackTrace();
         }
     }
 }

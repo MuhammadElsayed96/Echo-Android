@@ -19,8 +19,17 @@
             android:id="@+id/radio_australia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true"
             android:text="@string/australia_headlines"
+            android:textSize="20sp" />
+
+
+        <RadioButton
+            android:id="@+id/radio_international"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:checked="true"
+            android:text="@string/international_headlines"
             android:textSize="20sp" />
 
         <RadioButton
@@ -39,12 +48,5 @@
             android:text="@string/us_headlines"
             android:textSize="20sp" />
 
-        <RadioButton
-            android:id="@+id/radio_international"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/international_headlines"
-            android:textSize="20sp" />
     </RadioGroup>
 </android.support.constraint.ConstraintLayout>

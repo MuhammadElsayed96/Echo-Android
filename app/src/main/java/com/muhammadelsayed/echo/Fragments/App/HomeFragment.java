@@ -1,5 +1,7 @@
 package com.muhammadelsayed.echo.Fragments.App;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -78,11 +80,31 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
         fragmentManager = getChildFragmentManager();
         if (fragment == null) {
-            fragment = new InternationalHeadlines();
-            getActivity().setTitle(getResources().getString(R.string.international_headlines));
+            SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.settings_preferences), Context.MODE_PRIVATE);
+            boolean internationalHeadline = sharedPreferences.getBoolean("international_headline", true);
+            boolean usHeadline = sharedPreferences.getBoolean("us_headline", false);
+            boolean ukHeadline = sharedPreferences.getBoolean("uk_headline", false);
+            boolean australiaHeadline = sharedPreferences.getBoolean("australia_headline", false);
+            if (internationalHeadline) {
+                fragment = new InternationalHeadlines();
+                getActivity().setTitle(getResources().getString(R.string.international_headlines));
+            } else if (usHeadline) {
+                fragment = new UsHeadlines();
+                getActivity().setTitle(getResources().getString(R.string.us_headlines));
+            } else if (ukHeadline) {
+                fragment = new UkHeadlines();
+                getActivity().setTitle(getResources().getString(R.string.uk_headlines));
+            } else if (australiaHeadline) {
+                fragment = new AustraliaHeadlines();
+                getActivity().setTitle(getResources().getString(R.string.australia_headlines));
+            }
             navDrawer.setCheckedItem(R.id.nav_news);
         }
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+        fragmentManager.beginTransaction().
+
+                replace(R.id.content_frame, fragment).
+
+                commit();
 
         setupDrawerContent(navDrawer);
         return rootView;
@@ -183,8 +205,9 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             case R.id.nav_weather:
                 fragment = new Weather();
                 break;
-            default:
+            default: {
                 fragment = new InternationalHeadlines();
+            }
         }
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
     }
