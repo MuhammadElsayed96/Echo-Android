@@ -3,15 +3,23 @@ package com.muhammadelsayed.echo.SettingsFragment.FilterNewsTabs;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 
 import com.muhammadelsayed.echo.R;
+
+import static com.muhammadelsayed.echo.SettingsFragment.FilterNewsTabs.HeadlinesTab.au;
+import static com.muhammadelsayed.echo.SettingsFragment.FilterNewsTabs.HeadlinesTab.international;
+import static com.muhammadelsayed.echo.SettingsFragment.FilterNewsTabs.HeadlinesTab.uk;
+import static com.muhammadelsayed.echo.SettingsFragment.FilterNewsTabs.HeadlinesTab.us;
 
 public class SectionsTab extends Fragment {
     private static final String TAG = "SectionsTab";
@@ -273,6 +281,7 @@ public class SectionsTab extends Fragment {
     }
 
     private void initCheckBoxes() {
+        Log.d(TAG, "initCheckBoxes: ");
         sharedpreferences = getActivity().getSharedPreferences(getString(R.string.settings_preferences), Context.MODE_PRIVATE);
 
         artdesign = sharedpreferences.getBoolean("artdesign_enabled", true);
@@ -297,6 +306,7 @@ public class SectionsTab extends Fragment {
         travel = sharedpreferences.getBoolean("travel_enabled", true);
         tvradio = sharedpreferences.getBoolean("tvradio_enabled", true);
         weather = sharedpreferences.getBoolean("weather_enabled", true);
+        Log.d(TAG, "initCheckBoxes: artdesign = " + artdesign);
 
         if (artdesign)
             chkArtDesign.setChecked(true);
@@ -342,6 +352,66 @@ public class SectionsTab extends Fragment {
             chkTvRadio.setChecked(true);
         if (weather)
             chkWeather.setChecked(true);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Button reset = getActivity().findViewById(R.id.reset);
+
+        final SharedPreferences.Editor editor = sharedpreferences.edit();
+
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "onClick: ");
+                editor.putBoolean("au_enabled", true);
+                editor.putBoolean("uk_enabled", true);
+                editor.putBoolean("us_enabled", true);
+                editor.putBoolean("international_enabled", true);
+
+                editor.putBoolean("artdesign_enabled", true);
+                editor.putBoolean("books_enabled", true);
+                editor.putBoolean("business_enabled", true);
+                editor.putBoolean("culture_enabled", true);
+                editor.putBoolean("education_enabled", true);
+                editor.putBoolean("environment_enabled", true);
+                editor.putBoolean("fashion_enabled", true);
+                editor.putBoolean("film_enabled", true);
+                editor.putBoolean("football_enabled", true);
+                editor.putBoolean("law_enabled", true);
+                editor.putBoolean("lifestyle_enabled", true);
+                editor.putBoolean("media_enabled", true);
+                editor.putBoolean("money_enabled", true);
+                editor.putBoolean("music_enabled", true);
+                editor.putBoolean("politics_enabled", true);
+                editor.putBoolean("science_enabled", true);
+                editor.putBoolean("society_enabled", true);
+                editor.putBoolean("sport_enabled", true);
+                editor.putBoolean("technology_enabled", true);
+                editor.putBoolean("travel_enabled", true);
+                editor.putBoolean("tvradio_enabled", true);
+                editor.putBoolean("weather_enabled", true);
+                editor.apply();
+                initCheckBoxes();
+
+                au = sharedpreferences.getBoolean("au_enabled", true);
+                uk = sharedpreferences.getBoolean("uk_enabled", true);
+                us = sharedpreferences.getBoolean("us_enabled", true);
+                international = sharedpreferences.getBoolean("international_enabled", true);
+
+                if (au)
+                    HeadlinesTab.chkAustralia.setChecked(true);
+                if (uk)
+                    HeadlinesTab.chkUk.setChecked(true);
+                if (us)
+                    HeadlinesTab.chkUs.setChecked(true);
+                if (international)
+                    HeadlinesTab.chkInternational.setChecked(true);
+
+                Log.d(TAG, "onClick: artdesign = " + artdesign);
+            }
+        });
     }
 
 }

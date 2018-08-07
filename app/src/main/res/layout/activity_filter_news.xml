@@ -21,6 +21,8 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:title="Filter News"
+                app:titleTextColor="@color/finestWhite"
                 android:background="@color/colorPrimaryDark"
                 android:fitsSystemWindows="true"
                 android:minHeight="?android:attr/actionBarSize"
@@ -29,7 +31,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="match_parent">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -37,9 +39,11 @@
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:layout_marginLeft="20dp"
-                        android:layout_alignParentLeft="true"/>
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" />
 
                     <Button
+                        android:id="@+id/reset"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="RESET"
