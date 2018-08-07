@@ -19,9 +19,9 @@ public class HeadlinesTab extends Fragment {
 
     private RelativeLayout mAustralia, mUk, mUs, mInternational;
 
-    private CheckBox chkAustralia, chkUk, chkUs, chkInternational;
+    public static CheckBox chkAustralia, chkUk, chkUs, chkInternational;
 
-    private boolean au, uk, us, international;
+    public static boolean au, uk, us, international;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -103,7 +103,7 @@ public class HeadlinesTab extends Fragment {
             chkUs.setChecked(true);
         if (international)
             chkInternational.setChecked(true);
-
     }
+
     
 }

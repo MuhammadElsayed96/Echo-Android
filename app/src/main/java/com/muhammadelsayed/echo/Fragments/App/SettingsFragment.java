@@ -47,7 +47,7 @@ public class SettingsFragment extends Fragment {
         ConstraintLayout mEdition = rootView.findViewById(R.id.default_edition_layout);
         ConstraintLayout mArticle = rootView.findViewById(R.id.read_article_layout);
         ConstraintLayout mContact = rootView.findViewById(R.id.contact_layout);
-        ConstraintLayout mReorderSections = rootView.findViewById(R.id.reorder_news_layout);
+        ConstraintLayout mReorder = rootView.findViewById(R.id.reorder_news_layout);
 
         mAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +61,13 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(), FilterNewsActivity.class));
+            }
+        });
+
+        mReorder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), ReorderSectionsActivity.class));
             }
         });
 
@@ -82,13 +89,6 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(), ContactUsActivity.class));
-            }
-        });
-
-        mReorderSections.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getContext(), ReorderSectionsActivity.class));
             }
         });
     }

@@ -84,7 +84,7 @@
             android:background="@color/colorDivider"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/news_filter_layout" />
-        <!--News Filter-->
+        <!--Reorder Sections-->
         <android.support.constraint.ConstraintLayout
             android:id="@+id/reorder_news_layout"
             android:layout_width="match_parent"
