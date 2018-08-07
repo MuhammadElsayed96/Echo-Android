@@ -74,4 +74,8 @@
     <string name="send">send</string>
     <string name="settings_preferences">com.muhammadelsayed.echo.settings_preferences</string>
     <string name="reorder_sections">Reorder Sections</string>
+    <string name="reset">RESET</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="configure">Configure</string>
+    <string name="add_widget">Add widget</string>
 </resources>
