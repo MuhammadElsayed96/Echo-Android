@@ -16,6 +16,7 @@ import com.muhammadelsayed.echo.SettingsFragment.ContactUsActivity;
 import com.muhammadelsayed.echo.SettingsFragment.DefaultEditionActivity;
 import com.muhammadelsayed.echo.SettingsFragment.FilterNewsActivity;
 import com.muhammadelsayed.echo.SettingsFragment.ReadArticleActivity;
+import com.muhammadelsayed.echo.SettingsFragment.ReorderSectionsActivity;
 
 public class SettingsFragment extends Fragment {
     private static final String TAG = "SettingsFragment";
@@ -46,6 +47,7 @@ public class SettingsFragment extends Fragment {
         ConstraintLayout mEdition = rootView.findViewById(R.id.default_edition_layout);
         ConstraintLayout mArticle = rootView.findViewById(R.id.read_article_layout);
         ConstraintLayout mContact = rootView.findViewById(R.id.contact_layout);
+        ConstraintLayout mReorder = rootView.findViewById(R.id.reorder_news_layout);
 
         mAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +61,13 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(), FilterNewsActivity.class));
+            }
+        });
+
+        mReorder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), ReorderSectionsActivity.class));
             }
         });
 
