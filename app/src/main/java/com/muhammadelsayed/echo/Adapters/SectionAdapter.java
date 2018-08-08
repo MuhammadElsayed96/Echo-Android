@@ -30,7 +30,7 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.ItemView
 
     public SectionAdapter(Context context, List<Section> sections,
                           OnStartDragListener dragLlistener,
-                          OnSectionsListChangedListener listChangedListener){
+                          OnSectionsListChangedListener listChangedListener) {
         mSections = sections;
         mContext = context;
         mDragStartListener = dragLlistener;

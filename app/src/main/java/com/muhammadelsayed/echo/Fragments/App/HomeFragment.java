@@ -50,10 +50,10 @@ import com.muhammadelsayed.echo.R;
 
 public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private static final String TAG = "HomeFragment";
-    private DrawerLayout mDrawerLayout;
-    private NavigationView navDrawer;
     FragmentManager fragmentManager;
     Fragment fragment;
+    private DrawerLayout mDrawerLayout;
+    private NavigationView navDrawer;
 
     public static HomeFragment homeFragmentInstance() {
         return new HomeFragment();

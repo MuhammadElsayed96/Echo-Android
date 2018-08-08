@@ -34,7 +34,7 @@ public class SectionsTab extends Fragment {
             chkPolitics, chkScience, chkSociety, chkSport, chkTechnology, chkTravel, chkTvRadio, chkWeather;
 
     private boolean artdesign, books, business, culture, education, environment, fashion, film, football, law, lifestyle, media,
-                    money, music, politics, science, society, sport, technology, travel, tvradio, weather;
+            money, music, politics, science, society, sport, technology, travel, tvradio, weather;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,7 @@ public class SectionsTab extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView =  inflater.inflate(R.layout.fragment_sections_tab, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_sections_tab, container, false);
 
         initViews(rootView);
         initCheckBoxes();

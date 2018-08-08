@@ -1,11 +1,6 @@
 package com.muhammadelsayed.echo.SettingsFragment;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
-import com.muhammadelsayed.echo.R;
-
-public class ReorderSectionsActivity extends AppCompatActivity {
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -26,6 +21,7 @@ import com.muhammadelsayed.echo.model.Section;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class ReorderSectionsActivity extends AppCompatActivity implements OnSectionsListChangedListener,
         OnStartDragListener {
@@ -123,7 +119,8 @@ public class ReorderSectionsActivity extends AppCompatActivity implements OnSect
         if (!jsonListOfSortedSectionsIds.isEmpty()) {
 
             Gson gson = new Gson();
-            List<String> listOfSortedSectionssId = gson.fromJson(jsonListOfSortedSectionsIds, new TypeToken<List<String>>(){}.getType());
+            List<String> listOfSortedSectionssId = gson.fromJson(jsonListOfSortedSectionsIds, new TypeToken<List<String>>() {
+            }.getType());
 
             if (listOfSortedSectionssId != null && listOfSortedSectionssId.size() > 0) {
 

@@ -15,18 +15,15 @@ import com.muhammadelsayed.echo.R;
 
 public class HeadlinesTab extends Fragment {
     private static final String TAG = "HeadlinesTab";
-    private SharedPreferences sharedpreferences;
-
-    private RelativeLayout mAustralia, mUk, mUs, mInternational;
-
     public static CheckBox chkAustralia, chkUk, chkUs, chkInternational;
-
     public static boolean au, uk, us, international;
+    private SharedPreferences sharedpreferences;
+    private RelativeLayout mAustralia, mUk, mUs, mInternational;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-     
+
     }
 
     @Override
@@ -105,5 +102,5 @@ public class HeadlinesTab extends Fragment {
             chkInternational.setChecked(true);
     }
 
-    
+
 }
