@@ -1,4 +1,4 @@
-package com.muhammadelsayed.echo.model;
+package com.muhammadelsayed.echo.Model;
 
 public class Fields {
     private String thumbnail;

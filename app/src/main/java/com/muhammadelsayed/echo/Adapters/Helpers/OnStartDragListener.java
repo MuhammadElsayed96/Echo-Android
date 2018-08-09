@@ -1,4 +1,4 @@
-package com.muhammadelsayed.echo.Adapters.helpers;
+package com.muhammadelsayed.echo.Adapters.Helpers;
 
 import android.support.v7.widget.RecyclerView;
 

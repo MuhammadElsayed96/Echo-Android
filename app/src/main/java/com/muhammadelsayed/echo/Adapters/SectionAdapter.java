@@ -2,6 +2,7 @@ package com.muhammadelsayed.echo.Adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,12 +12,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.muhammadelsayed.echo.Adapters.helpers.ItemTouchHelperAdapter;
-import com.muhammadelsayed.echo.Adapters.helpers.ItemTouchHelperViewHolder;
-import com.muhammadelsayed.echo.Adapters.helpers.OnSectionsListChangedListener;
-import com.muhammadelsayed.echo.Adapters.helpers.OnStartDragListener;
+import com.muhammadelsayed.echo.Adapters.Helpers.ItemTouchHelperAdapter;
+import com.muhammadelsayed.echo.Adapters.Helpers.ItemTouchHelperViewHolder;
+import com.muhammadelsayed.echo.Adapters.Helpers.OnSectionsListChangedListener;
+import com.muhammadelsayed.echo.Adapters.Helpers.OnStartDragListener;
+import com.muhammadelsayed.echo.Model.Section;
 import com.muhammadelsayed.echo.R;
-import com.muhammadelsayed.echo.model.Section;
 
 import java.util.Collections;
 import java.util.List;
@@ -37,15 +38,16 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.ItemView
         mListChangedListener = listChangedListener;
     }
 
+    @NonNull
     @Override
-    public SectionAdapter.ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SectionAdapter.ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View rowView = LayoutInflater.from(parent.getContext()).inflate(R.layout.sections_item, parent, false);
         ItemViewHolder viewHolder = new ItemViewHolder(rowView);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(final ItemViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ItemViewHolder holder, int position) {
 
         final Section section = mSections.get(position);
 
@@ -83,10 +85,10 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.ItemView
 
     public static class ItemViewHolder extends RecyclerView.ViewHolder implements
             ItemTouchHelperViewHolder {
-        public final TextView sectionName;
-        public final ImageView imgDrag;
+        final TextView sectionName;
+        final ImageView imgDrag;
 
-        public ItemViewHolder(View itemView) {
+        ItemViewHolder(View itemView) {
             super(itemView);
             sectionName = itemView.findViewById(R.id.section_name);
             imgDrag = itemView.findViewById(R.id.img_drag);

@@ -1,4 +1,4 @@
-package com.muhammadelsayed.echo.database.model;
+package com.muhammadelsayed.echo.Database.Model;
 
 public class ArticleModel {
     public static final String SAVED_TABLE_NAME = "saved";

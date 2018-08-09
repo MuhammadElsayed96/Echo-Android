@@ -13,12 +13,12 @@ import android.view.View;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.muhammadelsayed.echo.Adapters.Helpers.OnSectionsListChangedListener;
+import com.muhammadelsayed.echo.Adapters.Helpers.OnStartDragListener;
+import com.muhammadelsayed.echo.Adapters.Helpers.SimpleItemTouchHelperCallback;
 import com.muhammadelsayed.echo.Adapters.SectionAdapter;
-import com.muhammadelsayed.echo.Adapters.helpers.OnSectionsListChangedListener;
-import com.muhammadelsayed.echo.Adapters.helpers.OnStartDragListener;
-import com.muhammadelsayed.echo.Adapters.helpers.SimpleItemTouchHelperCallback;
+import com.muhammadelsayed.echo.Model.Section;
 import com.muhammadelsayed.echo.R;
-import com.muhammadelsayed.echo.model.Section;
 
 import java.util.ArrayList;
 import java.util.List;

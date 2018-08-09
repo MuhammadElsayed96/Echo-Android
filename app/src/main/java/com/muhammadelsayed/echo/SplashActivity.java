@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.muhammadelsayed.echo.model.Article;
+import com.muhammadelsayed.echo.Model.Article;
 import com.thefinestartist.Base;
 
 import java.util.ArrayList;
@@ -48,6 +48,7 @@ public class SplashActivity extends AppCompatActivity {
     public static List<Article> mTvAndRadioArticleList = new ArrayList<>();
     public static List<Article> mWeatherArticleList = new ArrayList<>();
     public static List<Article> mWorldArticleList = new ArrayList<>();
+    public static Map<String, Object> sections = new HashMap<>();
     Map<String, Object> options = new HashMap<>();
     boolean bool, f1 = false, f2 = false, f3 = false, f4 = false, f5 = false, f6 = false, f7 = false, f8 = false,
             f9 = false, f10 = false, f11 = false, f12 = false, f13 = false, f14 = false, f15 = false, f16 = false,
@@ -69,6 +70,33 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.wtf(TAG, "onCreate(): has been instantiated");
+        sections.put("Business", mBusinessArticleList);
+        sections.put("Culture", mCultureArticleList);
+        sections.put("Art and design", mArtAndDesignArticleList);
+        sections.put("Environment", mEnvironmentArticleList);
+        sections.put("Books", mBooksArticleList);
+        sections.put("Australia news", mAustraliaNewsArticleList);
+        sections.put("UK news", mUkNewsArticleList);
+        sections.put("US news", mUsNewsArticleList);
+        sections.put("News", mInternationalArticleList);
+        sections.put("Education", mEducationArticleList);
+        sections.put("Fashion", mFashionArticleList);
+        sections.put("Film", mFilmArticleList);
+        sections.put("Football", mFootballArticleList);
+        sections.put("Law", mLawArticleList);
+        sections.put("Life and style", mLifestyleArticleList);
+        sections.put("Media", mMediaArticleList);
+        sections.put("Money", mMoneyArticleList);
+        sections.put("Music", mMusicArticleList);
+        sections.put("Politics", mPoliticsArticleList);
+        sections.put("Science", mScienceArticleList);
+        sections.put("Society", mSocietyArticleList);
+        sections.put("Sport", mSportArticleList);
+        sections.put("Technology", mTechnologyArticleList);
+        sections.put("Television & radio", mTvAndRadioArticleList);
+        sections.put("Travel", mTravelArticleList);
+        sections.put("Weather", mWeatherArticleList);
+        sections.put("World", mWorldArticleList);
         Base.initialize(this);
         if (isNetworkAvailable())
             getData();

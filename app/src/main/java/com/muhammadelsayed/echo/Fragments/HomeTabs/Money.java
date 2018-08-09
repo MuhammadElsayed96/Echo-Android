@@ -1,6 +1,7 @@
 package com.muhammadelsayed.echo.Fragments.HomeTabs;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,9 +14,9 @@ import android.widget.ProgressBar;
 
 import com.muhammadelsayed.echo.Adapters.EndlessRecyclerOnScrollListener;
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
+import com.muhammadelsayed.echo.Model.Article;
 import com.muhammadelsayed.echo.R;
 import com.muhammadelsayed.echo.Utils;
-import com.muhammadelsayed.echo.model.Article;
 
 import java.util.HashMap;
 import java.util.List;
@@ -38,7 +39,7 @@ public class Money extends Fragment implements SwipeRefreshLayout.OnRefreshListe
     private SweetAlertDialog noInternet;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.wtf(TAG, "onCreateView() has been instantiated");
         View rootView = inflater.inflate(R.layout.fragment_money, container, false);
         mProgressBar = rootView.findViewById(R.id.progressBar);

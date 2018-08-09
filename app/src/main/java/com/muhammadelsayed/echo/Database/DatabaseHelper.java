@@ -1,4 +1,4 @@
-package com.muhammadelsayed.echo.database;
+package com.muhammadelsayed.echo.Database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,10 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.muhammadelsayed.echo.database.model.ArticleModel;
-import com.muhammadelsayed.echo.model.Article;
-import com.muhammadelsayed.echo.model.Fields;
-import com.muhammadelsayed.echo.model.Tag;
+import com.muhammadelsayed.echo.Database.Model.ArticleModel;
+import com.muhammadelsayed.echo.Model.Article;
+import com.muhammadelsayed.echo.Model.Fields;
+import com.muhammadelsayed.echo.Model.Tag;
 
 import java.util.ArrayList;
 import java.util.Collections;

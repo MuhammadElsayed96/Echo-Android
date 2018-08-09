@@ -1,6 +1,6 @@
-package com.muhammadelsayed.echo.network;
+package com.muhammadelsayed.echo.Network;
 
-import com.muhammadelsayed.echo.model.Retrosponse;
+import com.muhammadelsayed.echo.Model.Retrosponse;
 
 import java.util.Map;
 

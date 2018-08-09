@@ -1,4 +1,4 @@
-package com.muhammadelsayed.echo.model;
+package com.muhammadelsayed.echo.Model;
 
 import java.util.Arrays;
 
@@ -12,8 +12,8 @@ public class Article {
     private String webTitle;
     private String webUrl;
     private String apiUrl;
-    private Fields fields;
-    private Tag[] tags;
+    private com.muhammadelsayed.echo.Model.Fields fields;
+    private com.muhammadelsayed.echo.Model.Tag[] tags;
     private boolean isHosted;
     private String pillarId;
     private String pillarName;
@@ -83,11 +83,11 @@ public class Article {
         this.apiUrl = apiUrl;
     }
 
-    public Fields getFields() {
+    public com.muhammadelsayed.echo.Model.Fields getFields() {
         return fields;
     }
 
-    public void setFields(Fields fields) {
+    public void setFields(com.muhammadelsayed.echo.Model.Fields fields) {
         this.fields = fields;
     }
 

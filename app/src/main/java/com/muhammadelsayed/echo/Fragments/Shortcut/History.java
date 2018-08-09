@@ -2,6 +2,7 @@ package com.muhammadelsayed.echo.Fragments.Shortcut;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,9 +13,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
+import com.muhammadelsayed.echo.Database.DatabaseHelper;
+import com.muhammadelsayed.echo.Model.Article;
 import com.muhammadelsayed.echo.R;
-import com.muhammadelsayed.echo.database.DatabaseHelper;
-import com.muhammadelsayed.echo.model.Article;
 
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class History extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.history_shortcuts_tab, container, false);

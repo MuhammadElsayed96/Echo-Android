@@ -48,8 +48,8 @@ import com.muhammadelsayed.echo.Fragments.HomeTabs.TvAndRadio;
 import com.muhammadelsayed.echo.Fragments.HomeTabs.UkHeadlines;
 import com.muhammadelsayed.echo.Fragments.HomeTabs.UsHeadlines;
 import com.muhammadelsayed.echo.Fragments.HomeTabs.Weather;
+import com.muhammadelsayed.echo.Model.Section;
 import com.muhammadelsayed.echo.R;
-import com.muhammadelsayed.echo.model.Section;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +62,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     Fragment fragment;
     private DrawerLayout mDrawerLayout;
     private NavigationView navDrawer;
+    public static List<Section> sortedSections;
 
     public static HomeFragment homeFragmentInstance() {
         return new HomeFragment();
@@ -126,7 +127,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         boolean uk = sharedPreferences.getBoolean("uk_enabled", true);
         boolean us = sharedPreferences.getBoolean("us_enabled", true);
         boolean international = sharedPreferences.getBoolean("international_enabled", true);
-
         boolean artdesign = sharedPreferences.getBoolean("artdesign_enabled", true);
         boolean books = sharedPreferences.getBoolean("books_enabled", true);
         boolean business = sharedPreferences.getBoolean("business_enabled", true);
@@ -151,7 +151,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         boolean weather = sharedPreferences.getBoolean("weather_enabled", true);
         Menu navMenu = navDrawer.getMenu();
 
-        List<Section> sortedSections = getSortedSections();
+        sortedSections = getSortedSections();
         for (int i = 0; i < sortedSections.size(); i++) {
             MenuItem item = navMenu.add(R.id.group_settings, sortedSections.get(i).getResId(), i, sortedSections.get(i).getTitle()).setCheckable(true);
             item.setIcon(R.drawable.ic_label_outline_black_24dp);
@@ -161,7 +161,6 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         navMenu.findItem(R.id.nav_uk_news).setVisible(uk);
         navMenu.findItem(R.id.nav_us_news).setVisible(us);
         navMenu.findItem(R.id.nav_news).setVisible(international);
-
         navMenu.findItem(R.string.nav_art_design).setVisible(artdesign);
         navMenu.findItem(R.string.nav_books).setVisible(books);
         navMenu.findItem(R.string.nav_business).setVisible(business);
@@ -191,7 +190,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                         selectDrawerItem(menuItem);
                         return true;
                     }
@@ -300,7 +299,8 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         if (!jsonListOfSortedSectionsIds.isEmpty()) {
 
             Gson gson = new Gson();
-            List<String> listOfSortedSectionsId = gson.fromJson(jsonListOfSortedSectionsIds, new TypeToken<List<String>>(){}.getType());
+            List<String> listOfSortedSectionsId = gson.fromJson(jsonListOfSortedSectionsIds, new TypeToken<List<String>>() {
+            }.getType());
             Log.d(TAG, "getSortedSections: listOfSortedSectionsId = " + listOfSortedSectionsId);
             if (listOfSortedSectionsId != null && listOfSortedSectionsId.size() > 0) {
 

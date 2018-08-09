@@ -1,6 +1,6 @@
-package com.muhammadelsayed.echo.Adapters.helpers;
+package com.muhammadelsayed.echo.Adapters.Helpers;
 
-import com.muhammadelsayed.echo.model.Section;
+import com.muhammadelsayed.echo.Model.Section;
 
 import java.util.List;
 

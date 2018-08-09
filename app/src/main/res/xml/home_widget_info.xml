@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-    android:configure="com.muhammadelsayed.echo.HomeWidgetConfigureActivity"
+    android:configure="com.muhammadelsayed.echo.Widgets.HomeWidgetConfigureActivity"
     android:initialKeyguardLayout="@layout/home_widget"
     android:initialLayout="@layout/home_widget"
     android:minHeight="180dp"
@@ -9,3 +9,19 @@
     android:resizeMode="vertical"
     android:updatePeriodMillis="1800000"
     android:widgetCategory="home_screen" />
+
+    <!--android:configure--><!--Activity to be launched,when you first install widget(drag n drop widget to homescreen) we will ignore this now -->
+
+
+    <!--android:initialLayout--><!-- the layout of the widget,just like setContentView(id) of Activity-->
+
+    <!--
+    android:minHeight="110dip"
+    android:minWidth="250dip"
+    --><!-- Minimum width and height of the widget -->
+
+    <!--android:previewImage--><!-- Image to be seen when you go to select a widget -->
+
+    <!--android:resizeMode--><!-- How to resize the widget -->
+
+    <!--android:updatePeriodMillis--><!-- Update interval i.e. @ this interval WidgetProvider onUpdate method will be called --><!-- Default is 30 min,you can set lower value,but it will take 30 min ,but it takes higher value than 30 min--><!-- 30 min =30x60x1000 -->

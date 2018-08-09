@@ -1,4 +1,4 @@
-package com.muhammadelsayed.echo.Adapters.helpers;
+package com.muhammadelsayed.echo.Adapters.Helpers;
 
 public interface ItemTouchHelperAdapter {
     boolean onItemMove(int fromPosition, int toPosition);

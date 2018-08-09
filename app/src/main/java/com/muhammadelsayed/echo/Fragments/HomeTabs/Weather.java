@@ -14,9 +14,9 @@ import android.widget.ProgressBar;
 
 import com.muhammadelsayed.echo.Adapters.EndlessRecyclerOnScrollListener;
 import com.muhammadelsayed.echo.Adapters.NewsAdapter;
+import com.muhammadelsayed.echo.Model.Article;
 import com.muhammadelsayed.echo.R;
 import com.muhammadelsayed.echo.Utils;
-import com.muhammadelsayed.echo.model.Article;
 
 import java.util.HashMap;
 import java.util.List;

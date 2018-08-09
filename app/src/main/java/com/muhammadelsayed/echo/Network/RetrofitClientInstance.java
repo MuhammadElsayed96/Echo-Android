@@ -1,8 +1,6 @@
-package com.muhammadelsayed.echo.network;
+package com.muhammadelsayed.echo.Network;
 
 import android.util.Log;
-
-import java.security.cert.CertificateException;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
@@ -42,14 +40,12 @@ public class RetrofitClientInstance {
                             new X509TrustManager() {
                                 @Override
                                 public void checkClientTrusted(
-                                        java.security.cert.X509Certificate[] chain, String authType)
-                                        throws CertificateException {
+                                        java.security.cert.X509Certificate[] chain, String authType) {
                                 }
 
                                 @Override
                                 public void checkServerTrusted(
-                                        java.security.cert.X509Certificate[] chain, String authType)
-                                        throws CertificateException {
+                                        java.security.cert.X509Certificate[] chain, String authType) {
                                 }
 
                                 @Override

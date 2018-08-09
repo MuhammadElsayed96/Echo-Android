@@ -3,12 +3,13 @@ package com.muhammadelsayed.echo;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.muhammadelsayed.echo.model.Article;
-import com.muhammadelsayed.echo.model.Retrosponse;
-import com.muhammadelsayed.echo.network.NewsClient;
-import com.muhammadelsayed.echo.network.RetrofitClientInstance;
+import com.muhammadelsayed.echo.Model.Article;
+import com.muhammadelsayed.echo.Model.Retrosponse;
+import com.muhammadelsayed.echo.Network.NewsClient;
+import com.muhammadelsayed.echo.Network.RetrofitClientInstance;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,7 +33,7 @@ public class Utils {
 
         call.enqueue(new Callback<Retrosponse>() {
             @Override
-            public void onResponse(Call<Retrosponse> call, Response<Retrosponse> response) {
+            public void onResponse(@NonNull Call<Retrosponse> call, @NonNull Response<Retrosponse> response) {
                 if (response.body() != null) {
                     if (response.body().getResponse().getStatus().equals("ok")) {
                         Log.d(TAG, "onResponse: " + response.body());
@@ -44,7 +45,7 @@ public class Utils {
             }
 
             @Override
-            public void onFailure(Call<Retrosponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<Retrosponse> call, @NonNull Throwable t) {
                 callback.onFailure(t);
             }
         });
@@ -58,7 +59,7 @@ public class Utils {
         Log.wtf(TAG, call.request().url().toString());
         call.enqueue(new Callback<Retrosponse>() {
             @Override
-            public void onResponse(Call<Retrosponse> call, Response<Retrosponse> response) {
+            public void onResponse(@NonNull Call<Retrosponse> call, @NonNull Response<Retrosponse> response) {
                 if (response.body() != null) {
                     if (response.body().getResponse().getStatus().equals("ok")) {
 
@@ -73,7 +74,7 @@ public class Utils {
             }
 
             @Override
-            public void onFailure(Call<Retrosponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<Retrosponse> call, @NonNull Throwable t) {
                 callback.onFailure(t);
             }
         });

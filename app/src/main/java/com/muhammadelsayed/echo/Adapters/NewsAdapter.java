@@ -19,10 +19,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.muhammadelsayed.echo.Database.DatabaseHelper;
+import com.muhammadelsayed.echo.Model.Article;
+import com.muhammadelsayed.echo.Model.Tag;
 import com.muhammadelsayed.echo.R;
-import com.muhammadelsayed.echo.database.DatabaseHelper;
-import com.muhammadelsayed.echo.model.Article;
-import com.muhammadelsayed.echo.model.Tag;
 import com.squareup.picasso.Picasso;
 import com.thefinestartist.finestwebview.FinestWebView;
 
