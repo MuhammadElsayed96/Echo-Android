@@ -20,6 +20,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.muhammadelsayed.echo.Fragments.HomeTabs.ArtAndDesign;
 import com.muhammadelsayed.echo.Fragments.HomeTabs.AustraliaHeadlines;
 import com.muhammadelsayed.echo.Fragments.HomeTabs.Books;
@@ -47,6 +49,12 @@ import com.muhammadelsayed.echo.Fragments.HomeTabs.UkHeadlines;
 import com.muhammadelsayed.echo.Fragments.HomeTabs.UsHeadlines;
 import com.muhammadelsayed.echo.Fragments.HomeTabs.Weather;
 import com.muhammadelsayed.echo.R;
+import com.muhammadelsayed.echo.model.Section;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.muhammadelsayed.echo.SettingsFragment.ReorderSectionsActivity.initSectionsList;
 
 public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private static final String TAG = "HomeFragment";
@@ -82,27 +90,33 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             boolean ukHeadline = sharedPreferences.getBoolean("uk_headline", false);
             boolean australiaHeadline = sharedPreferences.getBoolean("australia_headline", false);
             if (internationalHeadline) {
+                navDrawer.setCheckedItem(R.id.nav_news);
                 fragment = new InternationalHeadlines();
                 getActivity().setTitle(getResources().getString(R.string.international_headlines));
             } else if (usHeadline) {
+                navDrawer.setCheckedItem(R.id.nav_us_news);
                 fragment = new UsHeadlines();
                 getActivity().setTitle(getResources().getString(R.string.us_headlines));
             } else if (ukHeadline) {
+                navDrawer.setCheckedItem(R.id.nav_uk_news);
                 fragment = new UkHeadlines();
                 getActivity().setTitle(getResources().getString(R.string.uk_headlines));
             } else if (australiaHeadline) {
+                navDrawer.setCheckedItem(R.id.nav_au_news);
                 fragment = new AustraliaHeadlines();
                 getActivity().setTitle(getResources().getString(R.string.australia_headlines));
             }
-            navDrawer.setCheckedItem(R.id.nav_news);
         }
         fragmentManager.beginTransaction().
 
                 replace(R.id.content_frame, fragment).
 
                 commit();
+
+
         setupDrawerItems();
         setupDrawerContent(navDrawer);
+
         return rootView;
     }
 
@@ -137,33 +151,39 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         boolean weather = sharedPreferences.getBoolean("weather_enabled", true);
         Menu navMenu = navDrawer.getMenu();
 
+        List<Section> sortedSections = getSortedSections();
+        for (int i = 0; i < sortedSections.size(); i++) {
+            MenuItem item = navMenu.add(R.id.group_settings, sortedSections.get(i).getResId(), i, sortedSections.get(i).getTitle()).setCheckable(true);
+            item.setIcon(R.drawable.ic_label_outline_black_24dp);
+        }
+
         navMenu.findItem(R.id.nav_au_news).setVisible(au);
         navMenu.findItem(R.id.nav_uk_news).setVisible(uk);
         navMenu.findItem(R.id.nav_us_news).setVisible(us);
         navMenu.findItem(R.id.nav_news).setVisible(international);
 
-        navMenu.findItem(R.id.nav_art_design).setVisible(artdesign);
-        navMenu.findItem(R.id.nav_books).setVisible(books);
-        navMenu.findItem(R.id.nav_business).setVisible(business);
-        navMenu.findItem(R.id.nav_culture).setVisible(culture);
-        navMenu.findItem(R.id.nav_education).setVisible(education);
-        navMenu.findItem(R.id.nav_environment).setVisible(environment);
-        navMenu.findItem(R.id.nav_fashion).setVisible(fashion);
-        navMenu.findItem(R.id.nav_film).setVisible(film);
-        navMenu.findItem(R.id.nav_football).setVisible(football);
-        navMenu.findItem(R.id.nav_law).setVisible(law);
-        navMenu.findItem(R.id.nav_lifestyle).setVisible(lifestyle);
-        navMenu.findItem(R.id.nav_media).setVisible(media);
-        navMenu.findItem(R.id.nav_money).setVisible(money);
-        navMenu.findItem(R.id.nav_music).setVisible(music);
-        navMenu.findItem(R.id.nav_politics).setVisible(politics);
-        navMenu.findItem(R.id.nav_science).setVisible(science);
-        navMenu.findItem(R.id.nav_society).setVisible(society);
-        navMenu.findItem(R.id.nav_sport).setVisible(sport);
-        navMenu.findItem(R.id.nav_technology).setVisible(technology);
-        navMenu.findItem(R.id.nav_travel).setVisible(travel);
-        navMenu.findItem(R.id.nav_tv_radio).setVisible(tvradio);
-        navMenu.findItem(R.id.nav_weather).setVisible(weather);
+        navMenu.findItem(R.string.nav_art_design).setVisible(artdesign);
+        navMenu.findItem(R.string.nav_books).setVisible(books);
+        navMenu.findItem(R.string.nav_business).setVisible(business);
+        navMenu.findItem(R.string.nav_culture).setVisible(culture);
+        navMenu.findItem(R.string.nav_education).setVisible(education);
+        navMenu.findItem(R.string.nav_environment).setVisible(environment);
+        navMenu.findItem(R.string.nav_fashion).setVisible(fashion);
+        navMenu.findItem(R.string.nav_film).setVisible(film);
+        navMenu.findItem(R.string.nav_football).setVisible(football);
+        navMenu.findItem(R.string.nav_law).setVisible(law);
+        navMenu.findItem(R.string.nav_lifestyle).setVisible(lifestyle);
+        navMenu.findItem(R.string.nav_media).setVisible(media);
+        navMenu.findItem(R.string.nav_money).setVisible(money);
+        navMenu.findItem(R.string.nav_music).setVisible(music);
+        navMenu.findItem(R.string.nav_politics).setVisible(politics);
+        navMenu.findItem(R.string.nav_science).setVisible(science);
+        navMenu.findItem(R.string.nav_society).setVisible(society);
+        navMenu.findItem(R.string.nav_sport).setVisible(sport);
+        navMenu.findItem(R.string.nav_technology).setVisible(technology);
+        navMenu.findItem(R.string.nav_travel).setVisible(travel);
+        navMenu.findItem(R.string.nav_tv_radio).setVisible(tvradio);
+        navMenu.findItem(R.string.nav_weather).setVisible(weather);
 
     }
 
@@ -183,6 +203,7 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         getActivity().setTitle(menuItem.getTitle());
         mDrawerLayout.closeDrawers();
 
+        Log.d(TAG, "selectDrawerItem: getItemId = " + menuItem.getItemId());
         switch (menuItem.getItemId()) {
             case R.id.nav_au_news:
                 fragment = new AustraliaHeadlines();
@@ -196,70 +217,70 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             case R.id.nav_news:
                 fragment = new InternationalHeadlines();
                 break;
-            case R.id.nav_art_design:
+            case R.string.nav_art_design:
                 fragment = new ArtAndDesign();
                 break;
-            case R.id.nav_books:
+            case R.string.nav_books:
                 fragment = new Books();
                 break;
-            case R.id.nav_business:
+            case R.string.nav_business:
                 fragment = new Business();
                 break;
-            case R.id.nav_culture:
+            case R.string.nav_culture:
                 fragment = new Culture();
                 break;
-            case R.id.nav_education:
+            case R.string.nav_education:
                 fragment = new Education();
                 break;
-            case R.id.nav_environment:
+            case R.string.nav_environment:
                 fragment = new Environment();
                 break;
-            case R.id.nav_fashion:
+            case R.string.nav_fashion:
                 fragment = new Fashion();
                 break;
-            case R.id.nav_film:
+            case R.string.nav_film:
                 fragment = new Film();
                 break;
-            case R.id.nav_football:
+            case R.string.nav_football:
                 fragment = new Football();
                 break;
-            case R.id.nav_law:
+            case R.string.nav_law:
                 fragment = new Law();
                 break;
-            case R.id.nav_lifestyle:
+            case R.string.nav_lifestyle:
                 fragment = new Lifestyle();
                 break;
-            case R.id.nav_media:
+            case R.string.nav_media:
                 fragment = new Media();
                 break;
-            case R.id.nav_money:
+            case R.string.nav_money:
                 fragment = new Money();
                 break;
-            case R.id.nav_music:
+            case R.string.nav_music:
                 fragment = new Music();
                 break;
-            case R.id.nav_politics:
+            case R.string.nav_politics:
                 fragment = new Politics();
                 break;
-            case R.id.nav_science:
+            case R.string.nav_science:
                 fragment = new Science();
                 break;
-            case R.id.nav_society:
+            case R.string.nav_society:
                 fragment = new Society();
                 break;
-            case R.id.nav_sport:
+            case R.string.nav_sport:
                 fragment = new Sport();
                 break;
-            case R.id.nav_technology:
+            case R.string.nav_technology:
                 fragment = new Technology();
                 break;
-            case R.id.nav_travel:
+            case R.string.nav_travel:
                 fragment = new Travel();
                 break;
-            case R.id.nav_tv_radio:
+            case R.string.nav_tv_radio:
                 fragment = new TvAndRadio();
                 break;
-            case R.id.nav_weather:
+            case R.string.nav_weather:
                 fragment = new Weather();
                 break;
             default: {
@@ -267,6 +288,44 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
             }
         }
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+    }
+
+    private List<Section> getSortedSections() {
+        List<Section> sectionsList = initSectionsList();
+        List<Section> sortedSections = new ArrayList<>();
+        SharedPreferences mSharedPreferences;
+        mSharedPreferences = getActivity().getSharedPreferences(getString(R.string.settings_preferences), Context.MODE_PRIVATE);
+        String jsonListOfSortedSectionsIds = mSharedPreferences.getString("list_of_sorted_sections_ids", "");
+
+        if (!jsonListOfSortedSectionsIds.isEmpty()) {
+
+            Gson gson = new Gson();
+            List<String> listOfSortedSectionsId = gson.fromJson(jsonListOfSortedSectionsIds, new TypeToken<List<String>>(){}.getType());
+            Log.d(TAG, "getSortedSections: listOfSortedSectionsId = " + listOfSortedSectionsId);
+            if (listOfSortedSectionsId != null && listOfSortedSectionsId.size() > 0) {
+
+                for (String id : listOfSortedSectionsId) {
+                    for (Section section : sectionsList) {
+                        if (String.valueOf(section.getResId()).equals(id)) {
+                            sortedSections.add(section);
+                            sectionsList.remove(section);
+                            break;
+                        }
+                    }
+                }
+
+            }
+
+            if (sectionsList.size() > 0) {
+                sortedSections.addAll(sectionsList);
+            }
+
+            return sortedSections;
+
+        } else {
+            return sectionsList;
+        }
+
     }
 
     @Override

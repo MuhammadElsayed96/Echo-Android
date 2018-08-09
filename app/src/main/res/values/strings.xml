@@ -78,4 +78,36 @@
     <string name="appwidget_text">EXAMPLE</string>
     <string name="configure">Configure</string>
     <string name="add_widget">Add widget</string>
+
+    <!--THESE ARE NOT TO MISS WITH, AT ANY CIRCUMSTANCES-->
+    <!--THESE ARE USED FOR THE NAVIGATION DRAWER MENU ITEMS AS AN EXCHANGE OF ID'S-->
+    <!--THESE ARE LIFE SAVERS-->
+    <!--DO NOT ALTER OR DELETE ANY OF THEM-->
+    <string name="nav_au_news">nav_au_news</string>
+    <string name="nav_uk_news">nav_uk_news</string>
+    <string name="nav_us_news">nav_us_news</string>
+    <string name="nav_news">nav_news</string>
+    <string name="nav_art_design">nav_art_design</string>
+    <string name="nav_books">nav_books</string>
+    <string name="nav_business">nav_business</string>
+    <string name="nav_culture">nav_culture</string>
+    <string name="nav_education">nav_education</string>
+    <string name="nav_environment">nav_environment</string>
+    <string name="nav_fashion">nav_fashion</string>
+    <string name="nav_film">nav_film</string>
+    <string name="nav_football">nav_football</string>
+    <string name="nav_law">nav_law</string>
+    <string name="nav_lifestyle">nav_lifestyle</string>
+    <string name="nav_media">nav_media</string>
+    <string name="nav_money">nav_money</string>
+    <string name="nav_music">nav_music</string>
+    <string name="nav_politics">nav_politics</string>
+    <string name="nav_science">nav_science</string>
+    <string name="nav_society">nav_society</string>
+    <string name="nav_sport">nav_sport</string>
+    <string name="nav_technology">nav_technology</string>
+    <string name="nav_travel">nav_travel</string>
+    <string name="nav_tv_radio">nav_tv_radio</string>
+    <string name="nav_weather">nav_weather</string>
+
 </resources>

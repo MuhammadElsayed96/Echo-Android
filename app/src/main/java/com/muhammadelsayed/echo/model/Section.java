@@ -1,23 +1,23 @@
 package com.muhammadelsayed.echo.model;
 
 public class Section {
-    private String id;
+    private int resId;
     private String title;
 
     public Section() {
     }
 
-    public Section(String id, String title) {
-        this.id = id;
+    public Section(int resId, String title) {
+        this.resId = resId;
         this.title = title;
     }
 
-    public String getId() {
-        return id;
+    public int getResId() {
+        return resId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setResId(int resId) {
+        this.resId = resId;
     }
 
     public String getTitle() {
@@ -31,7 +31,7 @@ public class Section {
     @Override
     public String toString() {
         return "Section{" +
-                "id='" + id + '\'' +
+                "resId=" + resId +
                 ", title='" + title + '\'' +
                 '}';
     }

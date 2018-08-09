@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.View;
 
 import com.google.gson.Gson;
@@ -63,35 +64,31 @@ public class ReorderSectionsActivity extends AppCompatActivity implements OnSect
     }
 
 
-    private List<Section> initSectionsList() {
+    public static List<Section> initSectionsList() {
         List<Section> sections = new ArrayList<>();
 
-        sections.add(new Section("nav_au_news", "Australia Headlines"));
-        sections.add(new Section("nav_uk_news", "UK Headlines"));
-        sections.add(new Section("nav_us_news", "US Headlines"));
-        sections.add(new Section("nav_news", "International Headlines"));
-        sections.add(new Section("nav_art_design", "Art & Design"));
-        sections.add(new Section("nav_books", "Books"));
-        sections.add(new Section("nav_business", "Business"));
-        sections.add(new Section("nav_culture", "Culture"));
-        sections.add(new Section("nav_education", "Education"));
-        sections.add(new Section("nav_environment", "Environment"));
-        sections.add(new Section("nav_fashion", "Fashion"));
-        sections.add(new Section("nav_film", "Film"));
-        sections.add(new Section("nav_football", "Football"));
-        sections.add(new Section("nav_law", "Law"));
-        sections.add(new Section("nav_lifestyle", "Lifestyle"));
-        sections.add(new Section("nav_media", "Media"));
-        sections.add(new Section("nav_money", "Money"));
-        sections.add(new Section("nav_music", "Music"));
-        sections.add(new Section("nav_politics", "Politics"));
-        sections.add(new Section("nav_science", "Science"));
-        sections.add(new Section("nav_society", "Society"));
-        sections.add(new Section("nav_sport", "Sport"));
-        sections.add(new Section("nav_technology", "Technology"));
-        sections.add(new Section("nav_travel", "Travel"));
-        sections.add(new Section("nav_tv_radio", "Tv & Radio"));
-        sections.add(new Section("nav_weather", "Weather"));
+        sections.add(new Section(R.string.nav_art_design, "Art & Design"));
+        sections.add(new Section(R.string.nav_books, "Books"));
+        sections.add(new Section(R.string.nav_business, "Business"));
+        sections.add(new Section(R.string.nav_culture, "Culture"));
+        sections.add(new Section(R.string.nav_education, "Education"));
+        sections.add(new Section(R.string.nav_environment, "Environment"));
+        sections.add(new Section(R.string.nav_fashion, "Fashion"));
+        sections.add(new Section(R.string.nav_film, "Film"));
+        sections.add(new Section(R.string.nav_football, "Football"));
+        sections.add(new Section(R.string.nav_law, "Law"));
+        sections.add(new Section(R.string.nav_lifestyle, "Lifestyle"));
+        sections.add(new Section(R.string.nav_media, "Media"));
+        sections.add(new Section(R.string.nav_money, "Money"));
+        sections.add(new Section(R.string.nav_music, "Music"));
+        sections.add(new Section(R.string.nav_politics, "Politics"));
+        sections.add(new Section(R.string.nav_science, "Science"));
+        sections.add(new Section(R.string.nav_society, "Society"));
+        sections.add(new Section(R.string.nav_sport, "Sport"));
+        sections.add(new Section(R.string.nav_technology, "Technology"));
+        sections.add(new Section(R.string.nav_travel, "Travel"));
+        sections.add(new Section(R.string.nav_tv_radio, "Tv & Radio"));
+        sections.add(new Section(R.string.nav_weather, "Weather"));
 
         return sections;
     }
@@ -99,7 +96,7 @@ public class ReorderSectionsActivity extends AppCompatActivity implements OnSect
     private void createListofSortedSectionIds() {
         List<String> sortedIds = new ArrayList<>();
         for (Section section : mSections) {
-            sortedIds.add(section.getId());
+            sortedIds.add(""+section.getResId());
         }
 
         Gson gson = new Gson();
@@ -119,14 +116,13 @@ public class ReorderSectionsActivity extends AppCompatActivity implements OnSect
         if (!jsonListOfSortedSectionsIds.isEmpty()) {
 
             Gson gson = new Gson();
-            List<String> listOfSortedSectionssId = gson.fromJson(jsonListOfSortedSectionsIds, new TypeToken<List<String>>() {
-            }.getType());
+            List<String> listOfSortedSectionsId = gson.fromJson(jsonListOfSortedSectionsIds, new TypeToken<List<String>>(){}.getType());
+            Log.d(TAG, "getSectionsList: listOfSortedSectionsId = " + listOfSortedSectionsId);
+            if (listOfSortedSectionsId != null && listOfSortedSectionsId.size() > 0) {
 
-            if (listOfSortedSectionssId != null && listOfSortedSectionssId.size() > 0) {
-
-                for (String id : listOfSortedSectionssId) {
+                for (String id : listOfSortedSectionsId) {
                     for (Section section : sectionsList) {
-                        if (section.getId().equals(id)) {
+                        if (String.valueOf(section.getResId()).equals(id)) {
                             sortedSectionsList.add(section);
                             sectionsList.remove(section);
                             break;
@@ -145,7 +141,6 @@ public class ReorderSectionsActivity extends AppCompatActivity implements OnSect
         } else {
             return sectionsList;
         }
-
     }
 
     @Override
