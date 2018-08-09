@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,25 +22,22 @@ import static com.muhammadelsayed.echo.SettingsFragment.FilterNewsTabs.Headlines
 
 public class SectionsTab extends Fragment {
     private static final String TAG = "SectionsTab";
-
     private SharedPreferences sharedpreferences;
-
-    private int count;
-
     private RelativeLayout mArtDesign, mBooks, mBusiness, mCulture, mEducation, mEnvironment, mFashion, mFilm, mFootball, mLaw,
             mLifestyle, mMedia, mMoney, mMusic, mPolitics, mScience, mSociety, mSport, mTechnology, mTravel, mTvRadio, mWeather;
-
     private CheckBox chkArtDesign, chkBooks, chkBusiness, chkCulture, chkEducation, chkEnvironment,
             chkFashion, chkFilm, chkFootball, chkLaw, chkLifestyle, chkMedia, chkMoney, chkMusic,
             chkPolitics, chkScience, chkSociety, chkSport, chkTechnology, chkTravel, chkTvRadio, chkWeather;
-
     private boolean artdesign, books, business, culture, education, environment, fashion, film, football, law, lifestyle, media,
             money, music, politics, science, society, sport, technology, travel, tvradio, weather;
+
+    private int count;
+    private final int MAX_CHECKED_NUM = 22;
+    private final int MIN_CHECKED_NUM = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -49,13 +45,9 @@ public class SectionsTab extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_sections_tab, container, false);
-
         initViews(rootView);
         initCheckBoxes();
-
         final SharedPreferences.Editor editor = sharedpreferences.edit();
-
-
         chkArtDesign.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -65,96 +57,79 @@ public class SectionsTab extends Fragment {
                 validateCheckBoxes();
             }
         });
-
         chkBooks.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 editor.putBoolean("books_enabled", chkBooks.isChecked());
                 editor.apply();
-
                 countCheckedBox(b);
                 validateCheckBoxes();
 
             }
         });
-
         chkBusiness.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    editor.putBoolean("business_enabled", chkBusiness.isChecked());
-                    editor.apply();
+                editor.putBoolean("business_enabled", chkBusiness.isChecked());
+                editor.apply();
                 countCheckedBox(b);
                 validateCheckBoxes();
-
-                }
+            }
         });
-
         chkCulture.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    editor.putBoolean("culture_enabled", chkCulture.isChecked());
-                    editor.apply();
+                editor.putBoolean("culture_enabled", chkCulture.isChecked());
+                editor.apply();
                 countCheckedBox(b);
                 validateCheckBoxes();
-
             }
         });
-
         chkEducation.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    editor.putBoolean("education_enabled", chkEducation.isChecked());
-                    editor.apply();
+                editor.putBoolean("education_enabled", chkEducation.isChecked());
+                editor.apply();
                 countCheckedBox(b);
                 validateCheckBoxes();
-
-                }
+            }
         });
-
         chkEnvironment.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    editor.putBoolean("environment_enabled", chkEnvironment.isChecked());
-                    editor.apply();
+                editor.putBoolean("environment_enabled", chkEnvironment.isChecked());
+                editor.apply();
                 countCheckedBox(b);
                 validateCheckBoxes();
-
             }
         });
-
         chkFashion.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    editor.putBoolean("fashion_enabled", chkFashion.isChecked());
-                    editor.apply();
+                editor.putBoolean("fashion_enabled", chkFashion.isChecked());
+                editor.apply();
                 countCheckedBox(b);
                 validateCheckBoxes();
-
             }
         });
-
         chkFilm.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    editor.putBoolean("film_enabled", chkFilm.isChecked());
-                    editor.apply();
+                editor.putBoolean("film_enabled", chkFilm.isChecked());
+                editor.apply();
                 countCheckedBox(b);
                 validateCheckBoxes();
-
             }
         });
-
         chkFootball.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    editor.putBoolean("football_enabled", chkFootball.isChecked());
-                    editor.apply();
+                editor.putBoolean("football_enabled", chkFootball.isChecked());
+                editor.apply();
                 countCheckedBox(b);
                 validateCheckBoxes();
-
-                }
+            }
         });
-
         chkLaw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -162,10 +137,8 @@ public class SectionsTab extends Fragment {
                 editor.apply();
                 countCheckedBox(b);
                 validateCheckBoxes();
-
             }
         });
-
         chkLifestyle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -173,10 +146,8 @@ public class SectionsTab extends Fragment {
                 editor.apply();
                 countCheckedBox(b);
                 validateCheckBoxes();
-
             }
         });
-
         chkMedia.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -186,7 +157,6 @@ public class SectionsTab extends Fragment {
                 validateCheckBoxes();
             }
         });
-
         chkMoney.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -196,7 +166,6 @@ public class SectionsTab extends Fragment {
                 validateCheckBoxes();
             }
         });
-
         chkMusic.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -206,7 +175,6 @@ public class SectionsTab extends Fragment {
                 validateCheckBoxes();
             }
         });
-
         chkPolitics.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -216,7 +184,6 @@ public class SectionsTab extends Fragment {
                 validateCheckBoxes();
             }
         });
-
         chkScience.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -226,7 +193,6 @@ public class SectionsTab extends Fragment {
                 validateCheckBoxes();
             }
         });
-
         chkSociety.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -236,7 +202,6 @@ public class SectionsTab extends Fragment {
                 validateCheckBoxes();
             }
         });
-
         chkSport.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -246,7 +211,6 @@ public class SectionsTab extends Fragment {
                 validateCheckBoxes();
             }
         });
-
         chkTechnology.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -256,7 +220,6 @@ public class SectionsTab extends Fragment {
                 validateCheckBoxes();
             }
         });
-
         chkTravel.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -266,7 +229,6 @@ public class SectionsTab extends Fragment {
                 validateCheckBoxes();
             }
         });
-
         chkTvRadio.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -276,7 +238,6 @@ public class SectionsTab extends Fragment {
                 validateCheckBoxes();
             }
         });
-
         chkWeather.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -340,7 +301,6 @@ public class SectionsTab extends Fragment {
     private void initCheckBoxes() {
         count = 0;
         sharedpreferences = getActivity().getSharedPreferences(getString(R.string.settings_preferences), Context.MODE_PRIVATE);
-
         artdesign = sharedpreferences.getBoolean("artdesign_enabled", true);
         books = sharedpreferences.getBoolean("books_enabled", true);
         business = sharedpreferences.getBoolean("business_enabled", true);
@@ -363,7 +323,6 @@ public class SectionsTab extends Fragment {
         travel = sharedpreferences.getBoolean("travel_enabled", true);
         tvradio = sharedpreferences.getBoolean("tvradio_enabled", true);
         weather = sharedpreferences.getBoolean("weather_enabled", true);
-        Log.d(TAG, "initCheckBoxes: artdesign = " + artdesign);
 
         initCount(artdesign);
         initCount(books);
@@ -419,18 +378,15 @@ public class SectionsTab extends Fragment {
 
     private void countCheckedBox(boolean b) {
         if (b) {
-            if (count < 22)
+            if (count < MAX_CHECKED_NUM)
                 count++;
-        } else if (count > 0){
+        } else if (count >= MIN_CHECKED_NUM){
             count--;
         }
     }
 
-
     private void validateCheckBoxes() {
-
-        Log.d(TAG, "validateCheckBoxes: COUNT = " + count);
-        if (count <= 1) {
+        if (count <= MIN_CHECKED_NUM) {
             chkArtDesign.setEnabled(!chkArtDesign.isChecked());
             chkBooks.setEnabled(!chkBooks.isChecked());
             chkBusiness.setEnabled(!chkBusiness.isChecked());
@@ -476,23 +432,17 @@ public class SectionsTab extends Fragment {
             chkTravel.setEnabled(true);
             chkTvRadio.setEnabled(true);
             chkWeather.setEnabled(true);
-
         }
-
     }
-
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Button reset = getActivity().findViewById(R.id.reset);
-
         final SharedPreferences.Editor editor = sharedpreferences.edit();
-
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "onClick: ");
                 editor.putBoolean("au_enabled", true);
                 editor.putBoolean("uk_enabled", true);
                 editor.putBoolean("us_enabled", true);
@@ -539,5 +489,4 @@ public class SectionsTab extends Fragment {
                 }
         });
     }
-
 }

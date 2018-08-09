@@ -20,9 +20,7 @@ import com.muhammadelsayed.echo.R;
 import java.util.List;
 
 public class Saved extends Fragment {
-
     private static final String TAG = "Saved";
-
     private NewsAdapter mSavedNewsAdapter;
     private RecyclerView mSavedRecycler;
     private TextView mNoResults;
@@ -32,7 +30,6 @@ public class Saved extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         db = new DatabaseHelper(getActivity());
     }
 
@@ -53,14 +50,12 @@ public class Saved extends Fragment {
 
         Log.wtf(TAG, "onCreateView: SAVED = " + db.getAllSavedArticles());
         List<Article> articles = db.getAllSavedArticles();
-
         if (articles.isEmpty())
             mNoResults.setVisibility(View.VISIBLE);
         else {
             mSavedNewsAdapter = new NewsAdapter(getContext(), articles);
             mSavedRecycler.setAdapter(mSavedNewsAdapter);
         }
-
         return rootView;
     }
 }

@@ -109,8 +109,11 @@
     <string name="nav_travel">nav_travel</string>
     <string name="nav_tv_radio">nav_tv_radio</string>
     <string name="nav_weather">nav_weather</string>
+    <!--CLOSING TAG-->
+
+
     <string name="no_data">No News Found! \n Connect to Internet</string>
-    <string name="null">NULL</string>
+    <string name="null_str">NULL</string>
     <string name="empty">empty</string>
 
 </resources>

@@ -13,9 +13,9 @@ import android.view.View;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.muhammadelsayed.echo.Adapters.Helpers.OnSectionsListChangedListener;
-import com.muhammadelsayed.echo.Adapters.Helpers.OnStartDragListener;
-import com.muhammadelsayed.echo.Adapters.Helpers.SimpleItemTouchHelperCallback;
+import com.muhammadelsayed.echo.Adapters.ItemTouchHelpers.OnSectionsListChangedListener;
+import com.muhammadelsayed.echo.Adapters.ItemTouchHelpers.OnStartDragListener;
+import com.muhammadelsayed.echo.Adapters.ItemTouchHelpers.SimpleItemTouchHelperCallback;
 import com.muhammadelsayed.echo.Adapters.SectionAdapter;
 import com.muhammadelsayed.echo.Model.Section;
 import com.muhammadelsayed.echo.R;

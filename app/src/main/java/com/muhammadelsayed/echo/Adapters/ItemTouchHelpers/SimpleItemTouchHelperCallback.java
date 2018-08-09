@@ -1,4 +1,4 @@
-package com.muhammadelsayed.echo.Adapters.Helpers;
+package com.muhammadelsayed.echo.Adapters.ItemTouchHelpers;
 
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;

@@ -1,4 +1,4 @@
-package com.muhammadelsayed.echo.Adapters.Helpers;
+package com.muhammadelsayed.echo.Adapters.ItemTouchHelpers;
 
 import com.muhammadelsayed.echo.Model.Section;
 

@@ -60,7 +60,6 @@ public class SearchFragment extends Fragment {
         mNoResults = rootView.findViewById(R.id.no_results);
         mSearchView = rootView.findViewById(R.id.search_view);
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-
             @Override
             public boolean onQueryTextChange(String newText) {
                 //Log.wtf("onQueryTextChange", "called");
@@ -73,7 +72,6 @@ public class SearchFragment extends Fragment {
                 return false;
             }
         });
-
         return rootView;
     }
 

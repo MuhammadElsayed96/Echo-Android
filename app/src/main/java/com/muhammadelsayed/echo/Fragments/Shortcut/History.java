@@ -34,7 +34,6 @@ public class History extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         db = new DatabaseHelper(getActivity());
-
     }
 
     @Override
@@ -51,11 +50,9 @@ public class History extends Fragment {
         mHistoryRecycler.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
         mHistoryRecycler.setItemViewCacheSize(100);
         mNoResults = rootView.findViewById(R.id.no_results);
-
         Log.wtf(TAG, "onCreateView: HISTORY = " + db.getAllHistoryArticles());
 
         List<Article> articles = db.getAllHistoryArticles();
-
         if (articles.isEmpty())
             mNoResults.setVisibility(View.VISIBLE);
         else {
@@ -64,5 +61,4 @@ public class History extends Fragment {
         }
         return rootView;
     }
-
 }

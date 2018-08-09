@@ -20,12 +20,14 @@ public class HeadlinesTab extends Fragment {
     public static boolean au, uk, us, international;
     private SharedPreferences sharedpreferences;
     private RelativeLayout mAustralia, mUk, mUs, mInternational;
+
     private int count;
+    private final int MAX_CHECKED_NUM = 4;
+    private final int MIN_CHECKED_NUM = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -33,10 +35,8 @@ public class HeadlinesTab extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_headlines_tab, container, false);
-
         initViews(rootView);
         initCheckBoxes();
-
         final SharedPreferences.Editor editor = sharedpreferences.edit();
 
         chkAustralia.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -48,7 +48,6 @@ public class HeadlinesTab extends Fragment {
                 validateCheckBoxes();
             }
         });
-
         chkUk.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -58,7 +57,6 @@ public class HeadlinesTab extends Fragment {
                 validateCheckBoxes();
             }
         });
-
         chkUs.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -68,7 +66,6 @@ public class HeadlinesTab extends Fragment {
                 validateCheckBoxes();
             }
         });
-
         chkInternational.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -78,7 +75,6 @@ public class HeadlinesTab extends Fragment {
                 validateCheckBoxes();
             }
         });
-
         return rootView;
     }
 
@@ -97,7 +93,6 @@ public class HeadlinesTab extends Fragment {
     private void initCheckBoxes() {
         count = 0;
         sharedpreferences = getActivity().getSharedPreferences(getString(R.string.settings_preferences), Context.MODE_PRIVATE);
-
         au = sharedpreferences.getBoolean("au_enabled", true);
         uk = sharedpreferences.getBoolean("uk_enabled", true);
         us = sharedpreferences.getBoolean("us_enabled", true);
@@ -114,7 +109,6 @@ public class HeadlinesTab extends Fragment {
         chkInternational.setChecked(international);
     }
 
-
     private void initCount(boolean b) {
         if (b)
             count++;
@@ -122,18 +116,16 @@ public class HeadlinesTab extends Fragment {
 
     private void countCheckedBox(boolean b) {
         if (b) {
-            if (count < 4)
+            if (count < MAX_CHECKED_NUM)
                 count++;
-        } else if (count > 0){
+        } else if (count >= MIN_CHECKED_NUM){
             count--;
         }
     }
 
-
     private void validateCheckBoxes() {
-
         Log.d(TAG, "validateCheckBoxes: COUNT = " + count);
-        if (count <= 1) {
+        if (count <= MIN_CHECKED_NUM) {
             chkAustralia.setEnabled(!chkAustralia.isChecked());
             chkUk.setEnabled(!chkUk.isChecked());
             chkUs.setEnabled(!chkUs.isChecked());
@@ -143,8 +135,6 @@ public class HeadlinesTab extends Fragment {
             chkUk.setEnabled(true);
             chkUs.setEnabled(true);
             chkInternational.setEnabled(true);
-
         }
-
     }
 }

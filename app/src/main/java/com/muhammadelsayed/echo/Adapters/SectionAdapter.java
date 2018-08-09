@@ -12,10 +12,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.muhammadelsayed.echo.Adapters.Helpers.ItemTouchHelperAdapter;
-import com.muhammadelsayed.echo.Adapters.Helpers.ItemTouchHelperViewHolder;
-import com.muhammadelsayed.echo.Adapters.Helpers.OnSectionsListChangedListener;
-import com.muhammadelsayed.echo.Adapters.Helpers.OnStartDragListener;
+import com.muhammadelsayed.echo.Adapters.ItemTouchHelpers.ItemTouchHelperAdapter;
+import com.muhammadelsayed.echo.Adapters.ItemTouchHelpers.ItemTouchHelperViewHolder;
+import com.muhammadelsayed.echo.Adapters.ItemTouchHelpers.OnSectionsListChangedListener;
+import com.muhammadelsayed.echo.Adapters.ItemTouchHelpers.OnStartDragListener;
 import com.muhammadelsayed.echo.Model.Section;
 import com.muhammadelsayed.echo.R;
 
