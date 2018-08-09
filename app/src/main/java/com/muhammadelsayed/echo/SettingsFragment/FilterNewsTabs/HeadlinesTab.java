@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ public class HeadlinesTab extends Fragment {
     public static boolean au, uk, us, international;
     private SharedPreferences sharedpreferences;
     private RelativeLayout mAustralia, mUk, mUs, mInternational;
+    private int count;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,8 @@ public class HeadlinesTab extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 editor.putBoolean("au_enabled", chkAustralia.isChecked());
                 editor.apply();
+                countCheckedBox(b);
+                validateCheckBoxes();
             }
         });
 
@@ -50,6 +54,8 @@ public class HeadlinesTab extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 editor.putBoolean("uk_enabled", chkUk.isChecked());
                 editor.apply();
+                countCheckedBox(b);
+                validateCheckBoxes();
             }
         });
 
@@ -58,6 +64,8 @@ public class HeadlinesTab extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 editor.putBoolean("us_enabled", chkUs.isChecked());
                 editor.apply();
+                countCheckedBox(b);
+                validateCheckBoxes();
             }
         });
 
@@ -66,6 +74,8 @@ public class HeadlinesTab extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 editor.putBoolean("international_enabled", chkInternational.isChecked());
                 editor.apply();
+                countCheckedBox(b);
+                validateCheckBoxes();
             }
         });
 
@@ -85,6 +95,7 @@ public class HeadlinesTab extends Fragment {
     }
 
     private void initCheckBoxes() {
+        count = 0;
         sharedpreferences = getActivity().getSharedPreferences(getString(R.string.settings_preferences), Context.MODE_PRIVATE);
 
         au = sharedpreferences.getBoolean("au_enabled", true);
@@ -92,15 +103,48 @@ public class HeadlinesTab extends Fragment {
         us = sharedpreferences.getBoolean("us_enabled", true);
         international = sharedpreferences.getBoolean("international_enabled", true);
 
-        if (au)
-            chkAustralia.setChecked(true);
-        if (uk)
-            chkUk.setChecked(true);
-        if (us)
-            chkUs.setChecked(true);
-        if (international)
-            chkInternational.setChecked(true);
+        initCount(au);
+        initCount(uk);
+        initCount(us);
+        initCount(international);
+
+        chkAustralia.setChecked(au);
+        chkUk.setChecked(uk);
+        chkUs.setChecked(us);
+        chkInternational.setChecked(international);
     }
 
 
+    private void initCount(boolean b) {
+        if (b)
+            count++;
+    }
+
+    private void countCheckedBox(boolean b) {
+        if (b) {
+            if (count < 4)
+                count++;
+        } else if (count > 0){
+            count--;
+        }
+    }
+
+
+    private void validateCheckBoxes() {
+
+        Log.d(TAG, "validateCheckBoxes: COUNT = " + count);
+        if (count <= 1) {
+            chkAustralia.setEnabled(!chkAustralia.isChecked());
+            chkUk.setEnabled(!chkUk.isChecked());
+            chkUs.setEnabled(!chkUs.isChecked());
+            chkInternational.setEnabled(!chkInternational.isChecked());
+        } else {
+            chkAustralia.setEnabled(true);
+            chkUk.setEnabled(true);
+            chkUs.setEnabled(true);
+            chkInternational.setEnabled(true);
+
+        }
+
+    }
 }

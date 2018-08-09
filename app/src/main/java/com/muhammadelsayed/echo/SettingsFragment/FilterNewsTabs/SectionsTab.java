@@ -26,6 +26,8 @@ public class SectionsTab extends Fragment {
 
     private SharedPreferences sharedpreferences;
 
+    private int count;
+
     private RelativeLayout mArtDesign, mBooks, mBusiness, mCulture, mEducation, mEnvironment, mFashion, mFilm, mFootball, mLaw,
             mLifestyle, mMedia, mMoney, mMusic, mPolitics, mScience, mSociety, mSport, mTechnology, mTravel, mTvRadio, mWeather;
 
@@ -59,6 +61,8 @@ public class SectionsTab extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 editor.putBoolean("artdesign_enabled", chkArtDesign.isChecked());
                 editor.apply();
+                countCheckedBox(b);
+                validateCheckBoxes();
             }
         });
 
@@ -67,63 +71,88 @@ public class SectionsTab extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 editor.putBoolean("books_enabled", chkBooks.isChecked());
                 editor.apply();
+
+                countCheckedBox(b);
+                validateCheckBoxes();
+
             }
         });
 
         chkBusiness.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                editor.putBoolean("business_enabled", chkBusiness.isChecked());
-                editor.apply();
-            }
+                    editor.putBoolean("business_enabled", chkBusiness.isChecked());
+                    editor.apply();
+                countCheckedBox(b);
+                validateCheckBoxes();
+
+                }
         });
 
         chkCulture.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                editor.putBoolean("culture_enabled", chkCulture.isChecked());
-                editor.apply();
+                    editor.putBoolean("culture_enabled", chkCulture.isChecked());
+                    editor.apply();
+                countCheckedBox(b);
+                validateCheckBoxes();
+
             }
         });
 
         chkEducation.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                editor.putBoolean("education_enabled", chkEducation.isChecked());
-                editor.apply();
-            }
+                    editor.putBoolean("education_enabled", chkEducation.isChecked());
+                    editor.apply();
+                countCheckedBox(b);
+                validateCheckBoxes();
+
+                }
         });
 
         chkEnvironment.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                editor.putBoolean("environment_enabled", chkEnvironment.isChecked());
-                editor.apply();
+                    editor.putBoolean("environment_enabled", chkEnvironment.isChecked());
+                    editor.apply();
+                countCheckedBox(b);
+                validateCheckBoxes();
+
             }
         });
 
         chkFashion.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                editor.putBoolean("fashion_enabled", chkFashion.isChecked());
-                editor.apply();
+                    editor.putBoolean("fashion_enabled", chkFashion.isChecked());
+                    editor.apply();
+                countCheckedBox(b);
+                validateCheckBoxes();
+
             }
         });
 
         chkFilm.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                editor.putBoolean("film_enabled", chkFilm.isChecked());
-                editor.apply();
+                    editor.putBoolean("film_enabled", chkFilm.isChecked());
+                    editor.apply();
+                countCheckedBox(b);
+                validateCheckBoxes();
+
             }
         });
 
         chkFootball.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                editor.putBoolean("football_enabled", chkFootball.isChecked());
-                editor.apply();
-            }
+                    editor.putBoolean("football_enabled", chkFootball.isChecked());
+                    editor.apply();
+                countCheckedBox(b);
+                validateCheckBoxes();
+
+                }
         });
 
         chkLaw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -131,6 +160,9 @@ public class SectionsTab extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 editor.putBoolean("law_enabled", chkLaw.isChecked());
                 editor.apply();
+                countCheckedBox(b);
+                validateCheckBoxes();
+
             }
         });
 
@@ -139,6 +171,9 @@ public class SectionsTab extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 editor.putBoolean("lifestyle_enabled", chkLifestyle.isChecked());
                 editor.apply();
+                countCheckedBox(b);
+                validateCheckBoxes();
+
             }
         });
 
@@ -147,6 +182,8 @@ public class SectionsTab extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 editor.putBoolean("media_enabled", chkMedia.isChecked());
                 editor.apply();
+                countCheckedBox(b);
+                validateCheckBoxes();
             }
         });
 
@@ -155,6 +192,8 @@ public class SectionsTab extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 editor.putBoolean("money_enabled", chkMoney.isChecked());
                 editor.apply();
+                countCheckedBox(b);
+                validateCheckBoxes();
             }
         });
 
@@ -163,6 +202,8 @@ public class SectionsTab extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 editor.putBoolean("music_enabled", chkMusic.isChecked());
                 editor.apply();
+                countCheckedBox(b);
+                validateCheckBoxes();
             }
         });
 
@@ -171,6 +212,8 @@ public class SectionsTab extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 editor.putBoolean("politics_enabled", chkPolitics.isChecked());
                 editor.apply();
+                countCheckedBox(b);
+                validateCheckBoxes();
             }
         });
 
@@ -179,6 +222,8 @@ public class SectionsTab extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 editor.putBoolean("science_enabled", chkScience.isChecked());
                 editor.apply();
+                countCheckedBox(b);
+                validateCheckBoxes();
             }
         });
 
@@ -187,6 +232,8 @@ public class SectionsTab extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 editor.putBoolean("society_enabled", chkSociety.isChecked());
                 editor.apply();
+                countCheckedBox(b);
+                validateCheckBoxes();
             }
         });
 
@@ -195,6 +242,8 @@ public class SectionsTab extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 editor.putBoolean("sport_enabled", chkSport.isChecked());
                 editor.apply();
+                countCheckedBox(b);
+                validateCheckBoxes();
             }
         });
 
@@ -203,6 +252,8 @@ public class SectionsTab extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 editor.putBoolean("technology_enabled", chkTechnology.isChecked());
                 editor.apply();
+                countCheckedBox(b);
+                validateCheckBoxes();
             }
         });
 
@@ -211,6 +262,8 @@ public class SectionsTab extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 editor.putBoolean("travel_enabled", chkTravel.isChecked());
                 editor.apply();
+                countCheckedBox(b);
+                validateCheckBoxes();
             }
         });
 
@@ -219,6 +272,8 @@ public class SectionsTab extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 editor.putBoolean("tvradio_enabled", chkTvRadio.isChecked());
                 editor.apply();
+                countCheckedBox(b);
+                validateCheckBoxes();
             }
         });
 
@@ -227,6 +282,8 @@ public class SectionsTab extends Fragment {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 editor.putBoolean("weather_enabled", chkWeather.isChecked());
                 editor.apply();
+                countCheckedBox(b);
+                validateCheckBoxes();
             }
         });
         return rootView;
@@ -281,7 +338,7 @@ public class SectionsTab extends Fragment {
     }
 
     private void initCheckBoxes() {
-        Log.d(TAG, "initCheckBoxes: ");
+        count = 0;
         sharedpreferences = getActivity().getSharedPreferences(getString(R.string.settings_preferences), Context.MODE_PRIVATE);
 
         artdesign = sharedpreferences.getBoolean("artdesign_enabled", true);
@@ -308,51 +365,122 @@ public class SectionsTab extends Fragment {
         weather = sharedpreferences.getBoolean("weather_enabled", true);
         Log.d(TAG, "initCheckBoxes: artdesign = " + artdesign);
 
-        if (artdesign)
-            chkArtDesign.setChecked(true);
-        if (books)
-            chkBooks.setChecked(true);
-        if (business)
-            chkBusiness.setChecked(true);
-        if (culture)
-            chkCulture.setChecked(true);
-        if (education)
-            chkEducation.setChecked(true);
-        if (environment)
-            chkEnvironment.setChecked(true);
-        if (fashion)
-            chkFashion.setChecked(true);
-        if (film)
-            chkFilm.setChecked(true);
-        if (football)
-            chkFootball.setChecked(true);
-        if (law)
-            chkLaw.setChecked(true);
-        if (lifestyle)
-            chkLifestyle.setChecked(true);
-        if (media)
-            chkMedia.setChecked(true);
-        if (money)
-            chkMoney.setChecked(true);
-        if (music)
-            chkMusic.setChecked(true);
-        if (politics)
-            chkPolitics.setChecked(true);
-        if (science)
-            chkScience.setChecked(true);
-        if (society)
-            chkSociety.setChecked(true);
-        if (sport)
-            chkSport.setChecked(true);
-        if (technology)
-            chkTechnology.setChecked(true);
-        if (travel)
-            chkTravel.setChecked(true);
-        if (tvradio)
-            chkTvRadio.setChecked(true);
-        if (weather)
-            chkWeather.setChecked(true);
+        initCount(artdesign);
+        initCount(books);
+        initCount(business);
+        initCount(culture);
+        initCount(education);
+        initCount(environment);
+        initCount(fashion);
+        initCount(film);
+        initCount(football);
+        initCount(law);
+        initCount(lifestyle);
+        initCount(media);
+        initCount(money);
+        initCount(music);
+        initCount(politics);
+        initCount(science);
+        initCount(society);
+        initCount(sport);
+        initCount(technology);
+        initCount(travel);
+        initCount(tvradio);
+        initCount(weather);
+
+        chkArtDesign.setChecked(artdesign);
+        chkBooks.setChecked(books);
+        chkBusiness.setChecked(business);
+        chkCulture.setChecked(culture);
+        chkEducation.setChecked(education);
+        chkEnvironment.setChecked(environment);
+        chkFashion.setChecked(fashion);
+        chkFilm.setChecked(film);
+        chkFootball.setChecked(football);
+        chkLaw.setChecked(law);
+        chkLifestyle.setChecked(lifestyle);
+        chkMedia.setChecked(media);
+        chkMoney.setChecked(money);
+        chkMusic.setChecked(music);
+        chkPolitics.setChecked(politics);
+        chkScience.setChecked(science);
+        chkSociety.setChecked(society);
+        chkSport.setChecked(sport);
+        chkTechnology.setChecked(technology);
+        chkTravel.setChecked(travel);
+        chkTvRadio.setChecked(tvradio);
+        chkWeather.setChecked(weather);
     }
+
+    private void initCount(boolean b) {
+        if (b)
+            count++;
+    }
+
+    private void countCheckedBox(boolean b) {
+        if (b) {
+            if (count < 22)
+                count++;
+        } else if (count > 0){
+            count--;
+        }
+    }
+
+
+    private void validateCheckBoxes() {
+
+        Log.d(TAG, "validateCheckBoxes: COUNT = " + count);
+        if (count <= 1) {
+            chkArtDesign.setEnabled(!chkArtDesign.isChecked());
+            chkBooks.setEnabled(!chkBooks.isChecked());
+            chkBusiness.setEnabled(!chkBusiness.isChecked());
+            chkCulture.setEnabled(!chkCulture.isChecked());
+            chkEducation.setEnabled(!chkEducation.isChecked());
+            chkEnvironment.setEnabled(!chkEnvironment.isChecked());
+            chkFashion.setEnabled(!chkFashion.isChecked());
+            chkFilm.setEnabled(!chkFilm.isChecked());
+            chkFootball.setEnabled(!chkFootball.isChecked());
+            chkLaw.setEnabled(!chkLaw.isChecked());
+            chkLifestyle.setEnabled(!chkLifestyle.isChecked());
+            chkMedia.setEnabled(!chkMedia.isChecked());
+            chkMoney.setEnabled(!chkMoney.isChecked());
+            chkMusic.setEnabled(!chkMusic.isChecked());
+            chkPolitics.setEnabled(!chkPolitics.isChecked());
+            chkScience.setEnabled(!chkScience.isChecked());
+            chkSociety.setEnabled(!chkSociety.isChecked());
+            chkSport.setEnabled(!chkSport.isChecked());
+            chkTechnology.setEnabled(!chkTechnology.isChecked());
+            chkTravel.setEnabled(!chkTravel.isChecked());
+            chkTvRadio.setEnabled(!chkTvRadio.isChecked());
+            chkWeather.setEnabled(!chkWeather.isChecked());
+        } else {
+            chkArtDesign.setEnabled(true);
+            chkBooks.setEnabled(true);
+            chkBusiness.setEnabled(true);
+            chkCulture.setEnabled(true);
+            chkEducation.setEnabled(true);
+            chkEnvironment.setEnabled(true);
+            chkFashion.setEnabled(true);
+            chkFilm.setEnabled(true);
+            chkFootball.setEnabled(true);
+            chkLaw.setEnabled(true);
+            chkLifestyle.setEnabled(true);
+            chkMedia.setEnabled(true);
+            chkMoney.setEnabled(true);
+            chkMusic.setEnabled(true);
+            chkPolitics.setEnabled(true);
+            chkScience.setEnabled(true);
+            chkSociety.setEnabled(true);
+            chkSport.setEnabled(true);
+            chkTechnology.setEnabled(true);
+            chkTravel.setEnabled(true);
+            chkTvRadio.setEnabled(true);
+            chkWeather.setEnabled(true);
+
+        }
+
+    }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -408,9 +536,7 @@ public class SectionsTab extends Fragment {
                     HeadlinesTab.chkUs.setChecked(true);
                 if (international)
                     HeadlinesTab.chkInternational.setChecked(true);
-
-                Log.d(TAG, "onClick: artdesign = " + artdesign);
-            }
+                }
         });
     }
 
