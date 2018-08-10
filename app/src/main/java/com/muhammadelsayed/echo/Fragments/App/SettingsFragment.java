@@ -15,20 +15,13 @@ import com.muhammadelsayed.echo.SettingsFragment.AccountActivity;
 import com.muhammadelsayed.echo.SettingsFragment.ContactUsActivity;
 import com.muhammadelsayed.echo.SettingsFragment.DefaultEditionActivity;
 import com.muhammadelsayed.echo.SettingsFragment.FilterNewsActivity;
+import com.muhammadelsayed.echo.SettingsFragment.NotificationsActivity;
 import com.muhammadelsayed.echo.SettingsFragment.ReadArticleActivity;
 import com.muhammadelsayed.echo.SettingsFragment.ReorderSectionsActivity;
 
 public class SettingsFragment extends Fragment {
     private static final String TAG = "SettingsFragment";
     private View rootView;
-
-    public SettingsFragment() {
-        // Required empty public constructor
-    }
-
-    public static SettingsFragment settingsFragmentInstance() {
-        return new SettingsFragment();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,6 +33,14 @@ public class SettingsFragment extends Fragment {
         return rootView;
     }
 
+    public SettingsFragment() {
+        // Required empty public constructor
+    }
+
+    public static SettingsFragment settingsFragmentInstance() {
+        return new SettingsFragment();
+    }
+
     private void initiateViews() {
         Log.wtf(TAG, "initiateViews() has been instantiated");
         ConstraintLayout mAccount = rootView.findViewById(R.id.my_account_layout);
@@ -48,6 +49,7 @@ public class SettingsFragment extends Fragment {
         ConstraintLayout mArticle = rootView.findViewById(R.id.read_article_layout);
         ConstraintLayout mContact = rootView.findViewById(R.id.contact_layout);
         ConstraintLayout mReorder = rootView.findViewById(R.id.reorder_news_layout);
+        ConstraintLayout mNotifications = rootView.findViewById(R.id.notifications_layout);
 
         mAccount.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,6 +91,13 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(), ContactUsActivity.class));
+            }
+        });
+
+        mNotifications.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), NotificationsActivity.class));
             }
         });
     }

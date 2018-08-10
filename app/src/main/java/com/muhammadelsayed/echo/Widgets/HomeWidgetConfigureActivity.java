@@ -49,7 +49,8 @@ public class HomeWidgetConfigureActivity extends Activity {
             saveSectionPref(context, mAppWidgetId, sectionName);
 
             // It is the responsibility of the configuration activity to update the app widget
-//            HomeWidget.updateAppWidget(context, mAppWidgetId);
+            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+            HomeWidget.updateAppWidget(context, appWidgetManager, mAppWidgetId);
 
             // Make sure we pass back the original appWidgetId
             Intent resultValue = new Intent();

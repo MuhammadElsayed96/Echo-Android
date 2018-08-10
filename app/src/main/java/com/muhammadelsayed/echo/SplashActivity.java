@@ -70,36 +70,39 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.wtf(TAG, "onCreate(): has been instantiated");
-        sections.put("Business", mBusinessArticleList);
-        sections.put("Culture", mCultureArticleList);
-        sections.put("Art and design", mArtAndDesignArticleList);
-        sections.put("Environment", mEnvironmentArticleList);
-        sections.put("Books", mBooksArticleList);
-        sections.put("Australia news", mAustraliaNewsArticleList);
-        sections.put("UK news", mUkNewsArticleList);
-        sections.put("US news", mUsNewsArticleList);
-        sections.put("News", mInternationalArticleList);
-        sections.put("Education", mEducationArticleList);
-        sections.put("Fashion", mFashionArticleList);
-        sections.put("Film", mFilmArticleList);
-        sections.put("Football", mFootballArticleList);
-        sections.put("Law", mLawArticleList);
-        sections.put("Life and style", mLifestyleArticleList);
-        sections.put("Media", mMediaArticleList);
-        sections.put("Money", mMoneyArticleList);
-        sections.put("Music", mMusicArticleList);
-        sections.put("Politics", mPoliticsArticleList);
-        sections.put("Science", mScienceArticleList);
-        sections.put("Society", mSocietyArticleList);
-        sections.put("Sport", mSportArticleList);
-        sections.put("Technology", mTechnologyArticleList);
-        sections.put("Television & radio", mTvAndRadioArticleList);
-        sections.put("Travel", mTravelArticleList);
-        sections.put("Weather", mWeatherArticleList);
-        sections.put("World", mWorldArticleList);
         Base.initialize(this);
-        if (isNetworkAvailable())
+
+        if (isNetworkAvailable()) {
             getData();
+
+            sections.put("Business", mBusinessArticleList);
+            sections.put("Culture", mCultureArticleList);
+            sections.put("Art and design", mArtAndDesignArticleList);
+            sections.put("Environment", mEnvironmentArticleList);
+            sections.put("Books", mBooksArticleList);
+            sections.put("Australia news", mAustraliaNewsArticleList);
+            sections.put("UK news", mUkNewsArticleList);
+            sections.put("US news", mUsNewsArticleList);
+            sections.put("News", mInternationalArticleList);
+            sections.put("Education", mEducationArticleList);
+            sections.put("Fashion", mFashionArticleList);
+            sections.put("Film", mFilmArticleList);
+            sections.put("Football", mFootballArticleList);
+            sections.put("Law", mLawArticleList);
+            sections.put("Life and style", mLifestyleArticleList);
+            sections.put("Media", mMediaArticleList);
+            sections.put("Money", mMoneyArticleList);
+            sections.put("Music", mMusicArticleList);
+            sections.put("Politics", mPoliticsArticleList);
+            sections.put("Science", mScienceArticleList);
+            sections.put("Society", mSocietyArticleList);
+            sections.put("Sport", mSportArticleList);
+            sections.put("Technology", mTechnologyArticleList);
+            sections.put("Television & radio", mTvAndRadioArticleList);
+            sections.put("Travel", mTravelArticleList);
+            sections.put("Weather", mWeatherArticleList);
+            sections.put("World", mWorldArticleList);
+        }
         else
             tryToConnectOrExit();
     }

@@ -115,5 +115,6 @@
     <string name="no_data">No News Found! \n Connect to Internet</string>
     <string name="null_str">NULL</string>
     <string name="empty">empty</string>
+    <string name="notifications">Notifications</string>
 
 </resources>
