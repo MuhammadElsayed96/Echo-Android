@@ -2,6 +2,7 @@ package com.muhammadelsayed.echo.Widgets;
 
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,24 +18,15 @@ import com.muhammadelsayed.echo.Widgets.Adapter.WidgetNewsAdapter;
 import static com.muhammadelsayed.echo.Fragments.App.HomeFragment.sortedSections;
 
 /**
- * The configuration screen for the {@link HomeWidget HomeWidget} AppWidget.
+ * The configuration screen for the {@link WidgetProvider WidgetProvider} AppWidget.
  */
 public class HomeWidgetConfigureActivity extends Activity {
     private static final String TAG = HomeWidgetConfigureActivity.class.getSimpleName();
-    private static final String PREFS_NAME = "com.muhammadelsayed.echo.Widgets.HomeWidget";
+    private static final String PREFS_NAME = "com.muhammadelsayed.echo.Widgets.WidgetProvider";
     private static final String PREF_PREFIX_KEY = "appwidget_";
     int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
     ListView mSectionsList;
     WidgetNewsAdapter sectionsAdapter;
-
-    View.OnClickListener mOnClickListener = new View.OnClickListener() {
-        public void onClick(View v) {
-            final Context context = HomeWidgetConfigureActivity.this;
-
-//            saveSectionPref(context, mAppWidgetId, widgetText);
-
-        }
-    };
 
     ListView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
         @Override
@@ -48,14 +40,15 @@ public class HomeWidgetConfigureActivity extends Activity {
             Log.wtf(TAG, "Section Name -> " + sectionName);
             saveSectionPref(context, mAppWidgetId, sectionName);
 
-            // It is the responsibility of the configuration activity to update the app widget
-            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-            HomeWidget.updateAppWidget(context, appWidgetManager, mAppWidgetId);
 
             // Make sure we pass back the original appWidgetId
-            Intent resultValue = new Intent();
-            resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
-            setResult(RESULT_OK, resultValue);
+            // It is the responsibility of the configuration activity to update the app widget
+            Intent resultValue = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE, null, HomeWidgetConfigureActivity.this, WidgetProvider.class);
+            int[] ids = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), WidgetProvider.class));
+            resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+            sendBroadcast(resultValue);
+
+
             finish();
         }
     };
@@ -103,14 +96,7 @@ public class HomeWidgetConfigureActivity extends Activity {
         // Set the result to CANCELED.  This will cause the widget host to cancel
         // out of the widget placement if the user presses the back button.
         setResult(RESULT_CANCELED);
-
         setContentView(R.layout.home_widget_configure);
-
-        mSectionsList = findViewById(R.id.sections_list_view);
-        mSectionsList.setOnItemClickListener(itemClickListener);
-        // After getting the data, set the adapter to the listView.
-        sectionsAdapter = new WidgetNewsAdapter(HomeWidgetConfigureActivity.this, sortedSections);
-        mSectionsList.setAdapter(sectionsAdapter);
 
         // Find the widget id from the intent.
         Intent intent = getIntent();
@@ -125,6 +111,13 @@ public class HomeWidgetConfigureActivity extends Activity {
             finish();
         }
 
+        mSectionsList = findViewById(R.id.sections_list_view);
+        mSectionsList.setOnItemClickListener(itemClickListener);
+        // After getting the data, set the adapter to the listView.
+        sectionsAdapter = new WidgetNewsAdapter(HomeWidgetConfigureActivity.this, sortedSections);
+        mSectionsList.setAdapter(sectionsAdapter);
     }
 }
+
+
 

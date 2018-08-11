@@ -54,7 +54,7 @@ public class SplashActivity extends AppCompatActivity {
     public static List<Article> mTvAndRadioArticleList = new ArrayList<>();
     public static List<Article> mWeatherArticleList = new ArrayList<>();
     public static List<Article> mWorldArticleList = new ArrayList<>();
-    public static Map<String, Object> sections = new HashMap<>();
+    public static Map<String, List<Article>> sections = new HashMap<>();
     Map<String, Object> options = new HashMap<>();
     boolean bool, f1 = false, f2 = false, f3 = false, f4 = false, f5 = false, f6 = false, f7 = false, f8 = false,
             f9 = false, f10 = false, f11 = false, f12 = false, f13 = false, f14 = false, f15 = false, f16 = false,
@@ -108,8 +108,7 @@ public class SplashActivity extends AppCompatActivity {
             sections.put("Travel", mTravelArticleList);
             sections.put("Weather", mWeatherArticleList);
             sections.put("World", mWorldArticleList);
-        }
-        else
+        } else
             tryToConnectOrExit();
 
         setNotificationAlarm();

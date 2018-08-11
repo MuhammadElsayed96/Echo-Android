@@ -121,14 +121,14 @@
                 android:value=".MainActivity" />
         </activity>
 
-        <receiver android:name=".Widgets.HomeWidget">
+        <receiver android:name=".Widgets.WidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/home_widget_info" />
+                android:resource="@xml/widget_info" />
         </receiver>
 
         <activity
@@ -143,7 +143,6 @@
         <service
             android:name=".Widgets.WidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
-
 
         <receiver android:name=".NotificationReceiver" />
     </application>

@@ -36,7 +36,7 @@ public class Utils {
 
         NewsClient service = RetrofitClientInstance.getRetrofitInstance().create(NewsClient.class);
         Call<Retrosponse> call = service.search(options);
-
+        Log.wtf(TAG, call.request().url().toString());
         call.enqueue(new Callback<Retrosponse>() {
             @Override
             public void onResponse(@NonNull Call<Retrosponse> call, @NonNull Response<Retrosponse> response) {

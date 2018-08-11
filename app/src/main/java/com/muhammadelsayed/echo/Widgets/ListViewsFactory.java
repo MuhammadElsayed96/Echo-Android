@@ -3,14 +3,15 @@ package com.muhammadelsayed.echo.Widgets;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import com.muhammadelsayed.echo.Model.Article;
 import com.muhammadelsayed.echo.R;
+import com.thefinestartist.utils.log.L;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.muhammadelsayed.echo.SplashActivity.sections;
@@ -23,18 +24,17 @@ import static com.muhammadelsayed.echo.SplashActivity.sections;
  * <p>
  * This class is the Adapter of the ListView.
  */
-public class ListProvider implements RemoteViewsService.RemoteViewsFactory {
-    private static final String TAG = ListProvider.class.getSimpleName();
+public class ListViewsFactory implements RemoteViewsService.RemoteViewsFactory {
+    private static final String TAG = ListViewsFactory.class.getSimpleName();
     private Context context = null;
     private int appWidgetId;
-    private CharSequence sectionTitle = null;
-    private List<Article> selectedSection = new ArrayList<>();
+    private List<Article> selectedSection = null;
 
-    public ListProvider() {
+    public ListViewsFactory() {
     }
 
-    public ListProvider(Context context, Intent intent) {
-        Log.wtf(TAG, "ListProvider() has been instantiated");
+    ListViewsFactory(Context context, Intent intent) {
+        Log.wtf(TAG, "ListViewsFactory() has been instantiated");
         this.context = context;
         appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                 AppWidgetManager.INVALID_APPWIDGET_ID);
@@ -49,12 +49,14 @@ public class ListProvider implements RemoteViewsService.RemoteViewsFactory {
         // for example downloading or creating content etc, should be deferred to onDataSetChanged()
         // or getViewAt(). Taking more than 20 seconds in this call will result in an ANR.
 
-        sectionTitle = HomeWidgetConfigureActivity.loadSectionPref(context, appWidgetId);
-        selectedSection = (List<Article>) sections.get(sectionTitle);
+        CharSequence sectionTitle = HomeWidgetConfigureActivity.loadSectionPref(context, appWidgetId);
+        Log.wtf(TAG, "Section Name -> " + sectionTitle);
+        selectedSection = sections.get(sectionTitle);
+        Log.wtf(TAG, "Data Source -> " + selectedSection);
 
 
         // We sleep for 3 seconds here to show how the empty view appears in the interim.
-        // The empty view is set in the HomeWidget and should be a sibling of the
+        // The empty view is set in the WidgetProvider and should be a sibling of the
         // collection view.
         try {
             Thread.sleep(3000);
@@ -104,25 +106,24 @@ public class ListProvider implements RemoteViewsService.RemoteViewsFactory {
 //            e.printStackTrace();
 //        }
 
+        //  Next, we set a fill-intent which will be used to fill-in the pending intent template
+        //  which is set on the collection view in WidgetProvider.
+        final Bundle extras = new Bundle();
+        extras.putInt(WidgetProvider.EXTRA_ITEM, position);
+        final Intent fillInIntent = new Intent();
+        fillInIntent.putExtras(extras);
+        remoteView.setOnClickFillInIntent(R.id.widget_headline_view, fillInIntent);
 
-//        // Next, we set a fill-intent which will be used to fill-in the pending intent template
-//        // which is set on the collection view in HomeWidget.
-//        final Bundle extras = new Bundle();
-//        extras.putInt(HomeWidget.EXTRA_ITEM, position);
-//        final Intent fillInIntent = new Intent();
-//        fillInIntent.putExtras(extras);
-//        remoteView.setOnClickFillInIntent(R.id.widget_headline_view, fillInIntent);
-//
-//        // You can do heaving lifting in here, synchronously. For example, if you need to
-//        // process an image, fetch something from the network, etc., it is ok to do it here,
-//        // synchronously. A loading view will show up in lieu of the actual contents in the
-//        // interim.
-//        try {
-//            L.d("Loading view " + position);
-//            Thread.sleep(500);
-//        } catch (final InterruptedException e) {
-//            e.printStackTrace();
-//        }
+        // You can do heaving lifting in here, synchronously. For example, if you need to
+        // process an image, fetch something from the network, etc., it is ok to do it here,
+        // synchronously. A loading view will show up in lieu of the actual contents in the
+        // interim.
+        try {
+            L.d("Loading view " + position);
+            Thread.sleep(500);
+        } catch (final InterruptedException e) {
+            e.printStackTrace();
+        }
 
         return remoteView;
     }
