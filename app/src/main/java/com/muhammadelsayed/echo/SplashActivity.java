@@ -1,5 +1,7 @@
 package com.muhammadelsayed.echo;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +12,7 @@ import com.muhammadelsayed.echo.Model.Article;
 import com.thefinestartist.Base;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +24,9 @@ import static com.muhammadelsayed.echo.Utils.isNetworkAvailable;
 public class SplashActivity extends AppCompatActivity {
 
     private static final String TAG = "SplashActivity";
+
+    public static AlarmManager alarmManager;
+
     public static List<Article> mBusinessArticleList = new ArrayList<>();
     public static List<Article> mEnvironmentArticleList = new ArrayList<>();
     public static List<Article> mTechnologyArticleList = new ArrayList<>();
@@ -105,6 +111,9 @@ public class SplashActivity extends AppCompatActivity {
         }
         else
             tryToConnectOrExit();
+
+        setNotificationAlarm();
+
     }
 
     private void getData() {
@@ -612,4 +621,21 @@ public class SplashActivity extends AppCompatActivity {
             }
         }).show();
     }
+
+    private void setNotificationAlarm() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 3);
+        calendar.set(Calendar.MINUTE, 50);
+        calendar.set(Calendar.SECOND, 0);
+
+        Intent intent = new Intent(getApplicationContext(), NotificationReceiver.class);
+        intent.setAction("MY_NOTIFICATION_MESSAGE");
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
+
+    }
+
 }

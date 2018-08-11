@@ -19,6 +19,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SET_ALARM" />
 
     <application
         android:allowBackup="true"
@@ -30,7 +31,6 @@
         tools:replace="android:icon">
         <activity
             android:name=".MainActivity"
-            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
             android:name=".SplashActivity"
@@ -144,6 +144,8 @@
             android:name=".Widgets.WidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
+
+        <receiver android:name=".NotificationReceiver" />
     </application>
 
 </manifest> <!-- <action android:name="android.appwidget.action.APPWIDGET_UPDATE" /> --><!-- This widget provider receives broadcast with following action name or simply onUpdate of AppWidgetProvider is called -->

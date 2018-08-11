@@ -48,6 +48,7 @@ import com.muhammadelsayed.echo.Fragments.HomeTabs.TvAndRadio;
 import com.muhammadelsayed.echo.Fragments.HomeTabs.UkHeadlines;
 import com.muhammadelsayed.echo.Fragments.HomeTabs.UsHeadlines;
 import com.muhammadelsayed.echo.Fragments.HomeTabs.Weather;
+import com.muhammadelsayed.echo.MainActivity;
 import com.muhammadelsayed.echo.Model.Section;
 import com.muhammadelsayed.echo.R;
 
@@ -59,7 +60,7 @@ import static com.muhammadelsayed.echo.SettingsFragment.ReorderSectionsActivity.
 public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private static final String TAG = "HomeFragment";
     FragmentManager fragmentManager;
-    Fragment fragment;
+    public static Fragment fragment;
     private DrawerLayout mDrawerLayout;
     private NavigationView navDrawer;
     public static List<Section> sortedSections;
@@ -84,6 +85,14 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
         toggle.syncState();
 
         fragmentManager = getChildFragmentManager();
+
+        Log.d(TAG, "onCreateView: RESET = " + MainActivity.reset);
+        if (MainActivity.reset) {
+            Log.d(TAG, "onCreateView: RESET = " + MainActivity.reset);
+            fragment = null;
+            MainActivity.reset = false;
+        }
+
         if (fragment == null) {
             SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.settings_preferences), Context.MODE_PRIVATE);
             boolean internationalHeadline = sharedPreferences.getBoolean("international_headline", true);
@@ -102,11 +111,13 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
                 navDrawer.setCheckedItem(R.id.nav_uk_news);
                 fragment = new UkHeadlines();
                 getActivity().setTitle(getResources().getString(R.string.uk_headlines));
+                Log.d(TAG, "onCreateView: UKKKKKKKKKKKKKKKKK");
             } else if (australiaHeadline) {
                 navDrawer.setCheckedItem(R.id.nav_au_news);
                 fragment = new AustraliaHeadlines();
                 getActivity().setTitle(getResources().getString(R.string.australia_headlines));
             }
+            Log.d(TAG, "onCreateView: NULLLLLLLLLLLLLLLLLLLLLL");
         }
         fragmentManager.beginTransaction().
 

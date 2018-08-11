@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
     private List<Fragment> mFragmentsList = new ArrayList<>(INT_FRAGMENTS_COUNT);
     private SweetAlertDialog exit;
 
+    public static boolean reset = false;
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
@@ -106,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (IllegalAccessException e) {
             // Timber.e(e, "Unable to change value of shift mode");
         }
+
     }
 
     @Override
@@ -121,6 +124,43 @@ public class MainActivity extends AppCompatActivity {
         buildFragmentsList();
         // Set the 0th Fragment to be displayed by default.
         switchFragment(0, TAG_FRAGMENT_HOME);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume(): has been instantiated");
+
+        if (getIntent().hasExtra("from_notification")) {
+            Log.d(TAG, "onResume: HAS");
+            boolean fromNotification = getIntent().getBooleanExtra("from_notification", false);
+            if (fromNotification) {
+                Log.d(TAG, "onResume: fragment = " + HomeFragment.fragment);
+                reset = true;
+                switchFragment(0, TAG_FRAGMENT_HOME);
+                Log.d(TAG, "onResume: fragment = " + HomeFragment.fragment);
+
+            }
+        }
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause(): has been instantiated");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy(): has been instantiated");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop(): has been instantiated");
     }
 
     /**
@@ -157,6 +197,7 @@ public class MainActivity extends AppCompatActivity {
                 .replace(R.id.frame_fragment_holder, mFragmentsList.get(pos), tag)
                 .commit();
     }
+
 
     @Override
     public void onBackPressed() {
