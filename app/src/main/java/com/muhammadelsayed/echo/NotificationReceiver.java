@@ -15,6 +15,7 @@ import android.os.StrictMode;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.muhammadelsayed.echo.Database.DatabaseHelper;
 import com.muhammadelsayed.echo.Model.Article;
 
 import java.io.IOException;
@@ -27,14 +28,15 @@ import java.util.Map;
 public class NotificationReceiver extends BroadcastReceiver {
 
     private static final String TAG = "NotificationReceiver";
+
+    public static Article article;
+
     @Override
     public void onReceive(final Context context, final Intent intent) {
         Log.d(TAG, "onReceive: received !!");
         final NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-
         Intent targetIntent =  new Intent(context, MainActivity.class);
-
 
         SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.settings_preferences), Context.MODE_PRIVATE);
         boolean internationalHeadline = sharedPreferences.getBoolean("international_headline", true);
@@ -55,8 +57,12 @@ public class NotificationReceiver extends BroadcastReceiver {
         }
 
         targetIntent.putExtra("from_notification", true);
-        targetIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        targetIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         final PendingIntent pendingIntent = PendingIntent.getActivity(context, 100, targetIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
+        Intent saveButtonIntent = new Intent(context, saveButtonListener.class);
+        final PendingIntent saveBtnPendingIntent = PendingIntent.getBroadcast(context, 101, saveButtonIntent, 0);
 
 
         Map<String, Object> options = new HashMap<>();
@@ -70,7 +76,7 @@ public class NotificationReceiver extends BroadcastReceiver {
         Utils.getNews(options, new Utils.retrofitCallback() {
             @Override
             public void onSuccess(List<Article> articles) {
-                Article article = articles.get(0);
+                article = articles.get(0);
                 Uri sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
                 long[] vibrationPattern = {500, 1000};
@@ -99,7 +105,8 @@ public class NotificationReceiver extends BroadcastReceiver {
                         .setContentText(article.getWebTitle())
                         .setSubText(article.getType())
                         .setAutoCancel(true)
-                        .setStyle(new NotificationCompat.BigPictureStyle().bigPicture(image).bigLargeIcon(null))
+                        .addAction(0, "Save", saveBtnPendingIntent)
+                        .setStyle(new NotificationCompat.BigPictureStyle().bigPicture(image))
                         .setStyle(new NotificationCompat.BigTextStyle().bigText(article.getWebTitle()));
 
 //                notificationManager.notify(100, builder.build());
@@ -116,9 +123,20 @@ public class NotificationReceiver extends BroadcastReceiver {
             }
         });
 
+    }
+
+    public static class saveButtonListener extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d(TAG, "Save Button Clicked");
+            final DatabaseHelper db = new DatabaseHelper(context);
+            long id = db.saveArticle(article);
+            Log.d(TAG, "onReceive: SAVE ID = " + id);
 
 
-
-
+//            Cancel the notification
+//            final NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+//            notificationManager.cancel(100);
+        }
     }
 }

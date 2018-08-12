@@ -48,7 +48,6 @@ import com.muhammadelsayed.echo.Fragments.HomeTabs.TvAndRadio;
 import com.muhammadelsayed.echo.Fragments.HomeTabs.UkHeadlines;
 import com.muhammadelsayed.echo.Fragments.HomeTabs.UsHeadlines;
 import com.muhammadelsayed.echo.Fragments.HomeTabs.Weather;
-import com.muhammadelsayed.echo.MainActivity;
 import com.muhammadelsayed.echo.Model.Section;
 import com.muhammadelsayed.echo.R;
 
@@ -86,13 +85,15 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 
         fragmentManager = getChildFragmentManager();
 
-        Log.d(TAG, "onCreateView: RESET = " + MainActivity.reset);
-        if (MainActivity.reset) {
-            Log.d(TAG, "onCreateView: RESET = " + MainActivity.reset);
-            fragment = null;
-            MainActivity.reset = false;
+        if (getActivity().getIntent().hasExtra("from_notification")) {
+            if (getActivity().getIntent().getBooleanExtra("from_notification", false)) {
+                getActivity().getIntent().removeExtra("from_notification");
+                fragment = null;
+                Log.d(TAG, "onCreateView: fragment = " + fragment);
+            }
         }
 
+        Log.d(TAG, "onCreateView: fragment = " + fragment);
         if (fragment == null) {
             SharedPreferences sharedPreferences = getActivity().getSharedPreferences(getString(R.string.settings_preferences), Context.MODE_PRIVATE);
             boolean internationalHeadline = sharedPreferences.getBoolean("international_headline", true);

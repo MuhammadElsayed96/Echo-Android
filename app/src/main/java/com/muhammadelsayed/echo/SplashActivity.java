@@ -2,7 +2,9 @@ package com.muhammadelsayed.echo;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -24,8 +26,10 @@ import static com.muhammadelsayed.echo.Utils.isNetworkAvailable;
 public class SplashActivity extends AppCompatActivity {
 
     private static final String TAG = "SplashActivity";
+    private SharedPreferences sharedpreferences;
 
     public static AlarmManager alarmManager;
+    public static PendingIntent pendingIntent;
 
     public static List<Article> mBusinessArticleList = new ArrayList<>();
     public static List<Article> mEnvironmentArticleList = new ArrayList<>();
@@ -111,7 +115,11 @@ public class SplashActivity extends AppCompatActivity {
         } else
             tryToConnectOrExit();
 
-        setNotificationAlarm();
+        sharedpreferences = getSharedPreferences(getString(R.string.settings_preferences), Context.MODE_PRIVATE);
+        boolean notificationEnabled = sharedpreferences.getBoolean("notification_enabled", true);
+
+        if (notificationEnabled)
+            setNotificationAlarm();
 
     }
 
@@ -623,17 +631,17 @@ public class SplashActivity extends AppCompatActivity {
 
     private void setNotificationAlarm() {
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 3);
-        calendar.set(Calendar.MINUTE, 50);
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 57);
         calendar.set(Calendar.SECOND, 0);
 
         Intent intent = new Intent(getApplicationContext(), NotificationReceiver.class);
         intent.setAction("MY_NOTIFICATION_MESSAGE");
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_FIFTEEN_MINUTES, pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_HALF_DAY, pendingIntent);
 
     }
 

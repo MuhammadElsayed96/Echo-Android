@@ -16,6 +16,7 @@
 package com.muhammadelsayed.echo;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
@@ -53,8 +54,6 @@ public class MainActivity extends AppCompatActivity {
     public BottomNavigationView mBottomNavigation;
     private List<Fragment> mFragmentsList = new ArrayList<>(INT_FRAGMENTS_COUNT);
     private SweetAlertDialog exit;
-
-    public static boolean reset = false;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -136,10 +135,9 @@ public class MainActivity extends AppCompatActivity {
             boolean fromNotification = getIntent().getBooleanExtra("from_notification", false);
             if (fromNotification) {
                 Log.d(TAG, "onResume: fragment = " + HomeFragment.fragment);
-                reset = true;
                 switchFragment(0, TAG_FRAGMENT_HOME);
+                mBottomNavigation.setSelectedItemId(R.id.navigation_home);
                 Log.d(TAG, "onResume: fragment = " + HomeFragment.fragment);
-
             }
         }
 
@@ -219,7 +217,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(SweetAlertDialog sweetAlertDialog) {
                 finish();
+                HomeFragment.fragment = null;
             }
         }).show();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
     }
 }
