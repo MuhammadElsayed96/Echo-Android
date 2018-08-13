@@ -57,6 +57,5 @@ dependencies {
     implementation 'com.thefinestartist:finestwebview:1.2.7'
     // Sweet Alert Dialog
     implementation 'com.github.f0ris.sweetalert:library:1.5.1'
-    implementation files('libs/universal-image-loader-1.9.5.jar')
 }
 apply plugin: 'com.google.gms.google-services'

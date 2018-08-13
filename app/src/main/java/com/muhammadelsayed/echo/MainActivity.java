@@ -16,7 +16,11 @@
 package com.muhammadelsayed.echo;
 
 import android.annotation.SuppressLint;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
@@ -25,13 +29,16 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.muhammadelsayed.echo.Fragments.App.HomeFragment;
 import com.muhammadelsayed.echo.Fragments.App.SearchFragment;
 import com.muhammadelsayed.echo.Fragments.App.SettingsFragment;
 import com.muhammadelsayed.echo.Fragments.App.ShortcutsFragment;
 import com.thefinestartist.Base;
+import com.thefinestartist.finestwebview.FinestWebView;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -141,6 +148,43 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        if (getIntent().hasExtra("article_url")) {
+            switchFragment(0, TAG_FRAGMENT_HOME);
+            mBottomNavigation.setSelectedItemId(R.id.navigation_home);
+            SharedPreferences preferences = getSharedPreferences(getString(R.string.settings_preferences), Context.MODE_PRIVATE);
+            String url = getIntent().getStringExtra("article_url");
+            boolean inAppBrowser = preferences.getBoolean("in_app_browser", true);
+            if (inAppBrowser) {
+                new FinestWebView.Builder(this)
+                        .theme(R.style.FinestWebViewTheme)
+                        .titleDefault(getString(R.string.the_guardian))
+                        .showUrl(false)
+                        .statusBarColorRes(R.color.bluePrimaryDark)
+                        .toolbarColorRes(R.color.bluePrimary)
+                        .titleColorRes(R.color.finestWhite)
+                        .urlColorRes(R.color.bluePrimaryLight)
+                        .iconDefaultColorRes(R.color.finestWhite)
+                        .progressBarColorRes(R.color.finestWhite)
+                        .stringResCopiedToClipboard(R.string.copied_to_clipboard)
+                        .stringResCopiedToClipboard(R.string.copied_to_clipboard)
+                        .stringResCopiedToClipboard(R.string.copied_to_clipboard)
+                        .showSwipeRefreshLayout(true)
+                        .swipeRefreshColorRes(R.color.bluePrimaryDark)
+                        .menuSelector(R.drawable.selector_light_theme)
+                        .menuTextGravity(Gravity.CENTER)
+                        .menuTextPaddingRightRes(R.dimen.defaultMenuTextPaddingLeft)
+                        .dividerHeight(0)
+                        .gradientDivider(false)
+                        .setCustomAnimations(R.anim.slide_up, R.anim.hold, R.anim.hold, R.anim.slide_down)
+                        .show(url);
+                getIntent().removeExtra("article_url");
+            } else {
+                openWebPage(url);
+                getIntent().removeExtra("article_url");
+            }
+        }
+
+
     }
 
     @Override
@@ -226,5 +270,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         setIntent(intent);
+    }
+
+    private void openWebPage(String url) {
+        Log.wtf(TAG, "openWebPage() has been instantiated");
+        try {
+            Uri webPage = Uri.parse(url);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(webPage);
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(this, "No application can handle this request. Please install a web browser or check your URL.", Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.wtf(TAG, "onStart() has been instantiated");
     }
 }

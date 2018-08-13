@@ -134,7 +134,7 @@ public class ListViewsFactory implements RemoteViewsService.RemoteViewsFactory {
         //  which is set on the collection view in WidgetProvider.
         final Bundle extras = new Bundle();
         extras.putInt(WidgetProvider.EXTRA_ITEM, position);
-        extras.putString("article_url", article.getApiUrl());
+        extras.putString("article_url", article.getWebUrl());
         final Intent fillInIntent = new Intent();
         fillInIntent.putExtras(extras);
         remoteView.setOnClickFillInIntent(R.id.list_item_container, fillInIntent);

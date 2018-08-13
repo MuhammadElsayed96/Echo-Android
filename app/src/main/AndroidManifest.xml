@@ -110,7 +110,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
         <activity
             android:name=".SettingsFragment.ReorderSectionsActivity"
             android:label="@string/filter_news"
@@ -121,7 +120,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-
         <receiver android:name=".Widgets.WidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -131,7 +129,6 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/widget_info" />
         </receiver>
-
         <activity
             android:name=".Widgets.HomeWidgetConfigureActivity"
             android:label="Choose a section"
@@ -140,11 +137,9 @@
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
-
         <service
             android:name=".Widgets.WidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
-
         <receiver android:name=".NotificationReceiver" />
         <receiver android:name=".NotificationReceiver$saveButtonListener" />
     </application>

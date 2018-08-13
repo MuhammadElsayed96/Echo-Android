@@ -2,7 +2,6 @@ package com.muhammadelsayed.echo.Widgets;
 
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -51,8 +50,8 @@ public class HomeWidgetConfigureActivity extends Activity {
             // Make sure we pass back the original appWidgetId
             // It is the responsibility of the configuration activity to update the app widget
             Intent resultValue = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE, null, HomeWidgetConfigureActivity.this, WidgetProvider.class);
-            int[] ids = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), WidgetProvider.class));
-            resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
+//            int[] ids = AppWidgetManager.getInstance(getApplication()).getAppWidgetIds(new ComponentName(getApplication(), WidgetProvider.class));
+            resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, new int[]{mAppWidgetId});
             sendBroadcast(resultValue);
 
             int id = getIntent().getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, 0);
