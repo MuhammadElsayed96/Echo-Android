@@ -36,34 +36,6 @@ public class ReorderSectionsActivity extends AppCompatActivity implements OnSect
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reorder_sections);
-
-        mSharedPreferences = getSharedPreferences(getString(R.string.settings_preferences), Context.MODE_PRIVATE);
-
-
-        mSectionsRecycler = findViewById(R.id.recycler);
-        LinearLayoutManager mLinearLayoutManager =
-                new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        mSectionsRecycler.setLayoutManager(mLinearLayoutManager);
-        mSectionsRecycler.setDrawingCacheEnabled(true);
-        mSectionsRecycler.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
-        mSectionsRecycler.setItemViewCacheSize(100);
-
-
-        mSections = getSectionsList();
-
-        mSectionAdapter = new SectionAdapter(this, mSections, this, this);
-
-        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mSectionAdapter);
-        mItemTouchHelper = new ItemTouchHelper(callback);
-        mItemTouchHelper.attachToRecyclerView(mSectionsRecycler);
-        mSectionsRecycler.setAdapter(mSectionAdapter);
-    }
-
-
     public static List<Section> initSectionsList() {
         List<Section> sections = new ArrayList<>();
 
@@ -93,10 +65,37 @@ public class ReorderSectionsActivity extends AppCompatActivity implements OnSect
         return sections;
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_reorder_sections);
+
+        mSharedPreferences = getSharedPreferences(getString(R.string.settings_preferences), Context.MODE_PRIVATE);
+
+
+        mSectionsRecycler = findViewById(R.id.recycler);
+        LinearLayoutManager mLinearLayoutManager =
+                new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        mSectionsRecycler.setLayoutManager(mLinearLayoutManager);
+        mSectionsRecycler.setDrawingCacheEnabled(true);
+        mSectionsRecycler.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+        mSectionsRecycler.setItemViewCacheSize(100);
+
+
+        mSections = getSectionsList();
+
+        mSectionAdapter = new SectionAdapter(this, mSections, this, this);
+
+        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mSectionAdapter);
+        mItemTouchHelper = new ItemTouchHelper(callback);
+        mItemTouchHelper.attachToRecyclerView(mSectionsRecycler);
+        mSectionsRecycler.setAdapter(mSectionAdapter);
+    }
+
     private void createListofSortedSectionIds() {
         List<String> sortedIds = new ArrayList<>();
         for (Section section : mSections) {
-            sortedIds.add(""+section.getResId());
+            sortedIds.add("" + section.getResId());
         }
 
         Gson gson = new Gson();
@@ -116,7 +115,8 @@ public class ReorderSectionsActivity extends AppCompatActivity implements OnSect
         if (!jsonListOfSortedSectionsIds.isEmpty()) {
 
             Gson gson = new Gson();
-            List<String> listOfSortedSectionsId = gson.fromJson(jsonListOfSortedSectionsIds, new TypeToken<List<String>>(){}.getType());
+            List<String> listOfSortedSectionsId = gson.fromJson(jsonListOfSortedSectionsIds, new TypeToken<List<String>>() {
+            }.getType());
             Log.d(TAG, "getSectionsList: listOfSortedSectionsId = " + listOfSortedSectionsId);
             if (listOfSortedSectionsId != null && listOfSortedSectionsId.size() > 0) {
 

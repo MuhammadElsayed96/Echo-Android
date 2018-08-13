@@ -22,6 +22,8 @@ import static com.muhammadelsayed.echo.SettingsFragment.FilterNewsTabs.Headlines
 
 public class SectionsTab extends Fragment {
     private static final String TAG = "SectionsTab";
+    private final int MAX_CHECKED_NUM = 22;
+    private final int MIN_CHECKED_NUM = 1;
     private SharedPreferences sharedpreferences;
     private RelativeLayout mArtDesign, mBooks, mBusiness, mCulture, mEducation, mEnvironment, mFashion, mFilm, mFootball, mLaw,
             mLifestyle, mMedia, mMoney, mMusic, mPolitics, mScience, mSociety, mSport, mTechnology, mTravel, mTvRadio, mWeather;
@@ -30,10 +32,7 @@ public class SectionsTab extends Fragment {
             chkPolitics, chkScience, chkSociety, chkSport, chkTechnology, chkTravel, chkTvRadio, chkWeather;
     private boolean artdesign, books, business, culture, education, environment, fashion, film, football, law, lifestyle, media,
             money, music, politics, science, society, sport, technology, travel, tvradio, weather;
-
     private int count;
-    private final int MAX_CHECKED_NUM = 22;
-    private final int MIN_CHECKED_NUM = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -380,7 +379,7 @@ public class SectionsTab extends Fragment {
         if (b) {
             if (count < MAX_CHECKED_NUM)
                 count++;
-        } else if (count >= MIN_CHECKED_NUM){
+        } else if (count >= MIN_CHECKED_NUM) {
             count--;
         }
     }
@@ -486,7 +485,7 @@ public class SectionsTab extends Fragment {
                     HeadlinesTab.chkUs.setChecked(true);
                 if (international)
                     HeadlinesTab.chkInternational.setChecked(true);
-                }
+            }
         });
     }
 }

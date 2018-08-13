@@ -23,6 +23,14 @@ public class SettingsFragment extends Fragment {
     private static final String TAG = "SettingsFragment";
     private View rootView;
 
+    public SettingsFragment() {
+        // Required empty public constructor
+    }
+
+    public static SettingsFragment settingsFragmentInstance() {
+        return new SettingsFragment();
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -31,14 +39,6 @@ public class SettingsFragment extends Fragment {
         initiateViews();
 
         return rootView;
-    }
-
-    public SettingsFragment() {
-        // Required empty public constructor
-    }
-
-    public static SettingsFragment settingsFragmentInstance() {
-        return new SettingsFragment();
     }
 
     private void initiateViews() {

@@ -1,82 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:autofit="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp">
+    android:baselineAligned="false"
+    android:orientation="horizontal"
+    android:padding="4dp">
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/widget_headline_view"
+
+    <LinearLayout
+        android:id="@+id/list_item_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@drawable/border_strokeless"
-        android:orientation="horizontal"
-        android:padding="8dp"
-        android:weightSum="1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="horizontal">
 
-        <me.grantland.widget.AutofitTextView
+        <TextView
             android:id="@+id/widget_title_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
             android:layout_weight="1"
             android:ellipsize="end"
             android:fontFamily="@font/belgrano"
-            android:maxLines="2"
+            android:maxLines="3"
+            android:paddingLeft="8dp"
+            android:paddingStart="8dp"
+            android:paddingTop="8dp"
             android:text="DR Congo officially declares end to Ebola outbreak"
             android:textColor="@android:color/black"
             android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/widget_news_image"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/widget_headline_view"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             autofit:minTextSize="16sp" />
+
 
         <ImageView
             android:id="@+id/widget_news_image"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="4dp"
             android:scaleType="centerCrop"
             android:src="@drawable/trump"
-            android:visibility="visible"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:visibility="visible" />
 
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/widget_auther_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent">
-
-            <ImageView
-                android:id="@+id/widget_pen_image"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:src="@drawable/ic_pen_24dp"
-                app:layout_constraintLeft_toLeftOf="parent" />
-
-            <TextView
-                android:id="@+id/widget_author_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:ellipsize="end"
-                android:fontFamily="sans-serif"
-                android:text="The Straits Times"
-                android:textColor="@color/colorSecondaryText"
-                android:textSize="15sp"
-                app:layout_constraintLeft_toRightOf="@id/widget_pen_image" />
-        </android.support.constraint.ConstraintLayout>
-    </android.support.constraint.ConstraintLayout>
-</android.support.constraint.ConstraintLayout>
+    </LinearLayout>
+</LinearLayout>

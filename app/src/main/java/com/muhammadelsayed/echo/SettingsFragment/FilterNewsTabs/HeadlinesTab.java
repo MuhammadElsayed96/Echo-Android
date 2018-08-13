@@ -18,12 +18,11 @@ public class HeadlinesTab extends Fragment {
     private static final String TAG = "HeadlinesTab";
     public static CheckBox chkAustralia, chkUk, chkUs, chkInternational;
     public static boolean au, uk, us, international;
-    private SharedPreferences sharedpreferences;
-    private RelativeLayout mAustralia, mUk, mUs, mInternational;
-
-    private int count;
     private final int MAX_CHECKED_NUM = 4;
     private final int MIN_CHECKED_NUM = 1;
+    private SharedPreferences sharedpreferences;
+    private RelativeLayout mAustralia, mUk, mUs, mInternational;
+    private int count;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -118,7 +117,7 @@ public class HeadlinesTab extends Fragment {
         if (b) {
             if (count < MAX_CHECKED_NUM)
                 count++;
-        } else if (count >= MIN_CHECKED_NUM){
+        } else if (count >= MIN_CHECKED_NUM) {
             count--;
         }
     }

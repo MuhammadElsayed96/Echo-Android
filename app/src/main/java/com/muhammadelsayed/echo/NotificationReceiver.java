@@ -36,7 +36,7 @@ public class NotificationReceiver extends BroadcastReceiver {
         Log.d(TAG, "onReceive: received !!");
         final NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        Intent targetIntent =  new Intent(context, MainActivity.class);
+        Intent targetIntent = new Intent(context, MainActivity.class);
 
         SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.settings_preferences), Context.MODE_PRIVATE);
         boolean internationalHeadline = sharedPreferences.getBoolean("international_headline", true);
@@ -87,7 +87,7 @@ public class NotificationReceiver extends BroadcastReceiver {
                 StrictMode.setThreadPolicy(policy);
                 try {
                     URL url = new URL(article.getFields().getThumbnail());
-                    image = BitmapFactory.decodeStream((InputStream)url.getContent());
+                    image = BitmapFactory.decodeStream((InputStream) url.getContent());
                 } catch (IOException e) {
                     Log.e(TAG, e.getMessage());
                 }
@@ -112,7 +112,7 @@ public class NotificationReceiver extends BroadcastReceiver {
 //                notificationManager.notify(100, builder.build());
 
                 if (intent.getAction().equals("MY_NOTIFICATION_MESSAGE")) {
-                    notificationManager.notify(100,builder.build());
+                    notificationManager.notify(100, builder.build());
                     Log.d(TAG, "Alarm");
                 }
             }

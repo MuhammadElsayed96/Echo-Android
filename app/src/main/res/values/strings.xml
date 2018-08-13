@@ -112,9 +112,10 @@
     <!--CLOSING TAG-->
 
 
-    <string name="no_data">No News Found! \n Connect to Internet</string>
+    <string name="no_data">Loading ...</string>
     <string name="null_str">NULL</string>
     <string name="empty">empty</string>
     <string name="notifications">Notifications</string>
+    <string name="pen">pen</string>
 
 </resources>

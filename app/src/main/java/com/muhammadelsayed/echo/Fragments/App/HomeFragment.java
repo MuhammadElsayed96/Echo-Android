@@ -1,7 +1,10 @@
 package com.muhammadelsayed.echo.Fragments.App;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -19,6 +22,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -58,11 +62,11 @@ import static com.muhammadelsayed.echo.SettingsFragment.ReorderSectionsActivity.
 
 public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private static final String TAG = "HomeFragment";
-    FragmentManager fragmentManager;
     public static Fragment fragment;
+    public static List<Section> sortedSections;
+    FragmentManager fragmentManager;
     private DrawerLayout mDrawerLayout;
     private NavigationView navDrawer;
-    public static List<Section> sortedSections;
 
     public static HomeFragment homeFragmentInstance() {
         return new HomeFragment();
@@ -72,6 +76,40 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.wtf(TAG, "onCreateView() has been instantiated");
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+
+//        Intent intent = getActivity().getIntent();
+//        if (intent != null) {
+//            String articleUrl = intent.getStringExtra("article_url");
+//            SharedPreferences preferences = getSharedPreferences(getString(R.string.settings_preferences), Context.MODE_PRIVATE);
+//            boolean inAppBrowser = preferences.getBoolean("in_app_browser", true);
+//            if (inAppBrowser) {
+//                new FinestWebView.Builder(getActivity().getApplicationContext())
+//                        .theme(R.style.FinestWebViewTheme)
+//                        .titleDefault(getString(R.string.the_guardian))
+//                        .showUrl(false)
+//                        .statusBarColorRes(R.color.bluePrimaryDark)
+//                        .toolbarColorRes(R.color.bluePrimary)
+//                        .titleColorRes(R.color.finestWhite)
+//                        .urlColorRes(R.color.bluePrimaryLight)
+//                        .iconDefaultColorRes(R.color.finestWhite)
+//                        .progressBarColorRes(R.color.finestWhite)
+//                        .stringResCopiedToClipboard(R.string.copied_to_clipboard)
+//                        .stringResCopiedToClipboard(R.string.copied_to_clipboard)
+//                        .stringResCopiedToClipboard(R.string.copied_to_clipboard)
+//                        .showSwipeRefreshLayout(true)
+//                        .swipeRefreshColorRes(R.color.bluePrimaryDark)
+//                        .menuSelector(R.drawable.selector_light_theme)
+//                        .menuTextGravity(Gravity.CENTER)
+//                        .menuTextPaddingRightRes(R.dimen.defaultMenuTextPaddingLeft)
+//                        .dividerHeight(0)
+//                        .gradientDivider(false)
+//                        .setCustomAnimations(
+//                                R.anim.slide_up, R.anim.hold, R.anim.hold, R.anim.slide_down)
+//                        .show(articleUrl);
+//            } else {
+//                openWebPage(articleUrl);
+//            }
+//        }
 
         Toolbar toolbar = rootView.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
@@ -353,5 +391,18 @@ public class HomeFragment extends Fragment implements SwipeRefreshLayout.OnRefre
     @Override
     public void onRefresh() {
         Log.wtf(TAG, "onRefresh() has been instantiated");
+    }
+
+    private void openWebPage(String url) {
+        Log.wtf(TAG, "openWebPage() has been instantiated");
+        try {
+            Uri webPage = Uri.parse(url);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(webPage);
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(getActivity().getApplicationContext(), "No application can handle this request. Please install a web browser or check your URL.", Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
     }
 }

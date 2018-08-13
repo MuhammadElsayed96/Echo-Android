@@ -24,7 +24,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
@@ -36,35 +36,27 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
     // Retrofit libraries
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
-
     // Firebase
     implementation 'com.google.firebase:firebase-core:16.0.1'
     implementation 'com.google.firebase:firebase-auth:16.0.2'
-
     // RecyclerView
     //noinspection GradleCompatible
     implementation 'com.android.support:recyclerview-v7:27.1.1'
-
     // Circular ImageView
     implementation 'com.mikhaellopez:circularimageview:3.0.2'
-
     // zcweng/ToggleButton
     implementation 'com.zcw:togglebutton-library:1.0.0'
-
     // Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
-
     // AutoFitTextView
     implementation 'me.grantland:autofittextview:0.2.+'
-
     // FinestWebView-Android
     implementation 'com.thefinestartist:finestwebview:1.2.7'
-
     // Sweet Alert Dialog
     implementation 'com.github.f0ris.sweetalert:library:1.5.1'
+    implementation files('libs/universal-image-loader-1.9.5.jar')
 }
 apply plugin: 'com.google.gms.google-services'

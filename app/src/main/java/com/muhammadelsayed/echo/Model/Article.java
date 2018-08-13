@@ -1,8 +1,9 @@
 package com.muhammadelsayed.echo.Model;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class Article {
+public class Article implements Serializable {
 
     private String id;
     private String type;

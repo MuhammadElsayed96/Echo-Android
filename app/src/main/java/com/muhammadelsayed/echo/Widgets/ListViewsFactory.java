@@ -3,6 +3,7 @@ package com.muhammadelsayed.echo.Widgets;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
@@ -10,11 +11,14 @@ import android.widget.RemoteViewsService;
 
 import com.muhammadelsayed.echo.Model.Article;
 import com.muhammadelsayed.echo.R;
-import com.thefinestartist.utils.log.L;
+import com.muhammadelsayed.echo.Utils;
+import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
-import static com.muhammadelsayed.echo.SplashActivity.sections;
+import java.util.Map;
 
 /**
  * RemoteViewsFactory
@@ -44,25 +48,43 @@ public class ListViewsFactory implements RemoteViewsService.RemoteViewsFactory {
     @Override
     public void onCreate() {
         Log.wtf(TAG, "onCreate() has been instantiated");
+        selectedSection = new ArrayList<>();
+        Map<String, Object> options = new HashMap<>();
+        String prefSection = HomeWidgetConfigureActivity.loadSectionPref(context, appWidgetId);
+        Log.wtf(TAG, "prefSection Name -> " + prefSection);
+        options.put("section", prefSection);
+        options.put("order-by", "newest");
+        options.put("show-tags", "contributor");
+        options.put("show-fields", "thumbnail,showInRelatedContent,shortUrl");
+        options.put("page", 1);
+        options.put("page-size", 20);
+        options.put("api-key", "c8133e91-2b02-42b7-9cc8-88ca8d73998a");
+        Utils.getNews(options, new Utils.retrofitCallback() {
+            @Override
+            public void onSuccess(List<Article> articles) {
+                Log.wtf(TAG, "onSuccess:" + articles);
+//                selectedSection = filterArticles(articles);
+                selectedSection = articles;
+            }
 
-        // In onCreate() you setup any connections / cursors to your data source. Heavy lifting,
-        // for example downloading or creating content etc, should be deferred to onDataSetChanged()
-        // or getViewAt(). Taking more than 20 seconds in this call will result in an ANR.
+            @Override
+            public void onFailure(Throwable t) {
+                Log.wtf(TAG, "onFailure(): " + t.getMessage());
+            }
+        });
 
-        CharSequence sectionTitle = HomeWidgetConfigureActivity.loadSectionPref(context, appWidgetId);
-        Log.wtf(TAG, "Section Name -> " + sectionTitle);
-        selectedSection = sections.get(sectionTitle);
-        Log.wtf(TAG, "Data Source -> " + selectedSection);
+//        selectedSection = SplashActivity.sections.get(sectionTitle);
+//        Log.wtf(TAG, "Data Source -> " + selectedSection.toString());
 
 
         // We sleep for 3 seconds here to show how the empty view appears in the interim.
         // The empty view is set in the WidgetProvider and should be a sibling of the
         // collection view.
-        try {
-            Thread.sleep(3000);
-        } catch (final InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(3000);
+//        } catch (final InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Override
@@ -85,45 +107,37 @@ public class ListViewsFactory implements RemoteViewsService.RemoteViewsFactory {
     @Override
     public int getCount() {
         Log.wtf(TAG, "getCount() has been instantiated");
+        Log.wtf(TAG, "getCount() = " + selectedSection.size());
         return selectedSection.size();
     }
 
     @Override
     public RemoteViews getViewAt(int position) {
         Log.wtf(TAG, "getViewAt() has been instantiated");
-        // position will always range from 0 to getCount() - 1.
 
         // We construct a remote views item based on our widget item xml file, and set the
         // text based on the position.
         RemoteViews remoteView = new RemoteViews(context.getPackageName(), R.layout.widget_list_item);
+        remoteView.removeAllViews(R.id.widget_content);
         Article article = selectedSection.get(position);
+        Log.wtf(TAG, article.toString());
         remoteView.setTextViewText(R.id.widget_title_text, article.getWebTitle());
-        remoteView.setTextViewText(R.id.widget_author_name, article.getTags()[0].getWebTitle());
-//        try {
-//            Bitmap b = Picasso.get().load(article.getFields().getThumbnail()).get();
-//            remoteView.setImageViewBitmap(R.id.widget_news_image, b);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        Bitmap b = null;
+        try {
+            b = Picasso.get().load(article.getFields().getThumbnail()).get();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        remoteView.setImageViewBitmap(R.id.widget_news_image, b);
 
         //  Next, we set a fill-intent which will be used to fill-in the pending intent template
         //  which is set on the collection view in WidgetProvider.
         final Bundle extras = new Bundle();
         extras.putInt(WidgetProvider.EXTRA_ITEM, position);
+        extras.putString("article_url", article.getApiUrl());
         final Intent fillInIntent = new Intent();
         fillInIntent.putExtras(extras);
-        remoteView.setOnClickFillInIntent(R.id.widget_headline_view, fillInIntent);
-
-        // You can do heaving lifting in here, synchronously. For example, if you need to
-        // process an image, fetch something from the network, etc., it is ok to do it here,
-        // synchronously. A loading view will show up in lieu of the actual contents in the
-        // interim.
-        try {
-            L.d("Loading view " + position);
-            Thread.sleep(500);
-        } catch (final InterruptedException e) {
-            e.printStackTrace();
-        }
+        remoteView.setOnClickFillInIntent(R.id.list_item_container, fillInIntent);
 
         return remoteView;
     }
@@ -149,5 +163,4 @@ public class ListViewsFactory implements RemoteViewsService.RemoteViewsFactory {
     public boolean hasStableIds() {
         return true;
     }
-
 }

@@ -6,10 +6,11 @@ import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
-import android.widget.Toast;
 
+import com.muhammadelsayed.echo.Model.Article;
 import com.muhammadelsayed.echo.R;
 
 /**
@@ -54,6 +55,10 @@ public class WidgetProvider extends AppWidgetProvider {
             //which layout to show on widget
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget);
 
+            String sectionTitle = HomeWidgetConfigureActivity.loadSectionPref(context, appWidgetId);
+            Log.wtf(TAG, "Section Name -> " + sectionTitle);
+            views.setTextViewText(R.id.widget_header_section_text, sectionTitle);
+
             //setting adapter to listView of the widget
             views.setRemoteAdapter(R.id.widget_news_list, svcIntent);
 
@@ -65,13 +70,16 @@ public class WidgetProvider extends AppWidgetProvider {
             // cannot setup their own pending intents, instead, the collection as a whole can
             // setup a pending intent template, and the individual items can set a fillInIntent
             // to create unique before on an item to item basis.
+
             Intent toastIntent = new Intent(context, WidgetProvider.class);
             toastIntent.setAction(WidgetProvider.TOAST_ACTION);
             toastIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
             svcIntent.setData(Uri.parse(svcIntent.toUri(Intent.URI_INTENT_SCHEME)));
             PendingIntent toastPendingIntent = PendingIntent.getBroadcast(context, 0, toastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             views.setPendingIntentTemplate(R.id.widget_news_list, toastPendingIntent);
-
+//            Intent startActivity = new Intent(context, MainActivity.class);
+//            PendingIntent startActivityPending = PendingIntent.getActivity(context, 0, startActivity, PendingIntent.FLAG_UPDATE_CURRENT);
+//            views.setPendingIntentTemplate(R.id.widget_news_list, startActivityPending);
             appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_news_list);
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
@@ -164,8 +172,13 @@ public class WidgetProvider extends AppWidgetProvider {
             int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                     AppWidgetManager.INVALID_APPWIDGET_ID);
             int viewIndex = intent.getIntExtra(EXTRA_ITEM, 0);
-            Toast.makeText(context, "Touched view " + viewIndex, Toast.LENGTH_SHORT).show();
+            Article article = (Article) intent.getSerializableExtra("article");
         }
         super.onReceive(context, intent);
+    }
+
+    @Override
+    public void onAppWidgetOptionsChanged(final Context context, final AppWidgetManager appWidgetManager, final int appWidgetId, final Bundle newOptions) {
+        onUpdate(context, appWidgetManager, new int[]{appWidgetId});
     }
 }

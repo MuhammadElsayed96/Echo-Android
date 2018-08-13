@@ -26,11 +26,8 @@ import static com.muhammadelsayed.echo.Utils.isNetworkAvailable;
 public class SplashActivity extends AppCompatActivity {
 
     private static final String TAG = "SplashActivity";
-    private SharedPreferences sharedpreferences;
-
     public static AlarmManager alarmManager;
     public static PendingIntent pendingIntent;
-
     public static List<Article> mBusinessArticleList = new ArrayList<>();
     public static List<Article> mEnvironmentArticleList = new ArrayList<>();
     public static List<Article> mTechnologyArticleList = new ArrayList<>();
@@ -58,12 +55,12 @@ public class SplashActivity extends AppCompatActivity {
     public static List<Article> mTvAndRadioArticleList = new ArrayList<>();
     public static List<Article> mWeatherArticleList = new ArrayList<>();
     public static List<Article> mWorldArticleList = new ArrayList<>();
-    public static Map<String, List<Article>> sections = new HashMap<>();
     Map<String, Object> options = new HashMap<>();
     boolean bool, f1 = false, f2 = false, f3 = false, f4 = false, f5 = false, f6 = false, f7 = false, f8 = false,
             f9 = false, f10 = false, f11 = false, f12 = false, f13 = false, f14 = false, f15 = false, f16 = false,
             f17 = false, f18 = false, f19 = false, f20 = false, f21 = false, f22 = false, f23 = false, f24 = false,
             f25 = false, f26 = false, f28 = false;
+    private SharedPreferences sharedpreferences;
     private SweetAlertDialog exitOrRetry;
 
     private static List<Article> filterArticles(List<Article> articles) {
@@ -84,34 +81,6 @@ public class SplashActivity extends AppCompatActivity {
 
         if (isNetworkAvailable()) {
             getData();
-
-            sections.put("Business", mBusinessArticleList);
-            sections.put("Culture", mCultureArticleList);
-            sections.put("Art and design", mArtAndDesignArticleList);
-            sections.put("Environment", mEnvironmentArticleList);
-            sections.put("Books", mBooksArticleList);
-            sections.put("Australia news", mAustraliaNewsArticleList);
-            sections.put("UK news", mUkNewsArticleList);
-            sections.put("US news", mUsNewsArticleList);
-            sections.put("News", mInternationalArticleList);
-            sections.put("Education", mEducationArticleList);
-            sections.put("Fashion", mFashionArticleList);
-            sections.put("Film", mFilmArticleList);
-            sections.put("Football", mFootballArticleList);
-            sections.put("Law", mLawArticleList);
-            sections.put("Life and style", mLifestyleArticleList);
-            sections.put("Media", mMediaArticleList);
-            sections.put("Money", mMoneyArticleList);
-            sections.put("Music", mMusicArticleList);
-            sections.put("Politics", mPoliticsArticleList);
-            sections.put("Science", mScienceArticleList);
-            sections.put("Society", mSocietyArticleList);
-            sections.put("Sport", mSportArticleList);
-            sections.put("Technology", mTechnologyArticleList);
-            sections.put("Television & radio", mTvAndRadioArticleList);
-            sections.put("Travel", mTravelArticleList);
-            sections.put("Weather", mWeatherArticleList);
-            sections.put("World", mWorldArticleList);
         } else
             tryToConnectOrExit();
 

@@ -9,17 +9,16 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import com.muhammadelsayed.echo.Model.Section;
 import com.muhammadelsayed.echo.R;
 
 import java.util.List;
 
-public class WidgetNewsAdapter extends ArrayAdapter<Section> {
+public class WidgetNewsAdapter extends ArrayAdapter<String> {
 
     private Context mContext;
-    private List<Section> sections;
+    private List<String> sections;
 
-    public WidgetNewsAdapter(@NonNull Context context, List<Section> sections) {
+    public WidgetNewsAdapter(@NonNull Context context, List<String> sections) {
         super(context, 0, sections);
         mContext = context;
         this.sections = sections;
@@ -31,11 +30,11 @@ public class WidgetNewsAdapter extends ArrayAdapter<Section> {
         if (convertView == null)
             convertView = LayoutInflater.from(mContext).inflate(R.layout.widget_configure_list_item, parent, false);
 
-        Section currentSection = getItem(position);
+        String currentSection = getItem(position);
         TextView sectionName = convertView.findViewById(R.id.configure_name);
 
         try {
-            sectionName.setText(currentSection.getTitle());
+            sectionName.setText(currentSection);
         } catch (Exception ex) {
             sectionName.setText(mContext.getString(R.string.empty));
         }

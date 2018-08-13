@@ -94,13 +94,6 @@ public class Utils {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    public interface retrofitCallback {
-        void onSuccess(List<Article> articles);
-
-        void onFailure(Throwable t);
-    }
-
-
     public static Bitmap getBitmapFromURL(String src) {
         try {
             URL url = new URL(src);
@@ -114,6 +107,13 @@ public class Utils {
             e.printStackTrace();
             return null;
         }
+    }
+
+
+    public interface retrofitCallback {
+        void onSuccess(List<Article> articles);
+
+        void onFailure(Throwable t);
     }
 
 }
