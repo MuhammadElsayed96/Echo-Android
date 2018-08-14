@@ -47,6 +47,7 @@ public class HomeWidgetConfigureActivity extends Activity {
             String sectionPref = sectionMap.get(sectionName);
             saveSectionPref(context, mAppWidgetId, sectionPref);
 
+
             // Make sure we pass back the original appWidgetId
             // It is the responsibility of the configuration activity to update the app widget
             Intent resultValue = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE, null, HomeWidgetConfigureActivity.this, WidgetProvider.class);
@@ -82,6 +83,7 @@ public class HomeWidgetConfigureActivity extends Activity {
 
         SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, 0);
         String titleValue = prefs.getString(PREF_PREFIX_KEY + appWidgetId, null);
+        Log.wtf(TAG, "loadSectionPref()::Section Name -> " + titleValue);
         if (titleValue != null) {
             return titleValue;
         } else {
@@ -131,7 +133,6 @@ public class HomeWidgetConfigureActivity extends Activity {
         sectionsAdapter = new WidgetNewsAdapter(HomeWidgetConfigureActivity.this, sections);
         mSectionsList.setAdapter(sectionsAdapter);
     }
-
 
     private void loadSections() {
         Log.wtf(TAG, "loadSections() has been instantiated");

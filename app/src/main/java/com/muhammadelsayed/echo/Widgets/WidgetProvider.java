@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
 
-import com.muhammadelsayed.echo.MainActivity;
 import com.muhammadelsayed.echo.R;
 
 import java.util.ArrayList;
@@ -32,6 +31,7 @@ public class WidgetProvider extends AppWidgetProvider {
     private List<String> sections = null;
     private List<String> section = null;
     private Map<String, String> sectionMap = null;
+    private static int firstTime = 1;
 
     /**
      * However, if you have declared a configuration Activity,
@@ -61,11 +61,16 @@ public class WidgetProvider extends AppWidgetProvider {
             //which layout to show on widget
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget);
 
+
             String sectionTitle = HomeWidgetConfigureActivity.loadSectionPref(context, appWidgetId);
             Log.wtf(TAG, "Section Name -> " + sectionTitle);
-//            String title = sections.get(section.indexOf(sectionTitle));
-//            views.setTextViewText(R.id.widget_header_section_text, title);
-
+            if (!sectionTitle.equals("EXAMPLE")) {
+                int title1 = sections.indexOf(sectionTitle);
+                Log.wtf(TAG, "title1 -> " + title1);
+                String title = section.get(title1);
+                Log.wtf(TAG, "title -> " + title);
+                views.setTextViewText(R.id.widget_header_section_text, title);
+            }
             //setting adapter to listView of the widget
             views.setRemoteAdapter(R.id.widget_news_list, svcIntent);
 
@@ -89,7 +94,6 @@ public class WidgetProvider extends AppWidgetProvider {
         }
     }
 
-
     @Override
     public void onDeleted(Context context, int[] appWidgetIds) {
         Log.wtf(TAG, "onDeleted() has been instantiated");
@@ -97,7 +101,7 @@ public class WidgetProvider extends AppWidgetProvider {
         AppWidgetManager mgr = AppWidgetManager.getInstance(context);
         for (int appWidgetId : appWidgetIds) {
             HomeWidgetConfigureActivity.deleteSectionPref(context, appWidgetId);
-//            mgr.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_news_list);
+            mgr.notifyAppWidgetViewDataChanged(appWidgetId, R.id.widget_news_list);
         }
     }
 
@@ -122,18 +126,23 @@ public class WidgetProvider extends AppWidgetProvider {
         loadSections();
 
         AppWidgetManager mgr = AppWidgetManager.getInstance(context);
-        if (intent.getAction().equals(TOAST_ACTION)) {
-            int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
-                    AppWidgetManager.INVALID_APPWIDGET_ID);
-            int viewIndex = intent.getIntExtra(EXTRA_ITEM, 0);
 
-            String articleUrl = intent.getStringExtra("article_url");
-            Intent intent1 = new Intent(context, MainActivity.class);
-            intent1.putExtra("article_url", articleUrl);
-            intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            Log.wtf(TAG, "article_url = " + articleUrl);
-            context.startActivity(intent1);
-        }
+//        final String PREFS_NAME = "com.muhammadelsayed.echo.Widgets.WidgetProvider";
+//        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, 0);
+//        boolean clicked = prefs.getBoolean("click", false);
+//        Log.wtf(TAG, "clicked -> " + clicked);
+//        if (clicked) {
+//            SharedPreferences.Editor pref = context.getSharedPreferences(PREFS_NAME, 0).edit();
+//            pref.putBoolean("click", false).apply();
+//            Log.wtf(TAG, "clicked -> " + prefs.getBoolean("click", false));
+//            String articleUrl = intent.getStringExtra("article_url");
+//            Intent intent1 = new Intent(context, MainActivity.class);
+//            intent1.putExtra("article_url", articleUrl);
+//            intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            Log.wtf(TAG, "article_url = " + articleUrl);
+//            context.startActivity(intent1);
+//
+//        }
         super.onReceive(context, intent);
     }
 
@@ -151,7 +160,7 @@ public class WidgetProvider extends AppWidgetProvider {
         sections.add(1, "us-news");
         sections.add(3, "news");
         sections.add(4, "artanddesign");
-        sections.add(5, "boks");
+        sections.add(5, "books");
         sections.add(6, "business");
         sections.add(7, "culture");
         sections.add(8, "education");

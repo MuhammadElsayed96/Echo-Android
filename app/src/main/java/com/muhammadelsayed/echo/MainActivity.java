@@ -151,6 +151,14 @@ public class MainActivity extends AppCompatActivity {
         if (getIntent().hasExtra("article_url")) {
             switchFragment(0, TAG_FRAGMENT_HOME);
             mBottomNavigation.setSelectedItemId(R.id.navigation_home);
+//            NavigationView navDrawer = findViewById(R.id.nav_view);
+//            DrawerLayout mDrawerLayout = findViewById(R.id.drawer_layout);
+//            Toolbar toolbar = findViewById(R.id.toolbar);
+//            setSupportActionBar(toolbar);
+//            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close);
+//            mDrawerLayout.setDrawerListener(toggle);
+//            toggle.syncState();
+//            FragmentManager fragmentManager = getChildFragmentManager();
             SharedPreferences preferences = getSharedPreferences(getString(R.string.settings_preferences), Context.MODE_PRIVATE);
             String url = getIntent().getStringExtra("article_url");
             boolean inAppBrowser = preferences.getBoolean("in_app_browser", true);
