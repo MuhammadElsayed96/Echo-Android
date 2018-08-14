@@ -47,12 +47,12 @@ import java.util.List;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class MainActivity extends AppCompatActivity {
-
     private static final String TAG = "MainActivity";
     private static final String TAG_FRAGMENT_HOME = "tag_frag_home";
     private static final String TAG_FRAGMENT_SHORTCUTS = "tag_frag_shortcuts";
     private static final String TAG_FRAGMENT_SEARCH = "tag_frag_search";
     private static final String TAG_FRAGMENT_SETTINGS = "tag_frag_settings";
+    public static final String CLICK_ACTION = "com.muhammadelsayed.echo.Widgets.CLICK_ACTION";
     private static final int INT_FRAGMENTS_COUNT = 4;
     private static final int INT_FRAGMENT_HOME_POS = 0;
     private static final int INT_FRAGMENT_SHORTCUTS_POS = 1;
@@ -191,9 +191,8 @@ public class MainActivity extends AppCompatActivity {
                 getIntent().removeExtra("article_url");
             }
         }
-
-
     }
+
 
     @Override
     protected void onPause() {

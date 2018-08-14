@@ -13,12 +13,14 @@ import com.muhammadelsayed.echo.Model.Article;
 import com.muhammadelsayed.echo.R;
 import com.muhammadelsayed.echo.Utils;
 import com.squareup.picasso.Picasso;
+import com.thefinestartist.Base;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 /**
  * RemoteViewsFactory
@@ -30,6 +32,7 @@ import java.util.Map;
  */
 public class ListViewsFactory implements RemoteViewsService.RemoteViewsFactory {
     private static final String TAG = ListViewsFactory.class.getSimpleName();
+    static final String CLICK_ACTION = "com.muhammadelsayed.echo.Widgets.CLICK_ACTION";
     private Context context = null;
     private int appWidgetId;
     private List<Article> selectedSection = null;
@@ -44,10 +47,10 @@ public class ListViewsFactory implements RemoteViewsService.RemoteViewsFactory {
                 AppWidgetManager.INVALID_APPWIDGET_ID);
     }
 
-
     @Override
     public void onCreate() {
         Log.wtf(TAG, "onCreate() has been instantiated");
+        Base.initialize(context);
         selectedSection = new ArrayList<>();
         Map<String, Object> options = new HashMap<>();
         String prefSection = HomeWidgetConfigureActivity.loadSectionPref(context, appWidgetId);
@@ -65,6 +68,13 @@ public class ListViewsFactory implements RemoteViewsService.RemoteViewsFactory {
                 Log.wtf(TAG, "onSuccess:" + articles);
 //                selectedSection = filterArticles(articles);
                 selectedSection = articles;
+                Log.wtf(TAG, "Data has been completely loaded from the internet");
+                // Make sure we pass back the original appWidgetId
+                // It is the responsibility of the configuration activity to update the app widget
+                Intent resultValue = new Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE, null, context, WidgetProvider.class);
+                resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, new int[]{appWidgetId});
+                context.sendBroadcast(resultValue);
+                Log.wtf(TAG, "Broadcast sent");
             }
 
             @Override
@@ -118,9 +128,7 @@ public class ListViewsFactory implements RemoteViewsService.RemoteViewsFactory {
         // We construct a remote views item based on our widget item xml file, and set the
         // text based on the position.
         RemoteViews remoteView = new RemoteViews(context.getPackageName(), R.layout.widget_list_item);
-        remoteView.removeAllViews(R.id.widget_content);
         Article article = selectedSection.get(position);
-        Log.wtf(TAG, article.toString());
         remoteView.setTextViewText(R.id.widget_title_text, article.getWebTitle());
         Bitmap b = null;
         try {

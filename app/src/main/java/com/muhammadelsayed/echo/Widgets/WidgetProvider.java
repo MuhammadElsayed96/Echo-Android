@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
 
+import com.muhammadelsayed.echo.MainActivity;
 import com.muhammadelsayed.echo.R;
 
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ import java.util.Map;
 public class WidgetProvider extends AppWidgetProvider {
     public static final String TOAST_ACTION = "com.muhammadelsayed.echo.Widgets.TOAST_ACTION";
     public static final String EXTRA_ITEM = "com.muhammadelsayed.echo.Widgets.EXTRA_ITEM";
+    static final String CLICK_ACTION = "com.muhammadelsayed.echo.Widgets.CLICK_ACTION";
     private static final String TAG = WidgetProvider.class.getSimpleName();
     private List<String> sections = null;
     private List<String> section = null;
@@ -84,7 +86,7 @@ public class WidgetProvider extends AppWidgetProvider {
             // to create unique before on an item to item basis.
 
             Intent toastIntent = new Intent(context, WidgetProvider.class);
-            toastIntent.setAction(WidgetProvider.TOAST_ACTION);
+            toastIntent.setAction(WidgetProvider.CLICK_ACTION);
             toastIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
             svcIntent.setData(Uri.parse(svcIntent.toUri(Intent.URI_INTENT_SCHEME)));
             PendingIntent toastPendingIntent = PendingIntent.getBroadcast(context, 0, toastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -127,22 +129,14 @@ public class WidgetProvider extends AppWidgetProvider {
 
         AppWidgetManager mgr = AppWidgetManager.getInstance(context);
 
-//        final String PREFS_NAME = "com.muhammadelsayed.echo.Widgets.WidgetProvider";
-//        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, 0);
-//        boolean clicked = prefs.getBoolean("click", false);
-//        Log.wtf(TAG, "clicked -> " + clicked);
-//        if (clicked) {
-//            SharedPreferences.Editor pref = context.getSharedPreferences(PREFS_NAME, 0).edit();
-//            pref.putBoolean("click", false).apply();
-//            Log.wtf(TAG, "clicked -> " + prefs.getBoolean("click", false));
-//            String articleUrl = intent.getStringExtra("article_url");
-//            Intent intent1 = new Intent(context, MainActivity.class);
-//            intent1.putExtra("article_url", articleUrl);
-//            intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            Log.wtf(TAG, "article_url = " + articleUrl);
-//            context.startActivity(intent1);
-//
-//        }
+        if (intent.getAction().equals(CLICK_ACTION)) {
+            String articleUrl = intent.getStringExtra("article_url");
+            Intent intent1 = new Intent(context, MainActivity.class);
+            intent1.putExtra("article_url", articleUrl);
+            intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            Log.wtf(TAG, "article_url = " + articleUrl);
+            context.startActivity(intent1);
+        }
         super.onReceive(context, intent);
     }
 
