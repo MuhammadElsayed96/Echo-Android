@@ -117,5 +117,6 @@
     <string name="empty">empty</string>
     <string name="notifications">Notifications</string>
     <string name="pen">pen</string>
+    <string name="log_in">Log In</string>
 
 </resources>
