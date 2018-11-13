@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="24dp"
-    tools:context=".SettingsFragment.DefaultEditionActivity">
+    tools:context=".settings_fragment.DefaultEditionActivity">
 
     <RadioGroup
         android:id="@+id/editions_radio_group"

@@ -18,7 +18,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.muhammadelsayed.echo.MainActivity">
+    tools:context="com.muhammadelsayed.echo.activities.MainActivity">
 
     <!-- Middle Body Layout -->
     <RelativeLayout

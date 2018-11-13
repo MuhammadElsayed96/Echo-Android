@@ -111,12 +111,12 @@
     <string name="nav_weather">nav_weather</string>
     <!--CLOSING TAG-->
 
-
     <string name="no_data">Loading ...</string>
     <string name="null_str">NULL</string>
     <string name="empty">empty</string>
     <string name="notifications">Notifications</string>
     <string name="pen">pen</string>
     <string name="log_in">Log In</string>
+    <string name="news_adapter_date_pattern">MM/dd/yy \'at\' h:mm a</string>
 
 </resources>

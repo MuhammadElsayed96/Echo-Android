@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".settings_fragment.FilterNewsTabs.SectionsTab">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/auheadlines"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:text="@string/australia_headlines"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/check_auheadlines"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:buttonTint="@color/finestBlack" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/ukheadlines"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/auheadlines"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:text="@string/uk_headlines"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/check_ukheadlines"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:buttonTint="@color/finestBlack" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/usheadlines"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ukheadlines"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:text="@string/us_headlines"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/check_usheadlines"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:buttonTint="@color/finestBlack" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/headlines"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/usheadlines"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:text="@string/international_headlines"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/check_headlines"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:buttonTint="@color/finestBlack" />
+        </RelativeLayout>
+    </RelativeLayout>
+</ScrollView>

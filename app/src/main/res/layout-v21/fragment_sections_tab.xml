@@ -1,0 +1,570 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".settings_fragment.FilterNewsTabs.SectionsTab">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/art_design"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:text="Art &amp; Design"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/check_artanddesign"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:buttonTint="@color/finestBlack" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/books"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/art_design"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:text="Books"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/check_books"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:buttonTint="@color/finestBlack" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/business"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/books"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:text="Business"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/check_business"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:buttonTint="@color/finestBlack" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/culture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/business"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:text="Culture"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/check_culture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:buttonTint="@color/finestBlack" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/education"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/culture"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:text="Education"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/check_education"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:buttonTint="@color/finestBlack" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/environment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/education"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:text="Environment"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/check_environment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:buttonTint="@color/finestBlack" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/fashion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/environment"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:text="Fashion"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/check_fashion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:buttonTint="@color/finestBlack" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/film"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fashion"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:text="Film"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/check_film"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:buttonTint="@color/finestBlack" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/football"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/film"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:text="Football"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/check_football"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:buttonTint="@color/finestBlack" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/law"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/football"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:text="Law"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/check_law"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:buttonTint="@color/finestBlack" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/lifestyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/law"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:text="Lifestyle"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/check_lifestyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:buttonTint="@color/finestBlack" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/media"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/lifestyle"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:text="Media"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/check_media"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:buttonTint="@color/finestBlack" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/money"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/media"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:text="Money"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/check_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:buttonTint="@color/finestBlack" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/music"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/money"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:text="Music"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/check_music"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:buttonTint="@color/finestBlack" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/politics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/music"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:text="Politics"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/check_politics"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:buttonTint="@color/finestBlack" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/science"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/politics"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:text="Science"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/check_science"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:buttonTint="@color/finestBlack" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/society"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/science"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:text="Society"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/check_society"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:buttonTint="@color/finestBlack" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/sport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/society"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:text="Sport"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/check_sport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:buttonTint="@color/finestBlack" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/technology"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sport"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:text="Technology"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/check_technology"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:buttonTint="@color/finestBlack" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/travel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/technology"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:text="Travel"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/check_travel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:buttonTint="@color/finestBlack" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/tvradio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/travel"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:text="TV &amp; Radio"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/check_tvradio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:buttonTint="@color/finestBlack" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/weather"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvradio"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:text="Weather"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/check_weather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:buttonTint="@color/finestBlack" />
+        </RelativeLayout>
+    </RelativeLayout>
+</ScrollView>

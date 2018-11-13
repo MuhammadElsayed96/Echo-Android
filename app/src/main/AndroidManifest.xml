@@ -30,11 +30,11 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".activities.SplashActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
@@ -51,76 +51,77 @@
             android:screenOrientation="sensor"
             android:theme="@style/FinestWebViewTheme.Light" />
         <activity
-            android:name=".SettingsFragment.AccountActivity"
+            android:name=".settings_fragment.AccountActivity"
             android:label="@string/my_account"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".activities.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/CustomAppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".activities.MainActivity" />
         </activity>
         <activity
-            android:name=".SettingsFragment.FilterNewsActivity"
+            android:name=".settings_fragment.FilterNewsActivity"
             android:label="@string/filter_news"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".activities.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".activities.MainActivity" />
         </activity>
         <activity
-            android:name=".SettingsFragment.DefaultEditionActivity"
+            android:name=".settings_fragment.DefaultEditionActivity"
             android:label="@string/default_edition"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".activities.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/CustomAppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".activities.MainActivity" />
         </activity>
         <activity
-            android:name=".SettingsFragment.ReadArticleActivity"
+            android:name=".settings_fragment.ReadArticleActivity"
             android:label="Read Article In"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".activities.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/CustomAppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".activities.MainActivity" />
         </activity>
         <activity
-            android:name=".SettingsFragment.ContactUsActivity"
+            android:name=".settings_fragment.ContactUsActivity"
             android:label="@string/contact_us"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".activities.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/CustomAppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".activities.MainActivity" />
         </activity>
         <activity
-            android:name=".SettingsFragment.NotificationsActivity"
+            android:name=".settings_fragment.NotificationsActivity"
             android:label="@string/notifications"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".activities.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/CustomAppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".activities.MainActivity" />
         </activity>
         <activity
-            android:name=".SettingsFragment.ReorderSectionsActivity"
+            android:name=".settings_fragment.ReorderSectionsActivity"
             android:label="@string/filter_news"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".activities.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/CustomAppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".activities.MainActivity" />
         </activity>
-        <receiver android:name=".Widgets.WidgetProvider">
+
+        <receiver android:name=".widgets.WidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -130,7 +131,7 @@
                 android:resource="@xml/widget_info" />
         </receiver>
         <activity
-            android:name=".Widgets.HomeWidgetConfigureActivity"
+            android:name=".widgets.HomeWidgetConfigureActivity"
             android:label="Choose a section"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -138,10 +139,11 @@
             </intent-filter>
         </activity>
         <service
-            android:name=".Widgets.WidgetService"
+            android:name=".widgets.WidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
-        <receiver android:name=".NotificationReceiver" />
-        <receiver android:name=".NotificationReceiver$saveButtonListener" />
+
+        <receiver android:name=".broadcast_receivers.NotificationReceiver" />
+        <receiver android:name=".broadcast_receivers.NotificationReceiver$saveButtonListener" />
     </application>
 
 </manifest> <!-- <action android:name="android.appwidget.action.APPWIDGET_UPDATE" /> --><!-- This widget provider receives broadcast with following action name or simply onUpdate of AppWidgetProvider is called -->
