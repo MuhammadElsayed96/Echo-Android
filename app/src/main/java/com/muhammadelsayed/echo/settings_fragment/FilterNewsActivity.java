@@ -18,19 +18,20 @@ public class FilterNewsActivity extends AppCompatActivity {
 
     private static final String TAG = "FilterNewsActivity";
 
-    private Toolbar toolbar;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter_news);
-        toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle("Filter News");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ViewPager mViewPager = findViewById(R.id.container);
-        setupViewPager(mViewPager);
+        if (mViewPager != null)
+            setupViewPager(mViewPager);
+        else
+            Log.e(TAG, "viewPager == NULL");
 
         TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
