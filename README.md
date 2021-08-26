@@ -8,16 +8,6 @@ Getting Started
 This sample uses the Gradle build system. To build this project, use the
 "gradlew build" command or use "Import Project" in Android Studio.
 
-Screenshots
------
-1)
-2)
-3)
-4)
-5)
-6)
-7)
-8)
 License
 -------
 
